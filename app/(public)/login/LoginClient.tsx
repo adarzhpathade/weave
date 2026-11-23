@@ -2,10 +2,21 @@
 
 import { useRouter } from "next/navigation";
 import { LoginForm } from "@/components/auth/LoginForm";
+import { signIn } from "@/lib/actions/auth";
 
-// Server pages cannot pass functions to client components, so this thin wrapper owns the handler.
-// Real sign-in replaces `onContinue` in the backend task; the form itself stays untouched.
 export function LoginClient() {
   const router = useRouter();
-  return <LoginForm onContinue={() => router.push("/")} />;
+
+  async function handleContinue(
+    email: string,
+  ): Promise<{ ok: true } | { ok: false; message: string }> {
+    const result = await signIn(email);
+    if (result.ok) {
+      router.replace("/home");
+      return { ok: true };
+    }
+    return { ok: false, message: result.error.message };
+  }
+
+  return <LoginForm onContinue={handleContinue} />;
 }
