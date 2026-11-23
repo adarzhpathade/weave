@@ -55,6 +55,24 @@
   --stroke-field: 1.5px;
   --h-field: 52px;
   --h-button: 48px;
+
+  /* app shell (kit: .navpill, .mpanel, .npanel, .scroll) */
+  --d-menu: 640ms;
+  --d-menu-lead: 120ms; /* first menu row starts after the circle has opened a bit */
+  --d-menu-step: 50ms;
+  --d-notif-lead: 140ms;
+  --d-notif-step: 45ms;
+  --d-sub-step: 40ms;
+  --w-column: 720px; /* laptop content column */
+  --w-pill: 366px; /* 390 phone − 2 × 12px gutter */
+  --s-top-min: 1.5rem; /* top gap when the browser reports no safe area */
+  --s-screen-top: 0.625rem; /* .hm2 padding-top */
+  --s-screen-bottom: 6.5rem; /* .scroll padding-bottom, clears the pill */
+  --s-panel-top: 0.5rem; /* .mpanel 54px − 46px status bar */
+  --s-panel-bottom: 5.375rem; /* .mpanel padding-bottom 86px */
+  --s-dock: 0.75rem; /* pill offset from the screen edges */
+  --col-menu-idx: 1.625rem; /* .mhead 26px index column */
+  --col-notif-time: 2.625rem; /* .np-item 42px time column */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -115,9 +133,47 @@
   --text-h1: 2.5rem;
   --text-headline--line-height: 1;
 
+  /* app shell + home (values from the kit) */
+  --text-mono-2xs: 0.625rem; /* 10px: countdown units, week weekday, "later" */
+  --text-mono-xs: 0.65625rem; /* 10.5px: notification group */
+  --text-mono: 0.6875rem; /* 11px: status chip, menu index, time column */
+  --text-meta: 0.78125rem; /* 12.5px: notification meta line */
+  --text-row: 0.9375rem; /* 15px: list row title */
+  --text-row--line-height: 1.2;
+  --text-lead: 1.05rem; /* menu sub links, notification title */
+  --text-lead--line-height: 1.2;
+  --text-section: 1.35rem; /* empty-state lines in section type */
+  --text-section--line-height: 1.15;
+  --text-due: 1.6rem;
+  --text-due--line-height: 1.1;
+  --text-menu: 1.95rem;
+  --text-menu--line-height: 1;
+  --text-count: 2.4rem;
+  --text-count--line-height: 1;
+  --text-greet: clamp(2.5rem, 12cqi, 4.5rem);
+  --text-greet--line-height: 0.98;
+  --text-panel-title: clamp(2.5rem, 12cqi, 4.5rem);
+  --text-panel-title--line-height: 1;
+  --text-week-day: clamp(2.25rem, 13cqi, 4rem);
+  --text-week-day--line-height: 0.85;
+
+  --leading-sep: 0.95;
+
   --tracking-wordmark: -0.05em;
   --tracking-headline: -0.035em;
   --tracking-label: 0.08em;
+  --tracking-display: -0.045em;
+  --tracking-title: -0.03em;
+  --tracking-snug: -0.02em;
+  --tracking-row: -0.01em;
+  --tracking-count: -0.04em;
+  --tracking-week: -0.06em;
+  --tracking-status: 0.06em;
+
+  --shadow-float: var(--shadow-lift);
+
+  --container-column: var(--w-column);
+  --container-pill: var(--w-pill);
 
   --radius-xs: var(--r-xs);
   --radius-sm: var(--r-sm);
@@ -131,6 +187,8 @@
 
   --animate-rise: rise var(--d-rise) var(--e-out) backwards;
   --animate-fade-up: fade-up var(--d-rise) var(--e-out) backwards;
+  --animate-lift: lift var(--d-slow) var(--e-out) both; /* kit @keyframes rise (menu + notification rows) */
+  --animate-lift-quick: lift var(--d-base) var(--e-out) both; /* kit: menu sub-links */
 }
 
 /* spacing helpers that need env() — safe-area aware */
@@ -169,6 +227,89 @@
   animation-delay: calc(var(--n, 0) * var(--d-stagger));
 }
 
+/* ---------- app shell: floating pill, full-screen menu + notifications (kit .navpill / .mpanel / .npanel) ---------- */
+@utility pt-screen {
+  padding-top: calc(max(env(safe-area-inset-top, 0px), var(--s-top-min)) + var(--s-screen-top));
+}
+@utility pb-screen {
+  padding-bottom: calc(var(--s-screen-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility pt-panel {
+  padding-top: calc(max(env(safe-area-inset-top, 0px), var(--s-top-min)) + var(--s-panel-top));
+}
+@utility pb-panel {
+  padding-bottom: calc(var(--s-panel-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility bottom-dock {
+  bottom: calc(var(--s-dock) + env(safe-area-inset-bottom, 0px));
+}
+@utility grid-cols-menu-head {
+  grid-template-columns: var(--col-menu-idx) 1fr auto;
+}
+@utility grid-cols-notif {
+  grid-template-columns: var(--col-notif-time) 1fr;
+}
+@utility pl-menu-sub {
+  padding-left: calc(var(--col-menu-idx) + 0.5rem); /* index column + gap, kit 34px */
+}
+/* circle reveal from the pill's menu button; --mx / --my are set from the button's position */
+@utility reveal-panel {
+  clip-path: circle(0px at var(--mx, 85%) var(--my, 95%));
+  visibility: hidden;
+  transition:
+    clip-path var(--d-menu) var(--e-in-out),
+    visibility 0s linear var(--d-menu);
+}
+@utility reveal-panel-open {
+  clip-path: circle(150% at var(--mx, 85%) var(--my, 95%));
+  visibility: visible;
+  transition:
+    clip-path var(--d-menu) var(--e-in-out),
+    visibility 0s;
+}
+/* accordion: sub-options grow from 0 to their height */
+@utility rows-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--d-slow) var(--e-out);
+}
+@utility rows-expand {
+  grid-template-rows: 1fr;
+}
+@utility delay-menu {
+  animation-delay: calc(var(--d-menu-lead) + var(--n, 0) * var(--d-menu-step));
+}
+@utility delay-notif {
+  animation-delay: calc(var(--d-notif-lead) + var(--n, 0) * var(--d-notif-step));
+}
+@utility delay-sub {
+  animation-delay: calc(var(--n, 0) * var(--d-sub-step));
+}
+@utility dot-after {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    background: var(--c-lime);
+    vertical-align: 0.5em;
+  }
+}
+@utility dot-before {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--c-lime);
+    vertical-align: 0.12em;
+  }
+}
+
 /* entrance motion: only when the user has not asked for reduced motion.
    Elements are fully visible without these animations (no JS needed, no hidden initial state). */
 @keyframes rise {
@@ -182,12 +323,37 @@
     transform: translateY(16px);
   }
 }
+/* kit .skel: shimmering placeholder block */
+@utility skel {
+  background: linear-gradient(90deg, var(--c-line) 0%, var(--c-app) 50%, var(--c-line) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@keyframes lift {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation: none !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 }
 
