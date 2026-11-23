@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { db } from "@/lib/db";
 import { divisions, programs, students } from "@/lib/db/schema";
 import {
@@ -57,6 +58,8 @@ export async function createSession(studentId: string, userId: string): Promise<
  * expired, malformed, or tampered with.
  */
 export async function readSession(): Promise<SessionPayload | null> {
+  // connection() marks the render as request-time so the expiry check can read the clock.
+  await connection();
   const cookieStore = await cookies();
   const raw = cookieStore.get(SESSION_COOKIE_NAME)?.value;
   if (!raw) {

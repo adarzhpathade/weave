@@ -42,7 +42,7 @@ export function useShell(): ShellContextValue {
 type AppShellProps = {
   student: ShellStudent;
   notifications: NotificationItem[];
-  markAllReadAction: () => Promise<void>;
+  markAllReadAction: () => Promise<{ ok: boolean } | void>;
   signOutAction: () => Promise<void>;
   children: ReactNode;
 };
@@ -131,7 +131,8 @@ export function AppShell({ student, notifications, markAllReadAction, signOutAct
     setReadIds((prev) => new Set([...prev, ...ids]));
     startMarking(async () => {
       try {
-        await markAllReadAction();
+        const result = await markAllReadAction();
+        if (result && !result.ok) throw new Error("markAllRead returned ok: false");
       } catch (error) {
         console.error("markAllReadAction failed", error);
         setReadIds((prev) => {
