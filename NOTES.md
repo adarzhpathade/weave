@@ -51,3 +51,5 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-23 — The source has no unit/topic content, so units/topics will be drafted (5 units per subject, RGPV style) and marked as draft until checked against the official RGPV syllabus PDFs. — needed for notes + progress.
 - 2026-11-23 — Electives: each option is a subject in `program_subjects` with `kind` + `elective_group`; the student picks one option per group (`student_electives`, chosen in onboarding, changeable in Profile). Option codes normalised to `CSIT-503A` etc. — the source codes are inconsistent; without a pick students would see every option.
 - 2026-11-23 — CY seeded as a copy of the CSIT plan until the CY list arrives. — the source covers CSIT only.
+- 2026-11-24 — Phase 2 demo sign-in: email-only against the students list + HMAC-signed session cookie (SESSION_SECRET); Neon Auth email OTP later. — demo deadline.
+- 2026-11-24 — Home route is /home; / redirects by session. Unbuilt menu routes show a Coming next page. — orchestrator.
