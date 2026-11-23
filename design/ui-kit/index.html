@@ -347,41 +347,6 @@ main section { padding-block: 4rem 1rem; }
 .topbar nav a.on { background: var(--c-ink); color: var(--c-app); }
 @media (max-width: 420px) { .topbar nav a:not(.on) { display: none; } }
 
-/* ---------- playful shapes + stickers (Arcade hub) ---------- */
-.hero { position: relative; overflow: clip; }
-.hero .wrap { position: relative; z-index: 1; }
-.shapes { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.shp { position: absolute; width: var(--s, 56px); height: var(--s, 56px); color: var(--c, var(--c-lime)); animation: drift 7s var(--e-in-out) infinite alternate; }
-.shp.f1 { --s: 64px; top: 14%; right: 34%; --c: var(--c-lime); }
-.shp.f2 { --s: 92px; bottom: -22px; left: 44%; --c: var(--c-accent); animation-duration: 9s; }
-.shp.f3 { --s: 46px; top: 46%; right: 5%; --c: var(--c-late); animation-delay: -3s; }
-.shp.f4 { --s: 120px; bottom: -46px; left: -34px; --c: var(--c-sub-1); opacity: 0.9; animation-duration: 11s; }
-.shp.f5 { --s: 70px; bottom: 18%; right: 22%; --c: var(--c-sub-2); animation-delay: -5s; }
-@keyframes drift { from { transform: translateY(-8px) rotate(-10deg); } to { transform: translateY(10px) rotate(14deg); } }
-@media (max-width: 720px) { .shp.f1 { right: 8%; top: 9%; --s: 44px; } .shp.f5 { display: none; } .shp.f3 { top: 30%; } }
-.sticker {
-  display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border-radius: var(--r-pill);
-  background: var(--c-lime); color: var(--c-on-lime); border: 1.5px solid var(--c-ink); box-shadow: var(--shadow-pop);
-  font-family: var(--f-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
-  transform: rotate(var(--rot, -6deg));
-}
-.sticker.accent { background: var(--c-accent); color: var(--c-on-accent); }
-.sticker.warm { background: var(--c-late); color: var(--c-on-status); }
-.sticker svg { width: 11px; height: 11px; }
-.title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
-.spin { width: 30px; height: 30px; color: var(--c-lime); animation: spin 9s linear infinite; flex: none; }
-.wiggle:active, .shp-tap:active { animation: wiggle 420ms var(--e-spring); }
-@keyframes wiggle { 25% { transform: rotate(-8deg) scale(1.05); } 60% { transform: rotate(6deg); } }
-.scard .deco { position: absolute; right: -14px; bottom: -18px; width: 96px; height: 96px; color: var(--c-on-sub); opacity: 0.12; transition: transform var(--d-slow) var(--e-spring), opacity var(--d-base); }
-.scard.open .deco { transform: rotate(45deg) scale(1.15); opacity: 0.2; }
-.scard { overflow: hidden; }
-.topic { cursor: pointer; border-radius: 6px; }
-.topic .ck { position: relative; transition: transform var(--d-fast) var(--e-spring), background var(--d-fast); }
-.topic.done .ck { animation: pop 380ms var(--e-spring); }
-@keyframes pop { 40% { transform: scale(1.3); } }
-.bit { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; }
-.sec-shape { width: 0.7em; height: 0.7em; display: inline-block; vertical-align: 0.05em; margin-left: 0.12em; color: var(--c-accent); }
-
 /* ---------- floating pill + full-screen menu ---------- */
 .navpill {
   display: flex; align-items: center; gap: 6px; height: 60px; padding: 6px 6px 6px 18px; border-radius: var(--r-pill);
@@ -414,30 +379,116 @@ main section { padding-block: 4rem 1rem; }
 .sems button[aria-current="true"] { background: var(--c-lime); color: var(--c-on-lime); border-color: var(--c-lime); }
 .sems button:disabled { opacity: 0.3; cursor: not-allowed; }
 .mpanel .mshapes { position: relative; flex: 1; min-height: 40px; }
-.mpanel .mshapes .shp { animation-duration: 6s; }
 .mlist { display: grid; }
 .mitem { border-top: 1px solid var(--c-night-line); }
 .mitem:last-child { border-bottom: 1px solid var(--c-night-line); }
-.mhead { width: 100%; border: 0; background: transparent; color: inherit; display: grid; grid-template-columns: 22px 26px 1fr auto; align-items: center; gap: 8px; padding: 10px 0; text-align: left; transition: opacity var(--d-base); }
+.mhead { width: 100%; border: 0; background: transparent; color: inherit; display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 8px; padding: 10px 0; text-align: left; transition: opacity var(--d-base); }
 .mhead .idx { font-family: var(--f-mono); font-size: 11px; opacity: 0.5; }
 .mhead svg { width: 22px; height: 22px; color: var(--c); transition: transform var(--d-slow) var(--e-spring); }
-.mhead .w { font-family: var(--f-display); font-weight: 900; font-size: 2.5rem; line-height: 1; letter-spacing: -0.045em; }
+.mhead .w { font-family: var(--f-display); font-weight: 900; font-size: 2.15rem; line-height: 1; letter-spacing: -0.045em; }
 .mhead .cnt { font-family: var(--f-mono); font-size: 11px; opacity: 0.6; text-align: right; }
 .mitem.here .mhead .w::after { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--c-lime); margin-left: 8px; vertical-align: 0.5em; }
 .mlist.has-open .mitem:not(.open) .mhead { opacity: 0.35; }
 .mitem.open .mhead svg { transform: rotate(90deg) scale(1.15); }
 .msub { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--d-slow) var(--e-out); }
 .mitem.open .msub { grid-template-rows: 1fr; }
-.msub > div { overflow: hidden; display: flex; flex-wrap: wrap; gap: 6px; padding-left: 56px; }
+.msub > div { overflow: hidden; display: grid; padding-left: 34px; }
 .mitem.open .msub > div { padding-bottom: 12px; }
-.msub button { height: 34px; padding: 0 14px; border-radius: var(--r-pill); border: 1px solid var(--c-night-line); background: transparent; color: var(--c-on-night); font-weight: 700; font-size: 13px; }
-.msub button:first-child { background: var(--c-on-night); color: var(--c-night); border-color: var(--c-on-night); }
-.msub button.later { opacity: 0.4; border-style: dashed; cursor: default; }
+.msub button { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 40px; padding: 0 2px 0 0; border: 0; border-bottom: 1px solid var(--c-night-line); background: transparent; color: var(--c-on-night); font-weight: 700; font-size: 1.05rem; text-align: left; }
+.msub button:last-child { border-bottom: 0; }
+.msub button svg { width: 16px; height: 16px; opacity: 0.45; transition: translate var(--d-fast) var(--e-out), opacity var(--d-fast); }
+.msub button:hover svg, .msub button:focus-visible svg { translate: 4px 0; opacity: 1; }
+.msub button.later { opacity: 0.4; cursor: default; }
+.msub button em { font-style: normal; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.mitem.open .msub button { animation: rise var(--d-base) var(--e-out) both; }
+.mitem.open .msub button:nth-child(2) { animation-delay: 40ms; } .mitem.open .msub button:nth-child(3) { animation-delay: 80ms; }
+.mitem.open .msub button:nth-child(4) { animation-delay: 120ms; } .mitem.open .msub button:nth-child(n+5) { animation-delay: 160ms; }
 .mpanel.open .mitem, .mpanel.open .mtop { animation: rise var(--d-slow) var(--e-out) both; }
 .mpanel.open .mitem:nth-child(1) { animation-delay: 120ms; } .mpanel.open .mitem:nth-child(2) { animation-delay: 170ms; }
-.mpanel.open .mitem:nth-child(3) { animation-delay: 220ms; } .mpanel.open .mitem:nth-child(4) { animation-delay: 270ms; }
+.mpanel.open .mitem:nth-child(3) { animation-delay: 220ms; } .mpanel.open .mitem:nth-child(4) { animation-delay: 270ms; } .mpanel.open .mitem:nth-child(5) { animation-delay: 320ms; }
 .mpanel.instant, .mpanel.instant * { transition: none !important; animation: none !important; }
 .kcard .navpill { margin-top: 4px; }
+
+/* ---------- entrance motion: things arrive in order ---------- */
+.mk { display: block; overflow-x: visible; overflow-y: clip; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+.mk > span { display: block; }
+.js-motion .hero .mk > span, .js-motion .sec-head .mk > span { translate: 0 110%; transition: translate 1000ms var(--e-out); transition-delay: calc(var(--k, 0) * 110ms + 60ms); }
+.js-motion .hero.in .mk > span, .js-motion .sec-head.in .mk > span { translate: none; }
+.js-motion .hero .lead, .js-motion .hero .hero-stats, .js-motion .hero .badge-rot, .js-motion .hero .hero-top, .js-motion .sec-head p {
+  opacity: 0; translate: 0 18px; transition: opacity 700ms var(--e-out) 380ms, translate 900ms var(--e-out) 380ms;
+}
+.js-motion .hero .hero-top { transition-delay: 0ms; translate: 0 -12px; }
+.js-motion .hero.in .lead, .js-motion .hero.in .hero-stats, .js-motion .hero.in .badge-rot, .js-motion .hero.in .hero-top, .js-motion .sec-head.in p { opacity: 1; translate: none; }
+.js-motion .hero .hero-stats { transition-delay: 520ms; }
+.js-motion .hero .badge-rot { scale: 0.6; transition: opacity 700ms var(--e-out) 600ms, translate 900ms var(--e-out) 600ms, scale 900ms var(--e-spring) 600ms; }
+.js-motion .hero.in .badge-rot { scale: 1; }
+.js-motion .rv { opacity: 0; translate: 0 40px; transition: opacity 700ms var(--e-out), translate 1000ms var(--e-out); transition-delay: calc(var(--i, 0) * 80ms); }
+.js-motion .rv.in { opacity: 1; translate: none; }
+
+/* ---------- notes ---------- */
+.ncard { background: var(--c-surface); border-radius: var(--r-md); padding: 14px 16px; display: grid; gap: 8px; }
+.ncard .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-muted); }
+.ncard .t { font-weight: 800; font-size: 15.5px; line-height: 1.25; letter-spacing: -0.01em; }
+.ncard p { font-size: 13px; line-height: 1.45; color: var(--c-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.links { display: flex; flex-wrap: wrap; gap: 6px; }
+.lchip { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border-radius: var(--r-pill); border: 1px solid var(--c-line); background: transparent; color: var(--c-ink); font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.lchip svg { width: 12px; height: 12px; flex: none; }
+.lchip.syl { border-color: transparent; background: var(--bg, var(--c-sub-2)); color: var(--c-on-sub); }
+.lchip.add { border-style: dashed; color: var(--c-muted); }
+.lchip.add[aria-expanded="true"] { border-style: solid; border-color: var(--c-ink); color: var(--c-ink); }
+.note-title { font-family: var(--f-display); font-weight: 900; font-size: 2.2rem; line-height: 0.95; letter-spacing: -0.045em; }
+.note-title .it { color: var(--c-accent); }
+.note-body { display: grid; gap: 10px; font-size: 14.5px; line-height: 1.6; }
+.note-body ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.ilink { font-weight: 700; background: linear-gradient(transparent 62%, var(--c-lime) 62%); border-radius: 2px; }
+.picker { gap: 0; padding: 10px 14px 4px; }
+.picker .search { height: 40px; margin-bottom: 6px; }
+.prow { display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 8px; width: 100%; min-height: 42px; padding: 0; border: 0; border-top: 1px solid var(--c-line); background: transparent; text-align: left; font-weight: 700; font-size: 13px; }
+.brow { display: flex; align-items: center; gap: 8px; padding: 9px 0; border-top: 1px solid var(--c-line); font-weight: 700; font-size: 13.5px; }
+.brow svg { width: 14px; height: 14px; color: var(--c-muted); }
+.brow span { margin-left: auto; font-family: var(--f-mono); font-size: 10.5px; font-weight: 500; color: var(--c-muted); }
+
+/* ---------- graph ---------- */
+.graph-wrap { overflow: auto; margin: 0 -18px; padding: 0 18px; scrollbar-width: none; overscroll-behavior: contain; }
+.graph-wrap::-webkit-scrollbar { display: none; }
+.graph svg { display: block; overflow: visible; }
+.graph-wrap.wide { margin: 0; padding: 0; }
+.graph-wrap.wide svg { width: 100%; height: auto; min-width: 760px; }
+.wide-graph { --g-bg: var(--c-surface); margin-top: 28px; }
+.g-edge { fill: none; stroke: var(--c-line); stroke-width: 1.5; transition: opacity var(--d-base); }
+.g-edge.note { stroke: var(--c-accent); stroke-dasharray: 4 4; }
+.g-node { cursor: pointer; transform-box: fill-box; transform-origin: center; transition: opacity var(--d-base); }
+.g-node:focus { outline: none; }
+.g-node:focus-visible text { text-decoration: underline; }
+.g-node circle, .g-node rect { stroke-width: 2; transition: stroke-width var(--d-fast); }
+.g-node text { font-family: var(--f-body); font-size: 11.5px; font-weight: 600; fill: var(--c-ink); paint-order: stroke; stroke: var(--g-bg, var(--c-app)); stroke-width: 4px; stroke-linejoin: round; }
+.g-node.subject text { font-size: 13.5px; font-weight: 800; }
+.g-node.unit text { font-weight: 700; }
+.g-node.note text { font-weight: 700; }
+.g-node.subject circle { fill: var(--c-ink); stroke: var(--c-ink); }
+.g-node.unit circle { fill: var(--g-bg, var(--c-app)); stroke: var(--c-ink); }
+.g-node.topic circle { fill: var(--g-bg, var(--c-app)); stroke: var(--c-muted); stroke-width: 1.5; }
+.g-node.topic.covered circle { fill: var(--c-lime); stroke: var(--c-ink); }
+.g-node.note rect { fill: var(--c-accent); stroke: var(--c-accent); }
+.g-node.sel-node circle, .g-node.sel-node rect { stroke: var(--c-ink); stroke-width: 3.5; }
+.sel .g-node:not(.hl), .sel .g-edge:not(.hl) { opacity: 0.28; }
+.no-notes .g-node.note, .no-notes .g-edge.note { display: none; }
+.js-motion .graph:not(.play) .g-node, .js-motion .graph:not(.play) .g-edge { opacity: 0; }
+.graph.play .g-node { animation: gnode 560ms var(--e-spring) backwards; animation-delay: calc(var(--col) * 220ms + var(--j) * 22ms); }
+.graph.play .g-edge { animation: gedge 600ms var(--e-out) backwards; animation-delay: calc(var(--col) * 220ms - 80ms); }
+@keyframes gnode { from { opacity: 0; scale: 0.2; } }
+@keyframes gedge { from { opacity: 0; } }
+.gsheet { position: absolute; left: 12px; right: 12px; bottom: 84px; z-index: 3; background: var(--c-surface); border-radius: var(--r-md); box-shadow: var(--shadow-lift); padding: 12px 12px 12px 16px; display: flex; align-items: center; gap: 10px; }
+.ginfo { display: flex; align-items: center; gap: 12px; background: var(--c-app); border-radius: var(--r-md); padding: 12px 12px 12px 16px; }
+.ginfo-text { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.ginfo-text b { font-size: 15px; line-height: 1.2; }
+.ginfo-text span:last-child { font-size: 12px; color: var(--c-muted); }
+.legend { gap: 14px; font-size: 12px; font-weight: 600; color: var(--c-muted); }
+.lg { display: inline-flex; align-items: center; gap: 6px; }
+.lg i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--c-muted); }
+.lg i.cov { background: var(--c-lime); border-color: var(--c-ink); }
+.lg i.dia { width: 9px; height: 9px; border: 0; border-radius: 2px; background: var(--c-accent); transform: rotate(45deg); }
+.lg i.dash { width: 18px; height: 0; border: 0; border-top: 2px dashed var(--c-accent); border-radius: 0; }
 
 /* ---------- phone screens ---------- */
 .phones { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px 20px; justify-items: center; }
@@ -556,7 +607,7 @@ figure { margin: 0; }
 .replay-host.play .stagger > *:nth-child(n+7) { animation-delay: 340ms; }
 .replay-host.play .sheet { animation: sheet-up 620ms var(--e-spring) both; }
 .replay-host.play .bar .fill { animation: grow 900ms var(--e-out) both; }
-@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: none; } }
 @keyframes sheet-up { from { transform: translateY(105%); } to { transform: none; } }
 @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
@@ -585,27 +636,16 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></symbol>
   <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
   <symbol id="i-pen" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16zM13.5 6.5l4 4"/></symbol>
-  <symbol id="s-star" viewBox="0 0 100 100"><path fill="currentColor" d="M50 0C54 34 66 46 100 50C66 54 54 66 50 100C46 66 34 54 0 50C34 46 46 34 50 0Z"/></symbol>
-  <symbol id="s-circle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="currentColor"/></symbol>
-  <symbol id="s-tri" viewBox="0 0 100 100"><path fill="currentColor" d="M50 8c3 0 5 1.6 6.6 4.4l38 66C96.5 82 94.3 88 89 88H11c-5.3 0-7.5-6-5.6-9.6l38-66C45 9.6 47 8 50 8Z"/></symbol>
-  <symbol id="s-flower" viewBox="0 0 100 100"><g fill="currentColor"><circle cx="50" cy="26" r="24"/><circle cx="74" cy="50" r="24"/><circle cx="50" cy="74" r="24"/><circle cx="26" cy="50" r="24"/></g></symbol>
-  <symbol id="s-squiggle" viewBox="0 0 100 100"><path fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" d="M8 62C18 30 30 30 38 50S58 72 66 50 86 28 94 40"/></symbol>
-  <symbol id="s-half" viewBox="0 0 100 100"><path fill="currentColor" d="M0 75A50 50 0 0 1 100 75Z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 6.8M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.5-1.5"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></g></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></symbol>
   <symbol id="i-weave" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 8c3 0 3 8 6 8s3-8 6-8 3 8 6 8M3 16c3 0 3-8 6-8s3 8 6 8 3-8 6-8"/></symbol>
 </svg>
 
 <header class="hero">
-  <div class="shapes" aria-hidden="true">
-    <svg class="shp f4"><use href="#s-flower"/></svg>
-    <svg class="shp f1"><use href="#s-star"/></svg>
-    <svg class="shp f2"><use href="#s-half"/></svg>
-    <svg class="shp f3"><use href="#s-tri"/></svg>
-    <svg class="shp f5"><use href="#s-squiggle"/></svg>
-  </div>
   <div class="wrap">
     <div class="hero-top">
-      <span class="label">Weave · UI kit v0.3 · CSIT, RGPV</span>
+      <span class="label">Weave · UI kit v0.4 · CSIT, RGPV</span>
       <div class="controls" role="group" aria-label="Preview settings">
         <div class="seg" role="group" aria-label="Accent color">
           <button type="button" data-accent="periwinkle" aria-pressed="true"><span class="swatch-dot" style="background:#6D6AF4"></span>Periwinkle</button>
@@ -627,7 +667,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <div class="hero-stats">
           <div><span class="label">Semesters</span><b class="num">3–8</b></div>
           <div><span class="label">Theory subjects</span><b class="num">39</b></div>
-          <div><span class="label">Core screens</span><b class="num">5</b></div>
+          <div><span class="label">Screens</span><b class="num">10</b></div>
         </div>
       </div>
       <div class="badge-rot" aria-hidden="true">
@@ -643,7 +683,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <!-- ================= FOUNDATIONS ================= -->
   <section id="foundations">
     <div class="sec-head">
-      <h2>Foun<span class="it">dations</span><svg class="sec-shape" aria-hidden="true"><use href="#s-star"/></svg></h2>
+      <h2>Foun<span class="it">dations</span></h2>
       <p>Black, white and lime from the Museum reference. The accent is a placeholder until you choose: switch it at the top of the page.</p>
     </div>
 
@@ -707,7 +747,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <!-- ================= COMPONENTS ================= -->
   <section id="components">
     <div class="sec-head">
-      <h2>Compo<span class="it">nents</span><svg class="sec-shape" aria-hidden="true" style="color:var(--c-late)"><use href="#s-tri"/></svg></h2>
+      <h2>Compo<span class="it">nents</span></h2>
       <p>Every piece here works: tap the chips, switches, tab bar and the toast button.</p>
     </div>
 
@@ -811,9 +851,9 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="skel" style="height:64px"></div>
         </div>
         <div class="empty">
-          <div class="ill wiggle"><svg><use href="#i-pen"/></svg></div>
-          <b>No notes on this topic yet</b>
-          <p>Write your first note and this topic counts as covered.</p>
+          <div class="ill"><svg><use href="#i-pen"/></svg></div>
+          <b>No notes linked to this topic yet</b>
+          <p>Link a note from your Notes and this topic counts as covered.</p>
         </div>
         <div class="err">
           <b>Couldn't load assignments</b>
@@ -834,8 +874,8 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <!-- ================= SCREENS ================= -->
   <section id="screens">
     <div class="sec-head">
-      <h2>First <span class="it">screens</span><svg class="sec-shape" aria-hidden="true" style="color:var(--c-lime)"><use href="#s-flower"/></svg></h2>
-      <p>390 px, the size of most phones. Example data: a 3rd-year CSIT-2 student in semester 5. Tap <b>Menu</b> on any phone, the subject cards, the topic circles and "Replay motion".</p>
+      <h2>First <span class="it">screens</span></h2>
+      <p>390 px, the size of most phones. Example data: a 3rd-year CSIT-2 student in semester 5. Tap <b>Menu</b> on any phone, the subject cards, "+ Link" in a note, the graph dots and "Replay motion".</p>
     </div>
     <div class="row" style="margin-bottom:1.5rem"><button class="btn btn-ink" type="button" data-replay="#screens">Replay motion</button></div>
 
@@ -866,8 +906,8 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll stagger">
             <div class="scr-row"><div><div class="label" data-today>Today</div><div style="font-weight:700">Hi, Aarav</div></div><span class="avatar">AS</span></div>
-            <div class="title-row"><h3 class="scr-title">Semester <span class="it">five</span></h3><svg class="spin" aria-hidden="true"><use href="#s-star"/></svg></div>
-            <div class="card" style="grid-template-columns:auto 1fr;align-items:center;gap:14px;position:relative"><span class="sticker" style="position:absolute;top:-10px;right:14px;--rot:5deg">+4% this week</span>
+            <h3 class="scr-title">Semester <span class="it">five</span></h3>
+            <div class="card" style="grid-template-columns:auto 1fr;align-items:center;gap:14px;position:relative">
               <div class="dial" data-dial="59" style="width:128px"><div class="center"><b class="num" style="font-size:2rem">59%</b><span>In progress</span></div></div>
               <div class="stats" style="grid-template-columns:1fr;border-top:0">
                 <div style="padding:0"><div class="k">Topics covered</div><div class="v num" style="font-size:1.6rem">58/98</div></div>
@@ -898,30 +938,30 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll">
             <div class="scr-row"><span class="label">Semester 5 · CSIT-2</span><span class="label">Tap a card</span></div>
-            <div class="title-row"><h3 class="scr-title">Sub<span class="it">jects</span></h3><span class="sticker accent" style="--rot:-8deg;margin-bottom:6px">4 this sem</span></div>
+            <h3 class="scr-title">Sub<span class="it">jects</span></h3>
             <div class="row" data-chipgroup style="gap:6px">
               <button class="fchip" type="button" aria-pressed="true">All <span class="n">4</span></button>
               <button class="fchip" type="button" aria-pressed="false">Core <span class="n">2</span></button>
               <button class="fchip" type="button" aria-pressed="false">Electives <span class="n">2</span></button>
             </div>
             <div class="search"><svg><use href="#i-search"/></svg>Search notes</div>
-            <div class="stack" data-stack>
-              <button class="scard" type="button" style="background:var(--c-sub-1)"><svg class="deco" aria-hidden="true"><use href="#s-flower"/></svg>
+            <div class="stack stagger" data-stack>
+              <button class="scard" type="button" style="background:var(--c-sub-1)">
                 <div class="top"><span class="code">CSIT-501 · CORE</span><span class="pct num">72%</span></div>
                 <div class="name">Computer Networking</div>
                 <div class="more"><span class="band">In progress · 18 of 25 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
               </button>
-              <button class="scard" type="button" style="background:var(--c-sub-2)"><svg class="deco" aria-hidden="true"><use href="#s-star"/></svg>
+              <button class="scard" type="button" style="background:var(--c-sub-2)">
                 <div class="top"><span class="code">CSIT-502 · CORE</span><span class="pct num">48%</span></div>
                 <div class="name">Operating System</div>
                 <div class="more"><span class="band">In progress · 12 of 25 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
               </button>
-              <button class="scard" type="button" style="background:var(--c-sub-3)"><svg class="deco" aria-hidden="true"><use href="#s-tri"/></svg>
+              <button class="scard" type="button" style="background:var(--c-sub-3)">
                 <div class="top"><span class="code">CSIT-503A · DEPT. ELECTIVE</span><span class="pct num">31%</span></div>
                 <div class="name">Theory of Computation</div>
                 <div class="more"><span class="band">Low · 7 of 24 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
               </button>
-              <button class="scard open" type="button" style="background:var(--c-sub-4)"><svg class="deco" aria-hidden="true"><use href="#s-circle"/></svg>
+              <button class="scard open" type="button" style="background:var(--c-sub-4)">
                 <div class="top"><span class="code">CSIT-504B · OPEN ELECTIVE</span><span class="pct num">85%</span></div>
                 <div class="name">Artificial Intelligence</div>
                 <div class="more"><span class="band">Mastered · 21 of 24 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
@@ -964,7 +1004,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
               <div class="unit"><div class="t">5 · File systems and I/O <span>0/5</span></div><div class="bar" style="--v:0%"><div class="track"><div class="fill"></div></div></div></div>
             </div>
           </div>
-          <button class="fab" type="button"><svg><use href="#i-pen"/></svg>Write note</button>
+          
           <div class="navpill" data-section="study"><span class="where">Operating System</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
         </div></div>
         <figcaption><b>Subject → units → topics</b><span>Topic ticks turn lime when a note exists</span></figcaption>
@@ -981,7 +1021,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
                 <button type="button" aria-pressed="false" data-view="cal">Calendar</button>
               </div>
             </div>
-            <div class="title-row"><h3 class="scr-title">Due <span class="it">soon</span></h3><span class="sticker warm" style="--rot:7deg;margin-bottom:6px">3 pending</span></div>
+            <h3 class="scr-title">Due <span class="it">soon</span></h3>
             <div class="stagger" data-pane="list" style="display:grid;gap:10px">
               <div class="acard"><div class="meta"><span class="sub">CSIT-501 · NETWORKING</span><span class="status pending">Pending</span></div><div class="t">Assignment 3: Subnetting and CIDR</div><div class="count sm" data-due-in="1.27"></div></div>
               <div class="acard"><div class="meta"><span class="sub">CSIT-502 · OS</span><span class="status pending">Pending</span></div><div class="t">Assignment 2: CPU scheduling numericals</div><div class="count sm" data-due-in="3.09"></div></div>
@@ -1034,6 +1074,71 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <figcaption><b>Assignment detail</b><span>Bottom sheet with springy entry</span></figcaption>
       </figure>
 
+      <!-- NOTES -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll stagger">
+            <div class="scr-row"><span class="label">My notes · 42</span><button class="btn btn-ink" type="button" style="height:36px;padding:0 14px;font-size:13px"><svg width="16" height="16"><use href="#i-plus"/></svg>New note</button></div>
+            <h3 class="scr-title">Your <span class="it">notes</span></h3>
+            <div class="search"><svg><use href="#i-search"/></svg>Search your notes</div>
+            <div class="row" data-chipgroup style="gap:6px">
+              <button class="fchip" type="button" aria-pressed="true">All <span class="n">42</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Linked <span class="n">31</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Free <span class="n">11</span></button>
+            </div>
+            <article class="ncard"><div class="meta"><span>Edited 2h ago</span><span>3 links</span></div><div class="t">Round Robin vs priority</div><p>Small quantum means many context switches. Priority can starve low jobs; ageing fixes it.</p><div class="links"><span class="lchip syl" style="--bg:var(--c-sub-2)"><svg><use href="#i-book"/></svg>OS · U2 · Round Robin</span><span class="lchip"><svg><use href="#i-link"/></svg>Scheduling formulas</span></div></article>
+            <article class="ncard"><div class="meta"><span>Yesterday</span><span>2 links</span></div><div class="t">Subnetting in 5 steps</div><p>Find the class, borrow bits, count hosts as 2ⁿ − 2, then list the ranges.</p><div class="links"><span class="lchip syl" style="--bg:var(--c-sub-1)"><svg><use href="#i-book"/></svg>CN · U3 · Subnetting</span><span class="lchip"><svg><use href="#i-link"/></svg>IP classes table</span></div></article>
+            <article class="ncard"><div class="meta"><span>3 days ago</span><span>3 links</span></div><div class="t">Deadlock cheat sheet</div><p>Four conditions: mutual exclusion, hold and wait, no preemption, circular wait.</p><div class="links"><span class="lchip syl" style="--bg:var(--c-sub-2)"><svg><use href="#i-book"/></svg>OS · U3 · Deadlocks</span><span class="lchip"><svg><use href="#i-link"/></svg>Viva questions</span></div></article>
+            <article class="ncard"><div class="meta"><span>Last week</span><span>Free note</span></div><div class="t">Minor project ideas</div><p>A syllabus app for our department? Ask about the student list.</p></article>
+          </div>
+          <div class="navpill" data-section="notes"><span class="where">Notes · 42</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
+        </div></div>
+        <figcaption><b>Notes</b><span>The student's own notes, linked to syllabus topics or other notes</span></figcaption>
+      </figure>
+
+      <!-- NOTE EDITOR -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll stagger">
+            <div class="scr-row"><button class="ibtn soft" type="button" aria-label="Back" style="width:40px;height:40px"><svg><use href="#i-back"/></svg></button><span class="label">Saved · just now</span><button class="ibtn soft" type="button" aria-label="More" style="width:40px;height:40px"><svg><use href="#i-more"/></svg></button></div>
+            <h3 class="note-title">Round Robin <span class="it">vs</span> priority</h3>
+            <div class="links"><span class="lchip syl" style="--bg:var(--c-sub-2)"><svg><use href="#i-book"/></svg>OS · U2 · Round Robin</span><span class="lchip syl" style="--bg:var(--c-sub-2)"><svg><use href="#i-book"/></svg>OS · U2 · CPU scheduling</span><span class="lchip"><svg><use href="#i-link"/></svg>Scheduling formulas</span><button class="lchip add" type="button" data-linkadd aria-expanded="false"><svg><use href="#i-plus"/></svg>Link</button></div>
+            <div class="card picker" data-picker hidden>
+              <div class="search"><svg><use href="#i-search"/></svg>Link to a topic or a note</div>
+              <button class="prow" type="button" data-pick="OS · U3 · Deadlocks" data-kind="syl"><span class="label">Topic</span>OS · Unit 3 · Deadlocks</button>
+              <button class="prow" type="button" data-pick="Viva questions" data-kind="note"><span class="label">Note</span>Viva questions</button>
+              <button class="prow" type="button" data-pick="OS · U2 · Process concept" data-kind="syl"><span class="label">Topic</span>OS · Unit 2 · Process concept</button>
+            </div>
+            <div class="note-body">
+              <p>A <span class="ilink">time quantum</span> that is too small means lots of context switches. Too big, and Round Robin behaves like FCFS.</p>
+              <ul><li>Priority scheduling can <b>starve</b> low-priority jobs.</li><li>Fix: ageing raises priority the longer a job waits.</li><li>Exam tip: draw the Gantt chart first.</li></ul>
+              <p>Formulas are in <span class="ilink">Scheduling formulas</span>.</p>
+            </div>
+            <div class="card" style="gap:0"><span class="label" style="padding-bottom:6px">Also linked from</span><div class="brow"><svg><use href="#i-link"/></svg>Viva questions<span>note</span></div><div class="brow"><svg><use href="#i-link"/></svg>Exam plan · Sem 5<span>note</span></div></div>
+          </div>
+          <div class="navpill" data-section="notes"><span class="where">Notes · editing</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
+        </div></div>
+        <figcaption><b>Note editor</b><span>Tap "+ Link" to connect a topic or another note</span></figcaption>
+      </figure>
+
+      <!-- GRAPH -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll" style="padding-bottom:190px">
+            <div class="scr-row"><span class="label">OS · Sem 5</span><div class="view-toggle" role="group" aria-label="Graph view" data-graphmode><button type="button" aria-pressed="true" data-mode="all">With notes</button><button type="button" aria-pressed="false" data-mode="syl">Syllabus</button></div></div>
+            <h3 class="scr-title">Gr<span class="it">aph</span></h3>
+            <div class="row legend"><span class="lg"><i class="cov"></i>Covered</span><span class="lg"><i></i>Not yet</span><span class="lg"><i class="dia"></i>Your note</span><span class="lg"><i class="dash"></i>Link</span></div>
+            <div class="graph-wrap"><div class="graph" data-graph="phone"></div></div>
+          </div>
+          <div class="gsheet" data-ginfo><div class="ginfo-text"><span class="label" data-gk>Your note</span><b data-gt>Round Robin vs priority</b><span data-gl>Linked to 2 topics · 1 note</span></div><button class="btn btn-ink" type="button" style="height:40px;padding:0 16px;font-size:13px">Open</button></div>
+          <div class="navpill" data-section="study"><span class="where">Graph · Operating System</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
+        </div></div>
+        <figcaption><b>Graph</b><span>Syllabus tree + your notes woven in. Drag to explore, tap a dot</span></figcaption>
+      </figure>
+
       <!-- MENU OPEN -->
       <figure class="phone-wrap">
         <div class="phone"><div class="screen">
@@ -1044,26 +1149,37 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <figcaption><b>Menu (open)</b><span>The pill grows into the menu; Study unfolded</span></figcaption>
       </figure>
     </div>
+
+    <div class="kcard wide-graph rv">
+      <div class="scr-row" style="flex-wrap:wrap;align-items:end">
+        <div><span class="label">Graph · laptop view</span><div style="font-weight:900;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.035em;line-height:1.05;margin-top:4px">Operating System, <span class="it">woven with your notes</span></div></div>
+        <div class="view-toggle" role="group" aria-label="Graph view" data-graphmode><button type="button" aria-pressed="true" data-mode="all">With notes</button><button type="button" aria-pressed="false" data-mode="syl">Syllabus</button></div>
+      </div>
+      <div class="graph-wrap wide"><div class="graph" data-graph="wide"></div></div>
+      <div class="ginfo" data-ginfo><div class="ginfo-text"><span class="label" data-gk>Your note</span><b data-gt>Round Robin vs priority</b><span data-gl>Linked to 2 topics · 1 note</span></div><button class="btn btn-ink" type="button" style="height:40px;padding:0 16px;font-size:13px">Open</button></div>
+      <div class="row legend"><span class="lg"><i class="cov"></i>Covered</span><span class="lg"><i></i>Not yet</span><span class="lg"><i class="dia"></i>Your note</span><span class="lg"><i class="dash"></i>Link</span></div>
+    </div>
   </section>
 
   <!-- ================= MOTION ================= -->
   <section id="motion">
     <div class="sec-head">
-      <h2>Mo<span class="it">tion</span><svg class="sec-shape" aria-hidden="true"><use href="#s-squiggle"/></svg></h2>
-      <p>Playful but quick: shapes drift, cards spring, ticks pop with a little burst. Nothing slows the student down.</p>
+      <h2>Mo<span class="it">tion</span></h2>
+      <p>Every element arrives in order: headings rise out of a mask, content follows in a short stagger, bars and dials fill. Nothing blocks the student.</p>
     </div>
     <div class="motion-list">
       <div class="tok-card"><b>Screen change</b><p>View Transitions: the tapped card grows into the next screen. 360 ms, ease-out.</p></div>
       <div class="tok-card"><b>Lists</b><p>Items rise 18 px and fade in, 60 ms apart. Only on first load, never on every scroll.</p></div>
       <div class="tok-card"><b>Menu</b><p>The pill's button stretches into a full-screen menu (circle reveal, 640 ms). Items rise one after another; sub-options unfold.</p></div>
       <div class="tok-card"><b>Numbers</b><p>Countdowns tick every second; progress dials fill tick by tick when a note is saved.</p></div>
+      <div class="tok-card"><b>Graph</b><p>Columns appear left to right: subject, units, topics, then your notes and their links.</p></div>
       <div class="tok-card"><b>Press</b><p>Buttons scale to 96% on press, 140 ms. Gives a native feel.</p></div>
       <div class="tok-card"><b>Reduced motion</b><p>If the phone asks for less motion, everything appears instantly and the badges stop spinning.</p></div>
     </div>
   </section>
 </main>
 
-<footer class="wrap">Weave UI kit v0.3 · example data only · fonts: Urbanist, JetBrains Mono</footer>
+<footer class="wrap">Weave UI kit v0.4 · example data only · fonts: Urbanist, JetBrains Mono</footer>
 
 <div class="toast" role="status" aria-live="polite"><span class="ok"><svg><use href="#i-check"/></svg></span><span>Note saved</span></div>
 
@@ -1196,10 +1312,11 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
 
   // ---- floating pill + full-screen menu ----
   var MENU = [
-    { id: "home", word: "Home", count: "59%", shape: "s-circle", color: "var(--c-lime)", subs: ["Today", "Progress", "Deadlines"] },
-    { id: "study", word: "Study", count: "4 subj.", shape: "s-star", color: "var(--c-accent)", subs: ["Subjects", "Notes", "Materials"], later: ["Graph", "Quizzes", "AI tutor"] },
-    { id: "tasks", word: "Assignments", count: "3 due", shape: "s-tri", color: "var(--c-late)", subs: ["Pending", "Calendar", "Marked"] },
-    { id: "me", word: "Profile", count: "CSIT-2", shape: "s-flower", color: "var(--c-sub-1)", subs: ["My details", "Electives", "Notifications", "Install app"] }
+    { id: "home", word: "Home", count: "59%", subs: ["Today", "Progress", "Deadlines"] },
+    { id: "study", word: "Study", count: "4 subj.", subs: ["Subjects", "Graph", "Materials"], later: ["Quizzes", "AI tutor"] },
+    { id: "notes", word: "Notes", count: "42", subs: ["All notes", "New note", "Linked to syllabus", "Free notes"] },
+    { id: "tasks", word: "Assignments", count: "3 due", subs: ["Pending", "Calendar", "Marked"] },
+    { id: "me", word: "Profile", count: "CSIT-2", subs: ["My details", "Electives", "Notifications", "Install app"] }
   ];
   function menuHTML(here) {
     var sems = [3, 4, 5, 6, 7, 8].map(function (s) {
@@ -1207,16 +1324,14 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         : '<button type="button" aria-label="Semester ' + s + '"' + (s === 5 ? ' aria-current="true"' : "") + ">" + s + "</button>";
     }).join("");
     var items = MENU.map(function (m, i) {
-      var subs = m.subs.map(function (s) { return '<button type="button" data-go="' + m.word + " · " + s + '">' + s + "</button>"; }).join("") +
-        (m.later || []).map(function (s) { return '<button type="button" class="later" disabled>' + s + " · later</button>"; }).join("");
+      var subs = m.subs.map(function (s) { return '<button type="button" data-go="' + m.word + " · " + s + '"><span>' + s + '</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>'; }).join("") +
+        (m.later || []).map(function (s) { return '<button type="button" class="later" disabled><span>' + s + "</span><em>later</em></button>"; }).join("");
       return '<div class="mitem' + (m.id === here ? " here" : "") + '" data-id="' + m.id + '"><button class="mhead" type="button" aria-expanded="false" style="--c:' + m.color + '">' +
-        '<span class="idx">0' + (i + 1) + '</span><svg aria-hidden="true"><use href="#' + m.shape + '"/></svg><span class="w">' + m.word + '</span><span class="cnt">' + m.count + "</span></button>" +
+        '<span class="idx">0' + (i + 1) + '</span><span class="w">' + m.word + '</span><span class="cnt">' + m.count + "</span></button>" +
         '<div class="msub"><div>' + subs + "</div></div></div>";
     }).join("");
     return '<div class="mtop"><span class="label">Semester</span><div class="sems">' + sems + "</div></div>" +
-      '<div class="mshapes" aria-hidden="true"><svg class="shp" style="--s:54px;top:18%;right:12%;--c:var(--c-lime)"><use href="#s-star"/></svg>' +
-      '<svg class="shp" style="--s:80px;bottom:6%;left:-18px;--c:var(--c-accent)"><use href="#s-half"/></svg>' +
-      '<svg class="shp" style="--s:34px;top:52%;left:46%;--c:var(--c-late);animation-delay:-2s"><use href="#s-tri"/></svg></div>' +
+      '<div class="mshapes" aria-hidden="true"></div>' +
       '<div class="mlist">' + items + "</div>";
   }
   function setOpenItem(menu, id) {
@@ -1266,19 +1381,6 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
     if (pill.dataset.menuStart) { toggle(true, true); setOpenItem(menu, pill.dataset.menuStart); }
   });
 
-  // ---- topic ticks: tap to mark covered, with a small burst ----
-  var BURST = ["var(--c-lime)", "var(--c-accent)", "var(--c-late)", "var(--c-sub-1)"];
-  function burst(el) {
-    if (reduce || !el.animate) return;
-    for (var i = 0; i < 8; i++) {
-      var b = document.createElement("i"), a = (i / 8) * Math.PI * 2;
-      b.className = "bit"; b.style.background = BURST[i % 4];
-      el.appendChild(b);
-      b.animate([{ transform: "translate(-50%,-50%) scale(1)", opacity: 1 },
-        { transform: "translate(calc(-50% + " + Math.cos(a) * 24 + "px), calc(-50% + " + Math.sin(a) * 24 + "px)) scale(0.3)", opacity: 0 }],
-        { duration: 560, easing: "cubic-bezier(0.2,0.8,0.2,1)" }).onfinish = (function (x) { return function () { x.remove(); }; })(b);
-    }
-  }
   document.querySelectorAll(".topic").forEach(function (tp) {
     tp.setAttribute("role", "button"); tp.setAttribute("tabindex", "0");
     tp.setAttribute("aria-pressed", String(tp.classList.contains("done")));
@@ -1286,10 +1388,159 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       var on = !tp.classList.contains("done"), ck = tp.querySelector(".ck");
       tp.classList.toggle("done", on); tp.setAttribute("aria-pressed", String(on));
       ck.innerHTML = on ? '<svg><use href="#i-check"/></svg>' : "";
-      if (on) burst(ck);
     }
     tp.addEventListener("click", flip);
     tp.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+  });
+
+
+  // ---- entrance motion ----
+  var canIO = "IntersectionObserver" in window && !reduce;
+  var phonesAll = Array.prototype.slice.call(document.querySelectorAll(".phone"));
+  var graphs = Array.prototype.slice.call(document.querySelectorAll("[data-graph]"));
+  phonesAll.forEach(function (p) { p.classList.add("replay-host"); });
+  document.querySelectorAll(".hero h1, .sec-head h2").forEach(function (el) {
+    el.innerHTML = el.innerHTML.split(/<br\s*\/?>/i).map(function (l, i) { return '<span class="mk"><span style="--k:' + i + '">' + l + "</span></span>"; }).join("");
+  });
+  if (canIO) {
+    root.classList.add("js-motion");
+    [".swatches", ".type-rows", ".tok-grid", ".kit-grid", ".phones", ".motion-list"].forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (g) {
+        Array.prototype.forEach.call(g.children, function (c, i) { c.classList.add("rv"); c.style.setProperty("--i", String(i % 4)); });
+      });
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target; el.classList.add("in"); io.unobserve(el);
+        var ph = el.querySelector && el.querySelector(".phone");
+        if (ph) { ph.classList.add("play"); if (ph.querySelector("[data-dial]")) drawDials(true); }
+        if (el.hasAttribute("data-graph")) el.classList.add("play");
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    document.querySelectorAll(".rv, .sec-head").forEach(function (el) { io.observe(el); });
+    graphs.forEach(function (g) { io.observe(g); });
+    requestAnimationFrame(function () { requestAnimationFrame(function () { document.querySelector(".hero").classList.add("in"); }); });
+  }
+  var replayBtn = document.querySelector('[data-replay="#screens"]');
+  if (replayBtn) replayBtn.addEventListener("click", function () {
+    phonesAll.concat(graphs).forEach(function (p) { p.classList.remove("play"); void p.offsetWidth; p.classList.add("play"); });
+  });
+
+  // ---- graph: syllabus tree + the student's notes ----
+  var GN = [
+    { id: "s", t: "Operating System", k: "subject" },
+    { id: "u1", t: "1 · Introduction", k: "unit", p: "s" }, { id: "u2", t: "2 · Processes", k: "unit", p: "s" },
+    { id: "u3", t: "3 · Synchronization", k: "unit", p: "s" }, { id: "u4", t: "4 · Memory", k: "unit", p: "s" },
+    { id: "u5", t: "5 · File systems", k: "unit", p: "s" },
+    { id: "t1", t: "OS structures", k: "topic", p: "u1" }, { id: "t2", t: "System calls", k: "topic", p: "u1" },
+    { id: "t3", t: "Process concept", k: "topic", p: "u2" }, { id: "t4", t: "CPU scheduling", k: "topic", p: "u2" },
+    { id: "t5", t: "Round Robin", k: "topic", p: "u2" }, { id: "t6", t: "Semaphores", k: "topic", p: "u3" },
+    { id: "t7", t: "Deadlocks", k: "topic", p: "u3" }, { id: "t8", t: "Paging", k: "topic", p: "u4" },
+    { id: "t9", t: "Segmentation", k: "topic", p: "u4" }, { id: "t10", t: "File allocation", k: "topic", p: "u5" },
+    { id: "t11", t: "Disk scheduling", k: "topic", p: "u5" }
+  ];
+  var GNOTES = [
+    { id: "n1", t: "Round Robin vs priority", to: ["t5", "t4", "n2"] },
+    { id: "n2", t: "Scheduling formulas", to: ["t4"] },
+    { id: "n5", t: "Viva questions", to: ["t1", "t3", "n3"] },
+    { id: "n3", t: "Deadlock cheat sheet", to: ["t7", "t6"] },
+    { id: "n4", t: "Paging numericals", to: ["t8"] }
+  ];
+  function avg(a) { return a.reduce(function (s, v) { return s + v; }, 0) / a.length; }
+  function gpath(a, b) {
+    if (a.x === b.x) return "M" + a.x + " " + a.y + "C" + (a.x - 40) + " " + a.y + " " + (b.x - 40) + " " + b.y + " " + b.x + " " + b.y;
+    var l = a.x < b.x ? a : b, r = a.x < b.x ? b : a, m = (l.x + r.x) / 2;
+    return "M" + l.x + " " + l.y + "C" + m + " " + l.y + " " + m + " " + r.y + " " + r.x + " " + r.y;
+  }
+  function buildGraph(el) {
+    var wide = el.dataset.graph === "wide";
+    var X = wide ? [24, 240, 470, 720] : [14, 150, 290, 452], W = wide ? 900 : 620, RH = 38, TOP = 26;
+    var map = {}, list = [];
+    GN.forEach(function (n) { var c = { id: n.id, t: n.t, k: n.k, p: n.p }; map[n.id] = c; list.push(c); });
+    var ti = 0;
+    list.forEach(function (n) { if (n.k === "topic") { n.x = X[2]; n.y = TOP + ti++ * RH; n.col = 2; } });
+    list.forEach(function (n) { if (n.k === "unit") { n.x = X[1]; n.col = 1; n.y = avg(list.filter(function (c) { return c.p === n.id; }).map(function (c) { return c.y; })); } });
+    map.s.x = X[0]; map.s.col = 0; map.s.y = avg(list.filter(function (c) { return c.k === "unit"; }).map(function (c) { return c.y; }));
+    var notes = GNOTES.map(function (n) { var c = { id: n.id, t: n.t, k: "note", to: n.to, x: X[3], col: 3 }; map[n.id] = c; return c; });
+    notes.forEach(function (n) { n.y = avg(n.to.filter(function (id) { return map[id].k === "topic"; }).map(function (id) { return map[id].y; })); });
+    notes.sort(function (a, b) { return a.y - b.y; });
+    for (var i = 1; i < notes.length; i++) if (notes[i].y < notes[i - 1].y + RH * 1.3) notes[i].y = notes[i - 1].y + RH * 1.3;
+    notes.forEach(function (n) { n.to.forEach(function (id) { if (map[id].k === "topic") map[id].covered = true; }); });
+    var all = list.concat(notes), H = Math.max.apply(null, all.map(function (n) { return n.y; })) + 26;
+    var edges = [];
+    list.forEach(function (n) { if (n.p) edges.push({ a: n.p, b: n.id, k: "tree", col: n.col }); });
+    notes.forEach(function (n) { n.to.forEach(function (id) { edges.push({ a: n.id, b: id, k: "note", col: 3 }); }); });
+    var out = '<svg viewBox="0 0 ' + W + " " + H + '"' + (wide ? "" : ' width="' + W + '" height="' + H + '"') + ' role="group" aria-label="Operating System graph">';
+    edges.forEach(function (e) { out += '<path class="g-edge ' + e.k + '" data-a="' + e.a + '" data-b="' + e.b + '" style="--col:' + e.col + '" d="' + gpath(map[e.a], map[e.b]) + '"/>'; });
+    all.forEach(function (n, j) {
+      var shape = n.k === "note"
+        ? '<rect x="' + (n.x - 6) + '" y="' + (n.y - 6) + '" width="12" height="12" rx="3" transform="rotate(45 ' + n.x + " " + n.y + ')"/>'
+        : '<circle cx="' + n.x + '" cy="' + n.y + '" r="' + (n.k === "subject" ? 9 : n.k === "unit" ? 7 : 6) + '"/>';
+      out += '<g class="g-node ' + n.k + (n.covered ? " covered" : "") + '" data-n="' + n.id + '" tabindex="0" role="button" aria-label="' + n.t + '" style="--col:' + n.col + ";--j:" + (j % 12) + '">' + shape +
+        '<text x="' + (n.x + 13) + '" y="' + (n.y + 4) + '">' + n.t + "</text></g>";
+    });
+    el.innerHTML = out + "</svg>";
+    el._map = map;
+    el.addEventListener("click", function (e) { var n = e.target.closest("[data-n]"); selectNode(el, n ? n.dataset.n : null); });
+    el.addEventListener("keydown", function (e) { var n = e.target.closest("[data-n]"); if (n && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); selectNode(el, n.dataset.n); } });
+    selectNode(el, wide ? "n1" : null);
+  }
+  function selectNode(el, id) {
+    var svg = el.querySelector("svg"), map = el._map;
+    var info = el.closest(".screen, .kcard").querySelector("[data-ginfo]");
+    svg.querySelectorAll(".hl, .sel-node").forEach(function (x) { x.classList.remove("hl", "sel-node"); });
+    if (!id) {
+      svg.classList.remove("sel");
+      info.querySelector("[data-gk]").textContent = "Graph";
+      info.querySelector("[data-gt]").textContent = "Tap a dot";
+      info.querySelector("[data-gl]").textContent = "See what it connects to";
+      return;
+    }
+    svg.classList.add("sel");
+    svg.querySelector('[data-n="' + id + '"]').classList.add("hl", "sel-node");
+    var nT = 0, nN = 0;
+    svg.querySelectorAll(".g-edge").forEach(function (e) {
+      if (e.dataset.a !== id && e.dataset.b !== id) return;
+      e.classList.add("hl");
+      var other = e.dataset.a === id ? e.dataset.b : e.dataset.a;
+      svg.querySelector('[data-n="' + other + '"]').classList.add("hl");
+      if (map[other].k === "note") nN++; else nT++;
+    });
+    var n = map[id], kind = { subject: "Subject", unit: "Unit", note: "Your note" }[n.k] || (n.covered ? "Topic · covered" : "Topic · not covered yet");
+    var line = n.k === "note" ? "Linked to " + nT + " topic" + (nT === 1 ? "" : "s") + " · " + nN + " note" + (nN === 1 ? "" : "s")
+      : n.k === "topic" ? (nN ? nN + " of your notes link here" : "No notes yet. Link one to cover it")
+      : (n.k === "unit" ? nT - 1 : nT) + " items inside";
+    info.querySelector("[data-gk]").textContent = kind;
+    info.querySelector("[data-gt]").textContent = n.t;
+    info.querySelector("[data-gl]").textContent = line;
+  }
+  graphs.forEach(buildGraph);
+  document.querySelectorAll("[data-graphmode]").forEach(function (vt) {
+    var g = vt.closest(".screen, .kcard").querySelector("[data-graph]");
+    vt.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      vt.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      var syl = b.dataset.mode === "syl";
+      g.querySelector("svg").classList.toggle("no-notes", syl);
+      selectNode(g, g.dataset.graph === "wide" ? (syl ? "t5" : "n1") : null);
+    });
+  });
+
+  // ---- note editor: link a topic or another note ----
+  document.querySelectorAll("[data-linkadd]").forEach(function (b) {
+    var picker = b.closest(".screen").querySelector("[data-picker]");
+    b.addEventListener("click", function () { var open = picker.hidden; picker.hidden = !open; b.setAttribute("aria-expanded", String(open)); });
+    picker.addEventListener("click", function (e) {
+      var r = e.target.closest("[data-pick]"); if (!r) return;
+      var isSyl = r.dataset.kind === "syl", chip = document.createElement("span");
+      chip.className = "lchip" + (isSyl ? " syl" : "");
+      if (isSyl) chip.style.setProperty("--bg", "var(--c-sub-2)");
+      chip.innerHTML = '<svg><use href="#' + (isSyl ? "i-book" : "i-link") + '"/></svg>' + r.dataset.pick;
+      b.parentNode.insertBefore(chip, b);
+      if (!reduce && chip.animate) chip.animate([{ opacity: 0, transform: "scale(0.6)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.34,1.4,0.5,1)" });
+      r.remove(); picker.hidden = true; b.setAttribute("aria-expanded", "false");
+    });
   });
 
   // ---- subject stack: tapped card opens, the cards below make room ----
