@@ -10,7 +10,7 @@ Must stay fast (p95 < 800 ms) and within free/low-cost tiers.
 | Database connections | Serverless functions opening too many connections | Neon **pooled** URL (PgBouncer) for the app; `attachDatabasePool` on Vercel; unpooled only for migrations |
 | Slow queries | Dashboard/graph aggregate over notes, quizzes, activity | Indexes (see `database_schema.md`), one aggregated query per widget, no N+1; `EXPLAIN ANALYZE` the top 10 queries |
 | Repeated reads | Every tab switch re-queries | Next.js caching per user (tag `user:<id>`), revalidate on write; SW stale-while-revalidate on the client |
-| AI quota | Gemini free tier rate limits (requests/min, per day) | Per-student daily caps, quiz/analysis caching, queue embeddings in background, clear "try again" UX, optional paid key or fallback provider |
+| AI quota | Free-tier rate limits of Groq and Gemini (requests/tokens per minute and per day, shared by all students on one key) | Two providers with automatic chat fallback (Groq ⇄ Gemini), per-student daily caps, quiz/analysis caching, embeddings queued in background, clear "try again" UX, optional paid key |
 | Embedding backlog | Many notes saved at once | Debounced embedding, batched calls, retry with backoff |
 | Push fan-out | Reminder cron for all students | Batch sends (e.g. 50 at a time), drop dead subscriptions |
 | Client performance | Mid-range Android phones | Route JS budget < 200 KB, lazy graph/editor/charts, transform/opacity animations only |
@@ -24,4 +24,4 @@ Must stay fast (p95 < 800 ms) and within free/low-cost tiers.
 - Record results (charts + numbers) in `docs/testing.md` — good material for the report and viva.
 
 ## Cost estimate (pilot)
-Vercel Hobby/Pro, Neon free/launch tier, Gemini free tier with caps → ~₹0–2,000/month for 300 students. Update with real numbers after the pilot.
+Vercel Hobby/Pro, Neon free/launch tier, Groq + Gemini free tiers with caps → ~₹0–2,000/month for 300 students. Update with real numbers after the pilot.

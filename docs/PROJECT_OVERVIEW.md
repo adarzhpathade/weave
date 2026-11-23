@@ -53,4 +53,4 @@ Online assignment submission, student file uploads, public sharing, chat between
 
 ## Technology (summary)
 Next.js + React + TypeScript, Tailwind CSS, Motion/GSAP, Neon Postgres + pgvector, Drizzle ORM, Neon Auth,
-Vercel AI SDK + Google Gemini, Serwist (service worker) + Web Push, hosted on Vercel. Details in `architecture.md`.
+Vercel AI SDK with Groq (fast chat) + Google Gemini (embeddings, document reading), Serwist (service worker) + Web Push, hosted on Vercel. Details in `architecture.md`.

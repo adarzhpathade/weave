@@ -35,7 +35,7 @@ Read `docs/PROJECT_OVERVIEW.md` for the product story and `docs/roadmap.md` for 
 | PWA | `app/manifest.ts` + service worker (**Serwist**, or hand-written `public/sw.js` if Serwist does not support the bundler) + **Web Push** (`web-push`, VAPID) | See `docs/pwa.md` |
 | Database | **Neon Postgres** + **pgvector**, **Drizzle ORM** | Pooled URL for the app, unpooled for migrations |
 | Auth | **Neon Auth** (Better Auth) | College email domains only (`ALLOWED_EMAIL_DOMAINS`) |
-| AI | **Vercel AI SDK** + Gemini | Model IDs only in `lib/ai/config.ts` |
+| AI | **Vercel AI SDK** + **Groq** (chat, quizzes, analysis — fast) + **Google Gemini** (embeddings, PDF/vision, fallback chat) | Provider routing and model IDs only in `lib/ai/config.ts`; see `docs/ai.md` |
 | Files | Neon Object Storage (private, presigned URLs) | Faculty uploads only |
 | Validation | **Zod** | Every input, every AI structured output |
 | Client data | **TanStack Query** (only where needed) + **Zustand** (small UI state) | |
@@ -154,7 +154,9 @@ Status bands: Not started 0% · Low 1–39% · In progress 40–75% · Mastered 
 
 ## 9. AI rules
 
-- Provider config and model IDs **only** in `lib/ai/config.ts`. Prompts **only** in `lib/ai/prompts/`.
+- Two providers: **Groq** = primary for chat, quizzes and note analysis (speed); **Gemini** = embeddings, PDF/vision, and chat fallback. On 429/timeout/5xx the primary falls back once to the other, then a friendly message.
+- Provider routing and model IDs **only** in `lib/ai/config.ts` (`getModel(task)`); no other file names a provider. Prompts **only** in `lib/ai/prompts/`.
+- The embedding model is fixed (changing it means re-embedding everything).
 - Answer **only** from retrieved sources (faculty material for the student's sections + the student's own notes). Cite every claim. If nothing relevant is found, say "Not covered in your material" and suggest a unit/topic.
 - Never send another student's data to a model. RAG retrieval applies the same permission filters as normal queries.
 - Structured outputs (quiz, note analysis, gap finder) are validated with Zod schemas from `lib/ai/schemas.ts`.
