@@ -53,3 +53,4 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-23 — CY seeded as a copy of the CSIT plan until the CY list arrives. — the source covers CSIT only.
 - 2026-11-24 — Phase 2 demo sign-in: email-only against the students list + HMAC-signed session cookie (SESSION_SECRET); Neon Auth email OTP later. — demo deadline.
 - 2026-11-24 — Home route is /home; / redirects by session. Unbuilt menu routes show a Coming next page. — orchestrator.
+- 2026-11-24 — Note editor uses a plain Markdown textarea + small safe preview for now; Tiptap needs a dependency install (user OK) and comes later. — no new deps overnight.
