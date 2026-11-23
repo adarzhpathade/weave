@@ -14,7 +14,7 @@ const NOTIFY_ROWS: { key: NotifyKey; label: string }[] = [
 
 /**
  * Profile — no kit phone exists, so it is built from the kit's sheet language: mono label, screen title
- * (first name plain, the rest light italic accent like `.scr-title .it`), hairline `.kv` rows and `.toggle-row`
+ * (first name in ink, the rest in grey like the Home greeting; no italic, per the user), hairline `.kv` rows and `.toggle-row`
  * switches, then a ghost "Sign out" button.
  */
 export function ProfileScreen({ data, actions }: { data: ProfileData; actions: ProfileActions }): JSX.Element {
@@ -31,7 +31,7 @@ export function ProfileScreen({ data, actions }: { data: ProfileData; actions: P
         {restName ? (
           <>
             {" "}
-            <span className="font-light italic tracking-title text-accent">{restName}</span>
+            <span className="text-muted">{restName}</span>
           </>
         ) : null}
       </h1>

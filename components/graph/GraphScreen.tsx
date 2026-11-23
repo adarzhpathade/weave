@@ -90,7 +90,7 @@ export function GraphScreen({ data }: { data: GraphData }): JSX.Element {
               <span className="font-mono text-label tracking-label text-muted uppercase">Graph · laptop view</span>
               <h2 className="mt-1 text-h2 font-black tracking-headline">
                 {data.subject.name},{" "}
-                <span className="font-light italic tracking-title text-accent">
+                <span className="text-muted">
                   {withNotes ? "woven with your notes" : "the full syllabus"}
                 </span>
               </h2>
