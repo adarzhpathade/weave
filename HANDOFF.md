@@ -5,7 +5,7 @@
 
 ## Where we are
 - **App:** **Weave** — student-first PWA that maps the syllabus as a knowledge graph, links private notes, tracks deadlines (push reminders) and has grounded AI. College minor project; goal = department daily use, 100+ students, pixel-perfect, Awwwards-level.
-- **Repo:** https://github.com/adarzhpathade/weave (PUBLIC, squash-merge only, auto-delete branches). Local: `E:\Projects\College Projects\nodus` (folder keeps the old name).
+- **Repo:** https://github.com/adarzhpathade/weave (PUBLIC, squash-merge only, auto-delete branches). Local: `E:\Projects\College Projects\weave`.
 - Phase 0.1–0.4 done: Next.js 16.4 app scaffolded (Tailwind 4, shadcn Base UI, ESLint/Prettier, Vitest, Playwright) and Neon set up. See `docs/changes/2026-11-23-scaffold-and-neon.md`.
 - **Neon:** project `weave` = `proud-sky-40049407` (Singapore, PG 18, branch `main` = `br-raspy-boat-biu51cbq`): pgvector, Managed Neon Auth, private bucket `materials`. Secrets only in git-ignored `.env.local`; names in `.env.example`, validated by `lib/envSchema.ts`.
 - The old project `E:\Projects\College Projects\Not Decided` (NODUS) is **abandoned**. Do not reuse its code, design references or docs.
