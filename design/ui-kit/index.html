@@ -382,10 +382,10 @@ main section { padding-block: 4rem 1rem; }
 .mlist { display: grid; }
 .mitem { border-top: 1px solid var(--c-night-line); }
 .mitem:last-child { border-bottom: 1px solid var(--c-night-line); }
-.mhead { width: 100%; border: 0; background: transparent; color: inherit; display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 8px; padding: 10px 0; text-align: left; transition: opacity var(--d-base); }
+.mhead { width: 100%; border: 0; background: transparent; color: inherit; display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 8px; padding: 7px 0; text-align: left; transition: opacity var(--d-base); }
 .mhead .idx { font-family: var(--f-mono); font-size: 11px; opacity: 0.5; }
 .mhead svg { width: 22px; height: 22px; color: var(--c); transition: transform var(--d-slow) var(--e-spring); }
-.mhead .w { font-family: var(--f-display); font-weight: 900; font-size: 2.15rem; line-height: 1; letter-spacing: -0.045em; }
+.mhead .w { font-family: var(--f-display); font-weight: 900; font-size: 1.95rem; line-height: 1; letter-spacing: -0.045em; }
 .mhead .cnt { font-family: var(--f-mono); font-size: 11px; opacity: 0.6; text-align: right; }
 .mitem.here .mhead .w::after { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--c-lime); margin-left: 8px; vertical-align: 0.5em; }
 .mlist.has-open .mitem:not(.open) .mhead { opacity: 0.35; }
@@ -405,7 +405,7 @@ main section { padding-block: 4rem 1rem; }
 .mitem.open .msub button:nth-child(4) { animation-delay: 120ms; } .mitem.open .msub button:nth-child(n+5) { animation-delay: 160ms; }
 .mpanel.open .mitem, .mpanel.open .mtop { animation: rise var(--d-slow) var(--e-out) both; }
 .mpanel.open .mitem:nth-child(1) { animation-delay: 120ms; } .mpanel.open .mitem:nth-child(2) { animation-delay: 170ms; }
-.mpanel.open .mitem:nth-child(3) { animation-delay: 220ms; } .mpanel.open .mitem:nth-child(4) { animation-delay: 270ms; } .mpanel.open .mitem:nth-child(5) { animation-delay: 320ms; }
+.mpanel.open .mitem:nth-child(3) { animation-delay: 220ms; } .mpanel.open .mitem:nth-child(4) { animation-delay: 270ms; } .mpanel.open .mitem:nth-child(5) { animation-delay: 320ms; } .mpanel.open .mitem:nth-child(6) { animation-delay: 370ms; }
 .mpanel.instant, .mpanel.instant * { transition: none !important; animation: none !important; }
 .kcard .navpill { margin-top: 4px; }
 
@@ -544,6 +544,65 @@ main section { padding-block: 4rem 1rem; }
 .hm-subs i { position: absolute; left: 0; bottom: -1px; width: var(--v); height: 2px; background: var(--c-ink); transform-origin: left; }
 .hm-subs li.top i { height: 3px; background: var(--c-lime); }
 .replay-host.play .hm-subs i { animation: grow 1000ms var(--e-out) 300ms both; }
+
+/* ---------- login v3: app glimpse + one field ---------- */
+.login3 { flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 6px 22px 24px; }
+.lg-stack { position: relative; height: 92cqi; margin-top: 4px; }
+.lg-card { position: absolute; width: 72%; display: grid; gap: 6px; padding: 14px 16px; border-radius: var(--r-md); box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7); }
+.lg-card b { font-size: 17px; font-weight: 800; line-height: 1.15; letter-spacing: -0.015em; }
+.lg-k { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
+.lg-card.c1 { left: 0; top: 0; rotate: -6deg; background: var(--c-sub-1); color: var(--c-on-sub); }
+.lg-card.c2 { right: 0; top: 33%; rotate: 4deg; background: var(--c-on-night); color: var(--c-night); z-index: 1; }
+.lg-card.c3 { left: 6%; top: 67%; rotate: -2deg; background: var(--c-lime); color: var(--c-on-lime); z-index: 2; }
+.lg-bar { height: 5px; border-radius: var(--r-pill); background: rgba(11, 11, 12, 0.15); overflow: hidden; }
+.lg-bar i { display: block; height: 100%; background: var(--c-on-sub); border-radius: inherit; }
+.lg-cd { font-weight: 900; font-size: 22px; letter-spacing: -0.04em; }
+.lg-chip { justify-self: start; padding: 3px 9px; border-radius: var(--r-pill); border: 1px solid currentColor; font-size: 11px; font-weight: 700; }
+.replay-host.play .lg-card { animation: card-in 900ms var(--e-spring) both; }
+.replay-host.play .lg-card.c2 { animation-delay: 120ms; }
+.replay-host.play .lg-card.c3 { animation-delay: 240ms; }
+@keyframes card-in { from { opacity: 0; translate: 0 50px; rotate: 0deg; } }
+.lg-copy { display: grid; gap: 8px; margin-top: auto; padding-top: 8px; }
+.lg-copy h3 { font-family: var(--f-display); font-weight: 800; font-size: 2.25rem; line-height: 1; letter-spacing: -0.035em; }
+.lg-copy p { font-size: 14.5px; opacity: 0.65; }
+.lg-form2 { display: grid; gap: 8px; }
+.lg-form2 label { font-size: 13px; font-weight: 700; }
+.lg-form2 input { height: 52px; padding: 0 16px; border-radius: var(--r-sm); border: 1.5px solid var(--c-night-line); background: transparent; color: var(--c-on-night); font: inherit; font-size: 16px; transition: border-color var(--d-fast); }
+.lg-form2 input::placeholder { color: var(--c-on-night); opacity: 0.4; }
+.lg-form2 input:focus { outline: none; border-color: var(--c-lime); }
+.lg-form2 .btn { margin-top: 4px; }
+.lg-form2 p { font-size: 12px; text-align: center; opacity: 0.5; }
+
+/* ---------- home v3: today ---------- */
+.hm-hi { font-family: var(--f-display); font-weight: 800; font-size: 1.6rem; line-height: 1.1; letter-spacing: -0.03em; }
+.hm-next { margin-top: 2px; }
+.hm-next-t { font-size: 8.5cqi; }
+.hm-next-f { font-size: 12.5px; opacity: 0.65; }
+.hm-sec { align-items: baseline; margin-top: 6px; }
+.hm-sec h4 { margin: 0; font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.025em; }
+.hm-new { padding: 2px 8px; border-radius: var(--r-pill); background: var(--c-lime); color: var(--c-on-lime); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; }
+.hm-list { display: grid; margin-top: -10px; }
+.ann-row, .mk-row, .hm-cont { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--c-line); }
+.ann-row > div, .mk-row > div, .hm-cont > div { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.ann-row b, .mk-row b, .hm-cont b { font-size: 15px; font-weight: 800; line-height: 1.2; }
+.ann-row span:not(.ann-av), .mk-row > div span, .hm-cont span:not(.ibtn) { font-size: 12px; color: var(--c-muted); }
+.ann-row.unread b::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: var(--c-accent); vertical-align: 0.2em; }
+.hm-cont { margin-top: -10px; padding: 14px 14px 14px 16px; border: 0; border-radius: var(--r-md); background: var(--c-surface); }
+
+/* ---------- announcements ---------- */
+.ann-av { width: 36px; height: 36px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--c-sub-1); color: var(--c-on-sub); font-size: 12px; font-weight: 800; }
+.ann { display: grid; gap: 8px; padding: 14px 16px; border-radius: var(--r-md); background: var(--c-surface); }
+.ann.unread { box-shadow: inset 3px 0 0 var(--c-accent); }
+.ann-top { display: flex; align-items: center; gap: 10px; }
+.ann-top > div { flex: 1; min-width: 0; display: grid; }
+.ann-top b { font-size: 13.5px; font-weight: 800; }
+.ann-top span:not(.ann-av):not(.ann-tag) { font-size: 11.5px; color: var(--c-muted); }
+.ann-tag { padding: 3px 8px; border-radius: var(--r-pill); border: 1px solid var(--c-ink); font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+.ann h5 { margin: 0; font-size: 16.5px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; }
+.ann p { font-size: 13.5px; line-height: 1.45; color: var(--c-muted); }
+.ann-file { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: var(--r-sm); background: var(--c-app); font-size: 13px; font-weight: 700; }
+.ann-file svg { width: 16px; height: 16px; }
+.ann-file em { margin-left: auto; font-style: normal; font-family: var(--f-mono); font-size: 10.5px; color: var(--c-muted); }
 
 /* ---------- phone screens ---------- */
 .phones { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px 20px; justify-items: center; }
@@ -722,7 +781,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <div class="hero-stats">
           <div><span class="label">Semesters</span><b class="num">3–8</b></div>
           <div><span class="label">Theory subjects</span><b class="num">39</b></div>
-          <div><span class="label">Screens</span><b class="num">10</b></div>
+          <div><span class="label">Screens</span><b class="num">11</b></div>
         </div>
       </div>
       <div class="badge-rot" aria-hidden="true">
@@ -738,7 +797,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <!-- ================= FOUNDATIONS ================= -->
   <section id="foundations">
     <div class="sec-head">
-      <h2>Foun<span class="it">dations</span></h2>
+      <h2>Foundations</h2>
       <p>Black, white and lime from the Museum reference. The accent is a placeholder until you choose: switch it at the top of the page.</p>
     </div>
 
@@ -802,7 +861,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <!-- ================= COMPONENTS ================= -->
   <section id="components">
     <div class="sec-head">
-      <h2>Compo<span class="it">nents</span></h2>
+      <h2>Components</h2>
       <p>Every piece here works: tap the chips, switches, tab bar and the toast button.</p>
     </div>
 
@@ -940,32 +999,26 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       <figure class="phone-wrap">
         <div class="phone"><div class="screen night">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
-          <div class="login2">
-            <div class="scr-row"><span class="wordmark">weave.</span><span class="label on-night">CSIT · CY · RGPV</span></div>
-            <div class="lg-type stagger" aria-label="Your syllabus, notes and deadlines, woven.">
-              <span>Your</span>
-              <span class="it r">syllabus,</span>
-              <span>notes &amp;</span>
-              <span class="it r">deadlines</span>
-              <span class="lg-last"><span class="lime">woven.</span>
-                <span class="badge-rot lg-badge" aria-hidden="true">
-                  <svg class="ring-text" viewBox="0 0 152 152"><defs><path id="c4" d="M76 76m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0"/></defs><text fill="currentColor"><textPath href="#c4">CSIT · CY · SEM 3–8 · </textPath></text></svg>
-                  <span class="core"><svg width="32" height="32"><use href="#i-weave"/></svg></span>
-                </span>
-              </span>
+          <div class="login3">
+            <div class="scr-row"><span class="wordmark">weave.</span><span class="label on-night">CSIT · RGPV</span></div>
+            <div class="lg-stack" aria-hidden="true">
+              <div class="lg-card c1"><span class="lg-k">CSIT-501 · Core</span><b>Computer Networking</b><span class="lg-bar"><i style="width:72%"></i></span><span class="lg-k">18 of 25 topics</span></div>
+              <div class="lg-card c2"><span class="lg-k">Due tomorrow · CN</span><b>Subnetting and CIDR</b><span class="lg-cd num">01d 06h 28m</span></div>
+              <div class="lg-card c3"><span class="lg-k">Your note</span><b>Round Robin vs priority</b><span class="lg-chip">OS · Unit 2 · Round Robin</span></div>
             </div>
-            <div class="stats lg-stats">
-              <div><div class="k">Students</div><div class="v num">180+</div></div>
-              <div><div class="k">Theory subjects</div><div class="v num">39</div></div>
+            <div class="lg-copy">
+              <h3>Your semester,<br>in one place.</h3>
+              <p>Syllabus, notes, deadlines and announcements for CSIT and CY students.</p>
             </div>
-            <form class="lg-form" onsubmit="return false">
-              <label class="label on-night" for="l-email">College email</label>
-              <div class="lg-field"><input id="l-email" type="email" placeholder="you@college.ac.in" autocomplete="off"><button class="ibtn lime" type="submit" aria-label="Continue"><svg><use href="#i-arrow"/></svg></button></div>
-              <p class="lg-hint">Only students on the department list can sign in.</p>
+            <form class="lg-form2" onsubmit="return false">
+              <label for="l-email">College email</label>
+              <input id="l-email" type="email" placeholder="you@college.ac.in" autocomplete="off">
+              <button class="btn btn-lime btn-wide" type="submit">Continue <svg width="18" height="18"><use href="#i-arrow"/></svg></button>
+              <p>Only students on the department list can sign in.</p>
             </form>
           </div>
         </div></div>
-        <figcaption><b>Login</b><span>A type poster: one field, one button</span></figcaption>
+        <figcaption><b>Login</b><span>A glimpse of the app, then one field</span></figcaption>
       </figure>
 
       <!-- HOME -->
@@ -973,35 +1026,58 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <div class="phone"><div class="screen">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll stagger">
-            <div class="scr-row"><span class="label" data-today>Today</span><span class="avatar">AS</span></div>
-            <h3 class="hm-hello"><span data-greet>Morning</span>,<br><span class="it">Aarav.</span></h3>
-            <div class="hm-big">
-              <div class="hm-num num">59<span>%</span></div>
-              <div class="hm-side"><span class="it">of semester five<br>is covered</span><span class="hm-delta">+4% this week</span></div>
-            </div>
-            <div class="ticks" style="--v:59%" role="img" aria-label="59 percent covered"><i></i></div>
+            <div class="scr-row"><div><div class="label" data-today>Today</div><div class="hm-hi"><span data-greet>Morning</span>, Aarav</div></div><span class="avatar">AS</span></div>
             <div class="hm-next">
-              <div class="scr-row"><span class="label on-night">Next deadline · CSIT-501</span><span class="status late">Tomorrow</span></div>
-              <div class="hm-next-t">Subnetting <span class="it">and</span> CIDR</div>
+              <div class="scr-row"><span class="label on-night">Due next · Computer Networking</span><span class="status late">Tomorrow</span></div>
+              <div class="hm-next-t">Assignment 3: Subnetting and CIDR</div>
               <div class="count" data-due-in="1.27"></div>
+              <div class="scr-row hm-next-f"><span>Submit on paper in class</span><span>2 more this week</span></div>
             </div>
-            <div class="hm-sec"><span class="label">This week</span><span class="label">3 due</span></div>
+            <div class="hm-sec"><h4>Announcements</h4><span class="hm-new">2 new</span></div>
+            <div class="hm-list">
+              <div class="ann-row unread"><span class="ann-av">RM</span><div><b>CN class test moved to Friday</b><span>Prof. R. Mehta · 20 min ago</span></div></div>
+              <div class="ann-row unread"><span class="ann-av" style="background:var(--c-sub-2)">SI</span><div><b>Unit 3 slides uploaded</b><span>Prof. S. Iyer · Operating System · 2h ago</span></div></div>
+            </div>
+            <div class="hm-sec"><h4>This week</h4><span class="label">3 due</span></div>
             <div class="hm-week">
               <div data-day="1.27"><small>Wed</small><b>25</b><span>CN · Assignment 3</span></div>
-              <div data-day="3.09"><small>Fri</small><b>27</b><span>OS · Assignment 2</span></div>
+              <div data-day="3.09"><small>Fri</small><b>27</b><span>CN · Class test</span></div>
               <div data-day="6.4"><small>Mon</small><b>30</b><span>TOC · Assignment 1</span></div>
             </div>
-            <div class="hm-sec"><span class="label">Subjects</span><span class="label">Covered</span></div>
-            <ol class="hm-subs">
-              <li class="top"><span class="i">01</span><span class="n">Artificial Intelligence</span><span class="p num">85</span><i style="--v:85%"></i></li>
-              <li><span class="i">02</span><span class="n">Computer Networking</span><span class="p num">72</span><i style="--v:72%"></i></li>
-              <li><span class="i">03</span><span class="n">Operating System</span><span class="p num">48</span><i style="--v:48%"></i></li>
-              <li><span class="i">04</span><span class="n">Theory of Computation</span><span class="p num">31</span><i style="--v:31%"></i></li>
-            </ol>
+            <div class="hm-sec"><h4>Just marked</h4><span class="label">by teachers</span></div>
+            <div class="hm-list">
+              <div class="mk-row"><div><b>Search algorithms</b><span>AI · Assignment 2</span></div><span class="status submitted"><svg><use href="#i-check"/></svg>8 / 10</span></div>
+              <div class="mk-row"><div><b>Process states</b><span>OS · Assignment 1</span></div><span class="status late">Late · 6 / 10</span></div>
+            </div>
+            <div class="hm-sec"><h4>Keep writing</h4><span class="label">Edited 2h ago</span></div>
+            <div class="hm-cont"><div><b>Round Robin vs priority</b><span>OS · Unit 2 · 3 links</span></div><span class="ibtn ink" aria-hidden="true" style="width:40px;height:40px"><svg><use href="#i-arrow"/></svg></span></div>
           </div>
-          <div class="navpill" data-section="home"><span class="where">Home · Semester 5</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
+          <div class="navpill" data-section="home"><span class="where">Home · Today</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
         </div></div>
-        <figcaption><b>Home</b><span>One big number, the next deadline, the week, the subjects</span></figcaption>
+        <figcaption><b>Home</b><span>Only what matters today: due next, announcements, marks, your last note</span></figcaption>
+      </figure>
+
+      <!-- ANNOUNCEMENTS -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll stagger">
+            <div class="scr-row"><span class="label">CSIT-2 · Semester 5</span><span class="label">2 new</span></div>
+            <h3 class="scr-title" style="font-size:12cqi">Announcements</h3>
+            <div class="row" data-chipgroup style="gap:6px">
+              <button class="fchip" type="button" aria-pressed="true">All <span class="n">6</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Exams <span class="n">1</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Material <span class="n">2</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Class <span class="n">2</span></button>
+            </div>
+            <article class="ann unread"><div class="ann-top"><span class="ann-av">RM</span><div><b>Prof. R. Mehta</b><span>Computer Networking · 20 min ago</span></div><span class="ann-tag">Exam</span></div><h5>Class test on Unit 3 moved to Friday</h5><p>The test is now on Fri, 27 Nov at 10:00 in Lab 4. Syllabus: subnetting, CIDR and routing basics.</p></article>
+            <article class="ann unread"><div class="ann-top"><span class="ann-av" style="background:var(--c-sub-2)">SI</span><div><b>Prof. S. Iyer</b><span>Operating System · 2h ago</span></div><span class="ann-tag">Material</span></div><h5>Unit 3 slides uploaded</h5><p>Synchronization and deadlocks, 42 slides. Read before Thursday's lecture.</p><span class="ann-file"><svg><use href="#i-book"/></svg>OS-Unit3-slides.pdf<em>2.1 MB</em></span></article>
+            <article class="ann"><div class="ann-top"><span class="ann-av" style="background:var(--c-sub-5)">HD</span><div><b>Head of Department</b><span>CSIT · Yesterday</span></div><span class="ann-tag">Class</span></div><h5>No lectures on Monday</h5><p>Department seminar in the main hall instead. Attendance will be taken there.</p></article>
+            <article class="ann"><div class="ann-top"><span class="ann-av">RM</span><div><b>Prof. R. Mehta</b><span>Computer Networking · 3 days ago</span></div><span class="ann-tag">Assignment</span></div><h5>Assignment 3 posted</h5><p>Subnetting and CIDR, due Wed 25 Nov. Submit on paper in class.</p></article>
+          </div>
+          <div class="navpill" data-section="news"><span class="where">Announcements · 2 new</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
+        </div></div>
+        <figcaption><b>Announcements</b><span>Teachers post to a division or subject; students also get a push</span></figcaption>
       </figure>
 
       <!-- SUBJECTS -->
@@ -1010,7 +1086,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll">
             <div class="scr-row"><span class="label">Semester 5 · CSIT-2</span><span class="label">Tap a card</span></div>
-            <h3 class="scr-title">Sub<span class="it">jects</span></h3>
+            <h3 class="scr-title">Subjects</h3>
             <div class="row" data-chipgroup style="gap:6px">
               <button class="fchip" type="button" aria-pressed="true">All <span class="n">4</span></button>
               <button class="fchip" type="button" aria-pressed="false">Core <span class="n">2</span></button>
@@ -1052,7 +1128,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="scroll">
             <div class="sub-hero">
               <div class="scr-row"><button class="ibtn soft" type="button" aria-label="Back" style="width:40px;height:40px;background:var(--c-surface)"><svg><use href="#i-back"/></svg></button><span class="code label" style="color:var(--c-on-sub)">CSIT-502</span></div>
-              <h3 class="scr-title" style="font-size:2.4rem">Operating <span class="it">System</span></h3>
+              <h3 class="scr-title" style="font-size:2.4rem">Operating System</h3>
               <div class="stats" style="color:var(--c-on-sub)">
                 <div><div class="k">Progress</div><div class="v num">48%</div></div>
                 <div><div class="k">Notes</div><div class="v num">14</div></div>
@@ -1093,7 +1169,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
                 <button type="button" aria-pressed="false" data-view="cal">Calendar</button>
               </div>
             </div>
-            <h3 class="scr-title">Due <span class="it">soon</span></h3>
+            <h3 class="scr-title">Due soon</h3>
             <div class="stagger" data-pane="list" style="display:grid;gap:10px">
               <div class="acard"><div class="meta"><span class="sub">CSIT-501 · NETWORKING</span><span class="status pending">Pending</span></div><div class="t">Assignment 3: Subnetting and CIDR</div><div class="count sm" data-due-in="1.27"></div></div>
               <div class="acard"><div class="meta"><span class="sub">CSIT-502 · OS</span><span class="status pending">Pending</span></div><div class="t">Assignment 2: CPU scheduling numericals</div><div class="count sm" data-due-in="3.09"></div></div>
@@ -1118,7 +1194,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <div class="phone"><div class="screen">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="behind" aria-hidden="true">
-            <h3 class="scr-title">Due <span class="it">soon</span></h3>
+            <h3 class="scr-title">Due soon</h3>
             <div class="acard"><div class="t">Assignment 3: Subnetting and CIDR</div></div>
             <div class="acard"><div class="t">Assignment 2: CPU scheduling</div></div>
           </div>
@@ -1152,7 +1228,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll stagger">
             <div class="scr-row"><span class="label">My notes · 42</span><button class="btn btn-ink" type="button" style="height:36px;padding:0 14px;font-size:13px"><svg width="16" height="16"><use href="#i-plus"/></svg>New note</button></div>
-            <h3 class="scr-title">Your <span class="it">notes</span></h3>
+            <h3 class="scr-title">Your notes</h3>
             <div class="search"><svg><use href="#i-search"/></svg>Search your notes</div>
             <div class="row" data-chipgroup style="gap:6px">
               <button class="fchip" type="button" aria-pressed="true">All <span class="n">42</span></button>
@@ -1175,7 +1251,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll stagger">
             <div class="scr-row"><button class="ibtn soft" type="button" aria-label="Back" style="width:40px;height:40px"><svg><use href="#i-back"/></svg></button><span class="label">Saved · just now</span><button class="ibtn soft" type="button" aria-label="More" style="width:40px;height:40px"><svg><use href="#i-more"/></svg></button></div>
-            <h3 class="note-title">Round Robin <span class="it">vs</span> priority</h3>
+            <h3 class="note-title">Round Robin vs priority</h3>
             <div class="links"><span class="lchip syl" style="--bg:var(--c-sub-2)"><svg><use href="#i-book"/></svg>OS · U2 · Round Robin</span><span class="lchip syl" style="--bg:var(--c-sub-2)"><svg><use href="#i-book"/></svg>OS · U2 · CPU scheduling</span><span class="lchip"><svg><use href="#i-link"/></svg>Scheduling formulas</span><button class="lchip add" type="button" data-linkadd aria-expanded="false"><svg><use href="#i-plus"/></svg>Link</button></div>
             <div class="card picker" data-picker hidden>
               <div class="search"><svg><use href="#i-search"/></svg>Link to a topic or a note</div>
@@ -1201,7 +1277,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll" style="padding-bottom:190px">
             <div class="scr-row"><span class="label">OS · Sem 5</span><div class="view-toggle" role="group" aria-label="Graph view" data-graphmode><button type="button" aria-pressed="true" data-mode="all">With notes</button><button type="button" aria-pressed="false" data-mode="syl">Syllabus</button></div></div>
-            <h3 class="scr-title">Gr<span class="it">aph</span></h3>
+            <h3 class="scr-title">Graph</h3>
             <div class="row legend"><span class="lg"><i class="cov"></i>Covered</span><span class="lg"><i></i>Not yet</span><span class="lg"><i class="dia"></i>Your note</span><span class="lg"><i class="dash"></i>Link</span></div>
             <div class="graph-wrap"><div class="graph" data-graph="phone"></div></div>
           </div>
@@ -1215,7 +1291,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       <figure class="phone-wrap">
         <div class="phone"><div class="screen">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
-          <div class="scroll"><h3 class="scr-title">Sub<span class="it">jects</span></h3></div>
+          <div class="scroll"><h3 class="scr-title">Subjects</h3></div>
           <div class="navpill" data-section="study" data-menu-start="study"><span class="where">Subjects · Sem 5</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
         </div></div>
         <figcaption><b>Menu (open)</b><span>The pill grows into the menu; Study unfolded</span></figcaption>
@@ -1236,7 +1312,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   <!-- ================= MOTION ================= -->
   <section id="motion">
     <div class="sec-head">
-      <h2>Mo<span class="it">tion</span></h2>
+      <h2>Motion</h2>
       <p>Every element arrives in order: headings rise out of a mask, content follows in a short stagger, bars and dials fill. Nothing blocks the student.</p>
     </div>
     <div class="motion-list">
@@ -1393,8 +1469,9 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
 
   // ---- floating pill + full-screen menu ----
   var MENU = [
-    { id: "home", word: "Home", count: "59%", subs: ["Today", "Progress", "Deadlines"] },
-    { id: "study", word: "Study", count: "4 subj.", subs: ["Subjects", "Graph", "Materials"], later: ["Quizzes", "AI tutor"] },
+    { id: "home", word: "Home", count: "Today", subs: ["Due this week", "Just marked", "Keep writing"] },
+    { id: "news", word: "Announcements", count: "2 new", subs: ["All", "Exams", "Material", "Class updates"] },
+    { id: "study", word: "Study", count: "4 subj.", subs: ["Subjects & progress", "Graph", "Materials"], later: ["Quizzes", "AI tutor"] },
     { id: "notes", word: "Notes", count: "42", subs: ["All notes", "New note", "Linked to syllabus", "Free notes"] },
     { id: "tasks", word: "Assignments", count: "3 due", subs: ["Pending", "Calendar", "Marked"] },
     { id: "me", word: "Profile", count: "CSIT-2", subs: ["My details", "Electives", "Notifications", "Install app"] }
