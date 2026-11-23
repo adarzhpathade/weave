@@ -53,7 +53,7 @@ cd "$wtpath" || exit 1
 if [ "$worker" = "agy" ]; then
   agy --model "$model" --mode accept-edits -p="$prompt" > "$logs/$name.log" 2>&1
 else
-  claude -p "$prompt" --permission-mode acceptEdits \
+  claude -p "$prompt" --model "${model:-sonnet}" --permission-mode acceptEdits \
     --allowedTools "Read,Edit,Write,Glob,Grep,Bash(git status:*),Bash(git diff:*),Bash(pwd),Bash(ls:*)" \
     > "$logs/$name.log" 2>&1
 fi
