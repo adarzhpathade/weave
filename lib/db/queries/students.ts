@@ -1,7 +1,8 @@
 import "server-only";
+import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { departments, divisions, programs, students } from "@/lib/db/schema";
+import { departments, divisions, programs, students, users } from "@/lib/db/schema";
 
 export type StudentByEmail = {
   id: string;
@@ -104,4 +105,45 @@ export async function getStudentByEmail(email: string): Promise<StudentByEmail |
       name: row.departmentName,
     },
   };
+}
+
+/**
+ * Ensures a student row is linked to a `users` record (creating one on first
+ * sign-in) and returns the linked `userId`.
+ */
+export async function ensureStudentUser(
+  studentId: string,
+  email: string,
+  fullName: string,
+): Promise<string> {
+  const normalized = email.trim().toLowerCase();
+  const now = new Date();
+
+  const [userRow] = await db
+    .insert(users)
+    .values({
+      id: randomUUID(),
+      email: normalized,
+      name: fullName,
+      role: "student",
+    })
+    .onConflictDoUpdate({
+      target: users.email,
+      set: {
+        name: fullName,
+        updatedAt: now,
+      },
+    })
+    .returning({ id: users.id });
+
+  if (!userRow) {
+    throw new Error(`Failed to create user record for student ${studentId}.`);
+  }
+
+  await db
+    .update(students)
+    .set({ userId: userRow.id, updatedAt: now })
+    .where(eq(students.id, studentId));
+
+  return userRow.id;
 }

@@ -1,6 +1,16 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
+import { readSession } from "@/lib/auth/session";
 
-// Until the Home screen exists, the root sends everyone to the login page.
+async function RootRedirect() {
+  const session = await readSession();
+  redirect(session ? "/home" : "/login");
+}
+
 export default function RootPage() {
-  redirect("/login");
+  return (
+    <Suspense fallback={null}>
+      <RootRedirect />
+    </Suspense>
+  );
 }

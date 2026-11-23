@@ -168,3 +168,79 @@ export async function getNotifications(
     (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
   );
 }
+
+/**
+ * Inserts `announcement_reads` rows for every unread announcement visible to
+ * the given student (department-wide or their division, and either general or
+ * for one of their visible subjects). Idempotent via ON CONFLICT DO NOTHING.
+ */
+export async function markAllAnnouncementsRead(
+  userId: string,
+  studentId: string,
+): Promise<number> {
+  const [studentRow] = await db
+    .select({
+      id: students.id,
+      divisionId: divisions.id,
+      programId: divisions.programId,
+      currentSemester: divisions.currentSemester,
+    })
+    .from(students)
+    .innerJoin(divisions, eq(students.divisionId, divisions.id))
+    .where(and(eq(students.id, studentId), eq(students.userId, userId)))
+    .limit(1);
+
+  if (!studentRow) {
+    return 0;
+  }
+
+  const [visibleSubjectIds, unreadRows] = await Promise.all([
+    getVisibleSubjectIds(studentRow.id, studentRow.programId, studentRow.currentSemester),
+    db
+      .select({
+        id: announcements.id,
+        subjectId: announcements.subjectId,
+      })
+      .from(announcements)
+      .leftJoin(
+        announcementReads,
+        and(
+          eq(announcementReads.announcementId, announcements.id),
+          eq(announcementReads.userId, userId),
+        ),
+      )
+      .where(
+        and(
+          or(
+            isNull(announcements.divisionId),
+            eq(announcements.divisionId, studentRow.divisionId),
+          ),
+          isNull(announcementReads.id),
+        ),
+      ),
+  ]);
+
+  const unreadIds = unreadRows
+    .filter((row) => row.subjectId === null || visibleSubjectIds.has(row.subjectId))
+    .map((row) => row.id);
+
+  if (unreadIds.length === 0) {
+    return 0;
+  }
+
+  const now = new Date();
+  await db
+    .insert(announcementReads)
+    .values(
+      unreadIds.map((announcementId) => ({
+        userId,
+        announcementId,
+        readAt: now,
+      })),
+    )
+    .onConflictDoNothing({
+      target: [announcementReads.userId, announcementReads.announcementId],
+    });
+
+  return unreadIds.length;
+}
