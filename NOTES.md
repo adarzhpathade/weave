@@ -3,7 +3,7 @@
 Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 
 - 2026-11-23 — Fresh restart in `E:\Projects\College Projects\nodus`; nothing reused from the old NODUS repo (code, design references, docs). — user request.
-- 2026-11-23 — Working name **Sutra** (Sanskrit "thread": connects syllabus, notes and deadlines). Folder stays `nodus` until the name is final; rename = find/replace "Sutra". — needs user confirmation.
+- 2026-11-23 — App name **Weave** (chosen by the user from a shortlist): the app weaves syllabus, notes and deadlines together. Folder stays `nodus`; GitHub repo name follows the app name. — user decision.
 - 2026-11-23 — Student PWA first; faculty/admin tools in Phase 4. Until then curriculum, students and assignments come from seed data + an admin CSV import script. — user request.
 - 2026-11-23 — Mobile-first (360–430 px primary). Bottom tab bar on mobile, top bar on desktop, no sidebar. — PWA is used on phones.
 - 2026-11-23 — One Next.js app, no BE/FE split and no mock gateway layer; screens are built vertically (UI + data + states) one at a time. — the old split produced lots of code that was never seen running.

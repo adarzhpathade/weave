@@ -1,8 +1,8 @@
-# Sutra
+# Weave
 
-> Your syllabus, your notes and your deadlines — connected in one thread.
+> Your syllabus, your notes and your deadlines — woven together.
 
-Sutra is an installable web app (PWA) for college students. It maps the syllabus as a knowledge graph,
+Weave is an installable web app (PWA) for college students. It maps the syllabus as a knowledge graph,
 connects the student's own notes to it, tracks assignments and deadlines, and uses AI grounded only in
 the faculty's material and the student's notes to show what they know and what they are missing.
 

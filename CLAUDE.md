@@ -45,6 +45,6 @@ Claude tokens are the expensive resource, so heavy implementation goes to Gemini
 - UI: matches reference at its width; mobile 390 px; loading/empty/error states; reduced motion; keyboard + focus.
 
 ## Safety
-- Worktrees live in `../sutra-wt/<name>`. `node_modules` in a worktree is a **junction** to the main folder's; remove it only with `cmd /c rmdir <path>` — never `rm -rf`, `Remove-Item -Recurse` or `ln -s` on it.
+- Worktrees live in `../weave-wt/<name>`. `node_modules` in a worktree is a **junction** to the main folder's; remove it only with `cmd /c rmdir <path>` — never `rm -rf`, `Remove-Item -Recurse` or `ln -s` on it.
 - No `jq` on this machine; use `node -e` for JSON.
 - In Git Bash `gh` may be missing from PATH; use the PowerShell tool for `gh`.

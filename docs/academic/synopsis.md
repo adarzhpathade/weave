@@ -1,4 +1,4 @@
-# Synopsis — Sutra: A Syllabus-Mapped Learning Companion (PWA)
+# Synopsis — Weave: A Syllabus-Mapped Learning Companion (PWA)
 
 > Draft. Adapt headings to the college's synopsis format when it is provided.
 

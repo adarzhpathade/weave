@@ -5,7 +5,7 @@
 ```mermaid
 flowchart LR
   subgraph Device["Student phone / laptop"]
-    UI["Sutra PWA<br/>(React, Motion)"]
+    UI["Weave PWA<br/>(React, Motion)"]
     SW["Service worker<br/>cache + push"]
     IDB[("IndexedDB<br/>offline notes queue")]
   end

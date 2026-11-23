@@ -1,6 +1,6 @@
 # WORKER_RULES.md
 
-You are a worker agent on the **Sutra** project. The orchestrator (Claude Code) reviews everything you write.
+You are a worker agent on the **Weave** project. The orchestrator (Claude Code) reviews everything you write.
 
 1. **Location.** Work only inside the worktree path given in your prompt. First action: confirm the path. Never touch other folders.
 2. **Read first:** `AGENTS.md` (project rules), then your task file `tasks/<name>.md`, then every reference image and doc it lists.

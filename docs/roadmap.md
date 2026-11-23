@@ -5,7 +5,7 @@ before the next one starts.
 
 ## Phase 0 — Foundation
 - [x] 0.1 Repo, AGENTS.md, CLAUDE.md, worker rules, orchestration scripts, project + academic docs
-- [ ] 0.2 Final app name + GitHub repo (private)
+- [ ] 0.2 GitHub repo (private) — name chosen: Weave
 - [ ] 0.3 Scaffold Next.js + TS strict + Tailwind 4 + shadcn + ESLint/Prettier + Vitest/Playwright; scripts from AGENTS.md §11
 - [ ] 0.4 New Neon project (Singapore): Postgres + pgvector, Auth, storage; `.env.example`; env validation (`lib/env.ts`)
 - [ ] 0.5 Drizzle schema v1 + migrations + seed (1 branch, 8 semesters, Sem current filled, 3 sections × ~30 students, ~60 days of activity)

@@ -4,7 +4,7 @@
 Installs like an app on Android and iOS, opens instantly, stays readable offline, and reminds students about deadlines with push notifications.
 
 ## 1. Manifest (`app/manifest.ts`)
-- `name: "Sutra"`, `short_name: "Sutra"`, `id: "/"`, `start_url: "/dashboard?source=pwa"`, `scope: "/"`
+- `name: "Weave"`, `short_name: "Weave"`, `id: "/"`, `start_url: "/dashboard?source=pwa"`, `scope: "/"`
 - `display: "standalone"`, `orientation: "portrait"`, `theme_color` / `background_color` from tokens
 - Icons: 192, 512, 512 maskable (+ monochrome for Android themed icons); `apple-touch-icon` 180
 - `shortcuts`: New note, Assignments, AI tutor · `screenshots` (mobile + desktop) for the rich install dialog

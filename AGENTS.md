@@ -1,18 +1,18 @@
-# AGENTS.md — Sutra
+# AGENTS.md — Weave
 
 > Rules for every AI agent working in this repo (Claude Code, Gemini/agy, Codex, subagents).
 > Read this file fully before changing anything. If it conflicts with a direct instruction from the user, the user wins.
-> Working name: **Sutra** (see `NOTES.md` if the name changes; rename is a find/replace).
+> App name: **Weave** — it weaves the syllabus, your notes and your deadlines into one fabric.
 
 ---
 
 ## 1. What we are building
 
-**Sutra** is an installable PWA for college students. It maps the student's syllabus as a knowledge graph
+**Weave** is an installable PWA for college students. It maps the student's syllabus as a knowledge graph
 (Semester → Subject → Unit → Topic), lets them write private notes under each topic, shows their assignments
 and deadlines, and uses AI that answers **only** from their faculty's material and their own notes.
 
-> *"Sutra connects your syllabus, your notes and your deadlines into one thread, and shows you what you know and what you're missing."*
+> *"Weave connects your syllabus, your notes and your deadlines into one fabric, and shows you what you know and what you're missing."*
 
 - **Build order:** the **student PWA first**. Faculty/admin tools come later (Phase 4).
 - **Goal:** a college minor project that is good enough for the department to **use every day** (100+ students).

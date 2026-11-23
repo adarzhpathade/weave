@@ -1,7 +1,7 @@
-# Software Requirements Specification — Sutra (student PWA)
+# Software Requirements Specification — Weave (student PWA)
 
 ## 1. Introduction
-**Purpose.** Defines what the Sutra student app must do (functional) and how well (non-functional).
+**Purpose.** Defines what the Weave student app must do (functional) and how well (non-functional).
 **Scope.** Student-facing PWA (Phases 1–3). Faculty/admin requirements are listed in §5 for Phase 4.
 **Definitions.** *Topic covered* — see the progress formula in `AGENTS.md` §4. *PWA* — Progressive Web App.
 

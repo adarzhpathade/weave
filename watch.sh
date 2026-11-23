@@ -37,7 +37,7 @@ case "${1:-}" in
     done
     table ;;
   check)
-    n="${2:?name}"; wt="$parent/sutra-wt/$n"; allowed="$(fm "$n" files_allowed)"
+    n="${2:?name}"; wt="$parent/weave-wt/$n"; allowed="$(fm "$n" files_allowed)"
     [ -d "$wt" ] || { echo "no worktree $wt"; exit 1; }
     base="$(fm "$n" base)"; base="${base:-origin/main}"
     files="$( (git -C "$wt" diff --name-only "$base"...HEAD; git -C "$wt" diff --name-only; git -C "$wt" ls-files --others --exclude-standard) | sort -u | grep -vE '^(REPORT\.md|WORKER_RULES\.md|tasks/|\.env\.local|node_modules)' )"
@@ -57,7 +57,7 @@ case "${1:-}" in
     if [ "$c" -ge 3 ]; then echo "$n: 3 retries used, escalate the model or fix it yourself"; exit 1; fi
     echo $((c+1)) > "$logs/$n.retries"; echo "$n: retry $((c+1))/3" ;;
   clean)
-    n="${2:?name}"; wt="$parent/sutra-wt/$n"
+    n="${2:?name}"; wt="$parent/weave-wt/$n"
     [ -d "$wt/node_modules" ] && MSYS_NO_PATHCONV=1 cmd //c rmdir "$(cygpath -w "$wt/node_modules")"
     git -C "$root" worktree remove "$wt" && echo "removed $wt" ;;
   *) sed -n '2,9p' "$0" ;;

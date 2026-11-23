@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Usage: ./spawn.sh <agy|claude> <task-name>     (task file: tasks/<task-name>.md with frontmatter)
-# Prepares a worktree in ../sutra-wt/<task-name>, then:
+# Prepares a worktree in ../weave-wt/<task-name>, then:
 #   agy    + shell: no  -> runs a headless Gemini worker (file tools only) with the task's `model`
 #   agy    + shell: yes -> only prepares; prints the interactive command for the USER to run
 #   claude              -> runs a headless Claude worker (fallback)
@@ -19,11 +19,11 @@ fm() { sed -n '/^---$/,/^---$/p' "$task" | grep -m1 "^$1:" | sed "s/^$1:[[:space
 br="$(fm branch)"; base="$(fm base)"; base="${base:-origin/main}"; allowed="$(fm files_allowed)"
 model="$(fm model)"; model="${model:-gemini-4-neon-medium}"; shell="$(fm shell)"; subagents="$(fm subagents)"
 if [ -z "$br" ] || [ -z "$allowed" ]; then echo "task frontmatter needs branch and files_allowed"; status aborted; exit 1; fi
-wtpath="$parent/sutra-wt/$name"
+wtpath="$parent/weave-wt/$name"
 rm -f "$logs/$name.finished"
 
 if [ ! -d "$wtpath" ]; then
-  mkdir -p "$parent/sutra-wt"
+  mkdir -p "$parent/weave-wt"
   git -C "$root" fetch -q origin 2>/dev/null || true
   git -C "$root" worktree add -b "$br" "$wtpath" "$base" || { echo "worktree add failed"; status aborted; exit 1; }
   cp "$root/.env.local" "$wtpath/.env.local" 2>/dev/null || true

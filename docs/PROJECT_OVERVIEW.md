@@ -1,7 +1,7 @@
-# Sutra — Project Overview
+# Weave — Project Overview
 
 ## One line
-Sutra maps your syllabus, connects your notes to it, keeps your deadlines in front of you, and uses AI to show what you know and what you are missing.
+Weave maps your syllabus, connects your notes to it, keeps your deadlines in front of you, and uses AI to show what you know and what you are missing.
 
 ## The problem
 1. **Scattered material.** Faculty notes and slides are spread over WhatsApp groups, Drive links and email.
