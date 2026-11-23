@@ -25,3 +25,5 @@ the faculty's material and the student's notes to show what they know and what t
 
 ## For AI agents
 Read [`AGENTS.md`](AGENTS.md). Claude Code also reads [`CLAUDE.md`](CLAUDE.md); workers read [`WORKER_RULES.md`](WORKER_RULES.md).
+
+**New session?** Start with [HANDOFF.md](HANDOFF.md).
