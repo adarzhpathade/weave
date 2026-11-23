@@ -57,3 +57,5 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-24 — Reference images untracked and git-ignored (user: keep them outside git); they stay on the user's disk only. — copyright.
 - 2026-11-24 — Demo account: seed creates a demo CSIT-2 student from DEMO_STUDENT_EMAIL (fake address in .env.local). — user.
 - 2026-11-24 — Workers: frontend (anything the user sees) = Sonnet via spawn.sh claude; backend + data wiring = agy. Use the cheapest agy model that fits; Argon/top tier only for genuinely hard tasks. — user (cost).
+- 2026-11-24 — Two-tone titles = ink + grey word, never italic/colored (user rule applied to Profile and Graph). — user.
+- 2026-11-24 — Profile screen has no kit phone; built from kit hairline/kv language. — orchestrator.
