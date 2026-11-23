@@ -97,6 +97,25 @@
   --col-picker-kind: 3.375rem; /* .prow 54px "Topic" / "Note" column */
   --d-pop: 320ms; /* kit script: added link chip scales in */
   --ilink-mark: 62%; /* .ilink highlighter starts 62% down the line */
+  /* profile (kit .switch) */
+  --sh-knob: 0 1px 3px rgba(11, 11, 12, 0.25);
+  /* graph (kit .graph, .g-node, .gsheet) */
+  --w-graph: 1080px; /* laptop graph page column */
+  --w-graph-min: 760px; /* .graph-wrap.wide svg min-width */
+  --s-gsheet-bottom: 5.25rem; /* .gsheet bottom: 84px, clears the pill */
+  --s-graph-bottom: 11.875rem; /* .scroll padding-bottom: 190px with the sheet open */
+  --o-dim: 0.28; /* .sel .g-node:not(.hl) */
+  --t-gnode: 0.71875rem; /* 11.5px node label */
+  --t-gsubject: 0.84375rem; /* 13.5px subject label */
+  --g-stroke: 1.5px; /* edge + topic ring */
+  --g-stroke-node: 2px;
+  --g-stroke-sel: 3.5px;
+  --g-halo: 4px; /* label knock-out stroke */
+  --d-gnode: 560ms;
+  --d-gedge: 600ms;
+  --d-gcol: 220ms; /* columns appear left to right */
+  --d-gstep: 22ms; /* stagger inside a column */
+  --d-glead: 80ms; /* edges start just before their column */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -246,6 +265,12 @@
   --text-note-h1--line-height: 1.15;
   --text-note-h2: 1.05rem;
   --text-note-h2--line-height: 1.25;
+
+  /* profile + graph */
+  --shadow-knob: var(--sh-knob);
+  --container-graph: var(--w-graph);
+  --container-graph-min: var(--w-graph-min);
+  --radius-tick: 2px; /* .lg i.dia */
 
   --leading-sep: 0.95;
 
@@ -481,6 +506,127 @@
 }
 @keyframes scrim-out {
   to {
+    opacity: 0;
+  }
+}
+
+/* ---------- graph: tree of subject → units → topics + notes (kit .graph, .g-node, .g-edge) ---------- */
+@utility pb-graph {
+  padding-bottom: calc(var(--s-graph-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility bottom-gsheet {
+  bottom: calc(var(--s-gsheet-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility g-on-surface {
+  --g-bg: var(--c-surface); /* label halo matches the laptop card */
+}
+@layer components {
+  .g-edge {
+    fill: none;
+    stroke: var(--c-line);
+    stroke-width: var(--g-stroke);
+    transition: opacity var(--d-base);
+  }
+  .g-edge-note {
+    stroke: var(--c-accent);
+    stroke-dasharray: 4 4;
+  }
+  .g-node {
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity var(--d-base);
+  }
+  .g-node:focus {
+    outline: none;
+  }
+  .g-node:focus-visible text {
+    text-decoration: underline;
+  }
+  .g-node:focus-visible .g-dot {
+    stroke: var(--c-accent);
+    stroke-width: var(--g-stroke-sel);
+  }
+  .g-hit {
+    fill: transparent;
+    stroke: none;
+  }
+  .g-dot {
+    stroke-width: var(--g-stroke-node);
+    transition: stroke-width var(--d-fast);
+  }
+  .g-node text {
+    font-size: var(--t-gnode);
+    font-weight: 600;
+    fill: var(--c-ink);
+    paint-order: stroke;
+    stroke: var(--g-bg, var(--c-app));
+    stroke-width: var(--g-halo);
+    stroke-linejoin: round;
+  }
+  .g-subject text {
+    font-size: var(--t-gsubject);
+    font-weight: 800;
+  }
+  .g-unit text,
+  .g-note text {
+    font-weight: 700;
+  }
+  .g-subject .g-dot {
+    fill: var(--c-ink);
+    stroke: var(--c-ink);
+  }
+  .g-unit .g-dot {
+    fill: var(--g-bg, var(--c-app));
+    stroke: var(--c-ink);
+  }
+  .g-topic .g-dot {
+    fill: var(--g-bg, var(--c-app));
+    stroke: var(--c-muted);
+    stroke-width: var(--g-stroke);
+  }
+  .g-topic.is-covered .g-dot {
+    fill: var(--c-lime);
+    stroke: var(--c-ink);
+  }
+  .g-note .g-dot {
+    fill: var(--c-accent);
+    stroke: var(--c-accent);
+  }
+  .g-node.is-sel .g-dot {
+    stroke: var(--c-ink);
+    stroke-width: var(--g-stroke-sel);
+  }
+  .g-node.is-dim,
+  .g-edge.is-dim {
+    opacity: var(--o-dim);
+  }
+}
+/* columns build left to right (subject, units, topics, notes); nothing is hidden without the animation */
+@media (prefers-reduced-motion: no-preference) {
+  .g-node {
+    animation: gnode var(--d-gnode) var(--e-spring) backwards;
+    animation-delay: calc(var(--col, 0) * var(--d-gcol) + var(--j, 0) * var(--d-gstep));
+  }
+  .g-edge {
+    animation: gedge var(--d-gedge) var(--e-out) backwards;
+    animation-delay: calc(var(--col, 0) * var(--d-gcol) - var(--d-glead));
+  }
+}
+@keyframes gnode {
+  from {
+    opacity: 0;
+    scale: 0.2;
+  }
+}
+@keyframes gedge {
+  from {
     opacity: 0;
   }
 }
