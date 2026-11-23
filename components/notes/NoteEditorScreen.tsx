@@ -48,7 +48,8 @@ export function NoteEditorScreen({ note, actions }: { note: NoteEditorData; acti
   const [links, setLinks] = useState<NoteLinkChip[]>(note.links);
   const [noteId, setNoteId] = useState<string | null>(note.id);
   const [save, setSave] = useState<SaveState>({ kind: "idle" });
-  const [mode, setMode] = useState<Mode>("write");
+  // Existing notes open rendered (like the kit); empty/new notes open ready to type.
+  const [mode, setMode] = useState<Mode>(note.contentMd.trim() ? "preview" : "write");
   const [pickerOpen, setPickerOpen] = useState(false);
   const [poppedKey, setPoppedKey] = useState<string | null>(null);
   const [linkError, setLinkError] = useState<string | null>(null);
@@ -339,7 +340,7 @@ export function NoteEditorScreen({ note, actions }: { note: NoteEditorData; acti
       />
 
       <div style={step(2)} className="stagger grid animate-fade-up gap-2">
-        <ul aria-label="Links" className="flex flex-wrap gap-1.5">
+        <ul aria-label="Links" className="flex min-w-0 max-w-full flex-wrap gap-1.5">
           {links.map((link) => (
             <li key={linkKey(link)} className="max-w-full">
               <LinkChip link={link} pop={linkKey(link) === poppedKey} onRemove={() => remove(link)} />

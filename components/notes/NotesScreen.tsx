@@ -163,7 +163,7 @@ function NoteCard({ item, now }: { item: NoteListItem; now: Date }) {
   return (
     <Link
       href={`/notes/${item.id}`}
-      className="grid gap-2 rounded-md bg-surface px-4 py-3.5 transition-transform duration-fast ease-out active:scale-98"
+      className="grid grid-cols-1 gap-2 rounded-md bg-surface px-4 py-3.5 transition-transform duration-fast ease-out active:scale-98"
     >
       <span className="flex items-center justify-between gap-2 font-mono text-mono-xs tracking-status text-muted uppercase">
         <span>{formatNoteAge(new Date(item.updatedAt), now)}</span>
@@ -172,7 +172,7 @@ function NoteCard({ item, now }: { item: NoteListItem; now: Date }) {
       <b className="text-card-title font-extrabold tracking-row">{item.title.trim() || "Untitled"}</b>
       {item.excerpt.trim() ? <p className="line-clamp-2 text-excerpt text-muted">{item.excerpt}</p> : null}
       {chips.length > 0 ? (
-        <span className="flex flex-wrap gap-1.5">
+        <span className="flex min-w-0 max-w-full flex-wrap gap-1.5">
           {chips.map((link) => (
             <LinkChip key={linkKey(link)} link={link} />
           ))}

@@ -38,6 +38,7 @@ export function LinkChip({
     <span
       className={cx(
         chipBase,
+        "max-w-full min-w-0",
         isTopic ? `border-transparent text-on-sub ${subjectBg(link.colorIndex)}` : "border-line bg-transparent text-ink",
         onRemove ? "pr-1" : "pr-2.5",
         pop ? "animate-pop" : null,

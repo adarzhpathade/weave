@@ -44,6 +44,8 @@ function formatTopicChipLabel(subjectShort: string, unitOrder: number, topicTitl
 
 function stripMarkdownToExcerpt(markdown: string, maxLength = EXCERPT_MAX_LENGTH): string {
   const plain = markdown
+    // A leading "# Title" usually repeats the note title, so drop it from the excerpt.
+    .replace(/^\s{0,3}#\s+[^\n]*\n?/, "")
     .replace(/```[^\n]*\n?([\s\S]*?)```/g, " $1 ")
     .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
