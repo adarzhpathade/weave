@@ -1,0 +1,10 @@
+node_modules
+.next
+package-lock.json
+lib/db/migrations
+playwright-report
+test-results
+coverage
+logs
+# docs and orchestration files are hand-formatted
+*.md
