@@ -490,6 +490,61 @@ main section { padding-block: 4rem 1rem; }
 .lg i.dia { width: 9px; height: 9px; border: 0; border-radius: 2px; background: var(--c-accent); transform: rotate(45deg); }
 .lg i.dash { width: 18px; height: 0; border: 0; border-top: 2px dashed var(--c-accent); border-radius: 0; }
 
+/* ---------- login v2: type poster ---------- */
+.screen { container-type: inline-size; }
+.on-night { color: var(--c-on-night); opacity: 0.6; }
+.login2 { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 6px 22px 24px; }
+.wordmark { font-weight: 900; font-size: 1.4rem; letter-spacing: -0.05em; }
+.lg-type { display: grid; margin-top: 10px; font-family: var(--f-display); font-weight: 900; font-size: 16cqi; line-height: 0.86; letter-spacing: -0.055em; }
+.lg-type .it { font-weight: 300; letter-spacing: -0.04em; }
+.lg-type .r { justify-self: end; }
+.lg-type .lime { color: var(--c-lime); }
+.lg-last { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.lg-badge { width: 100px; height: 100px; color: var(--c-on-night); }
+.lg-badge .core { inset: 20px; }
+.lg-badge text { font-size: 17px; letter-spacing: 0.1em; }
+.lg-stats { color: var(--c-on-night); border-top-color: var(--c-night-line); }
+.lg-stats > div + div { border-left-color: var(--c-night-line); }
+.lg-form { margin-top: auto; display: grid; gap: 8px; }
+.lg-field { display: flex; align-items: center; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--c-on-night); }
+.lg-field input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--c-on-night); font: inherit; font-size: 1.2rem; font-weight: 700; outline: none; }
+.lg-field input::placeholder { color: var(--c-on-night); opacity: 0.35; }
+.lg-field:focus-within { border-bottom-color: var(--c-lime); }
+.lg-hint { font-size: 12.5px; opacity: 0.55; }
+
+/* ---------- home v2: editorial ---------- */
+.hm-hello { font-family: var(--f-display); font-weight: 900; font-size: 14cqi; line-height: 0.86; letter-spacing: -0.055em; }
+.hm-hello .it { font-weight: 300; color: var(--c-accent); letter-spacing: -0.04em; }
+:root[data-accent="lime"] .hm-hello .it { color: inherit; }
+.hm-big { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px solid var(--c-ink); }
+.hm-num { font-family: var(--f-display); font-weight: 900; font-size: 36cqi; line-height: 0.76; letter-spacing: -0.075em; }
+.hm-num span { margin-left: 4px; font-size: 0.36em; font-weight: 300; letter-spacing: -0.02em; vertical-align: top; }
+.hm-side { display: grid; justify-items: end; gap: 10px; padding-bottom: 4px; text-align: right; font-size: 15px; line-height: 1.15; }
+.hm-delta { padding: 3px 8px; border-radius: var(--r-pill); background: var(--c-lime); color: var(--c-on-lime); font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.ticks { position: relative; height: 26px; background: repeating-linear-gradient(90deg, var(--c-line) 0 2px, transparent 2px 6px); }
+.ticks i { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, var(--c-ink) 0 2px, transparent 2px 6px); clip-path: inset(0 calc(100% - var(--v)) 0 0); }
+.replay-host.play .ticks i { animation: tickfill 1300ms var(--e-out) 250ms both; }
+@keyframes tickfill { from { clip-path: inset(0 100% 0 0); } }
+.hm-next { display: grid; gap: 10px; margin: 6px -18px 0; padding: 18px 18px 20px; background: var(--c-night); color: var(--c-on-night); }
+.hm-next-t { font-family: var(--f-display); font-weight: 900; font-size: 10cqi; line-height: 0.92; letter-spacing: -0.045em; }
+.hm-next-t .it { font-weight: 300; }
+.hm-sec { display: flex; justify-content: space-between; margin-top: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--c-ink); }
+.hm-week { display: grid; grid-template-columns: repeat(3, 1fr); }
+.hm-week > div { display: grid; align-content: start; gap: 3px; padding-right: 10px; }
+.hm-week > div + div { padding-left: 10px; border-left: 1px solid var(--c-line); }
+.hm-week small { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); }
+.hm-week b { font-family: var(--f-display); font-weight: 900; font-size: 13cqi; line-height: 0.85; letter-spacing: -0.06em; }
+.hm-week span { font-size: 12px; font-weight: 700; line-height: 1.2; }
+.hm-subs { list-style: none; margin: -12px 0 0; padding: 0; display: grid; }
+.hm-subs li { position: relative; display: grid; grid-template-columns: 26px 1fr auto; align-items: baseline; gap: 8px; padding: 12px 0; border-bottom: 1px solid var(--c-line); }
+.hm-subs .i { font-family: var(--f-mono); font-size: 10.5px; color: var(--c-muted); }
+.hm-subs .n { font-weight: 800; font-size: 15.5px; line-height: 1.15; letter-spacing: -0.01em; }
+.hm-subs .p { font-family: var(--f-display); font-weight: 900; font-size: 2rem; line-height: 0.85; letter-spacing: -0.06em; }
+.hm-subs .p::after { content: "%"; font-size: 0.45em; font-weight: 300; letter-spacing: 0; }
+.hm-subs i { position: absolute; left: 0; bottom: -1px; width: var(--v); height: 2px; background: var(--c-ink); transform-origin: left; }
+.hm-subs li.top i { height: 3px; background: var(--c-lime); }
+.replay-host.play .hm-subs i { animation: grow 1000ms var(--e-out) 300ms both; }
+
 /* ---------- phone screens ---------- */
 .phones { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px 20px; justify-items: center; }
 .phone-wrap { display: grid; gap: 0.8rem; justify-items: center; width: 100%; max-width: 390px; }
@@ -885,19 +940,32 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       <figure class="phone-wrap">
         <div class="phone"><div class="screen night">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
-          <div class="weave-art"><canvas data-weave aria-hidden="true"></canvas></div>
-          <div class="login stagger">
-            <h3>Weave <span class="it">your</span><br>semester</h3>
-            <p style="opacity:.6;font-size:15px">Syllabus, notes and deadlines for CSIT and CY students.</p>
-            <div class="field">
-              <label for="l-email">College email</label>
-              <input id="l-email" type="email" placeholder="you@college.ac.in" autocomplete="off">
+          <div class="login2">
+            <div class="scr-row"><span class="wordmark">weave.</span><span class="label on-night">CSIT · CY · RGPV</span></div>
+            <div class="lg-type stagger" aria-label="Your syllabus, notes and deadlines, woven.">
+              <span>Your</span>
+              <span class="it r">syllabus,</span>
+              <span>notes &amp;</span>
+              <span class="it r">deadlines</span>
+              <span class="lg-last"><span class="lime">woven.</span>
+                <span class="badge-rot lg-badge" aria-hidden="true">
+                  <svg class="ring-text" viewBox="0 0 152 152"><defs><path id="c4" d="M76 76m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0"/></defs><text fill="currentColor"><textPath href="#c4">CSIT · CY · SEM 3–8 · </textPath></text></svg>
+                  <span class="core"><svg width="32" height="32"><use href="#i-weave"/></svg></span>
+                </span>
+              </span>
             </div>
-            <button class="btn btn-lime btn-wide" type="button">Continue <svg width="18" height="18"><use href="#i-arrow"/></svg></button>
-            <span class="label" style="color:var(--c-on-night);opacity:.45;text-align:center">CSIT department · RGPV</span>
+            <div class="stats lg-stats">
+              <div><div class="k">Students</div><div class="v num">180+</div></div>
+              <div><div class="k">Theory subjects</div><div class="v num">39</div></div>
+            </div>
+            <form class="lg-form" onsubmit="return false">
+              <label class="label on-night" for="l-email">College email</label>
+              <div class="lg-field"><input id="l-email" type="email" placeholder="you@college.ac.in" autocomplete="off"><button class="ibtn lime" type="submit" aria-label="Continue"><svg><use href="#i-arrow"/></svg></button></div>
+              <p class="lg-hint">Only students on the department list can sign in.</p>
+            </form>
           </div>
         </div></div>
-        <figcaption><b>Login</b><span>Black Museum hero, woven-thread art</span></figcaption>
+        <figcaption><b>Login</b><span>A type poster: one field, one button</span></figcaption>
       </figure>
 
       <!-- HOME -->
@@ -905,31 +973,35 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
         <div class="phone"><div class="screen">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="scroll stagger">
-            <div class="scr-row"><div><div class="label" data-today>Today</div><div style="font-weight:700">Hi, Aarav</div></div><span class="avatar">AS</span></div>
-            <h3 class="scr-title">Semester <span class="it">five</span></h3>
-            <div class="card" style="grid-template-columns:auto 1fr;align-items:center;gap:14px;position:relative">
-              <div class="dial" data-dial="59" style="width:128px"><div class="center"><b class="num" style="font-size:2rem">59%</b><span>In progress</span></div></div>
-              <div class="stats" style="grid-template-columns:1fr;border-top:0">
-                <div style="padding:0"><div class="k">Topics covered</div><div class="v num" style="font-size:1.6rem">58/98</div></div>
-                <div style="border-left:0;padding:.4rem 0 0;border-top:1px solid var(--c-line)"><div class="k">Due this week</div><div class="v num" style="font-size:1.6rem">3</div></div>
-              </div>
+            <div class="scr-row"><span class="label" data-today>Today</span><span class="avatar">AS</span></div>
+            <h3 class="hm-hello"><span data-greet>Morning</span>,<br><span class="it">Aarav.</span></h3>
+            <div class="hm-big">
+              <div class="hm-num num">59<span>%</span></div>
+              <div class="hm-side"><span class="it">of semester five<br>is covered</span><span class="hm-delta">+4% this week</span></div>
             </div>
-            <div class="card ink">
-              <div class="scr-row"><span class="label" style="color:var(--c-on-night);opacity:.6">Next deadline · CSIT-501</span><span class="status late">1 day left</span></div>
-              <div style="font-weight:800;font-size:1.15rem;line-height:1.2">Assignment 3: Subnetting and CIDR</div>
-              <div class="count" data-due-in="1.27" style="color:var(--c-on-night)"></div>
+            <div class="ticks" style="--v:59%" role="img" aria-label="59 percent covered"><i></i></div>
+            <div class="hm-next">
+              <div class="scr-row"><span class="label on-night">Next deadline · CSIT-501</span><span class="status late">Tomorrow</span></div>
+              <div class="hm-next-t">Subnetting <span class="it">and</span> CIDR</div>
+              <div class="count" data-due-in="1.27"></div>
             </div>
-            <div class="scr-row"><b>Subjects</b><span class="label">4 this sem</span></div>
-            <div class="card mini-list">
-              <div class="bar hi" style="--v:85%"><div class="top">Artificial Intelligence <span>85%</span></div><div class="track"><div class="fill"></div></div></div>
-              <div class="bar" style="--v:72%"><div class="top">Computer Networking <span>72%</span></div><div class="track"><div class="fill"></div></div></div>
-              <div class="bar" style="--v:48%"><div class="top">Operating System <span>48%</span></div><div class="track"><div class="fill"></div></div></div>
-              <div class="bar" style="--v:31%"><div class="top">Theory of Computation <span>31%</span></div><div class="track"><div class="fill"></div></div></div>
+            <div class="hm-sec"><span class="label">This week</span><span class="label">3 due</span></div>
+            <div class="hm-week">
+              <div data-day="1.27"><small>Wed</small><b>25</b><span>CN · Assignment 3</span></div>
+              <div data-day="3.09"><small>Fri</small><b>27</b><span>OS · Assignment 2</span></div>
+              <div data-day="6.4"><small>Mon</small><b>30</b><span>TOC · Assignment 1</span></div>
             </div>
+            <div class="hm-sec"><span class="label">Subjects</span><span class="label">Covered</span></div>
+            <ol class="hm-subs">
+              <li class="top"><span class="i">01</span><span class="n">Artificial Intelligence</span><span class="p num">85</span><i style="--v:85%"></i></li>
+              <li><span class="i">02</span><span class="n">Computer Networking</span><span class="p num">72</span><i style="--v:72%"></i></li>
+              <li><span class="i">03</span><span class="n">Operating System</span><span class="p num">48</span><i style="--v:48%"></i></li>
+              <li><span class="i">04</span><span class="n">Theory of Computation</span><span class="p num">31</span><i style="--v:31%"></i></li>
+            </ol>
           </div>
           <div class="navpill" data-section="home"><span class="where">Home · Semester 5</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
         </div></div>
-        <figcaption><b>Home</b><span>Progress dial, next deadline, subject bars</span></figcaption>
+        <figcaption><b>Home</b><span>One big number, the next deadline, the week, the subjects</span></figcaption>
       </figure>
 
       <!-- SUBJECTS -->
@@ -1282,6 +1354,15 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   setInterval(renderCounts, 1000);
   document.querySelectorAll("[data-today]").forEach(function (el) {
     el.textContent = new Date().toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
+  });
+  document.querySelectorAll("[data-day]").forEach(function (el) {
+    var dt = new Date(now0 + Number(el.dataset.day) * 86400000);
+    el.querySelector("b").textContent = dt.getDate();
+    el.querySelector("small").textContent = dt.toLocaleDateString("en-IN", { weekday: "short" });
+  });
+  document.querySelectorAll("[data-greet]").forEach(function (el) {
+    var h = new Date().getHours();
+    el.textContent = h < 12 ? "Morning" : h < 17 ? "Afternoon" : "Evening";
   });
   document.querySelectorAll("[data-due-label]").forEach(function (el) {
     var d = new Date(now0 + Number(el.dataset.dueLabel) * 86400000);
