@@ -12,3 +12,10 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-23 — Sign-in restricted to college email domains via `ALLOWED_EMAIL_DOMAINS` (domain not known yet). — department use.
 - 2026-11-23 — Web Push (deadline reminders) is in scope because the app is a PWA; old "no push" rule dropped. — user asked for a PWA.
 - 2026-11-23 — AI providers: Groq primary for chat/quizzes/analysis (fast streaming), Gemini for embeddings + PDF/vision + chat fallback; automatic one-retry fallback between them. — user agreed; Groq has no embeddings, two providers spread free-tier rate limits.
+- 2026-11-23 — Scaffold: Next.js 16.4.6, React 19.3, Tailwind 4.3 through the `@tailwindcss/turbopack` loader (create-next-app default; no PostCSS config), `cacheComponents` + `partialPrefetching` on (create-next-app defaults). — latest stable at scaffold time.
+- 2026-11-23 — shadcn initialised with **Base UI** (`base-nova` style, neutral). Its colours/radius in `globals.css` are **placeholders** until the Phase 1 tokens replace them. `cn()` comes from the `cn` package (new shadcn default), re-exported by `lib/utils.ts`; components import it from `@/lib/utils`. — AGENTS.md §2.
+- 2026-11-23 — No web fonts yet (system stack placeholder); Geist from Google removed because AGENTS.md wants `next/font/local` and the fonts come from the references. — Phase 1 decides fonts.
+- 2026-11-23 — Vitest runs in `node` environment without `@vitejs/plugin-react` (peer conflict with Babel 8; we only unit-test logic). Add it later if component tests are needed. `@types/node` pinned to ^24 to match Node 24. — avoid `--legacy-peer-deps`.
+- 2026-11-23 — Playwright specs live in a top-level `e2e/` folder (standard place; no other folder fits AGENTS.md §3). Projects: mobile 390×844, desktop 1440×900. — docs/testing.md.
+- 2026-11-23 — `next dev` adds a managed "nextjs-agent-rules" block to AGENTS.md; we commit it so the tree stays clean. — Next.js 16 behaviour.
+- 2026-11-23 — `typecheck` = `next typegen && tsc --noEmit` (route types like `LayoutProps` need typegen first). — Next.js 16.
