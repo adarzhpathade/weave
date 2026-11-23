@@ -1,0 +1,137 @@
+{
+  "program": "CSIT",
+  "university": "RGPV",
+  "source": "https://career-shiksha.com/post/rgpv-subject-list-b-tech-csit-all-semester/ (read 2026-11-23)",
+  "scope": "Theory subjects only. Labs, projects, internships, audit courses and NSS/NCC are left out on purpose.",
+  "codeNote": "Elective option codes are normalised to CSIT-<group><letter> (the source mixes 'CS 503 (A)', 'CSIT 603 (A)' and 'CSI 703(B)').",
+  "semesters": [
+    {
+      "semester": 3,
+      "core": [
+        { "code": "ES-301", "name": "Energy & Environmental Engineering" },
+        { "code": "CSIT-302", "name": "Discrete Structure" },
+        { "code": "CSIT-303", "name": "Data Structure" },
+        { "code": "CSIT-304", "name": "Digital Circuits & Systems" },
+        { "code": "CSIT-305", "name": "Object Oriented Programming & Methodology" }
+      ],
+      "electiveGroups": []
+    },
+    {
+      "semester": 4,
+      "core": [
+        { "code": "BT-401", "name": "Mathematics-III" },
+        { "code": "CSIT-402", "name": "Analog & Digital Communication" },
+        { "code": "CSIT-403", "name": "Analysis & Design of Algorithms" },
+        { "code": "CSIT-404", "name": "Computer Organization & Architecture" },
+        { "code": "CSIT-405", "name": "Database Management Systems" }
+      ],
+      "electiveGroups": []
+    },
+    {
+      "semester": 5,
+      "core": [
+        { "code": "CSIT-501", "name": "Computer Networking" },
+        { "code": "CSIT-502", "name": "Operating System" }
+      ],
+      "electiveGroups": [
+        {
+          "code": "CSIT-503",
+          "kind": "departmental_elective",
+          "options": [
+            { "code": "CSIT-503A", "name": "Theory of Computation" },
+            { "code": "CSIT-503B", "name": "Microprocessor & Interfacing" },
+            { "code": "CSIT-503C", "name": "Principles of Programming Languages" }
+          ]
+        },
+        {
+          "code": "CSIT-504",
+          "kind": "open_elective",
+          "options": [
+            { "code": "CSIT-504A", "name": "Cyber Security" },
+            { "code": "CSIT-504B", "name": "Artificial Intelligence" },
+            { "code": "CSIT-504C", "name": "Web Technology & E-Commerce" }
+          ]
+        }
+      ]
+    },
+    {
+      "semester": 6,
+      "core": [
+        { "code": "CSIT-601", "name": "Software Engineering & Agile" },
+        { "code": "CSIT-602", "name": "Machine Learning" }
+      ],
+      "electiveGroups": [
+        {
+          "code": "CSIT-603",
+          "kind": "departmental_elective",
+          "options": [
+            { "code": "CSIT-603A", "name": "Wireless & Mobile Computing" },
+            { "code": "CSIT-603B", "name": "Computer Graphics & Multimedia" },
+            { "code": "CSIT-603C", "name": "Advanced Computer Architecture" }
+          ]
+        },
+        {
+          "code": "CSIT-604",
+          "kind": "open_elective",
+          "options": [
+            { "code": "CSIT-604A", "name": "Cryptography & Network Security" },
+            { "code": "CSIT-604B", "name": "Embedded Systems" },
+            { "code": "CSIT-604C", "name": "Intellectual Property Rights" }
+          ]
+        }
+      ]
+    },
+    {
+      "semester": 7,
+      "core": [{ "code": "CSIT-701", "name": "Internet of Things" }],
+      "electiveGroups": [
+        {
+          "code": "CSIT-702",
+          "kind": "departmental_elective",
+          "options": [
+            { "code": "CSIT-702A", "name": "Information Storage Management" },
+            { "code": "CSIT-702B", "name": "Compiler Design" },
+            { "code": "CSIT-702C", "name": "Semantic Web & Service Oriented Architecture" },
+            { "code": "CSIT-702D", "name": "Natural Language Processing" }
+          ]
+        },
+        {
+          "code": "CSIT-703",
+          "kind": "open_elective",
+          "options": [
+            { "code": "CSIT-703A", "name": "E-Commerce & Web Technology" },
+            { "code": "CSIT-703B", "name": "Mobile Application Development" },
+            { "code": "CSIT-703C", "name": "Cloud Computing" },
+            { "code": "CSIT-703D", "name": "Data Visualization" }
+          ]
+        }
+      ]
+    },
+    {
+      "semester": 8,
+      "core": [{ "code": "CSIT-801", "name": "Data Science" }],
+      "electiveGroups": [
+        {
+          "code": "CSIT-802",
+          "kind": "departmental_elective",
+          "options": [
+            { "code": "CSIT-802A", "name": "Data Warehousing & Mining" },
+            { "code": "CSIT-802B", "name": "Bioinformatics" },
+            { "code": "CSIT-802C", "name": "Web & Information Retrieval" },
+            { "code": "CSIT-802D", "name": "Blockchain Technology" }
+          ]
+        },
+        {
+          "code": "CSIT-803",
+          "kind": "open_elective",
+          "options": [
+            { "code": "CSIT-803A", "name": "Digital Marketing & SEO" },
+            { "code": "CSIT-803B", "name": "Quantum Computing" },
+            { "code": "CSIT-803C", "name": "Cyber Laws & Forensics" },
+            { "code": "CSIT-803D", "name": "Robotics" }
+          ]
+        }
+      ]
+    }
+  ]
+}

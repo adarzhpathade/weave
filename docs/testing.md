@@ -26,6 +26,7 @@
 | TC-9 | FR-6.1 | CSIT-1 student opens Assignments | Sees only assignments for CSIT-1 |
 | TC-10 | FR-8.2 | Go offline, open Home | Last data or branded offline page |
 | TC-11 | NFR-2 | k6 200 VUs | p95 < 800 ms, errors < 1% |
+| TC-12 | FR-1.3 | Sem 5 student picks "Artificial Intelligence" as open elective | Subjects shows AI, not Cyber Security or Web Technology |
 
 ## Results
 _(filled as features are finished)_

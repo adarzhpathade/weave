@@ -10,7 +10,7 @@
 - **Users:** students of the CSIT department (programs CSIT and CY, 2nd–4th year, semesters 3–8), ~100–300 accounts, mostly on Android phones.
 - **Operating environment:** any modern mobile/desktop browser; installable on Android (Chrome) and iOS (Safari 16.4+).
 - **Constraints:** free/low-cost cloud tiers; assignment submission stays offline (paper).
-- **Assumptions:** the student list and the syllabus are provided by the department (CSV). Until the real syllabus arrives, seed data uses a placeholder.
+- **Assumptions:** the student list is provided by the department (CSV). Syllabus = RGPV B.Tech CSIT, **theory subjects only**; unit/topic lists are drafted until checked against the official syllabus.
 
 ## 3. Functional requirements (student, core)
 
@@ -19,7 +19,8 @@
 | **FR-1 Login + onboarding** | | |
 | FR-1.1 | Sign in with the college email; only emails on the department's student list can finish sign-in, others see "Ask your department to add you" | Must |
 | FR-1.2 | First sign-in: show the details from the list (name, enrollment no., program, division, semester) to confirm; optional phone and photo | Must |
-| FR-1.3 | Sign out; session persists across app restarts | Must |
+| FR-1.3 | Pick one option for each elective group of the current semester (can be changed later in Profile) | Must |
+| FR-1.4 | Sign out; session persists across app restarts | Must |
 | **FR-2 Home** | | |
 | FR-2.1 | Upcoming deadlines (next 7 days first) with live countdown | Must |
 | FR-2.2 | Semester progress and progress per subject (number + status label, never color alone) | Must |
@@ -27,7 +28,7 @@
 | FR-3.1 | Switch semester from Profile / top bar; past + current open, future visible but locked | Must |
 | FR-3.2 | The selected semester filters Home, Subjects and Assignments | Must |
 | **FR-4 Subjects → Unit → Topic** | | |
-| FR-4.1 | List the subjects of the selected semester (from the student's program plan) with progress | Must |
+| FR-4.1 | List the theory subjects of the selected semester (from the student's program plan: core + the electives they picked) with progress | Must |
 | FR-4.2 | Subject page: units with progress; unit page: topics with covered / not covered | Must |
 | FR-4.3 | Topic page: the student's notes on that topic; create a note | Must |
 | **FR-5 Notes** | | |
@@ -41,8 +42,8 @@
 | FR-6.3 | Web push: due in 2 days, due today, new assignment, status marked | Must |
 | FR-6.4 | Turn each push type on/off (in Profile) | Must |
 | **FR-7 Profile** | | |
-| FR-7.1 | Show own details (name, email, enrollment no., roll no., program, division, semester, lab batch) — list fields are read-only | Must |
-| FR-7.2 | Edit phone and photo; notification settings; install app; sign out | Must |
+| FR-7.1 | Show own details (name, email, enrollment no., program, division, semester) — list fields are read-only | Must |
+| FR-7.2 | Edit phone and photo; change electives; notification settings; install app; sign out | Must |
 | **FR-8 PWA** | | |
 | FR-8.1 | Installable (manifest, icons, splash), custom install prompt after a user action | Must |
 | FR-8.2 | Branded offline page; last-seen Home, notes and assignments readable offline | Must |

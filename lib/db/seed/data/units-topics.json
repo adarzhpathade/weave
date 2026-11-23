@@ -1,0 +1,2428 @@
+{
+  "draft": true,
+  "university": "RGPV",
+  "program": "CSIT",
+  "note": "Drafted 5-unit RGPV B.Tech CSIT syllabus breakdown (4-6 topics per unit) for every theory subject in csit-subjects.json. Verify against official RGPV syllabus PDFs before production rollout.",
+  "subjects": {
+    "ES-301": {
+      "shortName": "EEE",
+      "units": [
+        {
+          "title": "Introduction to Energy Science",
+          "topics": [
+            "Energy Systems and Energy Resources Classification",
+            "Fossil Fuels and Conventional Power Generation",
+            "Solar, Wind, Hydro, and Biomass Renewable Sources",
+            "Energy Conservation and Audit Fundamentals",
+            "India's Energy Scenario and Sustainable Transition"
+          ]
+        },
+        {
+          "title": "Ecosystems",
+          "topics": [
+            "Concept, Structure, and Function of an Ecosystem",
+            "Producers, Consumers, and Decomposers",
+            "Energy Flow, Food Chains, Food Webs, and Ecological Pyramids",
+            "Ecological Succession and Biogeochemical Cycles",
+            "Forest, Grassland, Desert, and Aquatic Ecosystems"
+          ]
+        },
+        {
+          "title": "Biodiversity and Its Conservation",
+          "topics": [
+            "Genetic, Species, and Ecosystem Diversity",
+            "Biogeographical Classification of India",
+            "Value of Biodiversity and Hotspots in India",
+            "Threats to Biodiversity and Endangered Species",
+            "In-Situ and Ex-Situ Conservation Strategies"
+          ]
+        },
+        {
+          "title": "Environmental Pollution",
+          "topics": [
+            "Air Pollution Sources, Effects, and Control Measures",
+            "Water and Marine Pollution Treatment Methods",
+            "Soil, Thermal, and Noise Pollution Management",
+            "Solid Waste and E-Waste Management Practices",
+            "Disaster Management for Floods, Earthquakes, and Cyclones"
+          ]
+        },
+        {
+          "title": "Social Issues and Environmental Legislation",
+          "topics": [
+            "Climate Change, Global Warming, Acid Rain, and Ozone Depletion",
+            "Water Conservation, Rainwater Harvesting, and Watershed Management",
+            "Environment Protection Act, Air Act, and Water Act",
+            "Wildlife Protection Act and Forest Conservation Act",
+            "Environmental Impact Assessment and Sustainable Development"
+          ]
+        }
+      ]
+    },
+    "CSIT-302": {
+      "shortName": "DS",
+      "units": [
+        {
+          "title": "Set Theory, Relations, and Functions",
+          "topics": [
+            "Sets, Subsets, Power Sets, and Venn Diagrams",
+            "Principle of Inclusion-Exclusion and Mathematical Induction",
+            "Binary Relations, Equivalence Relations, and Partitions",
+            "Partial Orders, Hasse Diagrams, and Lattices",
+            "Injective, Surjective, Bijective, and Composite Functions"
+          ]
+        },
+        {
+          "title": "Algebraic Structures",
+          "topics": [
+            "Semigroups, Monoids, and Groups",
+            "Subgroups, Cosets, and Lagrange's Theorem",
+            "Cyclic Groups, Permutation Groups, and Normal Subgroups",
+            "Group Homomorphism and Isomorphism",
+            "Rings, Integral Domains, and Fields"
+          ]
+        },
+        {
+          "title": "Propositional and Predicate Logic",
+          "topics": [
+            "Propositional Connectives, Truth Tables, and Tautologies",
+            "Logical Equivalences and Normal Forms (DNF, CNF)",
+            "Rules of Inference and Proof Techniques",
+            "Predicates, Quantifiers, and Nested Quantifiers",
+            "Boolean Algebra and Karnaugh Map Simplification"
+          ]
+        },
+        {
+          "title": "Graph Theory",
+          "topics": [
+            "Graph Terminology, Representations, and Isomorphism",
+            "Paths, Connectivity, Eulerian, and Hamiltonian Graphs",
+            "Planar Graphs, Euler's Formula, and Graph Coloring",
+            "Trees, Rooted Trees, and Spanning Trees",
+            "Shortest Path and Minimal Spanning Tree Concepts"
+          ]
+        },
+        {
+          "title": "Combinatorics and Recurrence Relations",
+          "topics": [
+            "Counting Principles, Permutations, and Combinations",
+            "Pigeonhole Principle and Binomial Identities",
+            "Generating Functions and Power Series",
+            "Linear Homogeneous Recurrence Relations",
+            "Non-Homogeneous Recurrence Relations and Master Method"
+          ]
+        }
+      ]
+    },
+    "CSIT-303": {
+      "shortName": "DSA",
+      "units": [
+        {
+          "title": "Introduction to Data Structures and Arrays",
+          "topics": [
+            "Abstract Data Types and Algorithm Complexity Analysis",
+            "Asymptotic Notations (Big-O, Omega, Theta)",
+            "One-Dimensional and Multi-Dimensional Arrays",
+            "Sparse Matrices and Polynomial Representations",
+            "String Operations and Pattern Matching Basics"
+          ]
+        },
+        {
+          "title": "Stacks and Queues",
+          "topics": [
+            "Stack ADT, Array and Linked Representations",
+            "Infix, Prefix, and Postfix Expression Evaluation",
+            "Recursion, Call Stack, and Tower of Hanoi",
+            "Linear Queue, Circular Queue, and Deque",
+            "Priority Queues and Practical Applications"
+          ]
+        },
+        {
+          "title": "Linked Lists",
+          "topics": [
+            "Singly Linked List Insertion, Deletion, and Traversal",
+            "Doubly Linked List Operations and Trade-offs",
+            "Circular Linked Lists and Josephus Problem",
+            "Header Linked Lists and Polynomial Addition",
+            "Dynamic Memory Management and Garbage Collection"
+          ]
+        },
+        {
+          "title": "Trees",
+          "topics": [
+            "Binary Tree Representations and Traversals (Inorder, Preorder, Postorder)",
+            "Binary Search Trees (BST) Operations",
+            "Height-Balanced Trees (AVL Rotations)",
+            "B-Trees and B+ Trees for External Storage",
+            "Binary Heaps and Huffman Coding Trees"
+          ]
+        },
+        {
+          "title": "Graphs, Searching, and Sorting",
+          "topics": [
+            "Graph Representations, BFS, and DFS Traversals",
+            "Minimum Spanning Trees (Prim's and Kruskal's)",
+            "Shortest Paths (Dijkstra's Algorithm) and Topological Sort",
+            "Sorting Algorithms (Quick, Merge, Heap, Radix, Insertion)",
+            "Hashing Techniques and Collision Resolution"
+          ]
+        }
+      ]
+    },
+    "CSIT-304": {
+      "shortName": "DCS",
+      "units": [
+        {
+          "title": "Number Systems and Boolean Algebra",
+          "topics": [
+            "Binary, Octal, Hexadecimal Conversions and Complements",
+            "BCD, Gray, Excess-3, and Error-Detecting Codes",
+            "Logic Gates, Universal Gates (NAND/NOR), and De Morgan's Laws",
+            "Canonical SOP and POS Forms",
+            "Karnaugh Map and Quine-McCluskey Minimization"
+          ]
+        },
+        {
+          "title": "Combinational Logic Circuits",
+          "topics": [
+            "Half Adder, Full Adder, and Carry Look-Ahead Adder",
+            "Binary Subtractors and BCD Adders",
+            "Multiplexers, Demultiplexers, and Function Realization",
+            "Encoders, Priority Encoders, and Decoders",
+            "Magnitude Comparators and Code Converters"
+          ]
+        },
+        {
+          "title": "Sequential Logic Circuits",
+          "topics": [
+            "Latches and Flip-Flops (SR, JK, D, T) with Excitation Tables",
+            "Master-Slave Flip-Flops and Race-Around Condition",
+            "Shift Registers (SISO, SIPO, PISO, PIPO)",
+            "Asynchronous (Ripple) and Synchronous Counters",
+            "Finite State Machines (Mealy and Moore Models)"
+          ]
+        },
+        {
+          "title": "Logic Families and Memory Devices",
+          "topics": [
+            "Digital IC Characteristics (Fan-in, Fan-out, Noise Margin, Propagation Delay)",
+            "TTL and CMOS Logic Families",
+            "Semiconductor Memories (RAM, ROM, PROM, EPROM, EEPROM)",
+            "Programmable Logic Devices (PLA, PAL, FPGA Overview)",
+            "Memory Expansion and Address Decoding"
+          ]
+        },
+        {
+          "title": "A/D and D/A Converters and Multivibrators",
+          "topics": [
+            "Weighted Resistor and R-2R Ladder DACs",
+            "Flash, Successive Approximation, and Dual-Slope ADCs",
+            "ADC/DAC Resolution, Accuracy, and Conversion Time",
+            "555 Timer Astable and Monostable Multivibrators",
+            "Schmitt Trigger and Sample-and-Hold Circuits"
+          ]
+        }
+      ]
+    },
+    "CSIT-305": {
+      "shortName": "OOP",
+      "units": [
+        {
+          "title": "Introduction to Object-Oriented Paradigm",
+          "topics": [
+            "Procedural vs Object-Oriented Programming",
+            "Abstraction, Encapsulation, Inheritance, and Polymorphism",
+            "Objects, Classes, Messages, and Relationships",
+            "Unified Modeling Language (UML) Class Diagrams",
+            "Benefits and Applications of Object-Oriented Design"
+          ]
+        },
+        {
+          "title": "Classes, Objects, and Constructors",
+          "topics": [
+            "Class Declaration, Access Specifiers, and Data Hiding",
+            "Constructors, Copy Constructors, and Destructors",
+            "Static Data Members, Static Methods, and Friend Functions",
+            "Inline Functions, Default Arguments, and Function Overloading",
+            "Dynamic Object Allocation and Memory Lifecycle"
+          ]
+        },
+        {
+          "title": "Inheritance and Polymorphism",
+          "topics": [
+            "Single, Multilevel, Multiple, and Hierarchical Inheritance",
+            "Ambiguity Resolution and Virtual Base Classes",
+            "Operator Overloading (Unary and Binary Operators)",
+            "Virtual Functions, Dynamic Binding, and vtable Mechanism",
+            "Abstract Classes, Pure Virtual Functions, and Interfaces"
+          ]
+        },
+        {
+          "title": "Generic Programming and Exception Handling",
+          "topics": [
+            "Function Templates and Class Templates",
+            "Standard Template Library (Vectors, Lists, Maps, Iterators)",
+            "Exception Handling (try, catch, throw, Stack Unwinding)",
+            "Custom Exception Classes and Exception Safety",
+            "Namespaces and Type Casting Operators"
+          ]
+        },
+        {
+          "title": "File Handling and Multithreading Basics",
+          "topics": [
+            "Stream Hierarchy and Formatted Console I/O",
+            "Sequential and Random Access File Operations",
+            "Object Serialization and Persistence Patterns",
+            "Introduction to Multithreading and Synchronization",
+            "SOLID Design Principles in Practice"
+          ]
+        }
+      ]
+    },
+    "BT-401": {
+      "shortName": "M-III",
+      "units": [
+        {
+          "title": "Numerical Methods for Equations",
+          "topics": [
+            "Errors in Numerical Computation and Convergence",
+            "Bisection, Regula-Falsi, and Secant Methods",
+            "Newton-Raphson Method for Transcendental Equations",
+            "Gauss Elimination and LU Decomposition",
+            "Gauss-Jacobi and Gauss-Seidel Iterative Methods"
+          ]
+        },
+        {
+          "title": "Interpolation and Numerical Calculus",
+          "topics": [
+            "Finite Differences and Forward/Backward Operators",
+            "Newton's Forward and Backward Interpolation",
+            "Lagrange's and Newton's Divided Difference Interpolation",
+            "Numerical Integration (Trapezoidal, Simpson's 1/3 and 3/8 Rules)",
+            "Numerical Differentiation Using Interpolation Polynomials"
+          ]
+        },
+        {
+          "title": "Numerical Solution of Ordinary Differential Equations",
+          "topics": [
+            "Taylor Series and Picard's Iteration Methods",
+            "Euler's and Modified Euler's Methods",
+            "Runge-Kutta Second and Fourth Order Methods",
+            "Milne's and Adams-Bashforth Predictor-Corrector Methods",
+            "Finite Difference Method for Boundary Value Problems"
+          ]
+        },
+        {
+          "title": "Laplace and Fourier Transforms",
+          "topics": [
+            "Laplace Transform Properties and Shifting Theorems",
+            "Inverse Laplace Transform and Convolution Theorem",
+            "Solving Linear ODEs via Laplace Transforms",
+            "Fourier Series and Half-Range Expansions",
+            "Fourier Integral and Fourier Transform Applications"
+          ]
+        },
+        {
+          "title": "Probability Distributions and Statistics",
+          "topics": [
+            "Random Variables, Expectation, Variance, and Moments",
+            "Binomial, Poisson, and Normal Distributions",
+            "Correlation, Regression, and Curve Fitting (Least Squares)",
+            "Sampling Distributions and Central Limit Theorem",
+            "Hypothesis Testing (t-test, Chi-Square, and F-test)"
+          ]
+        }
+      ]
+    },
+    "CSIT-402": {
+      "shortName": "ADC",
+      "units": [
+        {
+          "title": "Signals, Systems, and Noise",
+          "topics": [
+            "Continuous and Discrete-Time Signals Classification",
+            "Fourier Series and Fourier Transform Properties",
+            "Energy Spectral Density and Power Spectral Density",
+            "Linear Time-Invariant Systems and Bandwidth",
+            "Thermal Noise, Shot Noise, SNR, and Noise Figure"
+          ]
+        },
+        {
+          "title": "Amplitude Modulation Systems",
+          "topics": [
+            "Need for Modulation and Standard AM Wave",
+            "DSB-SC Modulation and Coherent Detection",
+            "SSB-SC Generation (Filter and Phase Shift Methods)",
+            "Vestigial Sideband (VSB) Modulation",
+            "Superheterodyne AM Receiver Architecture"
+          ]
+        },
+        {
+          "title": "Angle Modulation Systems",
+          "topics": [
+            "Frequency Modulation (FM) and Phase Modulation (PM)",
+            "Narrowband and Wideband FM Spectrum (Bessel Functions)",
+            "Carson's Rule and Bandwidth Calculation",
+            "FM Generation (Direct and Armstrong Indirect Methods)",
+            "FM Demodulators, Pre-emphasis, and De-emphasis"
+          ]
+        },
+        {
+          "title": "Pulse Modulation and PCM",
+          "topics": [
+            "Sampling Theorem, Nyquist Rate, and Aliasing",
+            "PAM, PWM, and PPM Generation and Detection",
+            "Quantization, Companding (Mu-Law and A-Law), and Quantization Noise",
+            "Pulse Code Modulation (PCM) and Differential PCM",
+            "Delta Modulation, Adaptive Delta Modulation, and TDM"
+          ]
+        },
+        {
+          "title": "Digital Modulation and Information Theory",
+          "topics": [
+            "Baseband Line Coding (NRZ, RZ, Manchester, AMI)",
+            "ASK, FSK, BPSK, QPSK, and QAM Constellation Diagrams",
+            "Matched Filter and Bit Error Rate Performance",
+            "Information Entropy, Mutual Information, and Channel Capacity",
+            "Source Coding (Huffman, Shannon-Fano) and Linear Block Codes"
+          ]
+        }
+      ]
+    },
+    "CSIT-403": {
+      "shortName": "ADA",
+      "units": [
+        {
+          "title": "Algorithm Analysis and Divide & Conquer",
+          "topics": [
+            "Time and Space Complexity, Recurrence Relations, and Master Theorem",
+            "Binary Search and Strassen's Matrix Multiplication",
+            "Merge Sort and Quick Sort Complexity Analysis",
+            "Heap Sort and Selection in Linear Time",
+            "Lower Bounds for Comparison-Based Sorting"
+          ]
+        },
+        {
+          "title": "Greedy Algorithms",
+          "topics": [
+            "Greedy Choice Property and Optimal Substructure",
+            "Activity Selection and Fractional Knapsack Problems",
+            "Job Sequencing with Deadlines",
+            "Huffman Coding and Optimal Merge Patterns",
+            "Prim's, Kruskal's MST, and Dijkstra's Shortest Path"
+          ]
+        },
+        {
+          "title": "Dynamic Programming",
+          "topics": [
+            "Memoization vs Tabulation Paradigm",
+            "0/1 Knapsack and Matrix Chain Multiplication",
+            "Longest Common Subsequence and Edit Distance",
+            "Optimal Binary Search Trees",
+            "Bellman-Ford, Floyd-Warshall, and Travelling Salesman Problem"
+          ]
+        },
+        {
+          "title": "Backtracking and Branch & Bound",
+          "topics": [
+            "State Space Trees and Implicit/Explicit Constraints",
+            "N-Queens, Sum of Subsets, and Graph Coloring",
+            "Hamiltonian Cycles via Backtracking",
+            "Branch & Bound (FIFO, LIFO, Least Cost Search)",
+            "0/1 Knapsack and TSP Using Branch & Bound"
+          ]
+        },
+        {
+          "title": "Tree/Graph Topics and NP-Completeness",
+          "topics": [
+            "B-Trees, Red-Black Trees, and Amortized Analysis",
+            "String Matching (KMP and Rabin-Karp Algorithms)",
+            "P, NP, NP-Hard, and NP-Complete Classes",
+            "Polynomial-Time Reductions and Cook-Levin Theorem",
+            "Approximation and Randomized Algorithms Overview"
+          ]
+        }
+      ]
+    },
+    "CSIT-404": {
+      "shortName": "COA",
+      "units": [
+        {
+          "title": "Basic Computer Organization and Register Transfer",
+          "topics": [
+            "Von Neumann vs Harvard Architecture and Functional Units",
+            "Bus Structure, System Interconnects, and Tri-State Buffers",
+            "Register Transfer Language and Micro-Operations",
+            "Instruction Formats and Addressing Modes",
+            "Instruction Cycle and Interrupt Processing"
+          ]
+        },
+        {
+          "title": "Computer Arithmetic",
+          "topics": [
+            "Signed Magnitude and Two's Complement Arithmetic",
+            "Ripple-Carry and Carry Look-Ahead Adders",
+            "Booth's Multiplication Algorithm",
+            "Restoring and Non-Restoring Division Algorithms",
+            "IEEE 754 Floating-Point Representation and Operations"
+          ]
+        },
+        {
+          "title": "Control Unit Design",
+          "topics": [
+            "Single-Bus and Multi-Bus Datapath Organization",
+            "Hardwired Control Unit Design",
+            "Microprogrammed Control and Control Memory",
+            "Horizontal vs Vertical Microinstructions",
+            "RISC vs CISC Architectural Trade-offs"
+          ]
+        },
+        {
+          "title": "Memory Organization",
+          "topics": [
+            "Memory Hierarchy (Registers, Cache, Main, Secondary)",
+            "Cache Mapping (Direct, Associative, Set-Associative)",
+            "Cache Replacement Policies and Write Policies",
+            "Virtual Memory, Paging, TLB, and Segmentation",
+            "Memory Interleaving and Associative Memory"
+          ]
+        },
+        {
+          "title": "I/O Organization and Pipelining",
+          "topics": [
+            "Programmed I/O, Interrupt-Driven I/O, and Priority Interrupts",
+            "Direct Memory Access (DMA) Controller and Bus Arbitration",
+            "Instruction Pipelining Stages and Speedup",
+            "Structural, Data, and Control Pipeline Hazards",
+            "Superscalar Execution and Multiprocessor Classification (Flynn's)"
+          ]
+        }
+      ]
+    },
+    "CSIT-405": {
+      "shortName": "DBMS",
+      "units": [
+        {
+          "title": "Database Architecture and ER Modeling",
+          "topics": [
+            "DBMS vs File System and Three-Schema Architecture",
+            "Data Independence and Database Languages (DDL, DML, DCL)",
+            "Entity-Relationship (ER) and Enhanced ER Diagrams",
+            "Mapping ER Diagrams to Relational Schemas",
+            "Keys (Super, Candidate, Primary, Foreign) and Integrity Constraints"
+          ]
+        },
+        {
+          "title": "Relational Model, Algebra, and SQL",
+          "topics": [
+            "Relational Algebra Operations (Select, Project, Join, Division)",
+            "Tuple and Domain Relational Calculus",
+            "SQL Queries, Joins, Aggregations, and Subqueries",
+            "Views, Triggers, Stored Procedures, and Cursors",
+            "Relational Integrity and Referential Actions"
+          ]
+        },
+        {
+          "title": "Relational Database Design and Normalization",
+          "topics": [
+            "Update Anomalies and Functional Dependencies",
+            "Armstrong's Axioms, Attribute Closure, and Canonical Cover",
+            "Lossless Join and Dependency-Preserving Decompositions",
+            "Normal Forms (1NF, 2NF, 3NF, BCNF)",
+            "Multivalued Dependencies (4NF) and Join Dependencies (5NF)"
+          ]
+        },
+        {
+          "title": "Query Processing, Optimization, and Indexing",
+          "topics": [
+            "File Organization and Disk Storage Structures",
+            "Single-Level, Multi-Level, and B+ Tree Indexing",
+            "Static and Dynamic Hashing (Extendible, Linear)",
+            "Query Parsing, Cost Estimation, and Join Execution Plans",
+            "Heuristic and Cost-Based Query Optimization"
+          ]
+        },
+        {
+          "title": "Transactions, Concurrency, and Recovery",
+          "topics": [
+            "ACID Properties and Transaction State Lifecycle",
+            "Conflict and View Serializability and Recoverability",
+            "Two-Phase Locking (2PL), Deadlocks, and Timestamp Ordering",
+            "Multi-Version Concurrency Control (MVCC) and Isolation Levels",
+            "Log-Based Recovery, Checkpointing, and ARIES Principles"
+          ]
+        }
+      ]
+    },
+    "CSIT-501": {
+      "shortName": "CN",
+      "units": [
+        {
+          "title": "Introduction and Physical Layer",
+          "topics": [
+            "Network Topologies, LAN/MAN/WAN, and Switching Techniques",
+            "OSI Seven-Layer Reference Model and TCP/IP Protocol Suite",
+            "Guided and Unguided Transmission Media",
+            "Multiplexing (FDM, TDM, WDM) and Spread Spectrum",
+            "Network Devices (Hub, Switch, Router, Bridge, Gateway)"
+          ]
+        },
+        {
+          "title": "Data Link Layer",
+          "topics": [
+            "Framing, Byte/Bit Stuffing, and Link Layer Services",
+            "Error Detection and Correction (Parity, CRC, Hamming Code)",
+            "Flow Control and Sliding Window Protocols (Stop-and-Wait, Go-Back-N, Selective Repeat)",
+            "Medium Access Control (ALOHA, CSMA/CD, CSMA/CA)",
+            "Ethernet Standards (IEEE 802.3), VLANs, and Wi-Fi (IEEE 802.11)"
+          ]
+        },
+        {
+          "title": "Network Layer",
+          "topics": [
+            "IPv4 Addressing, Subnetting, and CIDR",
+            "IPv4 and IPv6 Packet Formats and NAT",
+            "ARP, RARP, ICMP, and DHCP Protocols",
+            "Routing Algorithms (Distance Vector, Link State, Path Vector)",
+            "Routing Protocols (RIP, OSPF, BGP)"
+          ]
+        },
+        {
+          "title": "Transport Layer",
+          "topics": [
+            "Process-to-Process Delivery, Ports, and Sockets",
+            "UDP Header Structure and Use Cases",
+            "TCP Connection Management and Flow Control",
+            "Congestion Control Algorithms",
+            "Quality of Service (QoS), Leaky Bucket, and Token Bucket"
+          ]
+        },
+        {
+          "title": "Application Layer and Network Security",
+          "topics": [
+            "Domain Name System (DNS) Hierarchy and Resolution",
+            "HTTP/HTTPS, REST, and Web Caching",
+            "Email Protocols (SMTP, POP3, IMAP) and FTP",
+            "SNMP Network Management and Socket Programming Concepts",
+            "TLS/SSL, Firewalls, and VPN Fundamentals"
+          ]
+        }
+      ]
+    },
+    "CSIT-502": {
+      "shortName": "OS",
+      "units": [
+        {
+          "title": "Operating System Overview and Structure",
+          "topics": [
+            "OS Functions, Evolution, and Types (Batch, Time-Sharing, Real-Time)",
+            "Kernel Architectures (Monolithic, Microkernel, Hybrid)",
+            "System Calls, Dual-Mode Operation, and Interrupt Handling",
+            "OS Boot Process and Virtual Machines Overview",
+            "POSIX Shell and System Utilities Interface"
+          ]
+        },
+        {
+          "title": "Process Management and CPU Scheduling",
+          "topics": [
+            "Process States, Process Control Block (PCB), and Context Switching",
+            "Threads, User vs Kernel Threads, and Multithreading Models",
+            "CPU Scheduling Algorithms (FCFS, SJF, Priority, Round Robin)",
+            "Multilevel Queue and Multilevel Feedback Queue Scheduling",
+            "Inter-Process Communication (Pipes, Shared Memory, Message Passing)"
+          ]
+        },
+        {
+          "title": "Synchronization and Deadlocks",
+          "topics": [
+            "Race Conditions, Critical Section Problem, and Peterson's Solution",
+            "Mutex Locks, Semaphores, and Monitors",
+            "Classical Synchronization Problems (Producer-Consumer, Readers-Writers, Dining Philosophers)",
+            "Deadlock Characterization and Prevention",
+            "Banker's Algorithm for Deadlock Avoidance"
+          ]
+        },
+        {
+          "title": "Memory Management",
+          "topics": [
+            "Logical vs Physical Address Space, Swapping, and Contiguous Allocation",
+            "Paging, Page Table Structures, and TLB Performance",
+            "Segmentation and Segmented Paging",
+            "Virtual Memory, Demand Paging, and Page Fault Handling",
+            "Page Replacement Algorithms (FIFO, Optimal, LRU) and Thrashing"
+          ]
+        },
+        {
+          "title": "File Systems and Disk Scheduling",
+          "topics": [
+            "File Concepts, Directory Structures, and Access Methods",
+            "File Allocation Methods (Contiguous, Linked, Indexed, Inodes)",
+            "Free-Space Management and Journaling File Systems",
+            "Disk Scheduling Algorithms (FCFS, SSTF, SCAN, C-SCAN, LOOK)",
+            "RAID Levels, I/O Buffering, and System Protection"
+          ]
+        }
+      ]
+    },
+    "CSIT-503A": {
+      "shortName": "TOC",
+      "units": [
+        {
+          "title": "Finite Automata and Regular Languages",
+          "topics": [
+            "Alphabets, Strings, Languages, and Chomsky Hierarchy",
+            "Deterministic Finite Automata (DFA) Design",
+            "Nondeterministic Finite Automata (NFA) and Epsilon-NFA",
+            "Equivalence of NFA and DFA and Minimization",
+            "Mealy and Moore Finite State Machines"
+          ]
+        },
+        {
+          "title": "Regular Expressions and Properties",
+          "topics": [
+            "Regular Expressions and Algebraic Identities",
+            "Arden's Theorem and Finite Automaton to Regular Expression",
+            "Thompson's Construction (Regex to NFA)",
+            "Pumping Lemma for Regular Languages",
+            "Closure and Decision Properties of Regular Languages"
+          ]
+        },
+        {
+          "title": "Context-Free Grammars and Normal Forms",
+          "topics": [
+            "Context-Free Grammars, Derivations, and Parse Trees",
+            "Ambiguity in Grammars and Ambiguity Removal",
+            "Simplification of CFGs (Useless, Unit, and Null Productions)",
+            "Chomsky Normal Form (CNF)",
+            "Greibach Normal Form (GNF) and CYK Membership Algorithm"
+          ]
+        },
+        {
+          "title": "Pushdown Automata",
+          "topics": [
+            "Pushdown Automata (PDA) Formal Definition and Transitions",
+            "Acceptance by Final State vs Empty Stack",
+            "Equivalence of Pushdown Automata and Context-Free Grammars",
+            "Deterministic vs Nondeterministic PDA",
+            "Pumping Lemma and Closure Properties for Context-Free Languages"
+          ]
+        },
+        {
+          "title": "Turing Machines and Undecidability",
+          "topics": [
+            "Turing Machine Formal Model and Programming Techniques",
+            "Variants of Turing Machines (Multi-Tape, Nondeterministic, Universal)",
+            "Church-Turing Thesis and Recursive vs Recursively Enumerable Languages",
+            "Halting Problem, Diagonalization, and Post Correspondence Problem",
+            "Rice's Theorem and Introduction to Complexity Classes (P, NP)"
+          ]
+        }
+      ]
+    },
+    "CSIT-503B": {
+      "shortName": "MPI",
+      "units": [
+        {
+          "title": "8085 Microprocessor Architecture",
+          "topics": [
+            "Evolution of Microprocessors and 8085 Pin Configuration",
+            "Internal Registers, ALU, Flag Register, and Bus Organization",
+            "Instruction Cycle, Machine Cycle, and T-State Timing Diagrams",
+            "8085 Addressing Modes and Instruction Set",
+            "Stack, Subroutines, and 8085 Interrupt Structure"
+          ]
+        },
+        {
+          "title": "8086 Microprocessor Architecture",
+          "topics": [
+            "8086 BIU and EU Pipelined Architecture",
+            "Memory Segmentation and Physical Address Calculation",
+            "Minimum Mode vs Maximum Mode Operation",
+            "8086 Addressing Modes and Instruction Formats",
+            "8086 Interrupt Vector Table and Exception Handling"
+          ]
+        },
+        {
+          "title": "Assembly Language Programming",
+          "topics": [
+            "Data Transfer, Arithmetic, and Logical Instructions",
+            "Branching, Looping, and String Manipulation Instructions",
+            "Assembler Directives, Macros, and Procedures",
+            "Software Delays and Code Conversion Programs",
+            "Modular Assembly and Interfacing with High-Level Code"
+          ]
+        },
+        {
+          "title": "Memory and Peripheral Interfacing",
+          "topics": [
+            "Memory Interfacing and Address Decoding Logic",
+            "8255 Programmable Peripheral Interface (PPI) Modes",
+            "8253/8254 Programmable Interval Timer",
+            "8259 Programmable Interrupt Controller (PIC)",
+            "8257/8237 DMA Controller and 8251 USART"
+          ]
+        },
+        {
+          "title": "Microcontrollers and Advanced Processors",
+          "topics": [
+            "8051 Microcontroller Architecture and Memory Map",
+            "8051 Timers, Serial Port, and Interrupt Programming",
+            "Stepper Motor, LCD, and ADC/DAC Interfacing",
+            "Protected Mode and Virtual Memory in x86 (80286/80386)",
+            "Introduction to ARM RISC Architecture"
+          ]
+        }
+      ]
+    },
+    "CSIT-503C": {
+      "shortName": "PPL",
+      "units": [
+        {
+          "title": "Language Design Criteria and Syntax",
+          "topics": [
+            "Programming Domains and Language Evaluation Criteria",
+            "Compilation, Interpretation, and Hybrid Execution Models",
+            "Context-Free Grammars, BNF, and EBNF Notation",
+            "Attribute Grammars and Static Semantics",
+            "Operational, Denotational, and Axiomatic Semantics"
+          ]
+        },
+        {
+          "title": "Names, Bindings, Scopes, and Data Types",
+          "topics": [
+            "Variables, Binding Times, and Storage Allocation Lifetimes",
+            "Static vs Dynamic Scoping and Referencing Environments",
+            "Primitive, Structured, Union, and Pointer Data Types",
+            "Type Checking, Type Equivalence, and Type Inference",
+            "Garbage Collection Techniques (Reference Counting, Mark-and-Sweep)"
+          ]
+        },
+        {
+          "title": "Expressions, Control Flow, and Subprograms",
+          "topics": [
+            "Operator Precedence, Associativity, and Short-Circuit Evaluation",
+            "Selection, Iteration, and Guarded Commands",
+            "Parameter Passing Modes (Value, Reference, Result, Name)",
+            "Activation Records, Static/Dynamic Chains, and Closures",
+            "Coroutines, Iterators, and Exception Handling Mechanisms"
+          ]
+        },
+        {
+          "title": "Object-Oriented and Generic Abstractions",
+          "topics": [
+            "Abstract Data Types and Information Hiding",
+            "Single vs Multiple Inheritance and Mixins",
+            "Dynamic Dispatch, Method Lookup, and Reflection",
+            "Parametric Polymorphism and Bounded Generics",
+            "Module Systems and Package Visibility"
+          ]
+        },
+        {
+          "title": "Functional, Logic, and Concurrent Paradigms",
+          "topics": [
+            "Lambda Calculus Foundations and First-Class Functions",
+            "Immutability, Recursion, Higher-Order Functions, and Lazy Evaluation",
+            "Logic Programming with Horn Clauses and Unification (Prolog)",
+            "Concurrency Primitives (Threads, Monitors, Message Passing, Actors)",
+            "Memory Models and Data Race Freedom"
+          ]
+        }
+      ]
+    },
+    "CSIT-504A": {
+      "shortName": "CS",
+      "units": [
+        {
+          "title": "Introduction to Cyber Security",
+          "topics": [
+            "CIA Triad, AAA Framework, and Threat Landscape",
+            "Cybercrime Classification and Attack Vectors",
+            "Social Engineering, Phishing, and Malware Taxonomy",
+            "Vulnerability Assessment and Risk Management",
+            "Security Policies, Governance, and Defense in Depth"
+          ]
+        },
+        {
+          "title": "Cryptography Foundations",
+          "topics": [
+            "Classical Ciphers and Symmetric Encryption (DES, AES)",
+            "Asymmetric Cryptography (RSA, Diffie-Hellman, ECC)",
+            "Cryptographic Hash Functions (SHA-256) and MACs",
+            "Digital Signatures and Public Key Infrastructure (PKI)",
+            "Key Management and Password Hashing Best Practices"
+          ]
+        },
+        {
+          "title": "Network and System Security",
+          "topics": [
+            "Packet Sniffing, Spoofing, DoS/DDoS, and MITM Attacks",
+            "Firewalls, Packet Filtering, and Stateful Inspection",
+            "Intrusion Detection and Prevention Systems (IDS/IPS)",
+            "IPsec, TLS/SSL, SSH, and Wireless Security (WPA3)",
+            "OS Hardening, Access Control Models (DAC, MAC, RBAC)"
+          ]
+        },
+        {
+          "title": "Web and Application Security",
+          "topics": [
+            "OWASP Top 10 Vulnerabilities Overview",
+            "SQL Injection and Parameterized Defenses",
+            "Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF)",
+            "Authentication, Session Hijacking, and OAuth/JWT Pitfalls",
+            "Secure Coding Lifecycle and Dependency Auditing"
+          ]
+        },
+        {
+          "title": "Cyber Forensics, Compliance, and Incident Response",
+          "topics": [
+            "Incident Response Lifecycle (NIST Framework)",
+            "Digital Evidence Acquisition and Chain of Custody",
+            "Log Analysis, SIEM, and Threat Hunting Basics",
+            "Indian IT Act 2000 (Amended 2008) and DPDP Act 2023",
+            "ISO 27001 and Ethical Hacking Methodology"
+          ]
+        }
+      ]
+    },
+    "CSIT-504B": {
+      "shortName": "AI",
+      "units": [
+        {
+          "title": "Introduction to Artificial Intelligence and Agents",
+          "topics": [
+            "History, Foundations, and Turing Test",
+            "Intelligent Agents and PEAS Task Environments",
+            "Agent Architectures (Reflex, Model-Based, Goal-Based, Utility-Based)",
+            "Problem Formulation and State-Space Representation",
+            "Production Systems and AI Problem Characteristics"
+          ]
+        },
+        {
+          "title": "Search Techniques and Game Playing",
+          "topics": [
+            "Uninformed Search (BFS, DFS, Iterative Deepening, Uniform Cost)",
+            "Informed Search (Greedy Best-First, A* Search, Admissible Heuristics)",
+            "Local Search (Hill Climbing, Simulated Annealing, Genetic Algorithms)",
+            "Constraint Satisfaction Problems (Backtracking, Arc Consistency)",
+            "Adversarial Search (Minimax and Alpha-Beta Pruning)"
+          ]
+        },
+        {
+          "title": "Knowledge Representation and Reasoning",
+          "topics": [
+            "Propositional and First-Order Predicate Logic",
+            "Unification, Resolution Refutation, and Forward/Backward Chaining",
+            "Semantic Networks, Frames, and Conceptual Dependencies",
+            "Ontologies and Description Logics",
+            "Classical Planning (STRIPS, Partial-Order Planning)"
+          ]
+        },
+        {
+          "title": "Reasoning Under Uncertainty",
+          "topics": [
+            "Probability Axioms, Conditional Probability, and Bayes' Rule",
+            "Bayesian Belief Networks and Inference",
+            "Dempster-Shafer Theory of Evidence",
+            "Fuzzy Sets, Membership Functions, and Fuzzy Inference Systems",
+            "Markov Decision Processes (MDPs) and Value Iteration"
+          ]
+        },
+        {
+          "title": "Machine Learning, NLP, and Expert Systems",
+          "topics": [
+            "Supervised, Unsupervised, and Reinforcement Learning Overview",
+            "Decision Trees and Artificial Neural Networks Basics",
+            "Natural Language Processing Pipeline (Tokenization, Parsing, Semantics)",
+            "Expert System Architecture and Knowledge Acquisition",
+            "AI Ethics, Fairness, Explainability, and Safety"
+          ]
+        }
+      ]
+    },
+    "CSIT-504C": {
+      "shortName": "WTE",
+      "units": [
+        {
+          "title": "Web Fundamentals and Frontend Markup",
+          "topics": [
+            "Internet Protocols (HTTP/HTTPS, DNS, URL, MIME)",
+            "HTML5 Semantic Elements, Forms, and Accessibility",
+            "CSS3 Box Model, Flexbox, Grid, and Responsive Design",
+            "Document Object Model (DOM) and Browser Rendering Pipeline",
+            "XML, DTD, XML Schema, and JSON Data Interchange"
+          ]
+        },
+        {
+          "title": "Client-Side Scripting",
+          "topics": [
+            "JavaScript Language Fundamentals, Closures, and Prototypes",
+            "DOM Manipulation and Event Delegation",
+            "Asynchronous JavaScript (Promises, async/await, Fetch API)",
+            "Client-Side Form Validation and Web Storage APIs",
+            "Single-Page Application Architecture Concepts"
+          ]
+        },
+        {
+          "title": "Server-Side Web Development",
+          "topics": [
+            "Web Server Architecture and Request-Response Lifecycle",
+            "MVC Design Pattern and Routing",
+            "Sessions, Cookies, and Token-Based Authentication",
+            "Database Connectivity and Parameterized Queries",
+            "RESTful API Design, Status Codes, and CORS"
+          ]
+        },
+        {
+          "title": "E-Commerce Models and Electronic Payments",
+          "topics": [
+            "E-Commerce Business Models (B2B, B2C, C2C, D2C)",
+            "Electronic Data Interchange (EDI) and Supply Chain Integration",
+            "Digital Payment Systems (UPI, Cards, Wallets, Payment Gateways)",
+            "3-D Secure, PCI-DSS, and Fraud Prevention",
+            "Order Fulfillment, Logistics, and E-CRM"
+          ]
+        },
+        {
+          "title": "Web Security, SEO, and Deployment",
+          "topics": [
+            "HTTPS/TLS Certificates and Secure Headers",
+            "Mitigating XSS, CSRF, Injection, and Broken Access Control",
+            "Search Engine Optimization (On-Page, Structured Data, Sitemaps)",
+            "Web Performance Optimization, CDNs, and Caching",
+            "Cloud Hosting, CI/CD, and E-Commerce Legal Frameworks"
+          ]
+        }
+      ]
+    },
+    "CSIT-601": {
+      "shortName": "SEA",
+      "units": [
+        {
+          "title": "Software Process Models and Agile Mindset",
+          "topics": [
+            "Software Crisis, Software Characteristics, and SDLC Phases",
+            "Waterfall, Incremental, Prototype, and Spiral Models",
+            "Agile Manifesto, Values, and Twelve Principles",
+            "Scrum Framework (Roles, Sprints, Backlogs, Ceremonies)",
+            "Kanban, Extreme Programming (XP), and Lean Software Development"
+          ]
+        },
+        {
+          "title": "Requirements Engineering",
+          "topics": [
+            "Functional vs Non-Functional Requirements",
+            "Requirements Elicitation Techniques and User Stories",
+            "Software Requirements Specification (SRS) IEEE Standard",
+            "Use Case Modeling, Data Flow Diagrams, and Acceptance Criteria",
+            "Requirements Validation, Traceability, and Change Management"
+          ]
+        },
+        {
+          "title": "Software Design and Architecture",
+          "topics": [
+            "Modularity, Cohesion, Coupling, and Abstraction",
+            "Architectural Styles (Layered, Microservices, Event-Driven, MVC)",
+            "UML Behavioral Diagrams (Sequence, Activity, State Machine)",
+            "GoF Design Patterns (Creational, Structural, Behavioral)",
+            "User Interface Design and Usability Heuristics"
+          ]
+        },
+        {
+          "title": "Software Testing and Quality Assurance",
+          "topics": [
+            "Verification vs Validation and Testing Pyramid",
+            "Black-Box Testing (Equivalence Partitioning, Boundary Value Analysis)",
+            "White-Box Testing (Statement, Branch, Path Coverage, Cyclomatic Complexity)",
+            "Integration, System, Regression, and Test-Driven Development (TDD)",
+            "ISO 9001, CMMI Maturity Levels, and Code Reviews"
+          ]
+        },
+        {
+          "title": "Project Management, Metrics, and DevOps",
+          "topics": [
+            "Effort Estimation (Function Points, COCOMO, Story Points)",
+            "Project Scheduling (PERT/CPM, Gantt Charts, Burndown Charts)",
+            "Risk Identification, Mitigation, and Software Configuration Management",
+            "Continuous Integration, Continuous Delivery, and Automated Pipelines",
+            "Software Maintenance, Refactoring, and Technical Debt"
+          ]
+        }
+      ]
+    },
+    "CSIT-602": {
+      "shortName": "ML",
+      "units": [
+        {
+          "title": "Introduction to Machine Learning",
+          "topics": [
+            "Supervised, Unsupervised, Semi-Supervised, and Reinforcement Learning",
+            "Data Preprocessing, Feature Scaling, and Missing Value Imputation",
+            "Bias-Variance Trade-off, Underfitting, and Overfitting",
+            "Cross-Validation, Confusion Matrix, Precision, Recall, and ROC-AUC",
+            "Linear Algebra and Probability Foundations for ML"
+          ]
+        },
+        {
+          "title": "Regression and Classification Models",
+          "topics": [
+            "Simple and Multiple Linear Regression and Gradient Descent",
+            "Regularization (Ridge L2, Lasso L1, ElasticNet)",
+            "Logistic Regression and Softmax Classification",
+            "k-Nearest Neighbors (k-NN) and Naive Bayes Classifiers",
+            "Support Vector Machines (Margin Maximization and Kernel Trick)"
+          ]
+        },
+        {
+          "title": "Decision Trees and Ensemble Learning",
+          "topics": [
+            "Entropy, Information Gain (ID3/C4.5), and Gini Impurity (CART)",
+            "Tree Pruning and Regression Trees",
+            "Bagging and Random Forests",
+            "Boosting (AdaBoost, Gradient Boosting, XGBoost)",
+            "Stacking and Hyperparameter Tuning (Grid/Random Search)"
+          ]
+        },
+        {
+          "title": "Unsupervised Learning and Dimensionality Reduction",
+          "topics": [
+            "K-Means, K-Means++, and Elbow/Silhouette Evaluation",
+            "Hierarchical Clustering (Agglomerative, Dendrograms) and DBSCAN",
+            "Gaussian Mixture Models and Expectation-Maximization",
+            "Principal Component Analysis (PCA) and SVD",
+            "Association Rule Mining (Apriori) and Anomaly Detection"
+          ]
+        },
+        {
+          "title": "Neural Networks and Deep Learning Basics",
+          "topics": [
+            "Perceptron, Activation Functions, and Multi-Layer Perceptrons",
+            "Backpropagation and Optimizers (SGD, Momentum, Adam)",
+            "Dropout, Batch Normalization, and Early Stopping",
+            "Convolutional Neural Networks (CNNs) Overview",
+            "Recurrent Neural Networks (RNN/LSTM) and Model Deployment Ethics"
+          ]
+        }
+      ]
+    },
+    "CSIT-603A": {
+      "shortName": "WMC",
+      "units": [
+        {
+          "title": "Wireless Transmission and Cellular Concepts",
+          "topics": [
+            "Radio Frequency Spectrum, Propagation Models, and Path Loss",
+            "Multipath Fading, Doppler Shift, and Diversity Techniques",
+            "Frequency Reuse, Cell Splitting, Sectoring, and Handoff",
+            "Multiple Access Techniques (FDMA, TDMA, CDMA, OFDMA)",
+            "Evolution from 2G/GSM to 3G, 4G LTE, and 5G NR"
+          ]
+        },
+        {
+          "title": "Cellular Network Architectures",
+          "topics": [
+            "GSM System Architecture, Channels, and Call Routing",
+            "GPRS and EDGE Packet Data Architecture",
+            "UMTS/WCDMA and HSPA Core Network",
+            "LTE Evolved Packet Core (EPC) and E-UTRAN",
+            "5G Service-Based Architecture and Network Slicing"
+          ]
+        },
+        {
+          "title": "Wireless LANs and PANs",
+          "topics": [
+            "IEEE 802.11 Architecture (BSS, ESS, Ad-Hoc)",
+            "CSMA/CA, Hidden/Exposed Terminal Problem, and RTS/CTS",
+            "IEEE 802.11n/ac/ax (Wi-Fi 6) MIMO and OFDMA",
+            "Bluetooth Protocol Stack and BLE",
+            "ZigBee (IEEE 802.15.4) and NFC Technologies"
+          ]
+        },
+        {
+          "title": "Mobile Network and Transport Layers",
+          "topics": [
+            "Mobile IP (Agent Discovery, Registration, Tunneling)",
+            "DHCP and Dynamic Host Configuration in Mobile Networks",
+            "Mobile Ad-Hoc Networks (MANETs) Routing (DSDV, AODV, DSR)",
+            "TCP Challenges Over Wireless Links",
+            "Indirect TCP, Snooping TCP, and Mobile TCP"
+          ]
+        },
+        {
+          "title": "Mobile Computing Systems and Security",
+          "topics": [
+            "Mobile OS Architectures (Android and iOS Overview)",
+            "Disconnected Operations, Caching, and Synchronization",
+            "Location-Based Services, GPS, and Context-Aware Computing",
+            "Mobile Security Threats, SIM Authentication, and WPA3",
+            "Edge Computing and Mobile Cloud Offloading"
+          ]
+        }
+      ]
+    },
+    "CSIT-603B": {
+      "shortName": "CGM",
+      "units": [
+        {
+          "title": "Introduction to Computer Graphics and Primitives",
+          "topics": [
+            "Raster Scan vs Random Scan Display Systems",
+            "Frame Buffers, Color Models (RGB, CMY, HSV), and Resolution",
+            "Line Drawing Algorithms (DDA and Bresenham's)",
+            "Midpoint Circle and Ellipse Drawing Algorithms",
+            "Polygon Filling (Scan-Line, Boundary Fill, Flood Fill) and Anti-Aliasing"
+          ]
+        },
+        {
+          "title": "2D Transformations and Clipping",
+          "topics": [
+            "Translation, Rotation, Scaling, Reflection, and Shear",
+            "Homogeneous Coordinates and Composite Transformations",
+            "Window-to-Viewport Coordinate Mapping",
+            "Line Clipping (Cohen-Sutherland, Liang-Barsky)",
+            "Polygon Clipping (Sutherland-Hodgman, Weiler-Atherton)"
+          ]
+        },
+        {
+          "title": "3D Transformations, Projections, and Curves",
+          "topics": [
+            "3D Geometric Transformations and Viewing Pipeline",
+            "Parallel Projections (Orthographic, Oblique) and Perspective Projection",
+            "Parametric Curves (Hermite, Bezier, B-Spline)",
+            "3D Surface Representations and Polygon Meshes",
+            "Fractals and Procedural Modeling Basics"
+          ]
+        },
+        {
+          "title": "Visible Surface Detection and Illumination",
+          "topics": [
+            "Back-Face Culling and Depth-Buffer (Z-Buffer) Algorithm",
+            "Painter's Algorithm and BSP Trees",
+            "Phong Illumination Model (Ambient, Diffuse, Specular)",
+            "Shading Models (Flat, Gouraud, Phong Shading)",
+            "Ray Tracing, Texture Mapping, and Shadows"
+          ]
+        },
+        {
+          "title": "Multimedia Systems and Compression",
+          "topics": [
+            "Multimedia Components (Text, Audio, Image, Video, Animation)",
+            "Lossless Compression (RLE, Huffman, LZW)",
+            "Image Compression Standards (JPEG, PNG, WebP)",
+            "Video Compression (MPEG, H.264/AVC, Motion Compensation)",
+            "Keyframing, Morphing, and Multimedia Synchronization"
+          ]
+        }
+      ]
+    },
+    "CSIT-603C": {
+      "shortName": "ACA",
+      "units": [
+        {
+          "title": "Parallel Computer Models and Performance",
+          "topics": [
+            "Flynn's Taxonomy (SISD, SIMD, MISD, MIMD)",
+            "Shared-Memory vs Distributed-Memory Architectures",
+            "Amdahl's Law, Gustafson's Law, and Scalability Metrics",
+            "Instruction-Level, Data-Level, and Thread-Level Parallelism",
+            "Benchmarks and CPI Performance Equations"
+          ]
+        },
+        {
+          "title": "Advanced Pipelining and ILP",
+          "topics": [
+            "Instruction Pipeline Hazards and Forwarding Paths",
+            "Dynamic Branch Prediction (Branch Target Buffers, Tournament Predictors)",
+            "Dynamic Scheduling (Scoreboarding and Tomasulo's Algorithm)",
+            "Hardware Speculation and Reorder Buffers",
+            "Superscalar and VLIW Processor Architectures"
+          ]
+        },
+        {
+          "title": "Advanced Memory Hierarchy Design",
+          "topics": [
+            "Cache Optimization Techniques (Victim Cache, Prefetching, Non-Blocking)",
+            "Multi-Level Cache Inclusion and Exclusion Policies",
+            "Virtual Memory and Hardware TLB Optimizations",
+            "DRAM Organization, Timing, and High-Bandwidth Memory",
+            "NUMA vs UMA Memory Access Architectures"
+          ]
+        },
+        {
+          "title": "Multiprocessors and Cache Coherence",
+          "topics": [
+            "Symmetric Multiprocessors (SMP) and Multicore Chips",
+            "Snooping Cache Coherence Protocols (MSI, MESI, MOESI)",
+            "Directory-Based Cache Coherence",
+            "Memory Consistency Models (Sequential, Relaxed, Release)",
+            "Hardware Synchronization Primitives (LL/SC, CAS)"
+          ]
+        },
+        {
+          "title": "Interconnection Networks and GPUs",
+          "topics": [
+            "Static Networks (Mesh, Torus, Hypercube) and Dynamic Networks (Crossbar, Omega)",
+            "Routing, Wormhole Switching, and Deadlock-Free Networks",
+            "Vector Processors and SIMD Extensions (AVX/NEON)",
+            "GPU Architecture, SIMT Execution, and Memory Coalescing",
+            "Warehouse-Scale Computers and Domain-Specific Accelerators"
+          ]
+        }
+      ]
+    },
+    "CSIT-604A": {
+      "shortName": "CNS",
+      "units": [
+        {
+          "title": "Classical Cryptography and Number Theory",
+          "topics": [
+            "Security Goals, Attacks, Services, and Mechanisms",
+            "Substitution and Transposition Ciphers (Caesar, Playfair, Hill, Vigenere)",
+            "Modular Arithmetic, Euclidean Algorithm, and Chinese Remainder Theorem",
+            "Fermat's Little Theorem and Euler's Totient Theorem",
+            "Finite Fields GF(p) and GF(2^n)"
+          ]
+        },
+        {
+          "title": "Symmetric Key Cryptography",
+          "topics": [
+            "Feistel Cipher Structure and DES Round Function",
+            "Triple DES and Differential/Linear Cryptanalysis Overview",
+            "Advanced Encryption Standard (AES) Transformations",
+            "Block Cipher Modes of Operation (ECB, CBC, CTR, GCM)",
+            "Stream Ciphers (RC4, ChaCha20) and PRNGs"
+          ]
+        },
+        {
+          "title": "Asymmetric Cryptography and Key Exchange",
+          "topics": [
+            "Principles of Public-Key Cryptosystems",
+            "RSA Key Generation, Encryption, Decryption, and Attacks",
+            "Diffie-Hellman Key Exchange and Man-in-the-Middle Mitigation",
+            "ElGamal Cryptosystem",
+            "Elliptic Curve Cryptography (ECC) and ECDH"
+          ]
+        },
+        {
+          "title": "Message Integrity, Hashing, and Digital Signatures",
+          "topics": [
+            "Cryptographic Hash Requirements and Birthday Attack",
+            "MD5 Weaknesses, SHA-2, and SHA-3 (Keccak)",
+            "Message Authentication Codes (HMAC, CMAC)",
+            "Digital Signature Algorithms (RSA-PSS, DSA, ECDSA)",
+            "X.509 Digital Certificates, Certificate Authorities, and PKI"
+          ]
+        },
+        {
+          "title": "Network Security Protocols",
+          "topics": [
+            "Kerberos Authentication Protocol",
+            "Email Security (PGP and S/MIME)",
+            "IPsec Architecture (AH, ESP, IKE)",
+            "TLS 1.3 Handshake and Record Layer",
+            "Firewalls, Intrusion Detection Systems, and Zero-Trust Networking"
+          ]
+        }
+      ]
+    },
+    "CSIT-604B": {
+      "shortName": "ES",
+      "units": [
+        {
+          "title": "Introduction to Embedded Systems",
+          "topics": [
+            "Embedded System Characteristics and Classification",
+            "Hardware-Software Co-Design and Design Constraints",
+            "Microcontrollers, DSPs, ASICs, and FPGAs",
+            "Watchdog Timers, Brown-Out Detection, and Power Management",
+            "Embedded System Development Lifecycle"
+          ]
+        },
+        {
+          "title": "ARM Architecture and Peripherals",
+          "topics": [
+            "ARM Cortex-M Core Registers and Operating Modes",
+            "ARM/Thumb-2 Instruction Set and Pipeline",
+            "Memory Map, NVIC Interrupt Controller, and DMA",
+            "GPIO, Timers, PWM, and ADC/DAC Peripherals",
+            "Low-Power Sleep Modes and Clock Tree Configuration"
+          ]
+        },
+        {
+          "title": "Communication Interfaces and Buses",
+          "topics": [
+            "UART and RS-232/RS-485 Serial Communication",
+            "I2C Bus Protocol and Multi-Master Arbitration",
+            "SPI Bus Timing Modes and Chip Select",
+            "CAN Bus for Automotive and Industrial Systems",
+            "USB, Ethernet, and Wireless Sensor Interfaces"
+          ]
+        },
+        {
+          "title": "Real-Time Operating Systems (RTOS)",
+          "topics": [
+            "Hard vs Soft Real-Time Constraints and Determinism",
+            "Task States, Preemptive Scheduling (RMS, EDF)",
+            "Priority Inversion and Priority Inheritance Protocols",
+            "Inter-Task Communication (Queues, Semaphores, Event Groups)",
+            "FreeRTOS / Embedded Linux Architecture Overview"
+          ]
+        },
+        {
+          "title": "Embedded Firmware Design, Testing, and Case Studies",
+          "topics": [
+            "Embedded C Best Practices (volatile, Bit Manipulation, Memory Footprint)",
+            "Bootloaders and Over-the-Air (OTA) Firmware Updates",
+            "Debugging Tools (JTAG, SWD, Logic Analyzers, Oscilloscopes)",
+            "Hardware-in-the-Loop (HIL) Testing and Reliability",
+            "Case Studies (Smart Meter, Automotive ECU, Medical Wearable)"
+          ]
+        }
+      ]
+    },
+    "CSIT-604C": {
+      "shortName": "IPR",
+      "units": [
+        {
+          "title": "Introduction to Intellectual Property",
+          "topics": [
+            "Concept, Nature, and Economic Importance of IP",
+            "Types of Intellectual Property Rights",
+            "International Treaties (Paris Convention, Berne Convention, WIPO)",
+            "TRIPS Agreement and WTO Framework",
+            "IP Ecosystem and Innovation Management in India"
+          ]
+        },
+        {
+          "title": "Patents and Patentability",
+          "topics": [
+            "Criteria of Patentability (Novelty, Inventive Step, Industrial Applicability)",
+            "Non-Patentable Inventions under Indian Patents Act (Section 3)",
+            "Software and Computer-Related Inventions (CRI) Guidelines",
+            "Patent Drafting, Prior Art Search, Filing, and PCT Route",
+            "Patent Infringement, Compulsory Licensing, and Revocation"
+          ]
+        },
+        {
+          "title": "Copyrights and Related Rights",
+          "topics": [
+            "Subject Matter of Copyright (Literary, Artistic, Software, Databases)",
+            "Ownership, Term of Protection, and Moral Rights",
+            "Open-Source Software Licensing (MIT, Apache, GPL)",
+            "Fair Dealing Exceptions and Digital Rights Management (DRM)",
+            "Copyright Infringement and Remedies in India"
+          ]
+        },
+        {
+          "title": "Trademarks, Designs, and Geographical Indications",
+          "topics": [
+            "Trademark Functions, Types, and Registration Process",
+            "Passing Off, Infringement, and Domain Name Disputes (UDRP)",
+            "Industrial Designs Protection and Criteria",
+            "Geographical Indications (GI) of Goods in India",
+            "Semiconductor Integrated Circuits Layout-Design Protection"
+          ]
+        },
+        {
+          "title": "Trade Secrets, Licensing, and Commercialization",
+          "topics": [
+            "Trade Secrets Protection and Non-Disclosure Agreements (NDAs)",
+            "IP Valuation Methods and Portfolio Strategy",
+            "Technology Transfer, Assignment, and Licensing Agreements",
+            "IP Audits and Due Diligence for Startups",
+            "Emerging IP Challenges with Generative AI and Data"
+          ]
+        }
+      ]
+    },
+    "CSIT-701": {
+      "shortName": "IoT",
+      "units": [
+        {
+          "title": "Introduction to Internet of Things",
+          "topics": [
+            "IoT Vision, Characteristics, and Conceptual Framework",
+            "Physical and Logical Design of IoT Systems",
+            "IoT Enabling Technologies (WSN, Cloud, Big Data, Embedded)",
+            "IoT Levels and Deployment Templates",
+            "M2M vs IoT and Smart Domain Applications"
+          ]
+        },
+        {
+          "title": "Sensors, Actuators, and Hardware Platforms",
+          "topics": [
+            "Sensor Types, Signal Conditioning, and Calibration",
+            "Actuators (Relays, Servos, Stepper Motors, Solenoids)",
+            "Arduino, ESP32, and Raspberry Pi Architectures",
+            "Interfacing Sensors via GPIO, I2C, SPI, and UART",
+            "Power Budgeting and Energy Harvesting for IoT Nodes"
+          ]
+        },
+        {
+          "title": "IoT Networking and Communication Protocols",
+          "topics": [
+            "IEEE 802.15.4, 6LoWPAN, and RPL Routing",
+            "Short-Range Wireless (BLE, ZigBee, Z-Wave, Thread)",
+            "LPWAN Technologies (LoRaWAN, NB-IoT, Sigfox)",
+            "Application Protocols (MQTT, CoAP, AMQP, WebSockets)",
+            "REST APIs and Publish-Subscribe Messaging Patterns"
+          ]
+        },
+        {
+          "title": "IoT Cloud Platforms and Data Analytics",
+          "topics": [
+            "Edge, Fog, and Cloud Computing in IoT",
+            "Device Provisioning, Digital Twins, and Fleet Management",
+            "Time-Series Databases and Stream Processing",
+            "IoT Cloud Services (AWS IoT Core, Azure IoT Hub, ThingsBoard)",
+            "Machine Learning at the Edge (TinyML Overview)"
+          ]
+        },
+        {
+          "title": "IoT Security, Privacy, and Case Studies",
+          "topics": [
+            "IoT Threat Surface and OWASP IoT Top 10",
+            "Device Authentication, Secure Boot, and Mutual TLS",
+            "Lightweight Cryptography and Secure OTA Updates",
+            "Privacy Concerns and Regulatory Compliance",
+            "Case Studies (Smart Agriculture, Smart City, Industrial IoT)"
+          ]
+        }
+      ]
+    },
+    "CSIT-702A": {
+      "shortName": "ISM",
+      "units": [
+        {
+          "title": "Introduction to Information Storage",
+          "topics": [
+            "Data Growth, Structured vs Unstructured Data, and Storage Evolution",
+            "Data Center Infrastructure and Key Requirements",
+            "Host, Connectivity, and Storage System Components",
+            "Disk Drive Architecture, SSDs, and NVMe Performance",
+            "Intelligent Storage Systems and Cache Management"
+          ]
+        },
+        {
+          "title": "RAID and Storage Networking",
+          "topics": [
+            "RAID Implementation and Levels (0, 1, 5, 6, 10)",
+            "Direct-Attached Storage (DAS) vs Networked Storage",
+            "Fibre Channel Storage Area Network (FC-SAN) Architecture",
+            "IP-SAN (iSCSI, FCoE) and SAN Virtualization",
+            "Network-Attached Storage (NAS) Protocols (NFS, SMB)"
+          ]
+        },
+        {
+          "title": "Object Storage, Cloud, and Virtualization",
+          "topics": [
+            "Object-Based Storage Architecture and REST APIs (S3)",
+            "Unified Storage and Software-Defined Storage (SDS)",
+            "Block-Level and File-Level Storage Virtualization",
+            "Storage Tiering, Deduplication, and Compression",
+            "Cloud Storage Models and Multi-Tenant Isolation"
+          ]
+        },
+        {
+          "title": "Business Continuity, Backup, and Replication",
+          "topics": [
+            "RPO, RTO, Availability, and Fault Tolerance Metrics",
+            "Backup Topologies, Snapshots, and Continuous Data Protection",
+            "Local Replication (Clones and Copy-on-Write Snapshots)",
+            "Remote Replication (Synchronous vs Asynchronous)",
+            "Disaster Recovery Planning and Archiving Compliance"
+          ]
+        },
+        {
+          "title": "Storage Security and Management",
+          "topics": [
+            "Storage Security Domains (Application, Network, Storage)",
+            "LUN Masking, Fibre Channel Zoning, and Encryption at Rest",
+            "Monitoring, Capacity Planning, and Performance Tuning",
+            "Storage Provisioning and Lifecycle Automation",
+            "Green Data Center Storage Practices"
+          ]
+        }
+      ]
+    },
+    "CSIT-702B": {
+      "shortName": "CD",
+      "units": [
+        {
+          "title": "Compiler Structure and Lexical Analysis",
+          "topics": [
+            "Phases of a Compiler and Cousins of Compiler",
+            "Role of Lexical Analyzer and Input Buffering",
+            "Specification and Recognition of Tokens via Regular Expressions",
+            "Lex/Flex Lexical Analyzer Generator",
+            "Symbol Table Organization and Error Recovery"
+          ]
+        },
+        {
+          "title": "Syntax Analysis (Parsing)",
+          "topics": [
+            "Top-Down Parsing, Left Recursion Removal, and Left Factoring",
+            "FIRST and FOLLOW Sets and LL(1) Predictive Parsing",
+            "Bottom-Up Shift-Reduce Parsing and Handle Pruning",
+            "LR(0), SLR(1), CLR(1), and LALR(1) Parsers",
+            "Yacc/Bison Parser Generator and Operator Precedence Parsing"
+          ]
+        },
+        {
+          "title": "Syntax-Directed Translation and Type Checking",
+          "topics": [
+            "Synthesized and Inherited Attributes (S-Attributed and L-Attributed)",
+            "Dependency Graphs and Evaluation Orders",
+            "Intermediate Representations (AST, DAG, Three-Address Code)",
+            "Translation of Expressions, Control Flow, and Arrays",
+            "Static Type Checking, Type Equivalence, and Coercions"
+          ]
+        },
+        {
+          "title": "Run-Time Environments",
+          "topics": [
+            "Storage Organization (Code, Static, Stack, Heap)",
+            "Activation Trees and Activation Record Layout",
+            "Calling Sequences, Access Links, and Displays",
+            "Heap Management and Garbage Collection Strategies",
+            "Parameter Passing Implementation Details"
+          ]
+        },
+        {
+          "title": "Code Optimization and Code Generation",
+          "topics": [
+            "Basic Blocks, Control Flow Graphs, and Peephole Optimization",
+            "Local and Global Optimizations (CSE, Dead Code, Loop Invariant)",
+            "Data-Flow Analysis (Reaching Definitions, Live Variables)",
+            "Target Code Generation and Instruction Selection",
+            "Register Allocation via Graph Coloring"
+          ]
+        }
+      ]
+    },
+    "CSIT-702C": {
+      "shortName": "SWSOA",
+      "units": [
+        {
+          "title": "Foundations of Semantic Web",
+          "topics": [
+            "Syntactic Web vs Semantic Web Vision",
+            "Semantic Web Layer Cake Architecture",
+            "URIs, IRIs, XML Namespaces, and Linked Data Principles",
+            "Resource Description Framework (RDF) Triples and Graphs",
+            "RDF Serialization Formats (RDF/XML, Turtle, JSON-LD)"
+          ]
+        },
+        {
+          "title": "Ontologies, RDFS, and OWL",
+          "topics": [
+            "RDF Schema (RDFS) Classes, Properties, and Vocabularies",
+            "Web Ontology Language (OWL 2) Profiles and Constructs",
+            "Description Logics and Automated Reasoning",
+            "SPARQL Query Language for RDF Graphs",
+            "Ontology Engineering Tools (Protege) and Knowledge Graphs"
+          ]
+        },
+        {
+          "title": "Service-Oriented Architecture Fundamentals",
+          "topics": [
+            "SOA Principles (Loose Coupling, Reusability, Composability)",
+            "SOA vs Monolithic and Microservices Architectures",
+            "Web Services Stack (SOAP, WSDL, UDDI)",
+            "RESTful Web Services and OpenAPI Specifications",
+            "Enterprise Service Bus (ESB) and Messaging Patterns"
+          ]
+        },
+        {
+          "title": "Service Composition and Orchestration",
+          "topics": [
+            "Service Orchestration vs Choreography",
+            "WS-BPEL Process Modeling and Execution",
+            "Semantic Web Services (OWL-S, WSMO, SAWSDL)",
+            "Service Discovery, Matchmaking, and Registry Design",
+            "Fault Handling, Transactions, and Compensation in SOA"
+          ]
+        },
+        {
+          "title": "SOA Governance, Security, and Applications",
+          "topics": [
+            "WS-Security, SAML, OAuth 2.0, and API Gateways",
+            "Service Level Agreements (SLAs) and QoS Monitoring",
+            "SOA Lifecycle Governance and Versioning",
+            "Linked Open Data and Schema.org on the Modern Web",
+            "Enterprise Integration Case Studies"
+          ]
+        }
+      ]
+    },
+    "CSIT-702D": {
+      "shortName": "NLP",
+      "units": [
+        {
+          "title": "Introduction and Text Preprocessing",
+          "topics": [
+            "NLP Challenges, Ambiguity Levels, and Applications",
+            "Regular Expressions, Tokenization, and Subword BPE",
+            "Stemming, Lemmatization, and Morphological Analysis",
+            "Edit Distance and Spelling Correction",
+            "Text Normalization and Corpus Statistics (Zipf's Law)"
+          ]
+        },
+        {
+          "title": "Language Modeling and Sequence Tagging",
+          "topics": [
+            "N-Gram Language Models and Smoothing (Laplace, Kneser-Ney)",
+            "Perplexity and Language Model Evaluation",
+            "Part-of-Speech (POS) Tagging with Hidden Markov Models",
+            "Viterbi Decoding and Conditional Random Fields (CRF)",
+            "Named Entity Recognition (NER)"
+          ]
+        },
+        {
+          "title": "Syntactic and Semantic Analysis",
+          "topics": [
+            "Constituency Parsing and Probabilistic CFGs (CKY)",
+            "Dependency Parsing (Transition-Based and Graph-Based)",
+            "Lexical Semantics, WordNet, and Word Sense Disambiguation",
+            "Vector Space Models, TF-IDF, and Distributional Semantics",
+            "Word Embeddings (Word2Vec, GloVe, FastText)"
+          ]
+        },
+        {
+          "title": "Neural NLP and Transformers",
+          "topics": [
+            "RNNs, LSTMs, and Bidirectional Sequence Models",
+            "Encoder-Decoder Architecture and Attention Mechanism",
+            "Self-Attention and the Transformer Architecture",
+            "Pre-Trained Language Models (BERT, GPT, T5)",
+            "Fine-Tuning, Prompting, and Retrieval-Augmented Generation"
+          ]
+        },
+        {
+          "title": "NLP Applications and Evaluation",
+          "topics": [
+            "Sentiment Analysis and Text Classification",
+            "Machine Translation and BLEU/ROUGE Metrics",
+            "Extractive and Abstractive Text Summarization",
+            "Question Answering and Dialogue Systems",
+            "Bias, Hallucination, and Multilingual NLP Challenges"
+          ]
+        }
+      ]
+    },
+    "CSIT-703A": {
+      "shortName": "EWT",
+      "units": [
+        {
+          "title": "E-Commerce Foundations and Models",
+          "topics": [
+            "Evolution of E-Commerce and Digital Marketplaces",
+            "Business Models (B2B, B2C, C2C, Subscription, Aggregator)",
+            "Revenue Models, Value Chains, and Network Effects",
+            "Mobile Commerce and Social Commerce Trends",
+            "E-Commerce Architecture and Scalability Requirements"
+          ]
+        },
+        {
+          "title": "Modern Web Technologies and APIs",
+          "topics": [
+            "HTML5, CSS3, and Responsive Progressive Web Apps",
+            "Component-Based Frontend Architectures",
+            "REST, GraphQL, and Webhook Integrations",
+            "Server-Side Rendering vs Static Site Generation",
+            "Web Accessibility (WCAG) and Core Web Vitals"
+          ]
+        },
+        {
+          "title": "Electronic Payment and Fulfillment Systems",
+          "topics": [
+            "Payment Gateways, Acquirers, Issuers, and Settlement Flows",
+            "UPI, Digital Wallets, Tokenization, and Recurring Billing",
+            "PCI-DSS Compliance and Chargeback Management",
+            "Inventory Management, ERP, and Logistics API Integration",
+            "Customer Support Automation and Personalization"
+          ]
+        },
+        {
+          "title": "E-Commerce Security and Trust",
+          "topics": [
+            "TLS/HTTPS, Digital Signatures, and SET Protocol",
+            "Authentication, MFA, and Bot/Account-Takeover Defense",
+            "Preventing Payment Fraud and OWASP Web Vulnerabilities",
+            "Privacy Policies, Cookie Consent, and Data Protection Laws",
+            "Consumer Protection (E-Commerce) Rules in India"
+          ]
+        },
+        {
+          "title": "Digital Analytics, Marketing, and Strategy",
+          "topics": [
+            "Conversion Funnel Analysis and Cohort Retention",
+            "Search Engine Optimization and Paid Acquisition",
+            "A/B Testing and Recommendation Systems",
+            "Email Lifecycle Campaigns and Retargeting",
+            "Omnichannel Retail Case Studies"
+          ]
+        }
+      ]
+    },
+    "CSIT-703B": {
+      "shortName": "MAD",
+      "units": [
+        {
+          "title": "Mobile Platforms and Development Environment",
+          "topics": [
+            "Mobile Ecosystem (Android, iOS, Cross-Platform Frameworks)",
+            "Android Architecture, ART Runtime, and App Components",
+            "Activity and Fragment Lifecycles",
+            "Intents, Intent Filters, and App Manifest Configuration",
+            "Project Structure, Gradle Build System, and Emulators"
+          ]
+        },
+        {
+          "title": "UI Design, Navigation, and State Management",
+          "topics": [
+            "Responsive Layouts, ConstraintLayout, and Declarative UI",
+            "Material Design Guidelines and Adaptive Screens",
+            "Lists, RecyclerView, Pagination, and Gestures",
+            "Navigation Graphs, Deep Linking, and Bottom Navigation",
+            "ViewModel, State Flows, and Unidirectional Data Flow"
+          ]
+        },
+        {
+          "title": "Data Persistence and Networking",
+          "topics": [
+            "Preferences, File Storage, and Scoped Storage",
+            "SQLite and ORM Persistence (Room)",
+            "REST API Integration, Serialization, and Caching",
+            "Offline-First Architecture and Background Sync (WorkManager)",
+            "Push Notifications (FCM) and Real-Time Updates"
+          ]
+        },
+        {
+          "title": "Device Hardware, Sensors, and Permissions",
+          "topics": [
+            "Runtime Permissions and Privacy Best Practices",
+            "Location Services, Geofencing, and Maps Integration",
+            "Camera, Media Capture, and Biometric Authentication",
+            "Accelerometer, Gyroscope, and Bluetooth/NFC APIs",
+            "Background Services and Battery Optimization"
+          ]
+        },
+        {
+          "title": "Testing, Security, and App Distribution",
+          "topics": [
+            "Unit Testing, UI Instrumentation Testing, and Profiling",
+            "App Security (Keystore, Certificate Pinning, Code Obfuscation)",
+            "Cross-Platform Approaches (Flutter and React Native Overview)",
+            "App Signing, Play Store / App Store Guidelines, and Release Tracks",
+            "Crash Reporting, Telemetry, and Continuous Delivery"
+          ]
+        }
+      ]
+    },
+    "CSIT-703C": {
+      "shortName": "CC",
+      "units": [
+        {
+          "title": "Cloud Computing Fundamentals",
+          "topics": [
+            "NIST Definition, Essential Characteristics, and Evolution",
+            "Service Models (IaaS, PaaS, SaaS, FaaS/Serverless)",
+            "Deployment Models (Public, Private, Hybrid, Multi-Cloud)",
+            "Cloud Economics, TCO, and Elasticity",
+            "Service Level Agreements (SLAs) and Cloud Reference Architecture"
+          ]
+        },
+        {
+          "title": "Virtualization and Containers",
+          "topics": [
+            "Hypervisors (Type 1 and Type 2) and Hardware Virtualization",
+            "Compute, Storage, and Network Virtualization (SDN/NFV)",
+            "Live VM Migration and Resource Scheduling",
+            "Linux Containers, Docker Images, and Networking",
+            "Container Orchestration with Kubernetes"
+          ]
+        },
+        {
+          "title": "Cloud Architecture and Services",
+          "topics": [
+            "Compute, Object Storage, and Managed Database Services",
+            "Load Balancing, Auto-Scaling, and Content Delivery Networks",
+            "Serverless Functions and Event-Driven Architectures",
+            "Infrastructure as Code (Terraform, CloudFormation)",
+            "Microservices, API Gateways, and Distributed Tracing"
+          ]
+        },
+        {
+          "title": "Cloud Security, Governance, and Compliance",
+          "topics": [
+            "Shared Responsibility Model",
+            "Identity and Access Management (IAM) and Least Privilege",
+            "Data Encryption (In Transit, At Rest) and Key Management (KMS)",
+            "VPC Isolation, Security Groups, and Zero-Trust Networking",
+            "Compliance Standards (SOC 2, ISO 27017, GDPR, DPDP)"
+          ]
+        },
+        {
+          "title": "Cloud Platforms and Emerging Paradigms",
+          "topics": [
+            "AWS, Azure, and Google Cloud Platform Comparison",
+            "Cloud-Native CI/CD and GitOps Workflows",
+            "Disaster Recovery Strategies (Active-Passive, Multi-Region)",
+            "Edge, Fog, and FinOps Cloud Cost Management",
+            "Enterprise Cloud Migration Strategies (6 Rs)"
+          ]
+        }
+      ]
+    },
+    "CSIT-703D": {
+      "shortName": "DV",
+      "units": [
+        {
+          "title": "Foundations of Data Visualization",
+          "topics": [
+            "Purpose of Visualization (Exploratory vs Explanatory)",
+            "Human Visual Perception and Pre-Attentive Attributes",
+            "Gestalt Principles of Visual Grouping",
+            "Data Types (Nominal, Ordinal, Interval, Ratio) and Visual Encodings",
+            "Tufte's Principles, Data-Ink Ratio, and Avoiding Chartjunk"
+          ]
+        },
+        {
+          "title": "Statistical and Multivariate Charts",
+          "topics": [
+            "Bar, Line, Area, and Scatter Plots Design Best Practices",
+            "Distribution Visuals (Histograms, Box Plots, Violin Plots)",
+            "Multivariate Techniques (Small Multiples, Parallel Coordinates, Heatmaps)",
+            "Color Theory, Perceptually Uniform Palettes, and Accessibility",
+            "Handling Missing Values, Outliers, and Scale Distortions"
+          ]
+        },
+        {
+          "title": "Hierarchical, Network, and Spatial Visualization",
+          "topics": [
+            "Tree Layouts, Treemaps, and Sunburst Diagrams",
+            "Node-Link Graphs, Force-Directed Layouts, and Adjacency Matrices",
+            "Sankey Diagrams and Chord Diagrams for Flow Data",
+            "Choropleth Maps, Cartograms, and Geospatial Projections",
+            "Temporal and Streaming Time-Series Visualizations"
+          ]
+        },
+        {
+          "title": "Interactive Visualization and Dashboards",
+          "topics": [
+            "Shneiderman's Visual Information-Seeking Mantra",
+            "Interaction Techniques (Brushing, Linking, Zooming, Tooltips)",
+            "Dashboard Layout Hierarchy and KPI Storytelling",
+            "Web Visualization Libraries (D3.js, Vega-Lite, Recharts)",
+            "BI Tools Overview (Tableau, Power BI, Apache Superset)"
+          ]
+        },
+        {
+          "title": "Big Data Visualization and Evaluation",
+          "topics": [
+            "Visualizing High-Dimensional Data (t-SNE, UMAP, PCA)",
+            "Aggregation, Binning, and Progressive Rendering at Scale",
+            "Evaluating Visualizations (Usability Studies, Insight Metrics)",
+            "Ethics in Visualization and Detecting Misleading Graphics",
+            "End-to-End Visual Analytics Case Studies"
+          ]
+        }
+      ]
+    },
+    "CSIT-801": {
+      "shortName": "DSci",
+      "units": [
+        {
+          "title": "Data Science Lifecycle and Data Wrangling",
+          "topics": [
+            "Data Science Workflow (CRISP-DM) and Problem Framing",
+            "Data Collection (APIs, Databases, Scraping, Logs)",
+            "Data Cleaning, Deduplication, and Missing Data Strategies",
+            "Exploratory Data Analysis (EDA) and Summary Statistics",
+            "Feature Engineering and Data Pipelines"
+          ]
+        },
+        {
+          "title": "Statistical Inference and Experimentation",
+          "topics": [
+            "Probability Distributions and Sampling Methods",
+            "Confidence Intervals and Bootstrapping",
+            "Hypothesis Testing, p-Values, and Statistical Power",
+            "ANOVA, Chi-Square, and Non-Parametric Tests",
+            "A/B Testing Design and Causal Inference Basics"
+          ]
+        },
+        {
+          "title": "Predictive Modeling and Time Series",
+          "topics": [
+            "Regression, Classification, and Regularized Models",
+            "Tree Ensembles and Model Interpretability (SHAP, LIME)",
+            "Handling Imbalanced Datasets and Evaluation Metrics",
+            "Time-Series Decomposition, Stationarity, and ARIMA",
+            "Recommender Systems (Collaborative and Content-Based Filtering)"
+          ]
+        },
+        {
+          "title": "Big Data Analytics Ecosystem",
+          "topics": [
+            "Distributed Storage (HDFS, Object Lakes, Parquet)",
+            "MapReduce Paradigm and Apache Spark Architecture",
+            "Spark DataFrames, Spark SQL, and MLlib",
+            "Stream Processing with Kafka and Spark Streaming",
+            "Data Lakehouse Architecture Concepts"
+          ]
+        },
+        {
+          "title": "MLOps, Deployment, and Data Ethics",
+          "topics": [
+            "Model Packaging, Serving APIs, and Batch Scoring",
+            "Experiment Tracking and Model Registries",
+            "Data Drift, Concept Drift, and Production Monitoring",
+            "Privacy-Preserving Analytics and Algorithmic Fairness",
+            "Communicating Insights to Stakeholders"
+          ]
+        }
+      ]
+    },
+    "CSIT-802A": {
+      "shortName": "DWM",
+      "units": [
+        {
+          "title": "Data Warehousing Fundamentals",
+          "topics": [
+            "OLTP vs OLAP Systems and Data Warehouse Characteristics",
+            "Three-Tier Data Warehouse Architecture",
+            "Dimensional Modeling (Star, Snowflake, and Fact Constellation Schemas)",
+            "Data Marts, Enterprise Warehouse, and Metadata Repositories",
+            "ETL vs ELT Pipelines and Data Integration"
+          ]
+        },
+        {
+          "title": "OLAP Operations and Data Cube Technology",
+          "topics": [
+            "OLAP Operations (Roll-up, Drill-down, Slice, Dice, Pivot)",
+            "ROLAP, MOLAP, and HOLAP Servers",
+            "Data Cube Computation and Materialized Views",
+            "Bitmap Indexing and Join Indexing",
+            "Data Warehouse Query Optimization"
+          ]
+        },
+        {
+          "title": "Data Mining Process and Preprocessing",
+          "topics": [
+            "Knowledge Discovery in Databases (KDD) Process",
+            "Data Mining Tasks and Descriptive vs Predictive Primitives",
+            "Data Cleaning, Integration, and Discretization",
+            "Data Reduction, Sampling, and Attribute Subset Selection",
+            "Similarity and Dissimilarity Measures"
+          ]
+        },
+        {
+          "title": "Frequent Pattern and Association Rule Mining",
+          "topics": [
+            "Support, Confidence, Lift, and Market Basket Analysis",
+            "Apriori Algorithm and Candidate Generation",
+            "FP-Growth Algorithm Without Candidate Generation",
+            "Multilevel and Multidimensional Association Rules",
+            "Closed and Maximal Frequent Itemsets"
+          ]
+        },
+        {
+          "title": "Classification, Clustering, and Outlier Mining",
+          "topics": [
+            "Decision Tree Induction and Bayesian Classification",
+            "Rule-Based Classifiers and Model Evaluation",
+            "Partitioning (K-Means, K-Medoids) and Density Clustering (DBSCAN)",
+            "Outlier Detection Methods (Statistical, Proximity, Clustering-Based)",
+            "Web Mining, Text Mining, and Spatial Data Mining"
+          ]
+        }
+      ]
+    },
+    "CSIT-802B": {
+      "shortName": "BIO",
+      "units": [
+        {
+          "title": "Molecular Biology and Biological Databases",
+          "topics": [
+            "Central Dogma (DNA, RNA, Proteins) and Genetic Code",
+            "Genome Sequencing Technologies (Sanger and NGS)",
+            "Primary and Secondary Databases (GenBank, EMBL, UniProt, PDB)",
+            "Sequence File Formats (FASTA, GenBank, FASTQ, GFF)",
+            "Information Retrieval Systems (Entrez, SRS)"
+          ]
+        },
+        {
+          "title": "Sequence Alignment Algorithms",
+          "topics": [
+            "Scoring Matrices (PAM and BLOSUM) and Gap Penalties",
+            "Global Alignment (Needleman-Wunsch Dynamic Programming)",
+            "Local Alignment (Smith-Waterman Algorithm)",
+            "Heuristic Database Search (BLAST and FASTA)",
+            "Multiple Sequence Alignment (Clustal, MUSCLE, Profiles)"
+          ]
+        },
+        {
+          "title": "Phylogenetic Analysis and Gene Prediction",
+          "topics": [
+            "Molecular Evolution and Phylogenetic Trees",
+            "Distance-Based Methods (UPGMA, Neighbor-Joining)",
+            "Character-Based Methods (Maximum Parsimony, Maximum Likelihood)",
+            "Prokaryotic vs Eukaryotic Gene Structure",
+            "Ab Initio and Homology-Based Gene Finding (HMMs)"
+          ]
+        },
+        {
+          "title": "Protein Structure Prediction and Cheminformatics",
+          "topics": [
+            "Primary, Secondary, Tertiary, and Quaternary Protein Structure",
+            "Secondary Structure Prediction (Chou-Fasman, GOR)",
+            "Homology Modeling, Threading, and Deep Learning Folding (AlphaFold)",
+            "Molecular Docking and Structure-Based Drug Design",
+            "QSAR and Virtual Screening Basics"
+          ]
+        },
+        {
+          "title": "Genomics, Transcriptomics, and Systems Biology",
+          "topics": [
+            "Microarray and RNA-Seq Differential Expression Analysis",
+            "Clustering and Functional Enrichment (Gene Ontology)",
+            "Protein-Protein Interaction Networks and Metabolic Pathways",
+            "Metagenomics and Personalized Medicine",
+            "Ethical and Privacy Issues in Genomic Data"
+          ]
+        }
+      ]
+    },
+    "CSIT-802C": {
+      "shortName": "WIR",
+      "units": [
+        {
+          "title": "Information Retrieval Fundamentals",
+          "topics": [
+            "IR Architecture, Indexing, and Ad-Hoc Retrieval",
+            "Boolean Retrieval Model and Inverted Index Construction",
+            "Tokenization, Stop Words, Stemming, and Phrase Queries",
+            "Wildcard Queries (Permuterm, K-Gram) and Spelling Correction",
+            "Index Compression (Variable Byte, Gamma Codes)"
+          ]
+        },
+        {
+          "title": "Ranking Models and Evaluation",
+          "topics": [
+            "Vector Space Model, TF-IDF Weighting, and Cosine Similarity",
+            "Probabilistic IR and BM25 Ranking Formula",
+            "Statistical Language Models for Retrieval",
+            "Evaluation Metrics (Precision, Recall, F1, MAP, NDCG, MRR)",
+            "Relevance Feedback (Rocchio) and Query Expansion"
+          ]
+        },
+        {
+          "title": "Web Crawling and Search Engine Architecture",
+          "topics": [
+            "Web Graph Structure and Scale-Free Properties",
+            "Focused and Distributed Web Crawlers (Politeness, Frontier)",
+            "Near-Duplicate Detection (Shingling, SimHash, MinHash)",
+            "Distributed Indexing (MapReduce) and Sharding",
+            "Snippet Generation, Caching, and Autocomplete"
+          ]
+        },
+        {
+          "title": "Link Analysis and Learning to Rank",
+          "topics": [
+            "PageRank Algorithm, Teleportation, and Power Iteration",
+            "HITS Algorithm (Hubs and Authorities)",
+            "Topic-Sensitive PageRank and Spam Detection",
+            "Learning to Rank (Pointwise, Pairwise, Listwise)",
+            "Clickthrough Logs and Implicit User Feedback"
+          ]
+        },
+        {
+          "title": "Neural IR and Modern Search Systems",
+          "topics": [
+            "Dense Retrieval and Bi-Encoder Embeddings",
+            "Cross-Encoder Reranking and Hybrid Search (BM25 + Vector)",
+            "Approximate Nearest Neighbor Indexing (HNSW, IVF)",
+            "Question Answering and Retrieval-Augmented Generation",
+            "Personalization, Fairness, and Privacy in Search"
+          ]
+        }
+      ]
+    },
+    "CSIT-802D": {
+      "shortName": "BT",
+      "units": [
+        {
+          "title": "Blockchain Foundations and Cryptography",
+          "topics": [
+            "Centralized vs Decentralized vs Distributed Ledgers",
+            "Cryptographic Hash Functions, Hash Pointers, and Merkle Trees",
+            "Public-Key Cryptography, Digital Signatures, and Wallets",
+            "Block Structure, Immutability, and Byzantine Generals Problem",
+            "Public, Private, and Consortium Blockchains"
+          ]
+        },
+        {
+          "title": "Consensus Mechanisms",
+          "topics": [
+            "Proof of Work (PoW), Mining, and Difficulty Adjustment",
+            "Proof of Stake (PoS), Validators, and Slashing",
+            "Practical Byzantine Fault Tolerance (PBFT) and Raft",
+            "Delegated PoS and Proof of Authority",
+            "Forks (Soft vs Hard), Finality, and 51% Attacks"
+          ]
+        },
+        {
+          "title": "Bitcoin and Ethereum Architectures",
+          "topics": [
+            "Bitcoin UTXO Model, Transactions, and Scripting",
+            "Ethereum Account Model, Gas, and State Trie",
+            "Ethereum Virtual Machine (EVM) Execution",
+            "ERC-20, ERC-721, and Token Standards",
+            "Layer-2 Scaling (Rollups, State Channels, Sidechains)"
+          ]
+        },
+        {
+          "title": "Smart Contracts and Enterprise Platforms",
+          "topics": [
+            "Solidity Language Basics and Contract Lifecycle",
+            "Smart Contract Security (Reentrancy, Overflow, Access Control)",
+            "Oracles, IPFS, and Decentralized Application (dApp) Architecture",
+            "Hyperledger Fabric Architecture (Peers, Orderers, Channels, Chaincode)",
+            "Testing and Auditing Smart Contracts"
+          ]
+        },
+        {
+          "title": "Use Cases, Privacy, and Regulation",
+          "topics": [
+            "Supply Chain Provenance and Digital Identity (DID)",
+            "Decentralized Finance (DeFi) and Central Bank Digital Currencies",
+            "Zero-Knowledge Proofs (zk-SNARKs Overview)",
+            "Scalability Trilemma and Energy Considerations",
+            "Legal, Governance, and Regulatory Landscape"
+          ]
+        }
+      ]
+    },
+    "CSIT-803A": {
+      "shortName": "DMSEO",
+      "units": [
+        {
+          "title": "Digital Marketing Fundamentals",
+          "topics": [
+            "Traditional vs Digital Marketing and Customer Journey",
+            "Inbound vs Outbound Strategies and Marketing Funnel",
+            "Buyer Personas, Positioning, and Value Propositions",
+            "Digital Channels Overview (Owned, Earned, Paid Media)",
+            "KPIs, Attribution Models, and ROI Measurement"
+          ]
+        },
+        {
+          "title": "Search Engine Optimization (SEO)",
+          "topics": [
+            "How Search Engines Crawl, Index, and Rank Pages",
+            "Keyword Research, Search Intent, and Content Strategy",
+            "On-Page SEO (Titles, Headings, Internal Linking, Schema Markup)",
+            "Technical SEO (Core Web Vitals, Sitemaps, Robots.txt, Canonicalization)",
+            "Off-Page SEO, Backlink Quality, and Local SEO"
+          ]
+        },
+        {
+          "title": "Search Engine Marketing and Paid Media",
+          "topics": [
+            "Pay-Per-Click (PPC) Auction Mechanics and Quality Score",
+            "Search Campaign Structure, Match Types, and Ad Copy",
+            "Display Advertising, Programmatic Buying, and Remarketing",
+            "Landing Page Optimization and Conversion Rate Optimization",
+            "Budget Allocation and Bidding Strategies"
+          ]
+        },
+        {
+          "title": "Social Media, Content, and Email Marketing",
+          "topics": [
+            "Content Marketing Lifecycle and Editorial Calendars",
+            "Platform Strategies (LinkedIn, Instagram, YouTube, X)",
+            "Community Management and Influencer Partnerships",
+            "Email List Segmentation, Automation, and Deliverability",
+            "Affiliate Marketing and Viral Growth Loops"
+          ]
+        },
+        {
+          "title": "Web Analytics, Privacy, and Strategy",
+          "topics": [
+            "Event Tracking, Goals, and UTM Campaign Tagging",
+            "Cohort Analysis, Churn, and Customer Lifetime Value",
+            "A/B Testing and Multivariate Experimentation",
+            "Cookie Deprecation, First-Party Data, and Consent Laws",
+            "Integrated Digital Marketing Plan Case Study"
+          ]
+        }
+      ]
+    },
+    "CSIT-803B": {
+      "shortName": "QC",
+      "units": [
+        {
+          "title": "Mathematical and Quantum Foundations",
+          "topics": [
+            "Complex Vector Spaces, Inner Products, and Dirac Bra-Ket Notation",
+            "Linear Operators, Unitary Matrices, and Hermitian Observables",
+            "Tensor Products and Composite Quantum Systems",
+            "Postulates of Quantum Mechanics and Projective Measurement",
+            "Qubits, Superposition, and the Bloch Sphere"
+          ]
+        },
+        {
+          "title": "Quantum Gates, Circuits, and Entanglement",
+          "topics": [
+            "Single-Qubit Gates (Pauli X/Y/Z, Hadamard, Phase, T)",
+            "Multi-Qubit Gates (CNOT, SWAP, Toffoli) and Universality",
+            "Bell States, Quantum Entanglement, and No-Cloning Theorem",
+            "Quantum Teleportation and Superdense Coding",
+            "Reversible Computing and Quantum Circuit Diagrams"
+          ]
+        },
+        {
+          "title": "Core Quantum Algorithms",
+          "topics": [
+            "Quantum Parallelism and Phase Kickback",
+            "Deutsch and Deutsch-Jozsa Algorithms",
+            "Bernstein-Vazirani and Simon's Algorithms",
+            "Quantum Fourier Transform (QFT) and Phase Estimation",
+            "Shor's Factoring Algorithm Overview"
+          ]
+        },
+        {
+          "title": "Quantum Search, Optimization, and Simulation",
+          "topics": [
+            "Grover's Unstructured Search Algorithm and Amplitude Amplification",
+            "Quantum Complexity Classes (BQP vs P and NP)",
+            "Variational Quantum Eigensolver (VQE) and QAOA",
+            "Quantum Annealing and NISQ Era Algorithms",
+            "Quantum Machine Learning Concepts"
+          ]
+        },
+        {
+          "title": "Quantum Error Correction, Cryptography, and Hardware",
+          "topics": [
+            "Decoherence, Noise Channels, and Quantum Error Correction (Shor/Steane Codes)",
+            "Surface Codes and Fault-Tolerant Threshold Theorem",
+            "Quantum Key Distribution (BB84 Protocol) and Post-Quantum Crypto",
+            "Physical Qubit Realizations (Superconducting, Trapped Ion, Photonic)",
+            "Quantum Programming Frameworks (Qiskit, Cirq)"
+          ]
+        }
+      ]
+    },
+    "CSIT-803C": {
+      "shortName": "CLF",
+      "units": [
+        {
+          "title": "Cyber Space and Legal Frameworks",
+          "topics": [
+            "Jurisdiction in Cyberspace and Cross-Border Enforcement",
+            "Information Technology Act 2000 and 2008 Amendments",
+            "Electronic Signatures, E-Contracts, and Certifying Authorities",
+            "Intermediary Liability and Safe Harbor Provisions",
+            "Digital Personal Data Protection (DPDP) Act 2023 and GDPR"
+          ]
+        },
+        {
+          "title": "Cyber Crimes and Regulatory Offenses",
+          "topics": [
+            "Hacking, Data Theft, Identity Theft, and Phishing Offenses",
+            "Cyber Terrorism, Cyber Stalking, and Online Fraud",
+            "Intellectual Property Violations in Digital Media",
+            "Adjudication, Penalties, and Appellate Tribunals under IT Act",
+            "CERT-In Reporting Mandates and Sectoral Regulations"
+          ]
+        },
+        {
+          "title": "Digital Forensics Fundamentals",
+          "topics": [
+            "Digital Forensics Lifecycle and Investigation Methodology",
+            "First Responder Procedures and Volatile Data Acquisition",
+            "Disk Imaging, Write Blockers, and Cryptographic Hashing",
+            "Chain of Custody and Admissibility (Indian Evidence Act / BSA)",
+            "Forensic Readiness and Incident Containment"
+          ]
+        },
+        {
+          "title": "System, File System, and Memory Forensics",
+          "topics": [
+            "File System Forensics (NTFS, FAT, ext4) and Deleted File Recovery",
+            "File Carving, Metadata, and Timeline Analysis",
+            "Windows Registry, Event Logs, and Browser Artifact Analysis",
+            "RAM Acquisition and Live Memory Forensics (Volatility)",
+            "Anti-Forensics Techniques (Steganography, Timestomping, Encryption)"
+          ]
+        },
+        {
+          "title": "Network, Mobile, and Cloud Forensics",
+          "topics": [
+            "Packet Capture Analysis and Network Traffic Reconstruction",
+            "Email Header Forensics and Web Server Log Investigation",
+            "Mobile Device Forensics (Android/iOS Acquisition Challenges)",
+            "Cloud Forensics Challenges and Multi-Tenant Evidence",
+            "Forensic Reporting and Expert Witness Testimony"
+          ]
+        }
+      ]
+    },
+    "CSIT-803D": {
+      "shortName": "ROB",
+      "units": [
+        {
+          "title": "Introduction to Robotics",
+          "topics": [
+            "Robot Anatomy, Degrees of Freedom, and Workspace",
+            "Manipulator Configurations (Cartesian, Cylindrical, Spherical, SCARA, Articulated)",
+            "End Effectors (Mechanical, Vacuum, Magnetic Grippers)",
+            "Precision, Accuracy, and Repeatability Specifications",
+            "Industrial, Service, Autonomous, and Collaborative Robots"
+          ]
+        },
+        {
+          "title": "Kinematics and Dynamics",
+          "topics": [
+            "Coordinate Frames and Homogeneous Transformation Matrices",
+            "Forward Kinematics and Denavit-Hartenberg (D-H) Parameters",
+            "Inverse Kinematics (Analytical and Numerical Solutions)",
+            "Differential Kinematics, Jacobian Matrix, and Singularities",
+            "Lagrange-Euler and Newton-Euler Robot Dynamics"
+          ]
+        },
+        {
+          "title": "Actuators, Sensors, and Control",
+          "topics": [
+            "Electric (DC, Stepper, Servo), Hydraulic, and Pneumatic Actuators",
+            "Internal Sensors (Encoders, Potentiometers, IMU, Force/Torque)",
+            "External Sensors (Ultrasonic, LiDAR, Depth Cameras, Tactile)",
+            "PID Control, Trajectory Tracking, and Compliance Control",
+            "Joint-Space and Cartesian-Space Trajectory Planning"
+          ]
+        },
+        {
+          "title": "Mobile Robotics, Perception, and Navigation",
+          "topics": [
+            "Wheeled Mobile Robot Kinematics (Differential Drive, Ackermann)",
+            "Computer Vision Basics (Feature Detection, Calibration, Object Recognition)",
+            "Localization (Odometry, Kalman Filter, Particle Filter)",
+            "Simultaneous Localization and Mapping (SLAM)",
+            "Path Planning (A*, RRT, Potential Fields, Obstacle Avoidance)"
+          ]
+        },
+        {
+          "title": "Robot Programming, ROS, and Applications",
+          "topics": [
+            "Lead-Through Teaching, Offline Programming, and Simulation",
+            "Robot Operating System (ROS 2) Nodes, Topics, and Services",
+            "Safety Standards (ISO 10218) and Human-Robot Interaction",
+            "AI and Reinforcement Learning in Robotics",
+            "Applications (Manufacturing, Healthcare, Agriculture, Autonomous Vehicles)"
+          ]
+        }
+      ]
+    }
+  }
+}
