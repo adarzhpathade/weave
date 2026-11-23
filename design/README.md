@@ -24,4 +24,11 @@ Add a line per file to the table below with what to copy from it (layout? colors
 ## Reference index
 | File | Copy from it | Notes |
 |---|---|---|
-| _(empty — waiting for the user's references)_ | | |
+| `Digital Museum concept by Lay on Dribbble.jpg` | **Type + color direction** (user's main pick): heavy geometric bold mixed with light italic, black / white / lime + one accent, stat pairs with hairlines, rotating circular badges, outline pill buttons | User is unsure about the purple → accent is switchable in the kit |
+| `Arcade hub.jpg` | Dot-matrix numerals (countdowns, big numbers), mono uppercase labels, warm off-white paper | |
+| `Slava Kornilov … .jpg`, `Slava Kornilov … (1).jpg`, `(1) Instagram.jpg` (AI OS) | Tick-mark dial gauges (progress), stacked card deck, floating bottom bar with round ✕ / ✓ buttons, dark mode feel | Not the radial menu (AGENTS.md: no radial views) |
+| `download (9).jpg` (Week Spend) | Stacked pastel cards with overlap → Subjects list; huge one-word headings | |
+| `download (7).jpg` (Add money), `download (8).jpg` (memetime) | Bottom sheets over a dimmed screen, key–value rows, big number, black full-width button → assignment detail | |
+| `Pocket Cal.jpg` | Month grid with outlined busy days, filter chips with counts → assignments calendar | |
+
+Current UI kit: `design/ui-kit/index.html` (published privately for review).

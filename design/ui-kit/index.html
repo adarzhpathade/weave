@@ -1,0 +1,1199 @@
+<title>Weave UI Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300..900;1,300..600&family=Doto:wght@600..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an editorial kit page (black Museum-style hero → foundations → live components → phone screens).
+   Every value below is a token; the app copies these into app/globals.css + components/motion/tokens.ts. */
+:root {
+  /* color — neutrals lean very slightly warm, like the Arcade paper */
+  --c-bg: #ECECE8;
+  --c-app: #F4F4F1;
+  --c-surface: #FFFFFF;
+  --c-ink: #0B0B0C;
+  --c-muted: #6E6E73;
+  --c-line: #D8D8D3;
+  --c-frame: #0B0B0C;
+  --c-hero: #0B0B0C;
+  --c-on-hero: #F4F4F1;
+  --c-night: #0B0B0C;            /* forced-dark screens (login) */
+  --c-on-night: #F4F4F1;
+  --c-night-line: #2C2C30;
+  --c-lime: #62E04E;             /* covered / submitted / primary highlight */
+  --c-on-lime: #0B0B0C;
+  --c-accent: #6D6AF4;           /* periwinkle from the Museum reference (switchable) */
+  --c-on-accent: #FFFFFF;
+  --c-late: #FFB21E;
+  --c-missing: #FF4F3A;
+  --c-on-status: #0B0B0C;
+  --c-scrim: rgba(11, 11, 12, 0.38);
+  /* subject colors — Week Spend pastels; text on them is always ink */
+  --c-sub-1: #D7C6F7;
+  --c-sub-2: #E9F49A;
+  --c-sub-3: #A58CF2;
+  --c-sub-4: #C8CDF7;
+  --c-sub-5: #BDE9D3;
+  --c-sub-6: #F8CBAA;
+  --c-on-sub: #0B0B0C;
+
+  /* type */
+  --f-display: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-dot: "Doto", "JetBrains Mono", ui-monospace, monospace;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --t-display: clamp(3.2rem, 11vw, 7.5rem);
+  --t-h1: 2.5rem;
+  --t-h2: 1.75rem;
+  --t-title: 1.25rem;
+  --t-body: 1rem;
+  --t-small: 0.875rem;
+  --t-label: 0.6875rem;
+
+  /* shape */
+  --r-xs: 8px;
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 30px;
+  --r-pill: 999px;
+  --r-phone: 52px;
+  --shadow-lift: 0 24px 48px -24px rgba(11, 11, 12, 0.35);
+  --shadow-sheet: 0 -12px 40px -12px rgba(11, 11, 12, 0.28);
+
+  /* motion */
+  --d-fast: 140ms;
+  --d-base: 260ms;
+  --d-slow: 520ms;
+  --e-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --e-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  --e-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+:root[data-accent="cobalt"] { --c-accent: #2F66F5; }
+:root[data-accent="tangerine"] { --c-accent: #FF6A1F; --c-on-accent: #0B0B0C; }
+:root[data-accent="lime"] { --c-accent: #0B0B0C; --c-on-accent: #F4F4F1; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-bg: #050506; --c-app: #0B0B0C; --c-surface: #17171A; --c-ink: #F4F4F1; --c-muted: #9C9CA3;
+    --c-line: #2C2C30; --c-frame: #2A2A2E; --c-hero: #121214; --c-on-hero: #F4F4F1;
+    --c-scrim: rgba(0, 0, 0, 0.55); --shadow-lift: 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+    color-scheme: dark;
+  }
+  :root:not([data-theme="light"])[data-accent="lime"] { --c-accent: #F4F4F1; --c-on-accent: #0B0B0C; }
+}
+:root[data-theme="dark"] {
+  --c-bg: #050506; --c-app: #0B0B0C; --c-surface: #17171A; --c-ink: #F4F4F1; --c-muted: #9C9CA3;
+  --c-line: #2C2C30; --c-frame: #2A2A2E; --c-hero: #121214; --c-on-hero: #F4F4F1;
+  --c-scrim: rgba(0, 0, 0, 0.55); --shadow-lift: 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+:root[data-theme="dark"][data-accent="lime"] { --c-accent: #F4F4F1; --c-on-accent: #0B0B0C; }
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--f-body);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.num { font-variant-numeric: tabular-nums; }
+.label {
+  font-family: var(--f-mono); font-size: var(--t-label); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--c-muted);
+}
+.it { font-style: italic; font-weight: 300; }
+
+/* ---------- hero ---------- */
+.hero {
+  background: var(--c-hero);
+  color: var(--c-on-hero);
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: calc(env(safe-area-inset-top, 0px) + 2.5rem);
+  padding-bottom: 3rem;
+}
+.wrap {
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.hero-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.hero-top .label { color: var(--c-on-hero); opacity: 0.6; }
+.hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: end; margin-top: 2.5rem; }
+.hero h1 {
+  font-family: var(--f-display); font-weight: 800; font-size: var(--t-display); line-height: 0.9; letter-spacing: -0.035em;
+}
+.hero h1 .it { letter-spacing: -0.02em; }
+.hero p.lead { max-width: 34rem; margin-top: 1.5rem; font-size: 1.125rem; opacity: 0.75; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, auto); gap: 0 2.5rem; margin-top: 2.25rem; border-top: 1px solid var(--c-night-line); padding-top: 1rem; width: fit-content; }
+.hero-stats .label { color: var(--c-on-hero); opacity: 0.6; text-transform: none; font-family: var(--f-body); font-style: italic; letter-spacing: 0; font-size: var(--t-small); }
+.hero-stats b { display: block; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+@media (max-width: 720px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 0 1.5rem; }
+  .hero-stats b { font-size: 1.5rem; }
+}
+
+/* controls */
+.controls { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.seg { display: inline-flex; flex-wrap: wrap; max-width: 100%; padding: 4px; border-radius: var(--r-pill); border: 1px solid var(--c-night-line); gap: 2px; }
+.seg button {
+  border: 0; background: transparent; padding: 0.4rem 0.8rem; border-radius: var(--r-pill);
+  font-size: var(--t-small); font-weight: 600; color: var(--c-on-hero); opacity: 0.7;
+  transition: background var(--d-fast) var(--e-out), opacity var(--d-fast);
+}
+.seg button[aria-pressed="true"] { background: var(--c-on-hero); color: var(--c-hero); opacity: 1; }
+.swatch-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+
+/* rotating badge */
+.badge-rot { position: relative; width: 152px; height: 152px; flex: none; }
+.badge-rot svg.ring-text { position: absolute; inset: 0; animation: spin 18s linear infinite; }
+.badge-rot .core {
+  position: absolute; inset: 22px; border-radius: 50%; background: var(--c-lime); color: var(--c-on-lime);
+  display: grid; place-items: center;
+}
+.badge-rot.accent .core { background: var(--c-accent); color: var(--c-on-accent); }
+.badge-rot text { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.18em; font-weight: 500; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- sections ---------- */
+main section { padding-block: 4rem 1rem; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.sec-head h2 { font-family: var(--f-display); font-size: clamp(2.25rem, 6vw, 3.75rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; }
+.sec-head p { max-width: 30rem; color: var(--c-muted); }
+.sub-head { font-family: var(--f-display); font-size: var(--t-title); font-weight: 700; margin: 2.5rem 0 1rem; }
+
+/* color swatches */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.sw { border-radius: var(--r-md); overflow: hidden; background: var(--c-surface); border: 1px solid var(--c-line); }
+.sw .chip { height: 86px; }
+.sw .meta { padding: 0.6rem 0.8rem 0.75rem; display: grid; gap: 2px; }
+.sw .meta b { font-size: var(--t-small); font-weight: 700; }
+.sw .meta span { font-family: var(--f-mono); font-size: 11px; color: var(--c-muted); }
+
+/* type specimen */
+.type-rows { display: grid; gap: 0; border-top: 1px solid var(--c-line); }
+.type-row { display: grid; grid-template-columns: 170px 1fr; gap: 1rem; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--c-line); }
+.type-row > div { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 640px) { .type-row { grid-template-columns: 1fr; gap: 0.25rem; } }
+
+/* token table */
+.tok-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.tok-card { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-md); padding: 1.1rem 1.2rem; }
+.tok-card h4 { font-size: var(--t-small); font-weight: 700; margin-bottom: 0.75rem; }
+.tok-card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1rem; margin: 0; font-size: var(--t-small); }
+.tok-card dt { font-family: var(--f-mono); font-size: 12px; color: var(--c-muted); }
+.tok-card dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.radius-demo { display: flex; gap: 10px; align-items: end; flex-wrap: wrap; }
+.radius-demo div { width: 54px; height: 54px; background: var(--c-ink); }
+
+/* ---------- components ---------- */
+.kit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.kcard { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-lg); padding: 1.25rem; display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.kcard > .label { display: flex; justify-content: space-between; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: 1.5px solid transparent;
+  height: 48px; padding: 0 1.4rem; border-radius: var(--r-pill); font-weight: 700; font-size: 0.95rem;
+  transition: transform var(--d-fast) var(--e-out), background var(--d-fast), color var(--d-fast);
+}
+.btn:active { transform: scale(0.96); }
+.btn-ink { background: var(--c-ink); color: var(--c-app); }
+.btn-accent { background: var(--c-accent); color: var(--c-on-accent); }
+.btn-lime { background: var(--c-lime); color: var(--c-on-lime); }
+.btn-outline { border-color: var(--c-ink); background: transparent; height: 40px; padding: 0 1rem; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.btn-outline::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.btn-ghost { background: transparent; border-color: var(--c-line); }
+.btn-wide { width: 100%; }
+.ibtn {
+  width: 48px; height: 48px; border-radius: 50%; display: inline-grid; place-items: center; border: 0;
+  transition: transform var(--d-fast) var(--e-out);
+}
+.ibtn:active { transform: scale(0.9); }
+.ibtn svg { width: 20px; height: 20px; }
+.ibtn.ink { background: var(--c-ink); color: var(--c-app); }
+.ibtn.soft { background: var(--c-app); color: var(--c-ink); border: 1px solid var(--c-line); }
+.ibtn.lime { background: var(--c-lime); color: var(--c-on-lime); }
+.ibtn.accent { background: var(--c-accent); color: var(--c-on-accent); }
+
+.fchip {
+  display: inline-flex; align-items: center; gap: 0.45rem; height: 34px; padding: 0 0.5rem 0 0.85rem;
+  border-radius: var(--r-pill); border: 1px solid var(--c-line); background: transparent; font-size: var(--t-small); font-weight: 600;
+  color: var(--c-muted); transition: background var(--d-fast), color var(--d-fast), border-color var(--d-fast);
+}
+.fchip .n { font-family: var(--f-mono); font-size: 11px; padding: 2px 7px; border-radius: var(--r-pill); background: var(--c-line); color: var(--c-ink); }
+.fchip[aria-pressed="true"] { color: var(--c-ink); border-color: var(--c-ink); background: var(--c-surface); }
+.fchip[aria-pressed="true"]::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c-ink); }
+
+.status {
+  display: inline-flex; align-items: center; gap: 0.4rem; height: 26px; padding: 0 0.7rem; border-radius: var(--r-pill);
+  font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-on-status);
+}
+.status svg { width: 12px; height: 12px; }
+.status.pending { border: 1px solid var(--c-ink); color: var(--c-ink); }
+.status.submitted { background: var(--c-lime); }
+.status.late { background: var(--c-late); }
+.status.missing { background: var(--c-missing); }
+
+/* progress */
+.dial { position: relative; width: 168px; aspect-ratio: 1; }
+.dial svg { width: 100%; height: 100%; overflow: visible; }
+.dial .tick { stroke: var(--c-line); stroke-width: 2.2; stroke-linecap: round; }
+.dial .tick.on { stroke: var(--c-ink); }
+.dial .tick.head { stroke: var(--c-accent); stroke-width: 3.2; }
+.dial .center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.dial .center b { font-family: var(--f-dot); font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -0.02em; }
+.dial .center span { font-size: 12px; color: var(--c-muted); margin-top: 4px; }
+.dial.sm { width: 64px; }
+.dial.sm .center b { font-size: 1rem; font-family: var(--f-body); font-weight: 800; }
+
+.bar { display: grid; gap: 6px; }
+.bar .top { display: flex; justify-content: space-between; font-size: var(--t-small); font-weight: 600; }
+.bar .top span { color: var(--c-muted); font-weight: 500; }
+.bar .track { height: 8px; border-radius: var(--r-pill); background: var(--c-line); overflow: hidden; }
+.bar .fill { height: 100%; width: var(--v); border-radius: inherit; background: var(--c-ink); transform-origin: left; }
+.bar.hi .fill { background: var(--c-lime); }
+
+.dots { display: flex; gap: 5px; flex-wrap: wrap; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid currentColor; }
+.dots i.on { background: currentColor; }
+
+/* countdown */
+.count { display: flex; gap: 0.35rem; align-items: start; }
+.count .u { display: grid; justify-items: center; }
+.count b { font-family: var(--f-dot); font-weight: 800; font-size: 2.4rem; line-height: 1; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+.count .sep { font-family: var(--f-dot); font-weight: 800; font-size: 2.4rem; line-height: 1; opacity: 0.35; }
+.count small { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--c-muted); text-transform: uppercase; margin-top: 4px; }
+.count.big b, .count.big .sep { font-size: 3.6rem; }
+.count.sm b, .count.sm .sep { font-size: 1.15rem; }
+.count.sm small { display: none; }
+
+/* stat pair (Museum) */
+.stats { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid currentColor; }
+.stats > div { padding: 0.6rem 0 0; }
+.stats > div + div { border-left: 1px solid currentColor; padding-left: 1rem; }
+.stats .k { font-style: italic; font-weight: 400; font-size: var(--t-small); opacity: 0.7; }
+.stats .v { font-weight: 800; font-size: 2rem; letter-spacing: -0.02em; line-height: 1.1; }
+
+/* inputs */
+.field { display: grid; gap: 6px; }
+.field label { font-size: var(--t-small); font-weight: 600; }
+.field input {
+  height: 52px; border-radius: var(--r-sm); border: 1.5px solid var(--c-line); background: var(--c-app); color: var(--c-ink);
+  padding: 0 1rem; font: inherit; font-size: 1rem; transition: border-color var(--d-fast);
+}
+.field input:focus { outline: none; border-color: var(--c-ink); }
+.field .hint { font-size: 12px; color: var(--c-muted); }
+.search { display: flex; align-items: center; gap: 10px; height: 48px; border-radius: var(--r-pill); background: var(--c-app); border: 1px solid var(--c-line); padding: 0 1rem; color: var(--c-muted); font-size: var(--t-small); }
+.search svg { width: 18px; height: 18px; }
+.switch { position: relative; width: 52px; height: 32px; border-radius: var(--r-pill); background: var(--c-line); border: 0; padding: 0; transition: background var(--d-base) var(--e-out); }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: var(--c-surface); box-shadow: 0 1px 3px rgba(11, 11, 12, 0.25); transition: transform var(--d-base) var(--e-spring); }
+.switch[aria-checked="true"] { background: var(--c-lime); }
+.switch[aria-checked="true"]::after { transform: translateX(20px); }
+.toggle-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--c-line); font-weight: 600; font-size: var(--t-small); }
+.toggle-row:last-child { border-bottom: 0; }
+
+/* feedback */
+.skel { border-radius: var(--r-sm); background: linear-gradient(90deg, var(--c-line) 0%, var(--c-app) 50%, var(--c-line) 100%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.empty { text-align: center; display: grid; justify-items: center; gap: 0.5rem; padding: 1rem 0.5rem; }
+.empty .ill { width: 72px; height: 72px; border-radius: 50%; border: 1.5px dashed var(--c-muted); display: grid; place-items: center; color: var(--c-muted); }
+.empty .ill svg { width: 28px; height: 28px; }
+.empty b { font-size: 1.05rem; }
+.empty p { color: var(--c-muted); font-size: var(--t-small); max-width: 22rem; }
+.err { border-radius: var(--r-md); background: var(--c-app); border: 1px solid var(--c-missing); padding: 1rem; display: grid; gap: 0.6rem; }
+.err b { display: flex; align-items: center; gap: 0.5rem; }
+.err b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c-missing); }
+.err p { font-size: var(--t-small); color: var(--c-muted); }
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 50;
+  transform: translate(-50%, 140%); opacity: 0;
+  background: var(--c-ink); color: var(--c-app); border-radius: var(--r-pill); padding: 0.75rem 1.1rem 0.75rem 0.8rem;
+  display: flex; align-items: center; gap: 0.6rem; font-weight: 600; font-size: var(--t-small); box-shadow: var(--shadow-lift);
+  transition: transform var(--d-slow) var(--e-spring), opacity var(--d-base);
+}
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
+.toast .ok { width: 26px; height: 26px; border-radius: 50%; background: var(--c-lime); color: var(--c-on-lime); display: grid; place-items: center; }
+.toast .ok svg { width: 14px; height: 14px; }
+
+/* nav */
+.tabbar {
+  height: 64px; border-radius: 32px; background: var(--c-night); color: var(--c-on-night);
+  display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px; position: relative;
+}
+.tabbar .pill { position: absolute; top: 6px; bottom: 6px; left: 6px; width: calc((100% - 12px) / 4); border-radius: 26px; background: var(--c-lime); transition: transform var(--d-slow) var(--e-spring); }
+.tabbar button { position: relative; z-index: 1; border: 0; background: transparent; color: inherit; display: grid; place-items: center; gap: 1px; font-size: 10.5px; font-weight: 700; opacity: 0.6; transition: color var(--d-base), opacity var(--d-base); }
+.tabbar button svg { width: 20px; height: 20px; }
+.tabbar button[aria-selected="true"] { color: var(--c-on-lime); opacity: 1; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 56px; padding: 0 0.6rem 0 1rem; border-radius: var(--r-pill); background: var(--c-app); border: 1px solid var(--c-line); }
+.topbar .logo { font-weight: 900; letter-spacing: -0.03em; font-size: 1.2rem; }
+.topbar nav { display: flex; gap: 2px; }
+.topbar nav a { padding: 0.45rem 0.8rem; border-radius: var(--r-pill); font-size: 13px; font-weight: 600; color: var(--c-muted); text-decoration: none; }
+.topbar nav a.on { background: var(--c-ink); color: var(--c-app); }
+@media (max-width: 420px) { .topbar nav a:not(.on) { display: none; } }
+
+/* ---------- phone screens ---------- */
+.phones { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px 20px; justify-items: center; }
+.phone-wrap { display: grid; gap: 0.8rem; justify-items: center; width: 100%; max-width: 390px; }
+.phone-wrap figcaption { display: grid; justify-items: center; gap: 2px; text-align: center; }
+.phone-wrap figcaption b { font-size: var(--t-small); }
+.phone-wrap figcaption span { font-size: 12px; color: var(--c-muted); }
+figure { margin: 0; }
+.phone {
+  position: relative; width: 100%; max-width: 390px; aspect-ratio: 390 / 844;
+  border-radius: var(--r-phone); background: var(--c-frame); padding: 9px; box-shadow: var(--shadow-lift);
+}
+.screen {
+  position: relative; height: 100%; border-radius: 44px; overflow: hidden; background: var(--c-app); color: var(--c-ink);
+  display: flex; flex-direction: column; font-size: 15px;
+}
+.screen.night { background: var(--c-night); color: var(--c-on-night); }
+.sbar { flex: none; height: 46px; display: flex; justify-content: space-between; align-items: center; padding: 6px 30px 0; font-weight: 700; font-size: 14px; }
+.sbar .isl { width: 92px; height: 26px; border-radius: 20px; background: var(--c-night); }
+.screen.night .sbar .isl { background: var(--c-night-line); }
+.sbar .sig { display: flex; gap: 4px; align-items: center; }
+.sbar .sig i { display: block; width: 4px; border-radius: 1px; background: currentColor; }
+.scroll { flex: 1; overflow-y: auto; padding: 6px 18px 104px; scrollbar-width: none; display: grid; align-content: start; gap: 16px; }
+.scroll::-webkit-scrollbar { display: none; }
+.screen .tabbar { position: absolute; left: 12px; right: 12px; bottom: 12px; }
+.scr-title { font-family: var(--f-display); font-weight: 800; font-size: 2.6rem; line-height: 0.92; letter-spacing: -0.035em; }
+.scr-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--c-sub-1); color: var(--c-on-sub); display: grid; place-items: center; font-weight: 800; font-size: 14px; flex: none; }
+.card { background: var(--c-surface); border-radius: var(--r-md); padding: 16px; display: grid; gap: 12px; }
+.card.ink { background: var(--c-night); color: var(--c-on-night); }
+.mini-list { display: grid; gap: 12px; }
+.sub-mini { display: grid; grid-template-columns: 10px 1fr auto; gap: 10px; align-items: center; font-size: 14px; font-weight: 600; }
+.sub-mini i { width: 10px; height: 10px; border-radius: 3px; }
+.sub-mini span { font-family: var(--f-mono); font-size: 11px; color: var(--c-muted); font-weight: 500; }
+
+/* login */
+.login { flex: 1; display: flex; flex-direction: column; padding: 10px 22px 26px; gap: 18px; }
+.login h3 { font-family: var(--f-display); font-weight: 800; font-size: 3.5rem; line-height: 0.88; letter-spacing: -0.04em; }
+.login .field input { background: transparent; border-color: var(--c-night-line); color: var(--c-on-night); }
+.login .field input::placeholder { color: var(--c-on-night); opacity: 0.4; }
+.login .field label, .login .field .hint { color: var(--c-on-night); }
+.login .field .hint { opacity: 0.55; }
+.login .btn-on-night { background: var(--c-on-night); color: var(--c-night); }
+.weave-art { position: relative; height: 210px; margin: 0 -22px; overflow: hidden; }
+.weave-art canvas { width: 100%; height: 100%; display: block; }
+
+/* subjects stack */
+.stack { position: relative; display: grid; padding-bottom: 8px; }
+.scard {
+  position: relative; border-radius: 26px; padding: 16px 18px 20px; color: var(--c-on-sub); min-height: 168px;
+  display: grid; align-content: start; gap: 6px; border: 0; text-align: left; width: 100%;
+  margin-top: -78px; box-shadow: 0 -10px 24px -14px rgba(11, 11, 12, 0.35);
+  transition: transform var(--d-slow) var(--e-spring);
+}
+.scard:first-child { margin-top: 0; }
+.scard .top { display: flex; justify-content: space-between; align-items: center; }
+.scard .code { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.06em; opacity: 0.7; }
+.scard .name { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
+.scard .pct { font-weight: 800; font-size: 1.3rem; }
+.scard .more { display: grid; gap: 10px; margin-top: 46px; opacity: 0; transition: opacity var(--d-base) var(--e-out); }
+.scard.open .more { opacity: 1; }
+.scard .band { font-size: 12px; font-weight: 600; opacity: 0.75; }
+.scard .open-btn { justify-self: start; height: 34px; padding: 0 14px; border-radius: var(--r-pill); background: var(--c-night); color: var(--c-on-night); font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+
+/* subject detail */
+.sub-hero { background: var(--c-sub-3); color: var(--c-on-sub); margin: -6px -18px 0; padding: 4px 18px 22px; border-radius: 0 0 34px 34px; display: grid; gap: 14px; }
+.unit { display: grid; gap: 10px; padding: 14px 16px; border-radius: var(--r-md); background: var(--c-surface); }
+.unit .t { display: flex; justify-content: space-between; gap: 10px; font-weight: 700; font-size: 14px; }
+.unit .t span { font-family: var(--f-mono); font-weight: 500; font-size: 11px; color: var(--c-muted); white-space: nowrap; }
+.topics { display: grid; gap: 2px; margin-top: 2px; }
+.topic { display: flex; gap: 10px; align-items: center; font-size: 13.5px; padding: 7px 0; border-top: 1px solid var(--c-line); }
+.topic .ck { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--c-muted); flex: none; display: grid; place-items: center; }
+.topic .ck svg { width: 12px; height: 12px; }
+.topic.done .ck { background: var(--c-lime); border-color: var(--c-lime); color: var(--c-on-lime); }
+.topic .nc { margin-left: auto; font-family: var(--f-mono); font-size: 11px; color: var(--c-muted); }
+.fab { position: absolute; right: 18px; bottom: 90px; z-index: 2; height: 52px; padding: 0 18px 0 14px; border-radius: var(--r-pill); background: var(--c-lime); color: var(--c-on-lime); border: 0; display: flex; align-items: center; gap: 8px; font-weight: 800; box-shadow: var(--shadow-lift); }
+.fab svg { width: 20px; height: 20px; }
+
+/* assignments */
+.acard { background: var(--c-surface); border-radius: var(--r-md); padding: 14px 16px; display: grid; gap: 10px; border: 0; text-align: left; width: 100%; }
+.acard .t { font-weight: 700; font-size: 15px; line-height: 1.25; }
+.acard .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.acard .sub { font-family: var(--f-mono); font-size: 11px; color: var(--c-muted); letter-spacing: 0.04em; }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.cal .dow { font-family: var(--f-mono); font-size: 9.5px; text-align: center; color: var(--c-muted); padding-bottom: 2px; }
+.cal .d { aspect-ratio: 0.82; border-radius: 10px; border: 1px solid var(--c-line); padding: 4px 5px; font-size: 11.5px; font-weight: 700; display: grid; align-content: start; gap: 2px; overflow: hidden; }
+.cal .d.out { opacity: 0.35; }
+.cal .d.due { border: 2px solid var(--c-ink); background: var(--c-surface); }
+.cal .d.today { background: var(--c-ink); color: var(--c-app); border-color: var(--c-ink); }
+.cal .d small { font-family: var(--f-mono); font-size: 7.5px; font-weight: 500; line-height: 1.2; }
+.view-toggle { display: inline-flex; padding: 3px; border-radius: var(--r-pill); background: var(--c-surface); border: 1px solid var(--c-line); }
+.view-toggle button { border: 0; background: transparent; height: 30px; padding: 0 12px; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; color: var(--c-muted); }
+.view-toggle button[aria-pressed="true"] { background: var(--c-ink); color: var(--c-app); }
+
+/* sheet */
+.behind { padding: 4px 18px; display: grid; gap: 12px; filter: blur(1.5px); opacity: 0.8; }
+.scrim { position: absolute; inset: 0; background: var(--c-scrim); }
+.sheet {
+  position: absolute; left: 8px; right: 8px; bottom: 8px; top: 21%; border-radius: 38px; background: var(--c-surface); color: var(--c-ink);
+  padding: 12px 20px 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow-sheet);
+}
+.sheet .handle { width: 40px; height: 5px; border-radius: 3px; background: var(--c-line); align-self: center; }
+.sheet .kv { display: grid; gap: 0; border-top: 1px solid var(--c-line); }
+.sheet .kv div { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--c-line); font-size: 14px; }
+.sheet .kv div span:first-child { color: var(--c-muted); }
+.sheet .kv div span:last-child { font-weight: 700; text-align: right; }
+
+/* motion demo */
+.replay-host.play .stagger > * { animation: rise var(--d-slow) var(--e-out) both; }
+.replay-host.play .stagger > *:nth-child(2) { animation-delay: 60ms; }
+.replay-host.play .stagger > *:nth-child(3) { animation-delay: 120ms; }
+.replay-host.play .stagger > *:nth-child(4) { animation-delay: 180ms; }
+.replay-host.play .stagger > *:nth-child(5) { animation-delay: 240ms; }
+.replay-host.play .stagger > *:nth-child(6) { animation-delay: 300ms; }
+.replay-host.play .stagger > *:nth-child(n+7) { animation-delay: 340ms; }
+.replay-host.play .sheet { animation: sheet-up 620ms var(--e-spring) both; }
+.replay-host.play .bar .fill { animation: grow 900ms var(--e-out) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes sheet-up { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.motion-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.motion-list .tok-card p { font-size: var(--t-small); color: var(--c-muted); }
+.motion-list .tok-card b { display: block; margin-bottom: 0.3rem; }
+
+footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-small); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+  .badge-rot svg.ring-text { animation: none; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5zm0 15A1.5 1.5 0 0 0 5.5 21H20M8 7h8"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 4h6v3H9zM9 5.5H6a1 1 0 0 0-1 1V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6.5a1 1 0 0 0-1-1h-3M8.5 12.5l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7.5 9a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm5-2 4 4"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16zM13.5 6.5l4 4"/></symbol>
+  <symbol id="i-weave" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 8c3 0 3 8 6 8s3-8 6-8 3 8 6 8M3 16c3 0 3-8 6-8s3 8 6 8 3-8 6-8"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="label">Weave · UI kit v0.1 · CSIT, RGPV</span>
+      <div class="controls" role="group" aria-label="Preview settings">
+        <div class="seg" role="group" aria-label="Accent color">
+          <button type="button" data-accent="periwinkle" aria-pressed="true"><span class="swatch-dot" style="background:#6D6AF4"></span>Periwinkle</button>
+          <button type="button" data-accent="cobalt" aria-pressed="false"><span class="swatch-dot" style="background:#2F66F5"></span>Cobalt</button>
+          <button type="button" data-accent="tangerine" aria-pressed="false"><span class="swatch-dot" style="background:#FF6A1F"></span>Tangerine</button>
+          <button type="button" data-accent="lime" aria-pressed="false"><span class="swatch-dot" style="background:#62E04E"></span>Lime only</button>
+        </div>
+        <div class="seg" role="group" aria-label="Theme">
+          <button type="button" data-theme-set="system" aria-pressed="true">Auto</button>
+          <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1>Weave <span class="it">your</span><br>syllabus</h1>
+        <p class="lead">Your syllabus, your notes and your deadlines in one app. This page is the visual language for it: colors, type, components and the first screens.</p>
+        <div class="hero-stats">
+          <div><span class="label">Semesters</span><b class="num">3–8</b></div>
+          <div><span class="label">Theory subjects</span><b class="num">39</b></div>
+          <div><span class="label">Core screens</span><b class="num">5</b></div>
+        </div>
+      </div>
+      <div class="badge-rot" aria-hidden="true">
+        <svg class="ring-text" viewBox="0 0 152 152"><defs><path id="c1" d="M76 76m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0"/></defs><text fill="currentColor"><textPath href="#c1">WEAVE · NOTES · DEADLINES · SYLLABUS ·</textPath></text></svg>
+        <div class="core"><svg width="46" height="46"><use href="#i-weave"/></svg></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= FOUNDATIONS ================= -->
+  <section id="foundations">
+    <div class="sec-head">
+      <h2>Foun<span class="it">dations</span></h2>
+      <p>Black, white and lime from the Museum reference. The accent is a placeholder until you choose: switch it at the top of the page.</p>
+    </div>
+
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--c-ink)"></div><div class="meta"><b>Ink</b><span>--c-ink</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-app);border-bottom:1px solid var(--c-line)"></div><div class="meta"><b>Paper</b><span>--c-app</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-surface);border-bottom:1px solid var(--c-line)"></div><div class="meta"><b>Surface</b><span>--c-surface</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-lime)"></div><div class="meta"><b>Lime · covered</b><span>--c-lime</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-accent)"></div><div class="meta"><b>Accent</b><span>--c-accent</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-late)"></div><div class="meta"><b>Late</b><span>--c-late</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-missing)"></div><div class="meta"><b>Not submitted</b><span>--c-missing</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-muted)"></div><div class="meta"><b>Muted text</b><span>--c-muted</span></div></div>
+    </div>
+
+    <h3 class="sub-head">Subject colors</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--c-sub-1)"></div><div class="meta"><b>Lilac</b><span>--c-sub-1</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-sub-2)"></div><div class="meta"><b>Citron</b><span>--c-sub-2</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-sub-3)"></div><div class="meta"><b>Violet</b><span>--c-sub-3</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-sub-4)"></div><div class="meta"><b>Periwinkle</b><span>--c-sub-4</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-sub-5)"></div><div class="meta"><b>Mint</b><span>--c-sub-5</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--c-sub-6)"></div><div class="meta"><b>Peach</b><span>--c-sub-6</span></div></div>
+    </div>
+
+    <h3 class="sub-head">Type</h3>
+    <div class="type-rows">
+      <div class="type-row"><span class="label">Display · Urbanist 800 + 300 italic</span><div style="font-family:var(--f-display);font-weight:800;font-size:clamp(2.6rem,8vw,4.5rem);line-height:.92;letter-spacing:-.035em">Operating <span class="it">System</span></div></div>
+      <div class="type-row"><span class="label">H1 · 40 / 800</span><div style="font-size:var(--t-h1);font-weight:800;letter-spacing:-.03em;line-height:1.05">Due this week</div></div>
+      <div class="type-row"><span class="label">H2 · 28 / 700</span><div style="font-size:var(--t-h2);font-weight:700;letter-spacing:-.02em;line-height:1.1">Unit 2 · Process management</div></div>
+      <div class="type-row"><span class="label">Title · 20 / 700</span><div style="font-size:var(--t-title);font-weight:700">CPU scheduling numericals</div></div>
+      <div class="type-row"><span class="label">Body · 16 / 400</span><div style="max-width:60ch">Round Robin gives every process a fixed time quantum. If a process is still running when the quantum ends, it goes to the back of the ready queue.</div></div>
+      <div class="type-row"><span class="label">Small · 14 / 500</span><div style="font-size:var(--t-small);font-weight:500;color:var(--c-muted)">Given by Prof. Mehta · CSIT-2</div></div>
+      <div class="type-row"><span class="label">Label · JetBrains Mono 11</span><div class="label" style="color:var(--c-ink)">CSIT-502 · Semester 5 · Theory</div></div>
+      <div class="type-row"><span class="label">Numbers · Doto 800</span><div style="font-family:var(--f-dot);font-weight:800;font-size:3.4rem;line-height:1">02:14:08</div></div>
+    </div>
+
+    <h3 class="sub-head">Shape and motion tokens</h3>
+    <div class="tok-grid">
+      <div class="tok-card">
+        <h4>Radius</h4>
+        <div class="radius-demo">
+          <div style="border-radius:var(--r-xs)"></div><div style="border-radius:var(--r-sm)"></div><div style="border-radius:var(--r-md)"></div><div style="border-radius:var(--r-lg)"></div><div style="border-radius:var(--r-pill);width:84px"></div>
+        </div>
+        <dl style="margin-top:.9rem"><dt>xs / sm / md / lg</dt><dd>8 · 14 · 22 · 30 px</dd><dt>pill</dt><dd>999 px</dd></dl>
+      </div>
+      <div class="tok-card">
+        <h4>Duration</h4>
+        <dl><dt>--d-fast</dt><dd>140 ms · press, hover</dd><dt>--d-base</dt><dd>260 ms · toggles, fades</dd><dt>--d-slow</dt><dd>520 ms · sheets, cards</dd></dl>
+      </div>
+      <div class="tok-card">
+        <h4>Easing</h4>
+        <dl><dt>--e-out</dt><dd>0.2, 0.8, 0.2, 1</dd><dt>--e-spring</dt><dd>0.34, 1.4, 0.5, 1</dd><dt>--e-in-out</dt><dd>0.65, 0, 0.35, 1</dd></dl>
+      </div>
+      <div class="tok-card">
+        <h4>Spacing</h4>
+        <dl><dt>scale</dt><dd>4 · 8 · 12 · 16 · 20 · 24 · 32 · 48</dd><dt>screen gutter</dt><dd>18 px</dd><dt>card padding</dt><dd>16 px</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPONENTS ================= -->
+  <section id="components">
+    <div class="sec-head">
+      <h2>Compo<span class="it">nents</span></h2>
+      <p>Every piece here works: tap the chips, switches, tab bar and the toast button.</p>
+    </div>
+
+    <div class="kit-grid">
+      <div class="kcard">
+        <span class="label">Buttons</span>
+        <div class="row">
+          <button class="btn btn-ink" type="button">Open subject</button>
+          <button class="btn btn-accent" type="button">Remind me</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-lime" type="button">Write a note</button>
+          <button class="btn btn-outline" type="button">Due today</button>
+        </div>
+        <div class="row">
+          <button class="ibtn ink" type="button" aria-label="Close"><svg><use href="#i-x"/></svg></button>
+          <button class="ibtn soft" type="button" aria-label="Add"><svg><use href="#i-plus"/></svg></button>
+          <button class="ibtn lime" type="button" aria-label="Done"><svg><use href="#i-check"/></svg></button>
+          <button class="ibtn accent" type="button" aria-label="Notifications"><svg><use href="#i-bell"/></svg></button>
+        </div>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Filter chips · status</span>
+        <div class="row" data-chipgroup>
+          <button class="fchip" type="button" aria-pressed="true">All <span class="n">6</span></button>
+          <button class="fchip" type="button" aria-pressed="false">Pending <span class="n">3</span></button>
+          <button class="fchip" type="button" aria-pressed="false">Done <span class="n">3</span></button>
+        </div>
+        <div class="row">
+          <span class="status pending">Pending</span>
+          <span class="status submitted"><svg><use href="#i-check"/></svg>Submitted</span>
+          <span class="status late">Late</span>
+          <span class="status missing">Not submitted</span>
+        </div>
+        <p class="label" style="text-transform:none;letter-spacing:0">Status is always a word plus a color, never color alone.</p>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Progress dial <button class="btn-outline btn" type="button" data-replay-dial style="height:28px;font-size:10px;padding:0 .7rem">Replay</button></span>
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div class="dial" data-dial="59"><div class="center"><b class="num">59%</b><span>In progress</span></div></div>
+          <div style="display:grid;gap:10px;justify-items:center">
+            <div class="dial sm" data-dial="85"><div class="center"><b class="num">85</b></div></div>
+            <div class="dial sm" data-dial="31"><div class="center"><b class="num">31</b></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kcard replay-host" id="bars-demo">
+        <span class="label">Bars · topic dots <button class="btn-outline btn" type="button" data-replay="#bars-demo" style="height:28px;font-size:10px;padding:0 .7rem">Replay</button></span>
+        <div class="bar hi" style="--v:85%"><div class="top">Artificial Intelligence <span>Mastered · 85%</span></div><div class="track"><div class="fill"></div></div></div>
+        <div class="bar" style="--v:48%"><div class="top">Operating System <span>In progress · 48%</span></div><div class="track"><div class="fill"></div></div></div>
+        <div class="bar" style="--v:31%"><div class="top">Theory of Computation <span>Low · 31%</span></div><div class="track"><div class="fill"></div></div></div>
+        <div class="dots" aria-label="3 of 5 topics covered"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Countdown · live</span>
+        <div class="count big" data-due-in="1.27"></div>
+        <div class="count" data-due-in="3.09"></div>
+        <div class="count sm" data-due-in="6.4"></div>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Stat pair · badge</span>
+        <div class="stats">
+          <div><div class="k">Notes written</div><div class="v num">42</div></div>
+          <div><div class="k">Topics covered</div><div class="v num">61</div></div>
+        </div>
+        <div class="row" style="justify-content:space-between">
+          <div class="badge-rot" style="width:120px;height:120px" aria-hidden="true">
+            <svg class="ring-text" viewBox="0 0 152 152"><defs><path id="c2" d="M76 76m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0"/></defs><text fill="currentColor"><textPath href="#c2">DUE TODAY · DUE TODAY · DUE TODAY ·</textPath></text></svg>
+            <div class="core"><svg width="34" height="34"><use href="#i-clip"/></svg></div>
+          </div>
+          <div class="badge-rot accent" style="width:120px;height:120px" aria-hidden="true">
+            <svg class="ring-text" viewBox="0 0 152 152" style="animation-direction:reverse"><defs><path id="c3" d="M76 76m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0"/></defs><text fill="currentColor"><textPath href="#c3">MASTERED · MASTERED · MASTERED ·</textPath></text></svg>
+            <div class="core"><svg width="34" height="34"><use href="#i-check"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Inputs</span>
+        <div class="field">
+          <label for="k-email">College email</label>
+          <input id="k-email" type="email" placeholder="you@college.ac.in" autocomplete="off">
+          <span class="hint">Only students on the CSIT list can sign in.</span>
+        </div>
+        <div class="search"><svg><use href="#i-search"/></svg>Search your notes</div>
+        <div>
+          <div class="toggle-row">Deadline reminders <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Deadline reminders"></button></div>
+          <div class="toggle-row">New assignment <button class="switch" type="button" role="switch" aria-checked="false" aria-label="New assignment"></button></div>
+        </div>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Loading · empty · error</span>
+        <div style="display:grid;gap:8px">
+          <div class="skel" style="height:16px;width:55%"></div>
+          <div class="skel" style="height:64px"></div>
+        </div>
+        <div class="empty">
+          <div class="ill"><svg><use href="#i-pen"/></svg></div>
+          <b>No notes on this topic yet</b>
+          <p>Write your first note and this topic counts as covered.</p>
+        </div>
+        <div class="err">
+          <b>Couldn't load assignments</b>
+          <p>Check your internet connection, then try again.</p>
+          <button class="btn btn-ink" type="button" style="height:38px;justify-self:start">Try again</button>
+        </div>
+      </div>
+
+      <div class="kcard">
+        <span class="label">Navigation · toast</span>
+        <div class="tabbar" role="tablist" aria-label="Main" data-tabbar>
+          <span class="pill" aria-hidden="true"></span>
+          <button role="tab" type="button" aria-selected="true"><svg><use href="#i-home"/></svg>Home</button>
+          <button role="tab" type="button" aria-selected="false"><svg><use href="#i-book"/></svg>Subjects</button>
+          <button role="tab" type="button" aria-selected="false"><svg><use href="#i-clip"/></svg>Tasks</button>
+          <button role="tab" type="button" aria-selected="false"><svg><use href="#i-user"/></svg>Profile</button>
+        </div>
+        <div class="topbar"><span class="logo">weave.</span><nav><a class="on" href="#components">Home</a><a href="#components">Subjects</a><a href="#components">Assignments</a></nav><span class="avatar" style="width:36px;height:36px">AS</span></div>
+        <button class="btn btn-ink" type="button" data-toast>Show "Note saved" toast</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCREENS ================= -->
+  <section id="screens">
+    <div class="sec-head">
+      <h2>First <span class="it">screens</span></h2>
+      <p>390 px, the size of most phones. Example data: a 3rd-year CSIT-2 student in semester 5. Tap the subject cards, the list/calendar toggle and "Replay motion".</p>
+    </div>
+    <div class="row" style="margin-bottom:1.5rem"><button class="btn btn-ink" type="button" data-replay="#screens">Replay motion</button></div>
+
+    <div class="phones replay-host" id="screens-host">
+
+      <!-- LOGIN -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen night">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="weave-art"><canvas data-weave aria-hidden="true"></canvas></div>
+          <div class="login stagger">
+            <h3>Weave <span class="it">your</span><br>semester</h3>
+            <p style="opacity:.6;font-size:15px">Syllabus, notes and deadlines for CSIT and CY students.</p>
+            <div class="field">
+              <label for="l-email">College email</label>
+              <input id="l-email" type="email" placeholder="you@college.ac.in" autocomplete="off">
+            </div>
+            <button class="btn btn-lime btn-wide" type="button">Continue <svg width="18" height="18"><use href="#i-arrow"/></svg></button>
+            <span class="label" style="color:var(--c-on-night);opacity:.45;text-align:center">CSIT department · RGPV</span>
+          </div>
+        </div></div>
+        <figcaption><b>Login</b><span>Black Museum hero, woven-thread art</span></figcaption>
+      </figure>
+
+      <!-- HOME -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll stagger">
+            <div class="scr-row"><div><div class="label" data-today>Today</div><div style="font-weight:700">Hi, Aarav</div></div><span class="avatar">AS</span></div>
+            <h3 class="scr-title">Semester <span class="it">five</span></h3>
+            <div class="card" style="grid-template-columns:auto 1fr;align-items:center;gap:14px">
+              <div class="dial" data-dial="59" style="width:128px"><div class="center"><b class="num" style="font-size:2rem">59%</b><span>In progress</span></div></div>
+              <div class="stats" style="grid-template-columns:1fr;border-top:0">
+                <div style="padding:0"><div class="k">Topics covered</div><div class="v num" style="font-size:1.6rem">58/98</div></div>
+                <div style="border-left:0;padding:.4rem 0 0;border-top:1px solid var(--c-line)"><div class="k">Due this week</div><div class="v num" style="font-size:1.6rem">3</div></div>
+              </div>
+            </div>
+            <div class="card ink">
+              <div class="scr-row"><span class="label" style="color:var(--c-on-night);opacity:.6">Next deadline · CSIT-501</span><span class="status late">1 day left</span></div>
+              <div style="font-weight:700;font-size:1.1rem;line-height:1.2">Assignment 3: Subnetting and CIDR</div>
+              <div class="count" data-due-in="1.27" style="color:var(--c-on-night)"></div>
+            </div>
+            <div class="scr-row"><b>Subjects</b><span class="label">4 this sem</span></div>
+            <div class="card mini-list">
+              <div class="bar hi" style="--v:85%"><div class="top">Artificial Intelligence <span>85%</span></div><div class="track"><div class="fill"></div></div></div>
+              <div class="bar" style="--v:72%"><div class="top">Computer Networking <span>72%</span></div><div class="track"><div class="fill"></div></div></div>
+              <div class="bar" style="--v:48%"><div class="top">Operating System <span>48%</span></div><div class="track"><div class="fill"></div></div></div>
+              <div class="bar" style="--v:31%"><div class="top">Theory of Computation <span>31%</span></div><div class="track"><div class="fill"></div></div></div>
+            </div>
+          </div>
+          <div class="tabbar" role="tablist" aria-label="Main" data-tabbar>
+            <span class="pill" aria-hidden="true"></span>
+            <button role="tab" type="button" aria-selected="true"><svg><use href="#i-home"/></svg>Home</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-book"/></svg>Subjects</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-clip"/></svg>Tasks</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-user"/></svg>Profile</button>
+          </div>
+        </div></div>
+        <figcaption><b>Home</b><span>Progress dial, next deadline, subject bars</span></figcaption>
+      </figure>
+
+      <!-- SUBJECTS -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll">
+            <div class="scr-row"><span class="label">Semester 5 · CSIT-2</span><span class="label">Tap a card</span></div>
+            <h3 class="scr-title">Subjects</h3>
+            <div class="row" data-chipgroup style="gap:6px">
+              <button class="fchip" type="button" aria-pressed="true">All <span class="n">4</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Core <span class="n">2</span></button>
+              <button class="fchip" type="button" aria-pressed="false">Electives <span class="n">2</span></button>
+            </div>
+            <div class="search"><svg><use href="#i-search"/></svg>Search notes</div>
+            <div class="stack" data-stack>
+              <button class="scard" type="button" style="background:var(--c-sub-1)">
+                <div class="top"><span class="code">CSIT-501 · CORE</span><span class="pct num">72%</span></div>
+                <div class="name">Computer Networking</div>
+                <div class="more"><span class="band">In progress · 18 of 25 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
+              </button>
+              <button class="scard" type="button" style="background:var(--c-sub-2)">
+                <div class="top"><span class="code">CSIT-502 · CORE</span><span class="pct num">48%</span></div>
+                <div class="name">Operating System</div>
+                <div class="more"><span class="band">In progress · 12 of 25 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
+              </button>
+              <button class="scard" type="button" style="background:var(--c-sub-3)">
+                <div class="top"><span class="code">CSIT-503A · DEPT. ELECTIVE</span><span class="pct num">31%</span></div>
+                <div class="name">Theory of Computation</div>
+                <div class="more"><span class="band">Low · 7 of 24 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
+              </button>
+              <button class="scard open" type="button" style="background:var(--c-sub-4)">
+                <div class="top"><span class="code">CSIT-504B · OPEN ELECTIVE</span><span class="pct num">85%</span></div>
+                <div class="name">Artificial Intelligence</div>
+                <div class="more"><span class="band">Mastered · 21 of 24 topics</span><div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div><span class="open-btn">Open <svg width="14" height="14"><use href="#i-arrow"/></svg></span></div>
+              </button>
+            </div>
+          </div>
+          <div class="tabbar" role="tablist" aria-label="Main" data-tabbar data-start="1">
+            <span class="pill" aria-hidden="true"></span>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-home"/></svg>Home</button>
+            <button role="tab" type="button" aria-selected="true"><svg><use href="#i-book"/></svg>Subjects</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-clip"/></svg>Tasks</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-user"/></svg>Profile</button>
+          </div>
+        </div></div>
+        <figcaption><b>Subjects</b><span>Stacked wallet cards, one color per subject</span></figcaption>
+      </figure>
+
+      <!-- SUBJECT DETAIL -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar" style="background:var(--c-sub-3);color:var(--c-on-sub)"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll">
+            <div class="sub-hero">
+              <div class="scr-row"><button class="ibtn soft" type="button" aria-label="Back" style="width:40px;height:40px;background:var(--c-surface)"><svg><use href="#i-back"/></svg></button><span class="code label" style="color:var(--c-on-sub)">CSIT-502</span></div>
+              <h3 class="scr-title" style="font-size:2.4rem">Operating <span class="it">System</span></h3>
+              <div class="stats" style="color:var(--c-on-sub)">
+                <div><div class="k">Progress</div><div class="v num">48%</div></div>
+                <div><div class="k">Notes</div><div class="v num">14</div></div>
+              </div>
+            </div>
+            <div class="stagger" style="display:grid;gap:10px">
+              <div class="unit"><div class="t">1 · Introduction and OS structures <span>5/5</span></div><div class="bar hi" style="--v:100%"><div class="track"><div class="fill"></div></div></div></div>
+              <div class="unit">
+                <div class="t">2 · Process management and CPU scheduling <span>3/5</span></div>
+                <div class="bar" style="--v:60%"><div class="track"><div class="fill"></div></div></div>
+                <div class="topics">
+                  <div class="topic done"><span class="ck"><svg><use href="#i-check"/></svg></span>Process concept<span class="nc">2 notes</span></div>
+                  <div class="topic done"><span class="ck"><svg><use href="#i-check"/></svg></span>PCB and process states<span class="nc">1 note</span></div>
+                  <div class="topic done"><span class="ck"><svg><use href="#i-check"/></svg></span>Scheduling criteria<span class="nc">1 note</span></div>
+                  <div class="topic"><span class="ck"></span>FCFS, SJF and priority<span class="nc">—</span></div>
+                  <div class="topic"><span class="ck"></span>Round Robin, multilevel queues<span class="nc">—</span></div>
+                </div>
+              </div>
+              <div class="unit"><div class="t">3 · Synchronization and deadlocks <span>2/5</span></div><div class="bar" style="--v:40%"><div class="track"><div class="fill"></div></div></div></div>
+              <div class="unit"><div class="t">4 · Memory management <span>1/5</span></div><div class="bar" style="--v:20%"><div class="track"><div class="fill"></div></div></div></div>
+              <div class="unit"><div class="t">5 · File systems and I/O <span>0/5</span></div><div class="bar" style="--v:0%"><div class="track"><div class="fill"></div></div></div></div>
+            </div>
+          </div>
+          <button class="fab" type="button"><svg><use href="#i-pen"/></svg>Write note</button>
+          <div class="tabbar" role="tablist" aria-label="Main" data-tabbar data-start="1">
+            <span class="pill" aria-hidden="true"></span>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-home"/></svg>Home</button>
+            <button role="tab" type="button" aria-selected="true"><svg><use href="#i-book"/></svg>Subjects</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-clip"/></svg>Tasks</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-user"/></svg>Profile</button>
+          </div>
+        </div></div>
+        <figcaption><b>Subject → units → topics</b><span>Topic ticks turn lime when a note exists</span></figcaption>
+      </figure>
+
+      <!-- ASSIGNMENTS -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="scroll">
+            <div class="scr-row"><span class="label">CSIT-2 · Semester 5</span>
+              <div class="view-toggle" role="group" aria-label="View" data-viewtoggle>
+                <button type="button" aria-pressed="true" data-view="list">List</button>
+                <button type="button" aria-pressed="false" data-view="cal">Calendar</button>
+              </div>
+            </div>
+            <h3 class="scr-title">Due <span class="it">soon</span></h3>
+            <div class="stagger" data-pane="list" style="display:grid;gap:10px">
+              <div class="acard"><div class="meta"><span class="sub">CSIT-501 · NETWORKING</span><span class="status pending">Pending</span></div><div class="t">Assignment 3: Subnetting and CIDR</div><div class="count sm" data-due-in="1.27"></div></div>
+              <div class="acard"><div class="meta"><span class="sub">CSIT-502 · OS</span><span class="status pending">Pending</span></div><div class="t">Assignment 2: CPU scheduling numericals</div><div class="count sm" data-due-in="3.09"></div></div>
+              <div class="acard"><div class="meta"><span class="sub">CSIT-503A · TOC</span><span class="status pending">Pending</span></div><div class="t">Assignment 1: DFA and NFA design</div><div class="count sm" data-due-in="6.4"></div></div>
+              <div class="scr-row" style="margin-top:4px"><b>Marked</b><span class="label">3</span></div>
+              <div class="acard"><div class="meta"><span class="sub">CSIT-504B · AI</span><span class="status submitted"><svg><use href="#i-check"/></svg>Submitted</span></div><div class="t">Assignment 2: Search algorithms</div><div class="scr-row"><span class="label">Marks</span><b class="num">8 / 10</b></div></div>
+              <div class="acard"><div class="meta"><span class="sub">CSIT-502 · OS</span><span class="status late">Late</span></div><div class="t">Assignment 1: Process states</div><div class="scr-row"><span class="label">Marks</span><b class="num">6 / 10</b></div></div>
+              <div class="acard"><div class="meta"><span class="sub">CSIT-501 · NETWORKING</span><span class="status missing">Not submitted</span></div><div class="t">Assignment 2: OSI vs TCP/IP</div></div>
+            </div>
+            <div data-pane="cal" hidden style="display:grid;gap:10px">
+              <div class="scr-row"><b data-cal-title>November</b><span class="label">3 due</span></div>
+              <div class="cal" data-cal></div>
+            </div>
+          </div>
+          <div class="tabbar" role="tablist" aria-label="Main" data-tabbar data-start="2">
+            <span class="pill" aria-hidden="true"></span>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-home"/></svg>Home</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-book"/></svg>Subjects</button>
+            <button role="tab" type="button" aria-selected="true"><svg><use href="#i-clip"/></svg>Tasks</button>
+            <button role="tab" type="button" aria-selected="false"><svg><use href="#i-user"/></svg>Profile</button>
+          </div>
+        </div></div>
+        <figcaption><b>Assignments</b><span>List with live countdowns, or a Pocket Cal grid</span></figcaption>
+      </figure>
+
+      <!-- ASSIGNMENT SHEET -->
+      <figure class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
+          <div class="behind" aria-hidden="true">
+            <h3 class="scr-title">Due <span class="it">soon</span></h3>
+            <div class="acard"><div class="t">Assignment 3: Subnetting and CIDR</div></div>
+            <div class="acard"><div class="t">Assignment 2: CPU scheduling</div></div>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet" role="dialog" aria-label="Assignment details">
+            <span class="handle"></span>
+            <div class="scr-row"><span class="badge-rot" style="width:64px;height:64px" aria-hidden="true"><span class="core" style="inset:6px"><svg width="26" height="26"><use href="#i-clip"/></svg></span></span>
+              <button class="ibtn soft" type="button" aria-label="Close" style="width:42px;height:42px"><svg><use href="#i-x"/></svg></button></div>
+            <div>
+              <span class="label" data-due-label="1.27">Due tomorrow</span>
+              <div class="count" data-due-in="1.27" style="margin-top:6px"></div>
+            </div>
+            <div style="font-weight:700;font-size:1.2rem;line-height:1.2">Assignment 3: Subnetting and CIDR</div>
+            <div class="kv">
+              <div><span>Subject</span><span>Computer Networking</span></div>
+              <div><span>Unit</span><span>3 · Network layer</span></div>
+              <div><span>Given by</span><span>Prof. R. Mehta</span></div>
+              <div><span>Max marks</span><span class="num">10</span></div>
+              <div><span>Status</span><span class="status pending">Pending</span></div>
+            </div>
+            <p style="font-size:13px;color:var(--c-muted)">Submit on paper in class. Your teacher marks it here.</p>
+            <button class="btn btn-ink btn-wide" type="button" style="margin-top:auto">Remind me on the day</button>
+          </div>
+        </div></div>
+        <figcaption><b>Assignment detail</b><span>Bottom sheet with springy entry</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= MOTION ================= -->
+  <section id="motion">
+    <div class="sec-head">
+      <h2>Mo<span class="it">tion</span></h2>
+      <p>One idea runs through it: things are woven in. Cards slide into place, sheets spring up, numbers tick.</p>
+    </div>
+    <div class="motion-list">
+      <div class="tok-card"><b>Screen change</b><p>View Transitions: the tapped card grows into the next screen. 360 ms, ease-out.</p></div>
+      <div class="tok-card"><b>Lists</b><p>Items rise 18 px and fade in, 60 ms apart. Only on first load, never on every scroll.</p></div>
+      <div class="tok-card"><b>Sheets and tab pill</b><p>Spring with a small overshoot. Drag down to close.</p></div>
+      <div class="tok-card"><b>Numbers</b><p>Countdowns tick every second; progress dials fill tick by tick when a note is saved.</p></div>
+      <div class="tok-card"><b>Press</b><p>Buttons scale to 96% on press, 140 ms. Gives a native feel.</p></div>
+      <div class="tok-card"><b>Reduced motion</b><p>If the phone asks for less motion, everything appears instantly and the badges stop spinning.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">Weave UI kit v0.1 · example data only · fonts: Urbanist, Doto, JetBrains Mono</footer>
+
+<div class="toast" role="status" aria-live="polite"><span class="ok"><svg><use href="#i-check"/></svg></span><span>Note saved</span></div>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function store(key, value) {
+    try { if (value === undefined) return localStorage.getItem(key); localStorage.setItem(key, value); } catch (e) { return null; }
+    return null;
+  }
+
+  // ---- accent + theme ----
+  function setPressed(group, attr, value) {
+    group.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute(attr) === value)); });
+  }
+  var accentGroup = document.querySelector('[aria-label="Accent color"]');
+  var themeGroup = document.querySelector('[aria-label="Theme"]');
+  function applyAccent(a) {
+    if (a === "periwinkle") root.removeAttribute("data-accent"); else root.setAttribute("data-accent", a);
+    setPressed(accentGroup, "data-accent", a);
+  }
+  function applyTheme(t) {
+    if (t === "system") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", t);
+    setPressed(themeGroup, "data-theme-set", t);
+  }
+  accentGroup.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    applyAccent(b.dataset.accent); store("weave-kit-accent", b.dataset.accent); drawWeaves();
+  });
+  themeGroup.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    applyTheme(b.dataset.themeSet); store("weave-kit-theme", b.dataset.themeSet); drawDials(false);
+  });
+  applyAccent(store("weave-kit-accent") || "periwinkle");
+  applyTheme(store("weave-kit-theme") || "system");
+
+  // ---- dials (AI OS tick gauge) ----
+  var TICKS = 44, START = 135, SWEEP = 270;
+  function buildDial(el) {
+    var svgNS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 100 100");
+    svg.setAttribute("aria-hidden", "true");
+    var small = el.classList.contains("sm");
+    var n = small ? 28 : TICKS;
+    for (var i = 0; i < n; i++) {
+      var ang = (START + (SWEEP * i) / (n - 1)) * Math.PI / 180;
+      var r1 = small ? 40 : 42, r2 = small ? 48 : 49;
+      var l = document.createElementNS(svgNS, "line");
+      l.setAttribute("x1", 50 + r1 * Math.cos(ang)); l.setAttribute("y1", 50 + r1 * Math.sin(ang));
+      l.setAttribute("x2", 50 + r2 * Math.cos(ang)); l.setAttribute("y2", 50 + r2 * Math.sin(ang));
+      l.setAttribute("class", "tick");
+      svg.appendChild(l);
+    }
+    el.insertBefore(svg, el.firstChild);
+  }
+  function paintDial(el, upto) {
+    var ticks = el.querySelectorAll(".tick");
+    var on = Math.round((upto / 100) * (ticks.length - 1));
+    ticks.forEach(function (t, i) { t.setAttribute("class", "tick" + (i < on ? " on" : i === on && upto > 0 ? " head" : "")); });
+  }
+  var dials = Array.prototype.slice.call(document.querySelectorAll("[data-dial]"));
+  dials.forEach(buildDial);
+  function drawDials(animate) {
+    dials.forEach(function (el) {
+      var v = Number(el.dataset.dial);
+      if (!animate || reduce) { paintDial(el, v); return; }
+      var t0 = performance.now(), dur = 900;
+      (function step(now) {
+        var p = Math.min(1, (now - t0) / dur), eased = 1 - Math.pow(1 - p, 3);
+        paintDial(el, v * eased);
+        if (p < 1) requestAnimationFrame(step);
+      })(t0);
+    });
+  }
+  drawDials(false);
+  document.querySelector("[data-replay-dial]").addEventListener("click", function () { drawDials(true); });
+
+  // ---- countdowns ----
+  var counts = Array.prototype.slice.call(document.querySelectorAll("[data-due-in]"));
+  var now0 = Date.now();
+  counts.forEach(function (el) { el.dataset.target = String(now0 + Number(el.dataset.dueIn) * 86400000); });
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function renderCounts() {
+    var now = Date.now();
+    counts.forEach(function (el) {
+      var ms = Math.max(0, Number(el.dataset.target) - now);
+      var d = Math.floor(ms / 86400000), h = Math.floor(ms / 3600000) % 24, m = Math.floor(ms / 60000) % 60, s = Math.floor(ms / 1000) % 60;
+      var parts = [[d, "days"], [h, "hrs"], [m, "min"], [s, "sec"]];
+      el.setAttribute("aria-label", d + " days " + h + " hours " + m + " minutes left");
+      el.innerHTML = parts.map(function (p, i) {
+        return (i ? '<span class="sep" aria-hidden="true">:</span>' : "") + '<span class="u" aria-hidden="true"><b>' + pad(p[0]) + "</b><small>" + p[1] + "</small></span>";
+      }).join("");
+    });
+  }
+  renderCounts();
+  setInterval(renderCounts, 1000);
+  document.querySelectorAll("[data-today]").forEach(function (el) {
+    el.textContent = new Date().toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
+  });
+  document.querySelectorAll("[data-due-label]").forEach(function (el) {
+    var d = new Date(now0 + Number(el.dataset.dueLabel) * 86400000);
+    el.textContent = "Due " + d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" }) + " · 11:59 PM";
+  });
+
+  // ---- chips, switches, tab bars ----
+  document.querySelectorAll("[data-chipgroup]").forEach(function (g) {
+    g.addEventListener("click", function (e) {
+      var b = e.target.closest(".fchip"); if (!b) return;
+      g.querySelectorAll(".fchip").forEach(function (c) { c.setAttribute("aria-pressed", String(c === b)); });
+    });
+  });
+  document.querySelectorAll(".switch").forEach(function (s) {
+    s.addEventListener("click", function () { s.setAttribute("aria-checked", String(s.getAttribute("aria-checked") !== "true")); });
+  });
+  document.querySelectorAll("[data-tabbar]").forEach(function (bar) {
+    var tabs = Array.prototype.slice.call(bar.querySelectorAll('[role="tab"]'));
+    var pill = bar.querySelector(".pill");
+    function select(i) {
+      tabs.forEach(function (t, j) { t.setAttribute("aria-selected", String(i === j)); });
+      pill.style.transform = "translateX(" + (i * 100) + "%)";
+    }
+    select(Number(bar.dataset.start || 0));
+    bar.addEventListener("click", function (e) { var t = e.target.closest('[role="tab"]'); if (t) select(tabs.indexOf(t)); });
+  });
+
+  // ---- subject stack: tapped card opens, the cards below make room ----
+  document.querySelectorAll("[data-stack]").forEach(function (stack) {
+    var cards = Array.prototype.slice.call(stack.querySelectorAll(".scard"));
+    var OPEN_SHIFT = 132;
+    function open(idx) {
+      cards.forEach(function (c, i) {
+        c.classList.toggle("open", i === idx);
+        c.style.transform = i > idx ? "translateY(" + OPEN_SHIFT + "px)" : "";
+      });
+      stack.style.paddingBottom = idx < cards.length - 1 ? OPEN_SHIFT + 8 + "px" : "8px";
+    }
+    open(cards.length - 1);
+    stack.addEventListener("click", function (e) { var c = e.target.closest(".scard"); if (c) open(cards.indexOf(c)); });
+  });
+
+  // ---- assignments list / calendar ----
+  document.querySelectorAll("[data-viewtoggle]").forEach(function (vt) {
+    var screen = vt.closest(".screen");
+    vt.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      vt.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      screen.querySelectorAll("[data-pane]").forEach(function (p) { p.hidden = p.dataset.pane !== b.dataset.view; });
+    });
+  });
+  (function buildCalendar() {
+    var cal = document.querySelector("[data-cal]"); if (!cal) return;
+    var today = new Date();
+    var first = new Date(today.getFullYear(), today.getMonth(), 1);
+    var title = document.querySelector("[data-cal-title]");
+    title.textContent = first.toLocaleString("en-IN", { month: "long" }) + " " + first.getFullYear();
+    var dues = {};
+    [[1.27, "CN A3"], [3.09, "OS A2"], [6.4, "TOC A1"]].forEach(function (d) {
+      var dt = new Date(now0 + d[0] * 86400000);
+      dues[dt.toDateString()] = d[1];
+    });
+    var html = ["S", "M", "T", "W", "T", "F", "S"].map(function (d) { return '<span class="dow">' + d + "</span>"; }).join("");
+    var start = new Date(first); start.setDate(1 - first.getDay());
+    for (var i = 0; i < 35; i++) {
+      var day = new Date(start); day.setDate(start.getDate() + i);
+      var cls = "d" + (day.getMonth() !== today.getMonth() ? " out" : "") + (day.toDateString() === today.toDateString() ? " today" : "") + (dues[day.toDateString()] ? " due" : "");
+      html += '<div class="' + cls + '">' + day.getDate() + (dues[day.toDateString()] ? "<small>" + dues[day.toDateString()] + "</small>" : "") + "</div>";
+    }
+    cal.innerHTML = html;
+  })();
+
+  // ---- toast ----
+  var toast = document.querySelector(".toast"), toastTimer;
+  document.querySelector("[data-toast]").addEventListener("click", function () {
+    toast.classList.add("show"); clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200);
+  });
+
+  // ---- replay motion ----
+  document.querySelectorAll("[data-replay]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var sel = b.dataset.replay === "#screens" ? "#screens-host" : b.dataset.replay;
+      var host = document.querySelector(sel);
+      host.classList.remove("play"); void host.offsetWidth; host.classList.add("play");
+      if (sel === "#screens-host") drawDials(true);
+    });
+  });
+
+  // ---- login art: woven threads (canvas) ----
+  function cssVar(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+  var weaves = Array.prototype.slice.call(document.querySelectorAll("[data-weave]"));
+  function drawWeave(cv, t) {
+    var r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (!r.width) return;
+    if (cv.width !== Math.round(r.width * dpr)) { cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
+    var ctx = cv.getContext("2d"), w = cv.width, h = cv.height;
+    ctx.clearRect(0, 0, w, h);
+    var colors = palette;
+    var rows = 9;
+    for (var k = 0; k < rows; k++) {
+      ctx.beginPath();
+      var y0 = (h / (rows + 1)) * (k + 1);
+      for (var x = 0; x <= w; x += 6 * dpr) {
+        var y = y0 + Math.sin(x / (38 * dpr) + t / 900 + k * 0.7) * 14 * dpr * (k % 2 ? 1 : -1);
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = colors[k % colors.length];
+      ctx.globalAlpha = k % colors.length === 2 ? 0.35 : 0.95;
+      ctx.lineWidth = (k % 3 === 0 ? 7 : 3) * dpr;
+      ctx.lineCap = "round";
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+  var palette = [];
+  function readPalette() { palette = [cssVar("--c-lime"), cssVar("--c-accent"), cssVar("--c-on-night"), cssVar("--c-sub-1"), cssVar("--c-sub-2")]; }
+  function drawWeaves(t) { if (!palette.length || t === undefined) readPalette(); weaves.forEach(function (cv) { drawWeave(cv, t || 0); }); }
+  drawWeaves();
+  if (!reduce) {
+    (function loop(t) { drawWeaves(t); requestAnimationFrame(loop); })(0);
+  }
+  window.addEventListener("resize", function () { drawWeaves(0); });
+  themeGroup.addEventListener("click", function () { readPalette(); });
+})();
+</script>
