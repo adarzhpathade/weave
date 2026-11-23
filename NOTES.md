@@ -54,3 +54,6 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-24 — Phase 2 demo sign-in: email-only against the students list + HMAC-signed session cookie (SESSION_SECRET); Neon Auth email OTP later. — demo deadline.
 - 2026-11-24 — Home route is /home; / redirects by session. Unbuilt menu routes show a Coming next page. — orchestrator.
 - 2026-11-24 — Note editor uses a plain Markdown textarea + small safe preview for now; Tiptap needs a dependency install (user OK) and comes later. — no new deps overnight.
+- 2026-11-24 — Reference images untracked and git-ignored (user: keep them outside git); they stay on the user's disk only. — copyright.
+- 2026-11-24 — Demo account: seed creates a demo CSIT-2 student from DEMO_STUDENT_EMAIL (fake address in .env.local). — user.
+- 2026-11-24 — Workers: frontend (anything the user sees) = Sonnet via spawn.sh claude; backend + data wiring = agy. Use the cheapest agy model that fits; Argon/top tier only for genuinely hard tasks. — user (cost).
