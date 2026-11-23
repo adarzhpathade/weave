@@ -17,9 +17,15 @@ Logins (email, password, sessions) live in Neon Auth's own `neon_auth` schema; o
 | Table | Purpose | Key columns |
 |---|---|---|
 | `subjects` | Defined **once** per department, shared by programs | id, department_id, code, name, color_token |
-| `program_subjects` | A program's semester plan: which subject comes in which semester | program_id, subject_id, semester (3–8), order — unique (program_id, subject_id) |
+| `program_subjects` | A program's semester plan: which subject comes in which semester | program_id, subject_id, semester (3–8), order, kind (`core` / `departmental_elective` / `open_elective`), elective_group (nullable, e.g. `CSIT-503`) — unique (program_id, subject_id) |
 | `units` | Units of a subject | id, subject_id, title, order |
 | `topics` | Topics of a unit | id, unit_id, title, order |
+
+**Theory subjects only** (user decision). Labs, projects, internships, audit courses and NSS/NCC are not in the app.
+The CSIT list lives in `lib/db/seed/data/csit-subjects.json` (RGPV, semesters 3–8).
+
+**Electives:** every option of an elective group is its own subject row in `program_subjects` with the same `elective_group`.
+A student sees the core subjects of the semester plus **only the option they picked** in each group (`student_electives`); until they pick, the group shows "Choose your elective".
 
 This is how CY works: CSIT and CY point at the **same** subject rows (so units/topics are written once), CY can sit a shared
 subject in a different `semester`, and CY's extra subjects simply have no CSIT row.
@@ -28,12 +34,14 @@ subject in a different `semester`, and CY's extra subjects simply have no CSIT r
 | Table | Purpose | Key columns |
 |---|---|---|
 | `users` | Anyone who can log in | id (= Neon Auth user id), email (unique), name, role (`student` / `faculty` / `admin`), image_url |
-| `students` | The department's student list (CSV) — exists **before** the student signs in | id, user_id (nullable, unique → users; filled on first sign-in), email (unique), full_name, enrollment_no (unique), roll_no, division_id, lab_batch (nullable), phone (nullable), status (`active` / `inactive`), notify_deadline, notify_new_assignment, notify_status (booleans, default true) |
+| `students` | The department's student list (CSV) — exists **before** the student signs in | id, user_id (nullable, unique → users; filled on first sign-in), email (unique), full_name, enrollment_no (unique — the only college ID we store), division_id, phone (nullable), status (`active` / `inactive`), notify_deadline, notify_new_assignment, notify_status (booleans, default true) |
+
+| `student_electives` | The elective option a student picked per group | student_id, program_id, elective_group, subject_id — unique (student_id, elective_group) |
 
 **Sign-in gate:** after Neon Auth signs someone in, the app looks up `students.email`. Found → link `user_id`, show onboarding.
 Not found → sign out with "Ask your department to add you". This also limits the app to the college without relying on the email domain.
 
-**Personal data we store:** name, college email, enrollment no., roll no., program/division/semester, lab batch, optional phone and photo.
+**Personal data we store:** name, college email, enrollment no., program/division/semester, chosen electives, optional phone and photo.
 **Not stored:** address, parents' details, date of birth, Aadhaar or other ID numbers, category/caste, marks from university exams.
 
 ### Notes
@@ -67,6 +75,8 @@ erDiagram
   subjects ||--o{ units : has
   units ||--o{ topics : has
   divisions ||--o{ students : has
+  students ||--o{ student_electives : picks
+  subjects ||--o{ student_electives : "picked as"
   users |o--o| students : "signs in as"
   users ||--o{ notes : owns
   topics ||--o{ notes : contains
@@ -86,12 +96,14 @@ erDiagram
 ## Indexes (plan)
 - `notes (owner_id, topic_id)`, `notes (owner_id, updated_at desc)`, GIN on `notes.search_vector`
 - `program_subjects (program_id, semester)`, `units (subject_id, order)`, `topics (unit_id, order)`
-- `students (division_id)`, `students (email)` unique, `students (user_id)` unique
+- `students (division_id)`, `students (email)` unique, `students (user_id)` unique, `student_electives (student_id)`
 - `assignment_divisions (division_id)`, `assignments (subject_id, due_at)`, `assignment_marks (student_id)`
 
 ## Seed (dev branch only, never production)
 - 1 department (CSIT), programs CSIT + CY, divisions CSIT-1 / CSIT-2 / CY for 2nd, 3rd and 4th year.
-- Syllabus for semesters 3–8 with a realistic **placeholder** until the department's real syllabus CSV arrives; CY gets its extra subjects and a few shifted semesters.
+- CSIT subjects for semesters 3–8 from `lib/db/seed/data/csit-subjects.json` (real RGPV list, theory only). Units/topics: the usual 5 RGPV units per subject, **drafted** until the official unit-wise syllabus is checked.
+- CY: same plan as CSIT until the CY list arrives (then extra subjects + shifted semesters).
+- Each seeded student gets one option picked per elective group (spread across options).
 - ~30 students per division (fake names, emails, enrollment numbers), most without a login.
 - 2–3 demo accounts that can log in (a strong and a weak student) for testing and the viva.
 - ~60 days of notes and assignment marks with a realistic mix of strong / average / behind students. Deterministic (fixed random seed).
