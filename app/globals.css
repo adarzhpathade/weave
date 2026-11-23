@@ -73,6 +73,16 @@
   --s-dock: 0.75rem; /* pill offset from the screen edges */
   --col-menu-idx: 1.625rem; /* .mhead 26px index column */
   --col-notif-time: 2.625rem; /* .np-item 42px time column */
+
+  /* assignments (kit .acard, .cal, .sheet) */
+  --r-cal: 10px; /* .cal .d */
+  --r-sheet: 38px; /* .sheet */
+  --d-sheet: 620ms; /* .replay-host.play .sheet (sheet-up) */
+  --d-list-step: 60ms; /* .stagger > * nth-child delays */
+  --d-list-max: 340ms; /* .stagger > *:nth-child(n+7) */
+  --s-sheet-gap: 0.5rem; /* .sheet left/right/bottom 8px */
+  --s-sheet-top: 21dvh; /* .sheet top: 21% */
+  --w-sheet: 480px; /* centered dialog width on laptop */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -156,6 +166,33 @@
   --text-panel-title--line-height: 1;
   --text-week-day: clamp(2.25rem, 13cqi, 4rem);
   --text-week-day--line-height: 0.85;
+
+  /* assignments (values from the kit) */
+  --text-scr-title: 3rem; /* .scr-title */
+  --text-scr-title--line-height: 0.88;
+  --text-card: 0.9375rem; /* .acard .t 15px */
+  --text-card--line-height: 1.25;
+  --text-count-sm: 1.15rem; /* .count.sm */
+  --text-count-sm--line-height: 1;
+  --text-sheet-title: 1.2rem; /* sheet title */
+  --text-sheet-title--line-height: 1.2;
+  --text-fine: 0.8125rem; /* 13px: "Submit on paper" line */
+  --text-cal-day: 0.71875rem; /* 11.5px: .cal .d */
+  --text-cal-dow: 0.59375rem; /* 9.5px: .cal .dow */
+  --text-cal-tag: 0.46875rem; /* 7.5px: .cal .d small */
+  --text-cal-tag--line-height: 1.2;
+  --tracking-sub: 0.04em; /* .acard .sub */
+  --radius-cal: var(--r-cal);
+  --radius-sheet: var(--r-sheet);
+  --aspect-cal-day: 0.82;
+  --shadow-sheet-up: var(--shadow-sheet);
+  --container-sheet: var(--w-sheet);
+  --animate-sheet-up: sheet-up var(--d-sheet) var(--e-spring) backwards;
+  --animate-sheet-down: sheet-down var(--d-base) var(--e-in-out) forwards;
+  --animate-dialog-in: dialog-in var(--d-slow) var(--e-spring) backwards;
+  --animate-dialog-out: dialog-out var(--d-base) var(--e-in-out) forwards;
+  --animate-scrim-in: scrim-in var(--d-base) var(--e-out) backwards;
+  --animate-scrim-out: scrim-out var(--d-base) var(--e-in-out) forwards;
 
   --leading-sep: 0.95;
 
@@ -307,6 +344,62 @@
     border-radius: 50%;
     background: var(--c-lime);
     vertical-align: 0.12em;
+  }
+}
+
+/* ---------- assignments: list stagger, bottom sheet / laptop dialog (kit .stagger, .sheet) ---------- */
+@utility delay-list {
+  animation-delay: min(calc(var(--n, 0) * var(--d-list-step)), var(--d-list-max));
+}
+@utility sheet-frame {
+  left: var(--s-sheet-gap);
+  right: var(--s-sheet-gap);
+  bottom: calc(var(--s-sheet-gap) + env(safe-area-inset-bottom, 0px));
+  max-height: calc(100dvh - var(--s-sheet-top) - var(--s-sheet-gap) - env(safe-area-inset-bottom, 0px));
+}
+@utility dialog-frame {
+  inset: 0;
+  margin: auto;
+  width: calc(100% - 2rem);
+  max-width: var(--w-sheet);
+  height: fit-content;
+  max-height: calc(100dvh - 4rem);
+}
+@utility transition-translate {
+  transition-property: translate;
+  transition-duration: var(--d-base);
+  transition-timing-function: var(--e-spring);
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes sheet-down {
+  to {
+    transform: translateY(105%);
+  }
+}
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+@keyframes dialog-out {
+  to {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes scrim-out {
+  to {
+    opacity: 0;
   }
 }
 
