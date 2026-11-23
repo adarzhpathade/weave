@@ -49,19 +49,16 @@
 ## Components (built on `/lab`)
 Button · IconButton · Card · StatCard · ProgressRing · ProgressBar · Badge/StatusChip · Countdown · Tabs ·
 Sheet (bottom on mobile, side on desktop) · Dialog · Toast · Skeleton · EmptyState · ErrorState ·
-TopBar (desktop) · BottomTabBar (mobile) · SemesterSwitcher · SearchCommand · Avatar · InstallPrompt
+TopBar (desktop) · BottomTabBar (mobile: Home · Subjects · Assignments · Profile) · SemesterSwitcher · SearchBox · Avatar · InstallPrompt
 
 ## Screen inventory (references needed)
 | Screen | Mobile ref | Desktop ref | Status |
 |---|---|---|---|
 | Landing / install | | | |
 | Login + onboarding | | | |
-| Dashboard | | | |
-| Graph view | | | |
-| Subjects / Unit | | | |
-| Notes list / editor | | | |
-| Assignments | | | |
-| AI tutor | | | |
-| Practice | | | |
-| Notifications / Profile | | | |
+| Home | | | |
+| Subjects / Subject / Unit | | | |
+| Topic + note editor | | | |
+| Assignments list / detail | | | |
+| Profile (+ notification settings) | | | |
 | Offline page | | | |

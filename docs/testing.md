@@ -15,16 +15,17 @@
 ## Test cases (to be expanded per feature)
 | ID | Req | Case | Expected |
 |---|---|---|---|
-| TC-1 | FR-1.1 | Sign up with a non-college email | Rejected with a clear message |
-| TC-2 | FR-1.2 | First login | Onboarding shown; after it, dashboard |
+| TC-1 | FR-1.1 | Sign in with an email that is not on the student list | Signed out with "Ask your department to add you" |
+| TC-2 | FR-1.2 | First sign-in of a listed student | Onboarding shows their list details; after it, Home |
 | TC-3 | FR-3.1 | Select a future semester | Disabled with lock icon |
-| TC-4 | FR-6.2 | Type in a note, wait 2 s | "Saved" shown; reload keeps text |
+| TC-4 | FR-5.2 | Type in a note, wait 2 s | "Saved" shown; reload keeps text |
 | TC-5 | NFR-5 | Student A requests student B's note ID | Not found / forbidden |
-| TC-6 | FR-8.2 | Ask the tutor something not in the material | "Not covered in your material" |
-| TC-7 | FR-8.3 | Score ≥ 50% on a topic quiz with a note | Topic becomes covered; unit % rises |
-| TC-8 | FR-9.2 | Assignment due in 2 days | Push notification received (installed app) |
-| TC-9 | FR-10.2 | Go offline, open dashboard | Last data or branded offline page |
-| TC-10 | NFR-2 | k6 200 VUs | p95 < 800 ms, errors < 1% |
+| TC-6 | FR-4.1 | CY student opens Subjects | Sees CY's plan (extra subjects, shifted semesters), not CSIT's |
+| TC-7 | FR-4.2 | Write the first note on a topic | Topic becomes covered; unit, subject and semester % rise |
+| TC-8 | FR-6.3 | Assignment due in 2 days | One push notification received (installed app), not repeated |
+| TC-9 | FR-6.1 | CSIT-1 student opens Assignments | Sees only assignments for CSIT-1 |
+| TC-10 | FR-8.2 | Go offline, open Home | Last data or branded offline page |
+| TC-11 | NFR-2 | k6 200 VUs | p95 < 800 ms, errors < 1% |
 
 ## Results
 _(filled as features are finished)_

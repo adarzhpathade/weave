@@ -7,7 +7,7 @@ Installs like an app on Android and iOS, opens instantly, stays readable offline
 - `name: "Weave"`, `short_name: "Weave"`, `id: "/"`, `start_url: "/dashboard?source=pwa"`, `scope: "/"`
 - `display: "standalone"`, `orientation: "portrait"`, `theme_color` / `background_color` from tokens
 - Icons: 192, 512, 512 maskable (+ monochrome for Android themed icons); `apple-touch-icon` 180
-- `shortcuts`: New note, Assignments, AI tutor · `screenshots` (mobile + desktop) for the rich install dialog
+- `shortcuts`: Assignments, Subjects · `screenshots` (mobile + desktop) for the rich install dialog
 - iOS: `apple-mobile-web-app-capable`, status-bar style, splash images per device size
 
 ## 2. Service worker
@@ -24,7 +24,7 @@ Installs like an app on Android and iOS, opens instantly, stays readable offline
 
 ## 3. Offline
 - `/offline` page in the app's style.
-- Phase 3: notes editable offline — edits stored in IndexedDB (`idb-keyval` or similar), replayed on reconnect; conflict rule: last write wins, but if the server copy is newer, keep both (create "conflict copy").
+- Phase 4 (extra): notes editable offline — edits stored in IndexedDB (`idb-keyval` or similar), replayed on reconnect; conflict rule: last write wins, but if the server copy is newer, keep both (create "conflict copy").
 - Offline banner when `navigator.onLine` is false.
 
 ## 4. Push notifications
