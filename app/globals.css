@@ -73,6 +73,17 @@
   --s-dock: 0.75rem; /* pill offset from the screen edges */
   --col-menu-idx: 1.625rem; /* .mhead 26px index column */
   --col-notif-time: 2.625rem; /* .np-item 42px time column */
+
+  /* subjects (kit .stack / .scard / .sub-hero / .bar) */
+  --r-scard: 26px;
+  --r-hero: 34px; /* .sub-hero bottom corners */
+  --h-scard: 168px;
+  --s-stack-overlap: 78px; /* .scard margin-top: -78px */
+  --s-stack-open: 132px; /* kit OPEN_SHIFT: cards below the open one slide down */
+  --sh-stack: 0 -10px 24px -14px rgba(11, 11, 12, 0.35);
+  --d-list-step: 60ms; /* kit .stagger nth-child steps */
+  --d-list-max: 340ms;
+  --d-grow: 900ms; /* kit .bar .fill grow */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -156,6 +167,24 @@
   --text-panel-title--line-height: 1;
   --text-week-day: clamp(2.25rem, 13cqi, 4rem);
   --text-week-day--line-height: 0.85;
+
+  /* subjects (values from the kit) */
+  --text-screen-title: 3rem; /* .scr-title */
+  --text-screen-title--line-height: 0.88;
+  --text-hero-title: 2.4rem; /* subject detail title */
+  --text-hero-title--line-height: 0.88;
+  --text-card-name: 1.45rem; /* .scard .name */
+  --text-card-name--line-height: 1.15;
+  --text-card-pct: 1.3rem; /* .scard .pct */
+  --text-card-pct--line-height: 1.2;
+  --text-stat: 2rem; /* .stats .v */
+  --text-stat--line-height: 1.1;
+  --text-topic: 0.84375rem; /* .topic 13.5px */
+
+  --radius-scard: var(--r-scard);
+  --radius-hero: var(--r-hero);
+  --shadow-stack: var(--sh-stack);
+  --animate-grow: grow var(--d-grow) var(--e-out) both;
 
   --leading-sep: 0.95;
 
@@ -307,6 +336,37 @@
     border-radius: 50%;
     background: var(--c-lime);
     vertical-align: 0.12em;
+  }
+}
+
+/* ---------- subjects: wallet stack (kit .stack / .scard) ---------- */
+@utility min-h-scard {
+  min-height: var(--h-scard);
+}
+@utility stack-overlap {
+  &:not(:first-child) {
+    margin-top: calc(-1 * var(--s-stack-overlap));
+  }
+}
+/* uses transform, so it never fights the entrance animation (which animates translate) */
+@utility stack-card-motion {
+  transition: transform var(--d-slow) var(--e-spring);
+}
+@utility shift-stack-open {
+  transform: translateY(var(--s-stack-open));
+}
+@utility pb-stack-open {
+  padding-bottom: calc(var(--s-stack-open) + 0.5rem);
+}
+@utility delay-list {
+  animation-delay: min(calc(var(--n, 0) * var(--d-list-step)), var(--d-list-max));
+}
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
