@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300..900;1,300..600&family=Doto:wght@600..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300..900;1,300..600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: an editorial kit page (black Museum-style hero → foundations → live components → phone screens).
    Every value below is a token; the app copies these into app/globals.css + components/motion/tokens.ts. */
@@ -40,7 +40,7 @@
   /* type */
   --f-display: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --f-dot: "Doto", "JetBrains Mono", ui-monospace, monospace;
+  --f-num: "Urbanist", "Avenir Next", "Segoe UI", system-ui, sans-serif;   /* big numbers: bold, tabular, tight */
   --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --t-display: clamp(3.2rem, 11vw, 7.5rem);
   --t-h1: 2.5rem;
@@ -249,7 +249,7 @@ main section { padding-block: 4rem 1rem; }
 .dial .tick.on { stroke: var(--c-ink); }
 .dial .tick.head { stroke: var(--c-accent); stroke-width: 3.2; }
 .dial .center { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
-.dial .center b { font-family: var(--f-dot); font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -0.02em; }
+.dial .center b { font-family: var(--f-num); font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -0.04em; }
 .dial .center span { font-size: 12px; color: var(--c-muted); margin-top: 4px; }
 .dial.sm { width: 64px; }
 .dial.sm .center b { font-size: 1rem; font-family: var(--f-body); font-weight: 800; }
@@ -268,8 +268,8 @@ main section { padding-block: 4rem 1rem; }
 /* countdown */
 .count { display: flex; gap: 0.35rem; align-items: start; }
 .count .u { display: grid; justify-items: center; }
-.count b { font-family: var(--f-dot); font-weight: 800; font-size: 2.4rem; line-height: 1; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
-.count .sep { font-family: var(--f-dot); font-weight: 800; font-size: 2.4rem; line-height: 1; opacity: 0.35; }
+.count b { font-family: var(--f-num); font-weight: 800; font-size: 2.4rem; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.count .sep { font-family: var(--f-num); font-weight: 300; font-size: 2.4rem; line-height: 0.95; opacity: 0.35; }
 .count small { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--c-muted); text-transform: uppercase; margin-top: 4px; }
 .count.big b, .count.big .sep { font-size: 3.6rem; }
 .count.sm b, .count.sm .sep { font-size: 1.15rem; }
@@ -562,7 +562,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       <div class="type-row"><span class="label">Body · 16 / 400</span><div style="max-width:60ch">Round Robin gives every process a fixed time quantum. If a process is still running when the quantum ends, it goes to the back of the ready queue.</div></div>
       <div class="type-row"><span class="label">Small · 14 / 500</span><div style="font-size:var(--t-small);font-weight:500;color:var(--c-muted)">Given by Prof. Mehta · CSIT-2</div></div>
       <div class="type-row"><span class="label">Label · JetBrains Mono 11</span><div class="label" style="color:var(--c-ink)">CSIT-502 · Semester 5 · Theory</div></div>
-      <div class="type-row"><span class="label">Numbers · Doto 800</span><div style="font-family:var(--f-dot);font-weight:800;font-size:3.4rem;line-height:1">02:14:08</div></div>
+      <div class="type-row"><span class="label">Numbers · Urbanist 800, tabular</span><div style="font-family:var(--f-num);font-weight:800;font-size:3.4rem;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums">02<span style="font-weight:300;opacity:.35">:</span>14<span style="font-weight:300;opacity:.35">:</span>08</div></div>
     </div>
 
     <h3 class="sub-head">Shape and motion tokens</h3>
@@ -968,7 +968,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
   </section>
 </main>
 
-<footer class="wrap">Weave UI kit v0.1 · example data only · fonts: Urbanist, Doto, JetBrains Mono</footer>
+<footer class="wrap">Weave UI kit v0.1 · example data only · fonts: Urbanist, JetBrains Mono</footer>
 
 <div class="toast" role="status" aria-live="polite"><span class="ok"><svg><use href="#i-check"/></svg></span><span>Note saved</span></div>
 
