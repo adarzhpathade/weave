@@ -402,6 +402,9 @@
   }
   to {
     transform: scaleX(1);
+  }
+}
+
 /* ---------- assignments: list stagger, bottom sheet / laptop dialog (kit .stagger, .sheet) ---------- */
 @utility sheet-frame {
   left: var(--s-sheet-gap);
