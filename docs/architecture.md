@@ -7,12 +7,12 @@ flowchart LR
   subgraph Device["Student phone / laptop"]
     UI["Weave PWA<br/>(React, Motion)"]
     SW["Service worker<br/>cache + push"]
-    IDB[("IndexedDB<br/>offline notes queue")]
+    IDB[("IndexedDB<br/>offline notes queue (Phase 4)")]
   end
   subgraph Vercel["Vercel (Node runtime)"]
     RSC["Next.js<br/>Server Components"]
     SA["Server actions<br/>lib/actions"]
-    API["Route handlers<br/>AI stream, push, cron"]
+    API["Route handlers<br/>push, cron, AI (Phase 4)"]
   end
   subgraph Neon["Neon (Singapore)"]
     PG[("Postgres + pgvector")]
@@ -46,13 +46,13 @@ flowchart LR
 
 **Read (e.g. dashboard):** Server Component → `requireStudent()` → `lib/db/queries/dashboard.ts` (few aggregated queries) → cached per user with tag `user:<id>` → rendered HTML streamed with Suspense skeletons.
 
-**Write (e.g. save note):** client editor (debounced) → server action `updateNote` → Zod → owner check → update `notes` + re-derive `note_links` → enqueue embedding → `revalidateTag('user:<id>')`.
+**Write (e.g. save note):** client editor (debounced) → server action `updateNote` → Zod → owner check → update `notes` → `revalidateTag('user:<id>')`. (Phase 4 adds: enqueue embedding.)
 
-**Offline write:** if offline, the edit goes to IndexedDB; the service worker / app replays it when back online (last-write-wins with `updated_at` check).
+**Offline write (Phase 4):** if offline, the edit goes to IndexedDB; the service worker / app replays it when back online (last-write-wins with `updated_at` check).
 
-**AI tutor:** question → `/api/ai/tutor` → guard + daily limit → embed question → pgvector search over permitted chunks (own notes + own sections' material) → prompt with sources → streamed answer with citation IDs → saved to `ai_messages`.
+**AI tutor (Phase 4):** question → `/api/ai/tutor` → guard + daily limit → embed question → pgvector search over permitted chunks (own notes + own sections' material) → prompt with sources → streamed answer with citation IDs → saved to `ai_messages`.
 
-**Push:** daily cron (`/api/cron/reminders`) finds due-soon assignments → `push_subscriptions` of target students → `web-push` → service worker shows notification → tap opens the assignment.
+**Push:** daily cron (`/api/cron/reminders`) finds due-soon assignments → students of the target divisions with that reminder on → skip rows already in `push_log` → their `push_subscriptions` → `web-push` → service worker shows notification → tap opens the assignment.
 
 ## 4. Key decisions
 | Decision | Why |

@@ -32,7 +32,7 @@ export const serverEnvSchema = z.object({
   // Neon Auth (Managed Better Auth)
   NEON_AUTH_BASE_URL: z.string().url(),
   NEON_AUTH_COOKIE_SECRET: z.string().min(32, "must be at least 32 characters"),
-  /** Empty = no restriction (until the college domain is known). */
+  /** Extra check on top of the student-list gate. Empty = no domain check. */
   ALLOWED_EMAIL_DOMAINS: domainList,
 
   // Neon Object Storage (S3-compatible)
@@ -44,11 +44,11 @@ export const serverEnvSchema = z.object({
 
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
 
-  // AI (Phase 3) — optional until the AI features land; lib/ai checks them before use.
+  // AI (Phase 4 extra) — optional until the AI features land; lib/ai checks them before use.
   GROQ_API_KEY: optional(z.string()),
   GOOGLE_GENERATIVE_AI_API_KEY: optional(z.string()),
 
-  // Web push + cron (Phase 3.6)
+  // Web push + cron (Phase 2.6)
   VAPID_PUBLIC_KEY: optional(z.string()),
   VAPID_PRIVATE_KEY: optional(z.string()),
   VAPID_SUBJECT: optional(z.string()),

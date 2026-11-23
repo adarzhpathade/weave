@@ -1,73 +1,102 @@
-# Database schema (draft v0)
+# Database schema (v1 plan)
 
-Postgres (Neon) + pgvector, managed with Drizzle. UUID primary keys; every table has `created_at` / `updated_at`.
+Postgres (Neon), managed with Drizzle. UUID primary keys; every table has `created_at` / `updated_at`.
 This is the planned design — the Drizzle schema in `lib/db/schema/` is the source of truth once it exists.
+Logins (email, password, sessions) live in Neon Auth's own `neon_auth` schema; our `users.id` = the Neon Auth user id.
 
-## Tables
+## v1 tables (core app)
 
+### College structure
 | Table | Purpose | Key columns |
 |---|---|---|
-| `users` | App user (id = Neon Auth user id) | id, name, email, role (`student`/`faculty`/`admin`), image |
-| `student_profiles` | Academic info | user_id (PK, FK), branch_id, current_semester, section |
-| `branches` | e.g. CSE | id, name, code |
-| `semesters` | 1–8 per branch | id, branch_id, number, starts_on, ends_on |
-| `subjects` | Subjects in a semester | id, semester_id, name, code, order, color_token |
-| `subject_prerequisites` | Prerequisite edges | subject_id, prerequisite_subject_id |
-| `units` | Units in a subject | id, subject_id, title, order |
-| `topics` | Topics in a unit | id, unit_id, title, order |
-| `faculty_teaching` | Who teaches what (Phase 4) | faculty_id, subject_id, section |
-| `resources` | Faculty uploads | id, unit_id, uploaded_by, file_key, file_name, mime, pages, visible_sections[] |
-| `resource_chunks` | RAG chunks of uploads | id, resource_id, content, page_or_slide, embedding vector(768) |
-| `notes` | Student notes | id, owner_id, topic_id, title, content_md, content_json, search_vector (generated), word_count |
-| `note_chunks` | RAG chunks of notes | id, note_id, content, embedding vector(768) |
-| `note_links` | Links by ID | id, from_note_id, to_type (`note`/`topic`/`unit`), to_id |
-| `assignments` | Assignments | id, subject_id, unit_id?, title, description, due_at, created_by |
-| `assignment_sections` | Target sections | assignment_id, section |
-| `assignment_marks` | Offline marking (no row = pending) | assignment_id, student_id, status (`submitted`/`late`/`not_submitted`), marks?, remark?, marked_by, marked_at |
-| `quizzes` | Generated quizzes (cached) | id, unit_id, topic_id?, questions_json, source_hash |
-| `quiz_attempts` | Attempts | id, quiz_id, student_id, score, answers_json, attempted_at |
-| `ai_conversations` | Tutor chats | id, student_id, scope_type, scope_id |
-| `ai_messages` | Messages + citations | id, conversation_id, role, content, citations_json |
-| `ai_usage` | Daily AI quota per student | student_id, day, requests, tokens |
-| `note_analyses` | Cached Analyze Note | note_id, content_hash, summary, tags[], todos[], suggested_links_json |
-| `activity_log` | One row per study action | id, student_id, type, ref_id, created_at |
-| `notifications` | In-app notifications | id, user_id, type, title, body, href, read_at |
-| `push_subscriptions` | Web push endpoints | id, user_id, endpoint (unique), p256dh, auth, user_agent, last_success_at |
-| `notification_prefs` | Per-user toggles | user_id, deadline, new_assignment, status_marked |
+| `departments` | e.g. CSIT | id, name ("Computer Science and Information Technology"), code ("CSIT") |
+| `programs` | CSIT, CY | id, department_id, name, code |
+| `divisions` | One class group per program per year, e.g. "CSIT-2, admitted 2024" | id, program_id, name ("CSIT-2"), admission_year, current_semester (3–8) |
 
-`activity_log.type`: `note_created`, `note_updated`, `quiz_attempted`, `ai_question`, `resource_opened`.
+### Syllabus
+| Table | Purpose | Key columns |
+|---|---|---|
+| `subjects` | Defined **once** per department, shared by programs | id, department_id, code, name, color_token |
+| `program_subjects` | A program's semester plan: which subject comes in which semester | program_id, subject_id, semester (3–8), order — unique (program_id, subject_id) |
+| `units` | Units of a subject | id, subject_id, title, order |
+| `topics` | Topics of a unit | id, unit_id, title, order |
+
+This is how CY works: CSIT and CY point at the **same** subject rows (so units/topics are written once), CY can sit a shared
+subject in a different `semester`, and CY's extra subjects simply have no CSIT row.
+
+### People
+| Table | Purpose | Key columns |
+|---|---|---|
+| `users` | Anyone who can log in | id (= Neon Auth user id), email (unique), name, role (`student` / `faculty` / `admin`), image_url |
+| `students` | The department's student list (CSV) — exists **before** the student signs in | id, user_id (nullable, unique → users; filled on first sign-in), email (unique), full_name, enrollment_no (unique), roll_no, division_id, lab_batch (nullable), phone (nullable), status (`active` / `inactive`), notify_deadline, notify_new_assignment, notify_status (booleans, default true) |
+
+**Sign-in gate:** after Neon Auth signs someone in, the app looks up `students.email`. Found → link `user_id`, show onboarding.
+Not found → sign out with "Ask your department to add you". This also limits the app to the college without relying on the email domain.
+
+**Personal data we store:** name, college email, enrollment no., roll no., program/division/semester, lab batch, optional phone and photo.
+**Not stored:** address, parents' details, date of birth, Aadhaar or other ID numbers, category/caste, marks from university exams.
+
+### Notes
+| Table | Purpose | Key columns |
+|---|---|---|
+| `notes` | Student notes, private to the owner | id, owner_id (→ users), topic_id, title, content_md, search_vector (generated tsvector), word_count |
+
+### Assignments
+| Table | Purpose | Key columns |
+|---|---|---|
+| `assignments` | An assignment | id, subject_id, unit_id (nullable), title, description, due_at, max_marks (nullable), created_by (nullable → users; null while seeded/imported) |
+| `assignment_divisions` | Which divisions get it | assignment_id, division_id |
+| `assignment_marks` | Offline marking (no row = Pending) | assignment_id, student_id (→ students), status (`submitted` / `late` / `not_submitted`), marks, remark, marked_by, marked_at |
+
+### Push
+| Table | Purpose | Key columns |
+|---|---|---|
+| `push_subscriptions` | Web push endpoints per device | id, user_id, endpoint (unique), p256dh, auth, user_agent, last_success_at |
+| `push_log` | Stops duplicate reminders | assignment_id, student_id, kind (`due_2d` / `due_today` / `new` / `status`), sent_at — unique (assignment_id, student_id, kind) |
+
+**Not stored:** progress. It is calculated in `lib/progress/` from notes (and later quizzes), so it can never go stale.
 
 ## Relationships
 ```mermaid
 erDiagram
-  branches ||--o{ semesters : has
-  semesters ||--o{ subjects : has
+  departments ||--o{ programs : has
+  programs ||--o{ divisions : has
+  departments ||--o{ subjects : owns
+  programs ||--o{ program_subjects : "semester plan"
+  subjects ||--o{ program_subjects : "placed in"
   subjects ||--o{ units : has
   units ||--o{ topics : has
-  users ||--|| student_profiles : "student has"
+  divisions ||--o{ students : has
+  users |o--o| students : "signs in as"
   users ||--o{ notes : owns
-  topics ||--o{ notes : "contains"
-  notes ||--o{ note_links : "links from"
-  notes ||--o{ note_chunks : "chunked"
-  units ||--o{ resources : has
-  resources ||--o{ resource_chunks : "chunked"
+  topics ||--o{ notes : contains
   subjects ||--o{ assignments : has
-  assignments ||--o{ assignment_sections : targets
+  assignments ||--o{ assignment_divisions : targets
+  divisions ||--o{ assignment_divisions : gets
   assignments ||--o{ assignment_marks : "marked per student"
-  units ||--o{ quizzes : has
-  quizzes ||--o{ quiz_attempts : has
-  users ||--o{ quiz_attempts : makes
-  users ||--o{ ai_conversations : has
-  ai_conversations ||--o{ ai_messages : has
+  students ||--o{ assignment_marks : has
   users ||--o{ push_subscriptions : has
-  users ||--o{ notifications : receives
 ```
+
+## Rules
+- Semesters a student can open: 3 … `division.current_semester`; later ones are shown locked.
+- A student sees subjects from `program_subjects` of their own program only, and assignments of their own division only.
+- Deleting a topic with notes is **blocked**. Deleting a user cascades to their notes and push subscriptions; the `students` row stays (it is department data).
 
 ## Indexes (plan)
 - `notes (owner_id, topic_id)`, `notes (owner_id, updated_at desc)`, GIN on `notes.search_vector`
-- HNSW on `resource_chunks.embedding` and `note_chunks.embedding` (cosine)
-- `assignment_sections (section)`, `assignments (subject_id, due_at)`, `assignment_marks (student_id)`
-- `quiz_attempts (student_id, quiz_id)`, `activity_log (student_id, created_at)`, `notifications (user_id, read_at)`
+- `program_subjects (program_id, semester)`, `units (subject_id, order)`, `topics (unit_id, order)`
+- `students (division_id)`, `students (email)` unique, `students (user_id)` unique
+- `assignment_divisions (division_id)`, `assignments (subject_id, due_at)`, `assignment_marks (student_id)`
 
-## Delete rules
-- Deleting a topic with notes is **blocked** (faculty must move or archive it). Deleting a user cascades to their private data.
+## Seed (dev branch only, never production)
+- 1 department (CSIT), programs CSIT + CY, divisions CSIT-1 / CSIT-2 / CY for 2nd, 3rd and 4th year.
+- Syllabus for semesters 3–8 with a realistic **placeholder** until the department's real syllabus CSV arrives; CY gets its extra subjects and a few shifted semesters.
+- ~30 students per division (fake names, emails, enrollment numbers), most without a login.
+- 2–3 demo accounts that can log in (a strong and a weak student) for testing and the viva.
+- ~60 days of notes and assignment marks with a realistic mix of strong / average / behind students. Deterministic (fixed random seed).
+- The seed script refuses to run when `DATABASE_URL` points at the production branch.
+
+## Later tables (added in their phase, not in v1)
+- **Phase 3 (faculty):** `faculty_teaching` (faculty, subject, division), `resources` (uploaded files in the `materials` bucket).
+- **Phase 4 (extras):** `resource_chunks` + `note_chunks` (pgvector embeddings), `quizzes`, `quiz_attempts`, `ai_conversations`, `ai_messages`, `ai_usage`.

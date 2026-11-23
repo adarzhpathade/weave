@@ -1,5 +1,8 @@
 # AI features
 
+> **Phase 4 extra.** Not part of the core app; built only after Phases 2–3 are finished and faculty have uploaded material.
+> Analyze note and gap finder are **cut**; only the tutor and practice quizzes remain planned.
+
 ## Providers (two, via the Vercel AI SDK)
 | Job | Primary | Fallback | Why |
 |---|---|---|---|
@@ -10,7 +13,7 @@
 
 - Fallback is automatic: on a rate-limit (429), timeout or 5xx from the primary, retry once on the fallback, then show a friendly "AI is busy, try again" message.
 - Changing the embedding model means re-embedding every chunk — avoid it; if needed, do it with a script (`scripts/reembed.ts`).
-- Free-tier limits change often: check the current Groq and Gemini limits before Phase 3 and set the per-student caps from them.
+- Free-tier limits change often: check the current Groq and Gemini limits before Phase 4 and set the per-student caps from them.
 - Env: `GROQ_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY` (server only).
 
 ## Rules
