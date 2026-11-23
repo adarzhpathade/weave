@@ -1,7 +1,20 @@
 # AI features
 
+## Providers (two, via the Vercel AI SDK)
+| Job | Primary | Fallback | Why |
+|---|---|---|---|
+| Tutor chat (streaming) | **Groq** | Gemini | Groq streams very fast, so the tutor feels instant |
+| Quiz generation, analyze note, gap finder (structured output) | **Groq** | Gemini | Fast + good structured output; Zod validates either way |
+| Embeddings (notes + faculty material) | **Gemini** | — (fixed) | Groq has no embedding models; one fixed embedding model keeps stored vectors comparable |
+| PDF/slide text cleanup, image → note (vision), very long context | **Gemini** | — | Strong vision + large context window |
+
+- Fallback is automatic: on a rate-limit (429), timeout or 5xx from the primary, retry once on the fallback, then show a friendly "AI is busy, try again" message.
+- Changing the embedding model means re-embedding every chunk — avoid it; if needed, do it with a script (`scripts/reembed.ts`).
+- Free-tier limits change often: check the current Groq and Gemini limits before Phase 3 and set the per-student caps from them.
+- Env: `GROQ_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY` (server only).
+
 ## Rules
-- Provider: Google Gemini through the Vercel AI SDK. Model IDs and embedding dimension only in `lib/ai/config.ts`.
+- Provider routing, model IDs and the embedding dimension live only in `lib/ai/config.ts` (one `getModel(task)` helper; the rest of the code never names a provider).
 - Prompts only in `lib/ai/prompts/`. Structured outputs validated by Zod (`lib/ai/schemas.ts`).
 - Grounding: answers come **only** from retrieved sources — faculty material for the student's sections + the student's own notes. Never another student's data.
 - Quotas: per-student daily limits in `ai_usage` (e.g. 30 tutor messages, 10 quizzes, 20 analyses — tune later). Friendly limit message, never a crash.

@@ -33,7 +33,7 @@ Each feature is built end-to-end and tested on mobile and desktop before the nex
 
 ## 6. Technology
 Next.js, React, TypeScript, Tailwind CSS · PostgreSQL (Neon) with pgvector · Drizzle ORM · Neon Auth ·
-Google Gemini via Vercel AI SDK · Service Worker + Web Push · Vercel hosting · Playwright, Vitest, k6.
+Groq + Google Gemini via Vercel AI SDK · Service Worker + Web Push · Vercel hosting · Playwright, Vitest, k6.
 
 ## 7. Expected outcome
 A working PWA piloted with at least one section, load-tested for 200 concurrent users, that lets students

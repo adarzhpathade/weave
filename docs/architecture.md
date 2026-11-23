@@ -19,7 +19,8 @@ flowchart LR
     AUTH["Neon Auth"]
     S3[("Object storage<br/>faculty files")]
   end
-  GEM["Google Gemini<br/>chat + embeddings"]
+  GROQ["Groq<br/>chat, quizzes, analysis"]
+  GEM["Google Gemini<br/>embeddings, PDF/vision,<br/>fallback chat"]
   PUSH["Browser push services<br/>(FCM / APNs / Mozilla)"]
 
   UI <--> SW
@@ -28,7 +29,7 @@ flowchart LR
   RSC & SA & API --> PG
   RSC & SA --> AUTH
   API --> S3
-  API --> GEM
+  API --> GROQ & GEM
   API -- VAPID --> PUSH --> SW
 ```
 
@@ -61,7 +62,7 @@ flowchart LR
 | Server-side progress calculation in `lib/progress` | One formula, consistent everywhere, testable |
 | PWA instead of native app | One codebase for Android, iOS and desktop; no app store |
 | Neon Singapore region | ~80 ms per query from India vs ~700 ms from US regions |
-| Gemini via AI SDK | Free tier, good embeddings + vision; provider swappable in `lib/ai/config.ts` |
+| Groq + Gemini via AI SDK | Groq streams chat very fast; Gemini gives embeddings, PDF/vision and long context; each is the other's chat fallback, so one provider's rate limit never takes the AI down. Routing lives in `lib/ai/config.ts` |
 
 ## 5. Deployment
 - `main` → Vercel production; PR branches → preview deployments with a Neon branch per preview (later).

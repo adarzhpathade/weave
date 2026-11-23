@@ -11,3 +11,4 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-23 — Keep Neon (Postgres + pgvector + Auth + Object Storage, Singapore region) and Vercel; a NEW Neon project will be created in Phase 0 (not the old nodus-singapore one). — clean start, low latency from India.
 - 2026-11-23 — Sign-in restricted to college email domains via `ALLOWED_EMAIL_DOMAINS` (domain not known yet). — department use.
 - 2026-11-23 — Web Push (deadline reminders) is in scope because the app is a PWA; old "no push" rule dropped. — user asked for a PWA.
+- 2026-11-23 — AI providers: Groq primary for chat/quizzes/analysis (fast streaming), Gemini for embeddings + PDF/vision + chat fallback; automatic one-retry fallback between them. — user agreed; Groq has no embeddings, two providers spread free-tier rate limits.
