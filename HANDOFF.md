@@ -1,12 +1,13 @@
 # HANDOFF — start here (new Claude Code session)
 
-> Written 2026-11-23 at the end of the setup session (which ran from the old `Not Decided` folder).
+> Last updated 2026-11-23 after Phase 0.3 + 0.4 (scaffold + Neon).
 > Read this, then `AGENTS.md`, `CLAUDE.md`, `NOTES.md`, `docs/roadmap.md`. Update this file at the end of each session.
 
 ## Where we are
 - **App:** **Weave** — student-first PWA that maps the syllabus as a knowledge graph, links private notes, tracks deadlines (push reminders) and has grounded AI. College minor project; goal = department daily use, 100+ students, pixel-perfect, Awwwards-level.
 - **Repo:** https://github.com/adarzhpathade/weave (PUBLIC, squash-merge only, auto-delete branches). Local: `E:\Projects\College Projects\nodus` (folder keeps the old name).
-- **main** = docs only (no code yet). PRs #1, #2 merged. Phase 0.1 + 0.2 done.
+- Phase 0.1–0.4 done: Next.js 16.4 app scaffolded (Tailwind 4, shadcn Base UI, ESLint/Prettier, Vitest, Playwright) and Neon set up. See `docs/changes/2026-11-23-scaffold-and-neon.md`.
+- **Neon:** project `weave` = `proud-sky-40049407` (Singapore, PG 18, branch `main` = `br-raspy-boat-biu51cbq`): pgvector, Managed Neon Auth, private bucket `materials`. Secrets only in git-ignored `.env.local`; names in `.env.example`, validated by `lib/envSchema.ts`.
 - The old project `E:\Projects\College Projects\Not Decided` (NODUS) is **abandoned**. Do not reuse its code, design references or docs.
 
 ## Decisions already made (don't re-ask)
@@ -30,13 +31,10 @@
 3. Later: Groq API key (console.groq.com), Gemini API key (aistudio.google.com), real syllabus (CSV), team/guide names for `docs/academic/synopsis.md`.
 
 ## Next steps (Phase 0, `docs/roadmap.md`)
-- 0.3 Scaffold Next.js + TS strict + Tailwind 4 + shadcn + ESLint/Prettier + Vitest/Playwright + scripts from AGENTS.md §11 (branch `chore/scaffold`). Read `node_modules/next/dist/docs/` for the installed Next.js version first.
-- 0.4 New Neon project (Neon MCP/CLI): Postgres + pgvector, Auth, object storage; `.env.example`, `lib/env.ts`.
-- 0.5 Drizzle schema v1 (`docs/database_schema.md`) + migrations + seed.
-- 0.6 Auth + college-domain restriction + guards + onboarding.
-- 0.7 PWA base (manifest, icons, service worker, offline page, install prompt) — decide Serwist vs hand-written SW, log in NOTES.md.
-- 0.8 Vercel project + first preview deploy (ask the user before creating it).
-Good split: Claude does 0.3/0.4 (setup, needs shell); Gemini workers do 0.5–0.7 as tasks.
+- 0.5 Drizzle schema v1 (`docs/database_schema.md`) + migrations + seed — Gemini worker task. Seed script: use `.mts` or `main()` (no top-level await in CJS).
+- 0.6 Auth + college-domain restriction + guards + onboarding. **Managed Neon Auth cannot block sign-up by domain** (no hooks) → gate in our server code, or switch to self-managed Better Auth. Waiting on the user.
+- 0.7 PWA base — decide Serwist vs hand-written SW, log in NOTES.md.
+- 0.8 Vercel project + first preview deploy (ask the user first).
 
 ## Machine gotchas (Windows)
 - `agy` CLI: `~/AppData/Local/agy/bin` (v1.5.15). Models: `gemini-4-argon-*`, `gemini-4-neon-*`, `gemini-4-hydrogen-*`, `gemini-3.8-flash-*` (`agy models`). Tier order Argon > Neon > Hydrogen is an **unverified assumption**.
@@ -45,4 +43,5 @@ Good split: Claude does 0.3/0.4 (setup, needs shell); Gemini workers do 0.5–0.
 - Always review worker output for silent fallbacks and invented APIs (past Gemini bugs: wrong library APIs, undefined vars, duplicated formulas).
 - Worktrees: `../weave-wt/<name>`; `node_modules` there is a **junction** — remove only with `cmd /c rmdir`, never `rm -rf` / `Remove-Item -Recurse` / `ln -s` (a wrong delete once wiped the main `node_modules`).
 - `gh` is not on Git Bash PATH: use PowerShell and refresh `$env:Path` from Machine + User.
+- Neon CLI 8.4.4 login expired (`invalid_grant`); user must run `neon login`. Neon MCP works.
 - No `jq`; use `node -e`. Repo enforces LF (`.gitattributes`).
