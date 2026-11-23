@@ -52,7 +52,7 @@
 
   /* layout */
   --w-auth-column: 420px;
-  --border-field: 1.5px;
+  --stroke-field: 1.5px;
   --h-field: 52px;
   --h-button: 48px;
 }
@@ -147,8 +147,8 @@
 @utility min-h-screen-safe {
   min-height: 100dvh;
 }
-@utility border-field {
-  border-width: var(--border-field);
+@utility stroke-field {
+  border-width: var(--stroke-field);
 }
 @utility h-field {
   height: var(--h-field);

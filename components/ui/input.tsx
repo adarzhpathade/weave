@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 // "night" = field on a forced-dark screen (login); "default" = field on the app surface.
 const inputVariants = cva(
-  "h-field w-full rounded-sm border-field px-4 text-body transition-colors duration-fast outline-none aria-invalid:border-missing",
+  "h-field w-full rounded-sm stroke-field px-4 text-body transition-colors duration-fast outline-none aria-invalid:border-missing",
   {
     variants: {
       tone: {
