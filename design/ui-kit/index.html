@@ -604,6 +604,28 @@ main section { padding-block: 4rem 1rem; }
 .ann-file svg { width: 16px; height: 16px; }
 .ann-file em { margin-left: auto; font-style: normal; font-family: var(--f-mono); font-size: 10.5px; color: var(--c-muted); }
 
+/* ---------- home v4: minimal + bell ---------- */
+.hm2 { gap: 30px; padding-top: 10px; }
+.hm-top-r { display: flex; align-items: center; gap: 8px; }
+.bell { position: relative; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); display: grid; place-items: center; padding: 0; transition: transform var(--d-fast) var(--e-out); }
+.bell:active { transform: scale(0.92); }
+.bell svg { width: 19px; height: 19px; }
+.bell .dot { position: absolute; top: -3px; right: -3px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--r-pill); border: 2px solid var(--c-app); background: var(--c-accent); color: var(--c-on-accent); font-size: 10px; font-weight: 800; display: grid; place-items: center; }
+.hm-greet { margin-top: 6px; font-family: var(--f-display); font-weight: 800; font-size: 12cqi; line-height: 0.98; letter-spacing: -0.045em; }
+.hm-greet .soft { color: var(--c-muted); }
+.hm-due { display: grid; gap: 14px; padding: 22px; border-radius: var(--r-lg); background: var(--c-night); color: var(--c-on-night); }
+.hm-due-t { font-size: 1.35rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+.hm-block { display: grid; gap: 14px; }
+.hm-block .hm-cont { margin-top: 0; }
+.notif-scrim { position: absolute; inset: 0; z-index: 6; background: var(--c-scrim); opacity: 0; pointer-events: none; transition: opacity var(--d-base) var(--e-out); }
+.notif { position: absolute; top: 52px; left: 10px; right: 10px; z-index: 7; max-height: 74%; overflow: auto; padding: 16px 18px 6px; border-radius: var(--r-lg); background: var(--c-surface); box-shadow: var(--shadow-lift); transform-origin: calc(100% - 64px) 0; opacity: 0; scale: 0.92; pointer-events: none; transition: opacity var(--d-base) var(--e-out), scale var(--d-slow) var(--e-spring); }
+.screen.notif-open .notif-scrim, .screen.notif-open .notif { opacity: 1; pointer-events: auto; }
+.screen.notif-open .notif { scale: 1; }
+.notif-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 8px; border-bottom: 1px solid var(--c-ink); }
+.notif-head h4 { margin: 0; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; }
+.notif-head button { padding: 0; border: 0; background: none; color: var(--c-muted); font-size: 12px; font-weight: 700; }
+.notif .ann-row:last-child { border-bottom: 0; }
+
 /* ---------- phone screens ---------- */
 .phones { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px 20px; justify-items: center; }
 .phone-wrap { display: grid; gap: 0.8rem; justify-items: center; width: 100%; max-width: 390px; }
@@ -1001,11 +1023,6 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
           <div class="login3">
             <div class="scr-row"><span class="wordmark">weave.</span><span class="label on-night">CSIT · RGPV</span></div>
-            <div class="lg-stack" aria-hidden="true">
-              <div class="lg-card c1"><span class="lg-k">CSIT-501 · Core</span><b>Computer Networking</b><span class="lg-bar"><i style="width:72%"></i></span><span class="lg-k">18 of 25 topics</span></div>
-              <div class="lg-card c2"><span class="lg-k">Due tomorrow · CN</span><b>Subnetting and CIDR</b><span class="lg-cd num">01d 06h 28m</span></div>
-              <div class="lg-card c3"><span class="lg-k">Your note</span><b>Round Robin vs priority</b><span class="lg-chip">OS · Unit 2 · Round Robin</span></div>
-            </div>
             <div class="lg-copy">
               <h3>Your semester,<br>in one place.</h3>
               <p>Syllabus, notes, deadlines and announcements for CSIT and CY students.</p>
@@ -1025,59 +1042,88 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       <figure class="phone-wrap">
         <div class="phone"><div class="screen">
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
-          <div class="scroll stagger">
-            <div class="scr-row"><div><div class="label" data-today>Today</div><div class="hm-hi"><span data-greet>Morning</span>, Aarav</div></div><span class="avatar">AS</span></div>
-            <div class="hm-next">
-              <div class="scr-row"><span class="label on-night">Due next · Computer Networking</span><span class="status late">Tomorrow</span></div>
-              <div class="hm-next-t">Assignment 3: Subnetting and CIDR</div>
+          <div class="scroll stagger hm2">
+            <div class="scr-row"><span class="label" data-today>Today</span>
+              <div class="hm-top-r">
+                <button class="bell" type="button" data-bell aria-expanded="false" aria-label="Notifications, 2 new"><svg><use href="#i-bell"/></svg><span class="dot">2</span></button>
+                <span class="avatar">AS</span>
+              </div>
+            </div>
+            <h3 class="hm-greet"><span class="soft"><span data-greet>Morning</span>,</span><br>Aarav</h3>
+            <div class="hm-due">
+              <div class="scr-row"><span class="label on-night">Due next · Networking</span><span class="status late">Tomorrow</span></div>
+              <div class="hm-due-t">Assignment 3: Subnetting and CIDR</div>
               <div class="count" data-due-in="1.27"></div>
-              <div class="scr-row hm-next-f"><span>Submit on paper in class</span><span>2 more this week</span></div>
             </div>
-            <div class="hm-sec"><h4>Announcements</h4><span class="hm-new">2 new</span></div>
-            <div class="hm-list">
-              <div class="ann-row unread"><span class="ann-av">RM</span><div><b>CN class test moved to Friday</b><span>Prof. R. Mehta · 20 min ago</span></div></div>
-              <div class="ann-row unread"><span class="ann-av" style="background:var(--c-sub-2)">SI</span><div><b>Unit 3 slides uploaded</b><span>Prof. S. Iyer · Operating System · 2h ago</span></div></div>
+            <div class="hm-block">
+              <span class="label">This week</span>
+              <div class="hm-week">
+                <div data-day="1.27"><small>Wed</small><b>25</b><span>CN · Assignment 3</span></div>
+                <div data-day="3.09"><small>Fri</small><b>27</b><span>CN · Class test</span></div>
+                <div data-day="6.4"><small>Mon</small><b>30</b><span>TOC · Assignment 1</span></div>
+              </div>
             </div>
-            <div class="hm-sec"><h4>This week</h4><span class="label">3 due</span></div>
-            <div class="hm-week">
-              <div data-day="1.27"><small>Wed</small><b>25</b><span>CN · Assignment 3</span></div>
-              <div data-day="3.09"><small>Fri</small><b>27</b><span>CN · Class test</span></div>
-              <div data-day="6.4"><small>Mon</small><b>30</b><span>TOC · Assignment 1</span></div>
+            <div class="hm-block">
+              <span class="label">Keep writing</span>
+              <div class="hm-cont"><div><b>Round Robin vs priority</b><span>OS · Unit 2 · edited 2h ago</span></div><span class="ibtn ink" aria-hidden="true" style="width:40px;height:40px"><svg><use href="#i-arrow"/></svg></span></div>
             </div>
-            <div class="hm-sec"><h4>Just marked</h4><span class="label">by teachers</span></div>
-            <div class="hm-list">
-              <div class="mk-row"><div><b>Search algorithms</b><span>AI · Assignment 2</span></div><span class="status submitted"><svg><use href="#i-check"/></svg>8 / 10</span></div>
-              <div class="mk-row"><div><b>Process states</b><span>OS · Assignment 1</span></div><span class="status late">Late · 6 / 10</span></div>
-            </div>
-            <div class="hm-sec"><h4>Keep writing</h4><span class="label">Edited 2h ago</span></div>
-            <div class="hm-cont"><div><b>Round Robin vs priority</b><span>OS · Unit 2 · 3 links</span></div><span class="ibtn ink" aria-hidden="true" style="width:40px;height:40px"><svg><use href="#i-arrow"/></svg></span></div>
+          </div>
+          <div class="notif-scrim"></div>
+          <div class="notif" role="dialog" aria-label="Notifications">
+            <div class="notif-head"><h4>Notifications</h4><button type="button" data-markread>Mark all read</button></div>
+            <div class="ann-row unread"><span class="ann-av">RM</span><div><b>CN class test moved to Friday</b><span>Prof. R. Mehta · Exam · 20 min ago</span></div></div>
+            <div class="ann-row unread"><span class="ann-av" style="background:var(--c-sub-2)">SI</span><div><b>Unit 3 slides uploaded</b><span>Prof. S. Iyer · OS-Unit3-slides.pdf · 2h ago</span></div></div>
+            <div class="ann-row"><span class="ann-av" style="background:var(--c-lime);color:var(--c-on-lime)"><svg width="16" height="16"><use href="#i-check"/></svg></span><div><b>AI Assignment 2 marked: 8 / 10</b><span>Submitted · Yesterday</span></div></div>
+            <div class="ann-row"><span class="ann-av" style="background:var(--c-app);color:var(--c-ink)"><svg width="16" height="16"><use href="#i-bell"/></svg></span><div><b>CN Assignment 3 is due tomorrow</b><span>Reminder · Today, 9:00</span></div></div>
+            <div class="ann-row"><span class="ann-av" style="background:var(--c-sub-5)">HD</span><div><b>No lectures on Monday</b><span>Head of Department · Yesterday</span></div></div>
           </div>
           <div class="navpill" data-section="home"><span class="where">Home · Today</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
         </div></div>
-        <figcaption><b>Home</b><span>Only what matters today: due next, announcements, marks, your last note</span></figcaption>
+        <figcaption><b>Home</b><span>Due next, this week, your last note. Tap the bell</span></figcaption>
       </figure>
 
-      <!-- ANNOUNCEMENTS -->
+      <!-- NOTIFICATIONS -->
       <figure class="phone-wrap">
-        <div class="phone"><div class="screen">
+        <div class="phone"><div class="screen" data-notif-start>
           <div class="sbar"><span>9:41</span><span class="isl"></span><span class="sig"><i style="height:5px"></i><i style="height:8px"></i><i style="height:11px"></i></span></div>
-          <div class="scroll stagger">
-            <div class="scr-row"><span class="label">CSIT-2 · Semester 5</span><span class="label">2 new</span></div>
-            <h3 class="scr-title" style="font-size:12cqi">Announcements</h3>
-            <div class="row" data-chipgroup style="gap:6px">
-              <button class="fchip" type="button" aria-pressed="true">All <span class="n">6</span></button>
-              <button class="fchip" type="button" aria-pressed="false">Exams <span class="n">1</span></button>
-              <button class="fchip" type="button" aria-pressed="false">Material <span class="n">2</span></button>
-              <button class="fchip" type="button" aria-pressed="false">Class <span class="n">2</span></button>
+          <div class="scroll stagger hm2">
+            <div class="scr-row"><span class="label" data-today>Today</span>
+              <div class="hm-top-r">
+                <button class="bell" type="button" data-bell aria-expanded="false" aria-label="Notifications, 2 new"><svg><use href="#i-bell"/></svg><span class="dot">2</span></button>
+                <span class="avatar">AS</span>
+              </div>
             </div>
-            <article class="ann unread"><div class="ann-top"><span class="ann-av">RM</span><div><b>Prof. R. Mehta</b><span>Computer Networking · 20 min ago</span></div><span class="ann-tag">Exam</span></div><h5>Class test on Unit 3 moved to Friday</h5><p>The test is now on Fri, 27 Nov at 10:00 in Lab 4. Syllabus: subnetting, CIDR and routing basics.</p></article>
-            <article class="ann unread"><div class="ann-top"><span class="ann-av" style="background:var(--c-sub-2)">SI</span><div><b>Prof. S. Iyer</b><span>Operating System · 2h ago</span></div><span class="ann-tag">Material</span></div><h5>Unit 3 slides uploaded</h5><p>Synchronization and deadlocks, 42 slides. Read before Thursday's lecture.</p><span class="ann-file"><svg><use href="#i-book"/></svg>OS-Unit3-slides.pdf<em>2.1 MB</em></span></article>
-            <article class="ann"><div class="ann-top"><span class="ann-av" style="background:var(--c-sub-5)">HD</span><div><b>Head of Department</b><span>CSIT · Yesterday</span></div><span class="ann-tag">Class</span></div><h5>No lectures on Monday</h5><p>Department seminar in the main hall instead. Attendance will be taken there.</p></article>
-            <article class="ann"><div class="ann-top"><span class="ann-av">RM</span><div><b>Prof. R. Mehta</b><span>Computer Networking · 3 days ago</span></div><span class="ann-tag">Assignment</span></div><h5>Assignment 3 posted</h5><p>Subnetting and CIDR, due Wed 25 Nov. Submit on paper in class.</p></article>
+            <h3 class="hm-greet"><span class="soft"><span data-greet>Morning</span>,</span><br>Aarav</h3>
+            <div class="hm-due">
+              <div class="scr-row"><span class="label on-night">Due next · Networking</span><span class="status late">Tomorrow</span></div>
+              <div class="hm-due-t">Assignment 3: Subnetting and CIDR</div>
+              <div class="count" data-due-in="1.27"></div>
+            </div>
+            <div class="hm-block">
+              <span class="label">This week</span>
+              <div class="hm-week">
+                <div data-day="1.27"><small>Wed</small><b>25</b><span>CN · Assignment 3</span></div>
+                <div data-day="3.09"><small>Fri</small><b>27</b><span>CN · Class test</span></div>
+                <div data-day="6.4"><small>Mon</small><b>30</b><span>TOC · Assignment 1</span></div>
+              </div>
+            </div>
+            <div class="hm-block">
+              <span class="label">Keep writing</span>
+              <div class="hm-cont"><div><b>Round Robin vs priority</b><span>OS · Unit 2 · edited 2h ago</span></div><span class="ibtn ink" aria-hidden="true" style="width:40px;height:40px"><svg><use href="#i-arrow"/></svg></span></div>
+            </div>
           </div>
-          <div class="navpill" data-section="news"><span class="where">Announcements · 2 new</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
+          <div class="notif-scrim"></div>
+          <div class="notif" role="dialog" aria-label="Notifications">
+            <div class="notif-head"><h4>Notifications</h4><button type="button" data-markread>Mark all read</button></div>
+            <div class="ann-row unread"><span class="ann-av">RM</span><div><b>CN class test moved to Friday</b><span>Prof. R. Mehta · Exam · 20 min ago</span></div></div>
+            <div class="ann-row unread"><span class="ann-av" style="background:var(--c-sub-2)">SI</span><div><b>Unit 3 slides uploaded</b><span>Prof. S. Iyer · OS-Unit3-slides.pdf · 2h ago</span></div></div>
+            <div class="ann-row"><span class="ann-av" style="background:var(--c-lime);color:var(--c-on-lime)"><svg width="16" height="16"><use href="#i-check"/></svg></span><div><b>AI Assignment 2 marked: 8 / 10</b><span>Submitted · Yesterday</span></div></div>
+            <div class="ann-row"><span class="ann-av" style="background:var(--c-app);color:var(--c-ink)"><svg width="16" height="16"><use href="#i-bell"/></svg></span><div><b>CN Assignment 3 is due tomorrow</b><span>Reminder · Today, 9:00</span></div></div>
+            <div class="ann-row"><span class="ann-av" style="background:var(--c-sub-5)">HD</span><div><b>No lectures on Monday</b><span>Head of Department · Yesterday</span></div></div>
+          </div>
+          <div class="navpill" data-section="home"><span class="where">Home · Today</span><button class="nb search" type="button" aria-label="Search"><svg><use href="#i-search"/></svg></button><button class="nb menu" type="button" aria-expanded="false" aria-label="Open menu"><span class="burger" aria-hidden="true"></span><span class="mlabel">Menu</span></button></div>
         </div></div>
-        <figcaption><b>Announcements</b><span>Teachers post to a division or subject; students also get a push</span></figcaption>
+        <figcaption><b>Notifications (bell tapped)</b><span>Announcements, marks and reminders in one panel. No extra page</span></figcaption>
       </figure>
 
       <!-- SUBJECTS -->
@@ -1469,8 +1515,7 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
 
   // ---- floating pill + full-screen menu ----
   var MENU = [
-    { id: "home", word: "Home", count: "Today", subs: ["Due this week", "Just marked", "Keep writing"] },
-    { id: "news", word: "Announcements", count: "2 new", subs: ["All", "Exams", "Material", "Class updates"] },
+    { id: "home", word: "Home", count: "Today", subs: ["Due this week", "Notifications", "Keep writing"] },
     { id: "study", word: "Study", count: "4 subj.", subs: ["Subjects & progress", "Graph", "Materials"], later: ["Quizzes", "AI tutor"] },
     { id: "notes", word: "Notes", count: "42", subs: ["All notes", "New note", "Linked to syllabus", "Free notes"] },
     { id: "tasks", word: "Assignments", count: "3 due", subs: ["Pending", "Calendar", "Marked"] },
@@ -1683,6 +1728,21 @@ footer { padding-block: 3rem 4rem; color: var(--c-muted); font-size: var(--t-sma
       g.querySelector("svg").classList.toggle("no-notes", syl);
       selectNode(g, g.dataset.graph === "wide" ? (syl ? "t5" : "n1") : null);
     });
+  });
+
+  // ---- bell: notifications panel ----
+  document.querySelectorAll("[data-bell]").forEach(function (b) {
+    var scr = b.closest(".screen");
+    function set(open) { scr.classList.toggle("notif-open", open); b.setAttribute("aria-expanded", String(open)); }
+    b.addEventListener("click", function () { set(!scr.classList.contains("notif-open")); });
+    scr.querySelector(".notif-scrim").addEventListener("click", function () { set(false); });
+    scr.querySelector(".notif").addEventListener("keydown", function (e) { if (e.key === "Escape") { set(false); b.focus(); } });
+    scr.querySelector("[data-markread]").addEventListener("click", function () {
+      scr.querySelectorAll(".notif .unread").forEach(function (r) { r.classList.remove("unread"); });
+      var d = b.querySelector(".dot"); if (d) d.remove();
+      b.setAttribute("aria-label", "Notifications");
+    });
+    if (scr.hasAttribute("data-notif-start")) set(true);
   });
 
   // ---- note editor: link a topic or another note ----
