@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useId, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import { useFocusTrap } from "@/components/nav/useFocusTrap";
+import { PUSH_HELP, usePush } from "@/components/pwa/usePush";
+import { Button } from "@/components/ui/button";
 import { cx } from "./classes";
 import { Countdown } from "./Countdown";
 import { dueTime, formatDue, isOverdue, marksText } from "./format";
-import { ClipIcon, CloseIcon } from "./icons";
+import { CheckIcon, ClipIcon, CloseIcon } from "./icons";
 import { StatusChip } from "./StatusChip";
 import type { AssignmentItem } from "./types";
 import { useNow } from "./useNow";
@@ -170,8 +172,55 @@ export function AssignmentSheet({
           <p className="text-copy whitespace-pre-line">{item.description}</p>
         ) : null}
 
+        <RemindMe />
+
         <p className="text-fine text-muted">Submit on paper in class. Your teacher marks it here.</p>
       </div>
+    </div>
+  );
+}
+
+// "Remind me" turns on phone notifications (tap only); other states explain why it isn't available.
+function RemindMe() {
+  const { state, enable, error } = usePush();
+  const [busy, setBusy] = useState(false);
+
+  async function onEnable() {
+    if (busy) return;
+    setBusy(true);
+    try {
+      await enable();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (state === "loading") {
+    return <span aria-hidden="true" className="h-button w-full animate-pulse rounded-pill bg-line" />;
+  }
+  if (state === "unsupported" || state === "ios-install" || state === "denied") {
+    return <p className="text-fine text-muted">{PUSH_HELP[state]}</p>;
+  }
+  return (
+    <div className="grid gap-2">
+      {state === "on" ? (
+        <Button variant="ghost" size="wide" disabled>
+          <CheckIcon className="size-4" />
+          Reminders on
+        </Button>
+      ) : (
+        <Button variant="ghost" size="wide" disabled={busy} onClick={onEnable}>
+          Remind me
+        </Button>
+      )}
+      {error !== null ? (
+        <p
+          role="alert"
+          className="flex items-center gap-2 text-fine font-semibold before:size-2 before:flex-none before:rounded-full before:bg-missing"
+        >
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }

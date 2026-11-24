@@ -1,5 +1,5 @@
 import "server-only";
-import webpush from "web-push";
+import { sendNotification } from "web-push";
 import {
   deletePushSubscriptionByEndpoint,
   getSubscriptionsForStudent,
@@ -45,7 +45,7 @@ export async function sendPushToStudent(
             },
           };
 
-          await webpush.sendNotification(
+          await sendNotification(
             pushSubscription,
             JSON.stringify(payload),
             { TTL: 60 * 60 * 24 },

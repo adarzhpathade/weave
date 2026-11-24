@@ -1,5 +1,5 @@
 import "server-only";
-import webpush from "web-push";
+import { setVapidDetails } from "web-push";
 
 let vapidConfigured = false;
 
@@ -21,6 +21,6 @@ export function ensureVapidConfig(): void {
   }
 
   const { subject, publicKey, privateKey } = getVapidKeys();
-  webpush.setVapidDetails(subject, publicKey, privateKey);
+  setVapidDetails(subject, publicKey, privateKey);
   vapidConfigured = true;
 }

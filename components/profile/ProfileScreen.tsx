@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type JSX, type ReactNode } from "react";
+import { PushToggle } from "@/components/pwa/PushToggle";
 import { Button } from "@/components/ui/button";
 import type { NotifyPrefs, ProfileActions, ProfileData } from "./types";
 
@@ -110,6 +111,7 @@ function NotifySection({
         Notifications
       </h2>
       <div className="grid border-t border-line">
+        <PushToggle />
         {NOTIFY_ROWS.map(({ key, label }) => (
           <div
             key={key}
@@ -136,7 +138,6 @@ function NotifySection({
           {error}
         </p>
       ) : null}
-      <p className="text-fine text-muted">Push notifications arrive after you install Weave on your phone.</p>
     </section>
   );
 }
