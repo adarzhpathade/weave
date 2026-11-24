@@ -15,13 +15,20 @@ export type {
 export { ensureStudentUser, getStudentByEmail } from "./students";
 export type { StudentByEmail } from "./students";
 export {
+  claimPushLog,
   deletePushSubscription,
   deletePushSubscriptionByEndpoint,
+  getDue2dCandidates,
+  getDueTodayCandidates,
+  getNewAssignmentCandidates,
+  getStatusMarkedCandidate,
   getSubscriptionsForStudent,
   markPushSuccess,
   upsertPushSubscription,
 } from "./push";
 export type {
+  AssignmentReminderCandidate,
+  StatusMarkedCandidate,
   StudentPushSubscription,
   UpsertPushSubscriptionInput,
 } from "./push";

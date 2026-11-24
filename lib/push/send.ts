@@ -1,11 +1,15 @@
 import "server-only";
-import webpush from "web-push";
+import * as webpushModule from "web-push";
 import {
   deletePushSubscriptionByEndpoint,
   getSubscriptionsForStudent,
   markPushSuccess,
 } from "@/lib/db/queries/push";
 import { ensureVapidConfig } from "./config";
+
+const webpush =
+  (webpushModule as unknown as { default?: typeof webpushModule }).default ??
+  webpushModule;
 
 export type PushPayload = {
   title: string;
