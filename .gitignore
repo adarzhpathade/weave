@@ -36,3 +36,7 @@ Thumbs.db
 # Reference images are other designers' work: keep them local, never in git
 design/references/*
 !design/references/.gitkeep
+
+.vercel
+.env*
+!.env.example

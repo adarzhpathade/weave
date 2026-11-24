@@ -45,6 +45,12 @@ function hasValidSessionCookie(request: NextRequest): boolean {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Browser/tool probes (e.g. Chrome devtools' /.well-known/appspecific/*.json) have no page here.
+  // Answer 404 directly so they never fall into the app's catch-all route.
+  if (pathname.startsWith("/.well-known/")) {
+    return new NextResponse(null, { status: 404 });
+  }
+
   if (isPublicAssetOrRoute(pathname)) {
     return NextResponse.next();
   }

@@ -33,11 +33,10 @@ vi.mock("@/lib/db/queries/push", () => ({
 const mockSendNotification = vi.fn();
 const mockSetVapidDetails = vi.fn();
 
+// web-push v4 has named exports only (no default export).
 vi.mock("web-push", () => ({
-  default: {
-    sendNotification: (...args: unknown[]) => mockSendNotification(...args),
-    setVapidDetails: (...args: unknown[]) => mockSetVapidDetails(...args),
-  },
+  sendNotification: (...args: unknown[]) => mockSendNotification(...args),
+  setVapidDetails: (...args: unknown[]) => mockSetVapidDetails(...args),
 }));
 
 const STUDENT_ID = "11111111-1111-4111-8111-111111111111";
