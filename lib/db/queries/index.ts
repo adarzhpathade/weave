@@ -14,3 +14,15 @@ export type {
 } from "./notifications";
 export { ensureStudentUser, getStudentByEmail } from "./students";
 export type { StudentByEmail } from "./students";
+export {
+  deletePushSubscription,
+  deletePushSubscriptionByEndpoint,
+  getSubscriptionsForStudent,
+  markPushSuccess,
+  upsertPushSubscription,
+} from "./push";
+export type {
+  StudentPushSubscription,
+  UpsertPushSubscriptionInput,
+} from "./push";
+
