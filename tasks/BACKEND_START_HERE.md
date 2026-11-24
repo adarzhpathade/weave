@@ -13,8 +13,9 @@ Do them **one at a time, in order**. Start the next one only after the PR for th
 
 ## Before you start (the only things you do by hand)
 
-1. Get the file **`teammate.env.local`** from Adarsh **privately** (WhatsApp/DM). Save it in your
-   **Downloads** folder. Never share it, never put it in the repo or a PR.
+1. Get the env file from Adarsh **privately** (WhatsApp/DM). Put it in the folder you will open in
+   Antigravity (as `.env.local`) or in **Downloads** (as `teammate.env.local`). Never share it,
+   never put it in the repo or a PR.
    It points to **`dev-teammate`**, your own copy of the database. You can't break the live app with it.
 2. Make an empty folder, e.g. `D:\code`, and open it in Antigravity.
 3. Paste the prompt below into the agent. The agent installs the tools, logs in to GitHub, downloads
@@ -71,9 +72,13 @@ STEP 3 - Get the code
 - Run: npm install
 
 STEP 4 - Secrets
-- If "weave/.env.local" does not exist, copy my file into it:
-  Copy-Item "$HOME\Downloads\teammate.env.local" ".env.local"
-  If that file is not in Downloads, ASK ME where I saved it.
+- The project needs the file "weave\.env.local". If it is not there yet, look for my env file in
+  this order and COPY the first one you find to "weave\.env.local" (do not open or print it):
+  1. the folder Antigravity is open in (the parent of "weave"): ".env.local" or "teammate.env.local"
+  2. "$HOME\Downloads\teammate.env.local"
+  Example: Copy-Item "..\.env.local" ".env.local"
+  If none exists, ASK ME where it is.
+- Check it is ignored by git: git check-ignore .env.local  (must print ".env.local").
 - Never print, show or log the values in .env.local. Never commit it. Never paste secrets into
   code, logs, commit messages or the PR.
 - This database is my own test copy, so "npm run db:migrate" and "npm run db:seed" are allowed
@@ -129,5 +134,5 @@ STEP 9 - Commit, push and open the pull request
 - Teammate database: Neon branch `dev-teammate` (`br-super-dew-biuw2s7o`, project `proud-sky-40049407`),
   copied from production data on 2026-11-24, with its own Neon Auth. Her env file has its own
   session/cookie/cron secrets and empty VAPID keys. Delete the branch when the backend tasks are done.
-- Before b1 is tested end to end, email OTP sign-in must be enabled on both the `dev-teammate` and the
-  production branch's Neon Auth.
+- Email OTP is built into Neon Auth (checked 2026-11-24). Before real students use it, set a real
+  email provider on the production branch (the shared sender is for development only).

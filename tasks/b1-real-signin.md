@@ -60,20 +60,31 @@ Log the real error on the server with `console.error` (never the code or secrets
 - `lib/auth/session.ts` — `createSession`, `getSessionStudent` (do not change their signatures)
 - `lib/db/queries/students.ts` — `getStudentByEmail`, `ensureStudentUser`
 - `lib/db/schema/people.ts` — `users.id` has no default: it is meant to hold the Neon Auth user id
-- Neon Auth docs: https://neon.com/docs/auth/overview and the email OTP page in the same docs.
-  Better Auth email OTP plugin: https://www.better-auth.com/docs/plugins/email-otp
+- Neon Auth Next.js server SDK (checked 2026-11-24): https://neon.com/docs/auth/reference/nextjs-server
+- Neon Auth email OTP: https://neon.com/docs/auth/guides/plugins/email-otp
+  (Email OTP is built in; it only needs "Sign-up and Sign-in with Email" on, which it already is.)
 
 ## Steps
-1. Read the references. In Neon Auth docs find how to **send an email OTP** and **sign in with an
-   email OTP from the server** (Node). Use the official Neon Auth package if it supports server-side
-   calls (install it with `npm install <package>`; it is already part of our planned stack). If the
-   package has no server API, call the Better Auth HTTP endpoints under `NEON_AUTH_BASE_URL` with `fetch`
-   (`/email-otp/send-verification-otp` with `type: "sign-in"`, then `/sign-in/email-otp`). Write which
-   one you used and why in the PR.
-2. Create `lib/auth/neonAuth.ts` (starts with `import "server-only";`) with two functions:
-   `sendEmailCode(email)` and `verifyEmailCode(email, code)`. `verifyEmailCode` returns the Neon Auth
-   user `{ id, email, name }` on success, or a typed error (`"invalid_code" | "rate_limited" | "failed"`).
-   Use a 10-second timeout on each request. Read `NEON_AUTH_BASE_URL` from `lib/env.ts`.
+1. Install the official package: `npm install @neon/auth@latest`. Read the two Neon docs above.
+   The methods you need (all from the server instance, they return `{ data, error }`):
+   ```ts
+   import { createNeonAuth } from "@neon/auth/next/server";
+   export const auth = createNeonAuth({
+     baseUrl: env.NEON_AUTH_BASE_URL,
+     cookies: { secret: env.NEON_AUTH_COOKIE_SECRET },
+   });
+   await auth.emailOtp.sendVerificationOtp({ email, type: "sign-in" }); // sends the code
+   await auth.signIn.emailOtp({ email, otp });                          // checks the code
+   ```
+   Too many wrong tries returns an error with code `TOO_MANY_ATTEMPTS` (map it to `TOO_MANY_TRIES`);
+   HTTP 429 also maps to `TOO_MANY_TRIES`. Network errors have codes starting with `NETWORK_` (map to
+   `SIGN_IN_FAILED`). Check the real type of `error` in `node_modules/@neon/auth` before writing the mapping.
+   Do NOT add `auth.handler()`, `auth.middleware()` or an `app/api/auth` route; we only call these two methods.
+2. Create `lib/auth/server.ts` (starts with `import "server-only";`) with the `auth` instance above,
+   and two functions: `sendEmailCode(email)` and `verifyEmailCode(email, code)`. `verifyEmailCode`
+   returns the Neon Auth user `{ id, email, name }` (from `data.user`) on success, or a typed error
+   (`"invalid_code" | "rate_limited" | "failed"`). Read the env values from `lib/env.ts`.
+   In `signOut` (lib/actions/auth.ts), also call `auth.signOut()` and ignore only its "no session" error.
 3. In `lib/db/queries/students.ts`, add `linkStudentToAuthUser(studentId, authUserId, email, name)`:
    - if the student already has a `userId`, return it (do not change it);
    - otherwise, in **one transaction**: insert the `users` row with `id = authUserId`
@@ -83,7 +94,7 @@ Log the real error on the server with `console.error` (never the code or secrets
    `verifySignInCode` must check the student list **again** (student may have been removed),
    then link the user (step 3), then call `createSession(student.id, userId)`.
 5. Change `signIn` so it only works for the demo email (see contract).
-6. Tests: create `lib/actions/auth.test.ts` with Vitest. Mock `lib/auth/neonAuth.ts`,
+6. Tests: create `lib/actions/auth.test.ts` with Vitest. Mock `lib/auth/server.ts`,
    `lib/db/queries` and `lib/auth/session.ts` with `vi.mock`. Cover: invalid email, not on list,
    demo email skips the code, code sent for a listed student, wrong code, rate limited, correct code
    creates a session. Look at `lib/auth/cookie.test.ts` for the test style.
@@ -104,5 +115,6 @@ Log the real error on the server with `console.error` (never the code or secrets
 - [ ] No secrets, no `any`, only `files_allowed` touched, PR opened (not merged)
 
 ## Admin step (Adarsh, not the teammate)
-Email OTP must be turned on for the Neon Auth project (Neon console → Auth → Email OTP), and the
-email sender configured. Check this before testing the UI end to end.
+Email OTP is built in and works on the `dev-teammate` branch with Neon's shared sender (dev only).
+Before real students use it, set a real email provider (SMTP) for the production branch's Neon Auth
+(https://neon.com/docs/auth/production-checklist#email-provider) and add the production URL as a trusted domain.
