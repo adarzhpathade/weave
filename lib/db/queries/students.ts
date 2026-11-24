@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { departments, divisions, programs, students, users } from "@/lib/db/schema";
 
@@ -146,4 +146,63 @@ export async function ensureStudentUser(
     .where(eq(students.id, studentId));
 
   return userRow.id;
+}
+
+/**
+ * Links a student to a Neon Auth user ID on first sign-in with an email code.
+ * The neon-http driver has no transactions, so each step is safe to repeat on its own:
+ * - if the student already has a userId, return it (never change it);
+ * - insert the users row with id = authUserId (do nothing if the email already exists);
+ * - set students.user_id only while it is still empty, so two parallel sign-ins cannot overwrite each other.
+ */
+export async function linkStudentToAuthUser(
+  studentId: string,
+  authUserId: string,
+  email: string,
+  name: string,
+): Promise<string> {
+  const normalized = email.trim().toLowerCase();
+
+  const [existingStudent] = await db
+    .select({ userId: students.userId })
+    .from(students)
+    .where(eq(students.id, studentId))
+    .limit(1);
+  if (existingStudent?.userId) {
+    return existingStudent.userId;
+  }
+
+  await db
+    .insert(users)
+    .values({ id: authUserId, email: normalized, name: name.trim() || normalized, role: "student" })
+    .onConflictDoNothing({ target: users.email });
+
+  const [userRow] = await db
+    .select({ id: users.id })
+    .from(users)
+    .where(eq(users.email, normalized))
+    .limit(1);
+  if (!userRow) {
+    throw new Error(`Failed to resolve user id for student ${studentId}.`);
+  }
+
+  const [linked] = await db
+    .update(students)
+    .set({ userId: userRow.id, updatedAt: new Date() })
+    .where(and(eq(students.id, studentId), isNull(students.userId)))
+    .returning({ userId: students.userId });
+  if (linked?.userId) {
+    return linked.userId;
+  }
+
+  // Another request linked the student first; use what it stored.
+  const [current] = await db
+    .select({ userId: students.userId })
+    .from(students)
+    .where(eq(students.id, studentId))
+    .limit(1);
+  if (!current?.userId) {
+    throw new Error(`Failed to link student ${studentId} to a user.`);
+  }
+  return current.userId;
 }

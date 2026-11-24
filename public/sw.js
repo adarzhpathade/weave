@@ -112,7 +112,7 @@ self.addEventListener("push", (event) => {
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   const rawUrl = event.notification.data?.url;
-  const targetUrl = typeof rawUrl === "string" && rawUrl.startsWith("/") ? rawUrl : "/";
+  const targetUrl = typeof rawUrl === "string" && rawUrl.startsWith("/") && !rawUrl.startsWith("//") ? rawUrl : "/";
 
   event.waitUntil(
     self.clients

@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weave Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Tokens copied from app/globals.css (light theme) */
+:root{
+  --c-bg:#ECECE8; --c-app:#F4F4F1; --c-surface:#FFFFFF; --c-ink:#0B0B0C; --c-muted:#6E6E73; --c-line:#D8D8D3;
+  --c-night:#0B0B0C; --c-on-night:#F4F4F1; --c-night-line:#2C2C30; --c-night-muted:#9C9CA3;
+  --c-lime:#62E04E; --c-on-lime:#0B0B0C; --c-accent:#6D6AF4; --c-late:#FFB21E; --c-missing:#FF4F3A;
+  --c-sub-1:#D7C6F7; --c-sub-2:#E9F49A; --c-sub-3:#A58CF2; --c-sub-4:#C8CDF7; --c-sub-5:#BDE9D3; --c-sub-6:#F8CBAA;
+  --font-sans:"Urbanist","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --r-sm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--c-bg);overflow:hidden;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+body{font-family:var(--font-sans);color:var(--c-ink);cursor:default}
+
+/* Stage: designed at 1440x810, scaled to fit */
+#stage{position:absolute;left:50%;top:50%;width:1440px;height:810px;overflow:hidden;transform-origin:center;background:var(--c-bg)}
+.slide{position:absolute;inset:0;padding:92px 80px 0;background:var(--c-app);visibility:hidden}
+.slide.on{visibility:visible}
+.slide.night{background:var(--c-night);color:var(--c-on-night);padding-top:76px}
+
+/* Persistent chrome */
+.chrome{position:absolute;left:80px;right:80px;top:34px;display:flex;justify-content:space-between;z-index:10;pointer-events:none;
+  font:500 13px var(--font-mono);letter-spacing:.24em;color:var(--c-ink);transition:color .5s .3s}
+.bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--c-line);z-index:10;transition:background .5s .3s}
+.bar i{display:block;height:100%;background:var(--c-ink);transform-origin:left;transform:scaleX(.2);transition:background .5s .3s}
+#stage.dark .chrome{color:var(--c-on-night)}
+#stage.dark .bar{background:var(--c-night-line)}
+#stage.dark .bar i{background:var(--c-on-night)}
+
+/* Shared type */
+.label{font:500 13px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--c-muted)}
+.night .label{color:var(--c-night-muted)}
+.title{margin-top:16px;font-weight:900;font-size:64px;line-height:.98;letter-spacing:-.035em}
+.tl{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em;color:var(--c-muted)}
+.tl.k{color:var(--c-ink)}
+.night .tl{color:var(--c-night-muted)}
+.night .tl.k{color:var(--c-on-night)}
+.s4 .title{font-size:52px}
+.s5 .title{font-size:56px}
+.mono{font-family:var(--font-mono)}
+
+/* 0 — title */
+.s0{display:flex;flex-direction:column;justify-content:center;padding-top:0}
+.s0 .brand{font-weight:900;font-size:168px;line-height:.9;letter-spacing:-.05em;color:var(--c-ink)}
+.s0 .tag{margin-top:26px;font-size:34px;font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--c-muted)}
+.s0 .tag b{color:var(--c-ink);font-weight:800}
+.s0 .meta{position:absolute;left:80px;right:80px;bottom:58px;display:flex;justify-content:space-between;align-items:end;padding-top:22px;border-top:1px solid var(--c-line)}
+.s0 .team{font-size:44px;font-weight:900;letter-spacing:-.03em;color:var(--c-ink)}
+.s0 .team small{display:block;margin-bottom:6px;font:500 13px var(--font-mono);letter-spacing:.2em;color:var(--c-muted)}
+.s0 .meta .label{text-align:right}
+
+/* 1 — problem */
+.rows{margin-top:30px;border-bottom:1px solid var(--c-line)}
+.prow{display:grid;grid-template-columns:56px 1fr 360px;gap:24px;align-items:center;height:98px;border-top:1px solid var(--c-line)}
+.prow .num{font:500 15px var(--font-mono);color:var(--c-muted);letter-spacing:.1em}
+.prow b{display:block;font-size:27px;font-weight:800;letter-spacing:-.02em}
+.prow p{margin-top:4px;font-size:18px;line-height:1.35;color:var(--c-muted);max-width:760px}
+.thread{width:360px;height:40px;overflow:visible}
+.thread path{fill:none;stroke-linecap:round}
+.thread .th{stroke:var(--c-ink);stroke-width:1.6}
+.thread .fr{stroke:var(--c-muted);stroke-width:1.2}
+
+/* 2 — solution */
+.sub{margin-top:16px;max-width:700px;font-size:17px;line-height:1.45;color:var(--c-muted)}
+.pillars{position:relative;margin-top:22px;max-width:800px}
+.pillar{padding:12px 0 12px 70px;border-top:1px solid var(--c-line)}
+.pillar:last-child{border-bottom:1px solid var(--c-line)}
+.pillar b{display:block;font-size:21px;font-weight:800;letter-spacing:-.015em}
+.pillar span{display:block;margin-top:3px;font-size:16px;line-height:1.35;color:var(--c-muted)}
+.rail{position:absolute;left:0;top:0;width:70px;overflow:visible}
+.rail path{fill:none;stroke:var(--c-ink);stroke-width:1.5;stroke-linecap:round}
+.rail circle{fill:var(--c-app);stroke:var(--c-ink);stroke-width:1.5}
+.strip{position:absolute;left:80px;bottom:46px;font:500 12px var(--font-mono);letter-spacing:.18em;color:var(--c-muted)}
+.phone{position:absolute;right:120px;top:66px;width:316px;height:684px;padding:9px;border-radius:46px;background:var(--c-ink)}
+.phone .scr{position:relative;width:100%;height:100%;border-radius:37px;overflow:hidden;background:var(--c-app)}
+.shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.shot:first-child{opacity:1}
+
+/* 3 — stack */
+.s3{display:grid;grid-template-columns:400px 1fr;gap:60px}
+.s3 .hint{margin-top:26px;font:500 12px var(--font-mono);letter-spacing:.18em;color:var(--c-muted)}
+.stack{display:flex;flex-direction:column-reverse;border-bottom:1px solid var(--c-line);align-self:start;margin-top:40px}
+.layer{display:grid;grid-template-columns:130px 1fr;align-items:center;height:88px;border-top:1px solid var(--c-line)}
+.layer .ln{font:500 13px var(--font-mono);letter-spacing:.2em;color:var(--c-muted)}
+.layer b{display:block;font-size:22px;font-weight:800;letter-spacing:-.015em}
+.layer span{display:block;margin-top:5px;font-size:16px;color:var(--c-muted)}
+
+/* 4 — flow (night) */
+#flow{display:block;margin-top:20px;overflow:visible}
+.fl-t{font:700 16px var(--font-sans)}
+.fl-n rect,.fl-n polygon{fill:none;stroke:var(--c-ink);stroke-width:1.5}
+.fl-n text{fill:var(--c-ink);font:700 16px var(--font-sans);text-anchor:middle;dominant-baseline:central}
+.fl-n.dec polygon{stroke:var(--c-accent);stroke-width:2}
+.fl-n.start rect{fill:var(--c-ink)} .fl-n.start text{fill:var(--c-app)}
+.fl-n.end rect{fill:var(--c-lime);stroke:var(--c-lime)} .fl-n.end text{fill:var(--c-on-lime)}
+.fl-n.bad rect{stroke:var(--c-missing)} .fl-n.bad text{fill:var(--c-missing)}
+.fl-n.sys rect{stroke:var(--c-accent)}
+.fl-edge,.fl-head{fill:none;stroke:var(--c-muted);stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
+.fl-lb{fill:var(--c-accent);font:500 16px var(--font-mono);text-anchor:middle}
+.fl-div{stroke:var(--c-line);stroke-width:1}
+.fl-dot{fill:var(--c-accent)}
+
+/* 5 — table */
+.tbl{margin-top:34px}
+.trow{position:relative;display:grid;grid-template-columns:230px repeat(6,1fr);align-items:center;height:52px;border-top:1px solid var(--c-line)}
+.trow:last-child{border-bottom:1px solid var(--c-line)}
+.trow.head{height:52px;align-items:end;padding-bottom:10px;border-top:0}
+.trow.head .c{font:500 12px/1.3 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--c-muted);text-align:center;padding:0 8px}
+.trow .nm{font-size:22px;font-weight:700;position:relative;z-index:1}
+.trow .c{position:relative;z-index:1;text-align:center;font-size:24px;font-weight:800}
+.trow .c i{display:inline-block;font-style:normal}
+.trow .c .no{color:var(--c-muted);font-weight:400}
+.trow .c .pt{font:500 12px var(--font-mono);letter-spacing:.08em;color:var(--c-muted)}
+.trow.me .nm{font-weight:900}
+.trow.me .band{position:absolute;inset:0 -20px;background:var(--c-lime);border-radius:var(--r-sm);z-index:0;transform-origin:left}
+.trow.me{border-top-color:transparent}
+.final{margin-top:30px;font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--c-muted)}
+.final b{font-weight:900;color:var(--c-ink)}
+
+@media (prefers-reduced-motion:reduce){.chrome,.bar,.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="chrome"><span>WEAVE</span><span id="count">01 / 05</span></div>
+
+  <!-- 0 — TITLE -->
+  <section class="slide s0">
+    <div class="label">Minor project · CSIT department</div>
+    <h1 class="brand"><span class="tl k">Weave</span></h1>
+    <p class="tag">Your syllabus, notes and deadlines, <b>woven into one app.</b></p>
+    <div class="meta">
+      <div class="team"><small>PRESENTED BY</small>Team DevZ</div>
+      <div class="label">Press → to begin</div>
+    </div>
+  </section>
+
+  <!-- 1 — PROBLEM -->
+  <section class="slide s1">
+    <div class="label">01 — Problem</div>
+    <h1 class="title"><span class="tl">Students are</span><span class="tl k">losing the thread</span></h1>
+    <div class="rows">
+      <div class="prow"><span class="num">01</span><div><b>Syllabus nobody follows</b><p>RGPV syllabus is a PDF; students can't see what they've covered.</p></div><svg class="thread" viewBox="0 0 360 40"></svg></div>
+      <div class="prow"><span class="num">02</span><div><b>Notes scattered everywhere</b><p>Notebooks, WhatsApp, Drive; nothing tied to the syllabus.</p></div><svg class="thread" viewBox="0 0 360 40"></svg></div>
+      <div class="prow"><span class="num">03</span><div><b>Deadlines lost in chats</b><p>Assignments posted in WhatsApp groups get buried; submissions are missed.</p></div><svg class="thread" viewBox="0 0 360 40"></svg></div>
+      <div class="prow"><span class="num">04</span><div><b>No picture of progress</b><p>Students and teachers can't see how far a class really is.</p></div><svg class="thread" viewBox="0 0 360 40"></svg></div>
+    </div>
+  </section>
+
+  <!-- 2 — SOLUTION -->
+  <section class="slide s2">
+    <div class="label">02 — Solution</div>
+    <h1 class="title"><span class="tl">One app that</span><span class="tl k">weaves it together</span></h1>
+    <p class="sub">Weave connects your syllabus, your notes and your deadlines — and shows what you know and what you're missing.</p>
+    <div class="pillars" id="pillars">
+      <svg class="rail" id="rail"></svg>
+      <div class="pillar"><b>Syllabus progress</b><span>Semester → Subject → Unit → Topic, with % and status bands.</span></div>
+      <div class="pillar"><b>Linked notes</b><span>Private notes linked to topics and to each other, with backlinks; a linked topic turns green.</span></div>
+      <div class="pillar"><b>Assignments</b><span>Live countdown, teacher marks, push reminders 2 days before and on the day.</span></div>
+      <div class="pillar"><b>Graph view</b><span>The whole syllabus as a tree, your notes as diamonds; gaps are obvious.</span></div>
+      <div class="pillar"><b>AI study help</b><span>Tutor that answers only from your notes and teacher material, with citations; topic quizzes; gap finder.</span></div>
+    </div>
+    <div class="strip">INSTALLABLE PWA · WORKS OFFLINE · DEPARTMENT-ONLY SIGN-IN · 100+ STUDENTS</div>
+    <div class="phone"><div class="scr">
+      <img class="shot" src="img/home.png" alt="Home screen">
+      <img class="shot" src="img/subjects.png" alt="Subjects screen">
+      <img class="shot" src="img/notes.png" alt="Notes screen">
+      <img class="shot" src="img/assignments.png" alt="Assignments screen">
+      <img class="shot" src="img/graph.png" alt="Graph view">
+    </div></div>
+  </section>
+
+  <!-- 3 — TECH STACK -->
+  <section class="slide s3">
+    <div>
+      <div class="label">03 — Tech stack</div>
+      <h1 class="title"><span class="tl">Built on a</span><span class="tl k">modern stack</span></h1>
+      <div class="hint">READ FROM THE BOTTOM UP</div>
+    </div>
+    <div class="stack">
+      <div class="layer"><span class="ln">HOSTING</span><div><b>Vercel (Singapore region) · Fluid compute</b><span>Fast for Indian students, auto-deploy from GitHub.</span></div></div>
+      <div class="layer"><span class="ln">DATABASE</span><div><b>Neon Postgres + pgvector · Drizzle ORM</b><span>One database for data and AI search.</span></div></div>
+      <div class="layer"><span class="ln">AUTH</span><div><b>Neon Auth (email code)</b><span>Only emails on the department student list get in.</span></div></div>
+      <div class="layer"><span class="ln">BACKEND</span><div><b>Next.js server actions · Zod</b><span>Every input validated, every query scoped to the student.</span></div></div>
+      <div class="layer"><span class="ln">FRONTEND</span><div><b>Next.js 16 · React 19 · Tailwind 4 · GSAP / Motion</b><span>App-like, animated, installable PWA with Web Push.</span></div></div>
+      <div class="layer"><span class="ln">AI</span><div><b>Groq (fast chat, quizzes) · Gemini (embeddings, fallback) · Vercel AI SDK</b><span>Answers only from your material.</span></div></div>
+    </div>
+  </section>
+
+  <!-- 4 — TECH FLOW -->
+  <section class="slide s4">
+    <div class="label">04 — How it flows</div>
+    <h1 class="title"><span class="tl">From sign-in</span><span class="tl k">to progress</span></h1>
+    <svg id="flow" width="1280" height="548" viewBox="0 0 1280 548" role="img" aria-label="Flowchart from sign-in to progress"></svg>
+  </section>
+
+  <!-- 5 — SIMILAR APPS -->
+  <section class="slide s5">
+    <div class="label">05 — Similar apps</div>
+    <h1 class="title"><span class="tl">What others do,</span><span class="tl k">what Weave adds</span></h1>
+    <div class="tbl" id="tbl"></div>
+    <p class="final">Weave is the only one built around <b>your syllabus</b>.</p>
+  </section>
+
+  <div class="bar"><i id="fill"></i></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<script>
+gsap.registerPlugin(SplitText, DrawSVGPlugin, MotionPathPlugin);
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const NS = "http://www.w3.org/2000/svg";
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const stage = $("#stage"), slides = $$(".slide"), N = slides.length;
+let cur = -1, busy = false, cycle = null;
+const ctxs = [], tls = [], flow = {};
+
+/* ---------- static DOM that the builds animate ---------- */
+
+// Slide 1: a thread per row that frays at the end
+function buildThreads() {
+  $$(".thread").forEach((svg, i) => {
+    const bx = 190 + i * 24, s = i % 2 ? -12 : 12;
+    svg.innerHTML =
+      `<path class="th" d="M0 20 C 60 ${20 + s}, 120 ${20 - s}, ${bx} 20"/>` +
+      `<path class="fr" d="M${bx} 20 l 26 -12"/><path class="fr" d="M${bx} 20 l 36 4"/><path class="fr" d="M${bx} 20 l 22 16"/>`;
+  });
+}
+
+// Slide 2: threads converge into one line that runs down the pillars
+function buildRail() {
+  const rows = $$(".pillar"), rail = $("#rail");
+  const ys = rows.map(r => r.offsetTop + 24), H = $("#pillars").offsetHeight, x = 40;
+  rail.setAttribute("height", H);
+  rail.setAttribute("viewBox", `0 0 70 ${H}`);
+  const starts = [-14, 2, 30, 58];
+  const curves = starts.map(s => `<path class="rt" d="M0 ${ys[0] + s} C 20 ${ys[0] + s}, 18 ${ys[0]}, ${x} ${ys[0]}"/>`).join("");
+  rail.innerHTML = curves + `<path id="railLine" d="M${x} ${ys[0]} L${x} ${ys[ys.length - 1]}"/>` +
+    ys.map(y => `<circle class="rn" cx="${x}" cy="${y}" r="5"/>`).join("");
+}
+
+// Slide 5: comparison table
+function buildTable() {
+  const cols = ["Knows the syllabus", "Notes linked to topics", "Deadlines + push", "Graph of gaps", "AI from your own material", "Department-only sign-in"];
+  const Y = "y", P = "p", X = "n";
+  const data = [
+    ["Google Classroom", X, X, Y, X, X, Y],
+    ["Notion", X, P, X, X, P, X],
+    ["Obsidian", X, Y, X, Y, X, X],
+    ["MyStudyLife", X, X, Y, X, X, X],
+    ["College portal (ERP)", P, X, P, X, X, Y],
+    ["Weave", Y, Y, Y, Y, Y, Y]
+  ];
+  const cell = (v, i) => `<div class="c" data-col="${i}">` + (v === Y ? "<i>✓</i>" : v === P ? '<i class="pt">partial</i>' : '<i class="no">–</i>') + "</div>";
+  $("#tbl").innerHTML =
+    `<div class="trow head"><div></div>${cols.map(c => `<div class="c">${c}</div>`).join("")}</div>` +
+    data.map(r => `<div class="trow${r[0] === "Weave" ? " me" : ""}">${r[0] === "Weave" ? '<div class="band"></div>' : ""}<div class="nm">${r[0]}</div>${r.slice(1).map(cell).join("")}</div>`).join("");
+}
+
+// Slide 4: the flowchart, generated so every coordinate is computed once
+function buildFlow() {
+  const svg = $("#flow"), NH = 40;
+  const mk = (tag, at, parent = svg, txt) => {
+    const e = document.createElementNS(NS, tag);
+    for (const k in at) e.setAttribute(k, at[k]);
+    if (txt != null) e.textContent = txt;
+    parent.appendChild(e);
+    return e;
+  };
+  const tw = t => { const x = mk("text", { class: "fl-t" }, svg, t), w = x.getComputedTextLength(); x.remove(); return w; };
+
+  function node(label, cx, cy, cls = "", dia) {
+    const lines = label.split("|"), g = mk("g", { class: "fl-n " + cls });
+    const w = dia ? dia[0] : Math.ceil(Math.max(...lines.map(tw))) + 36, h = dia ? dia[1] : NH;
+    if (dia) mk("polygon", { points: `${cx},${cy - h / 2} ${cx + w / 2},${cy} ${cx},${cy + h / 2} ${cx - w / 2},${cy}` }, g);
+    else mk("rect", { x: cx - w / 2, y: cy - h / 2, width: w, height: h, rx: 10 }, g);
+    lines.forEach((l, i) => mk("text", { x: cx, y: cy + (i - (lines.length - 1) / 2) * 18 }, g, l));
+    return { g, cx, cy, w, l: cx - w / 2, r: cx + w / 2, t: cy - h / 2, b: cy + h / 2, dia: !!dia };
+  }
+
+  function edge(pts, o = {}) {
+    const g = mk("g"), heads = [];
+    const line = mk("path", { class: "fl-edge", d: "M" + pts.map(p => p.join(" ")).join(" L") }, g);
+    const head = (p, q) => {
+      const a = Math.atan2(p[1] - q[1], p[0] - q[0]), pt = s => [p[0] - 9 * Math.cos(a + s), p[1] - 9 * Math.sin(a + s)];
+      heads.push(mk("path", { class: "fl-head", d: `M${pt(0.45)} L${p} L${pt(-0.45)}` }, g));
+    };
+    if (o.head !== false) head(pts[pts.length - 1], pts[pts.length - 2]);
+    if (o.both) head(pts[0], pts[1]);
+    const lab = o.label ? mk("text", { class: "fl-lb", x: o.label[1], y: o.label[2] }, g, o.label[0]) : null;
+    return { g, line, heads, lab };
+  }
+  const hz = (a, b, o) => edge([[a.r, a.cy], [b.l, b.cy]], o);
+
+  // Top row: sign-in
+  const spec = [["Open app", ""], ["Signed in?", "dec", [150, 88]], ["College email", ""], ["On student|list?", "dec", [170, 88]], ["Code by email", ""], ["Home", "end"]];
+  const widths = spec.map(s => s[2] ? s[2][0] : tw(s[0]) + 36);
+  const gap = (1280 - widths.reduce((a, b) => a + b, 0)) / 5, TY = 62;
+  let x = 0;
+  const top = spec.map((s, i) => { const n = node(s[0], x + widths[i] / 2, TY, s[1], s[2]); x += widths[i] + gap; return n; });
+  const [open, d1, mail, d2, code, home] = top;
+  const topSeq = [open, hz(open, d1), d1, hz(d1, mail, { label: ["no", (d1.r + mail.l) / 2, TY - 10] }), mail, hz(mail, d2), d2,
+    hz(d2, code, { label: ["yes", (d2.r + code.l) / 2, TY - 10] }), code, hz(code, home), home];
+  const denied = node("Access denied", d2.cx, 150, "bad");
+  const extras = [
+    edge([[d1.cx, d1.t], [d1.cx, 6], [home.cx, 6], [home.cx, home.t]], { label: ["yes", (d1.cx + home.cx) / 2, 0] }),
+    edge([[d2.cx, d2.b], [d2.cx, denied.t]], { label: ["no", d2.cx + 20, (d2.b + denied.t) / 2 + 5] }), denied];
+
+  // Four lanes branching off Home
+  const LY = [236, 288, 340, 392], TRUNK = 22;
+  const trunk = edge([[home.cx, home.b], [home.cx, 192], [TRUNK, 192], [TRUNK, LY[3]]], { head: false });
+  const lanes = [
+    ["Subjects", "Topic", "See progress"],
+    ["Notes", "Write note", "Link to topic", "Topic covered", "Progress rises", "Shows on graph"],
+    ["Assignments", "Live countdown", "Reminder push", "Teacher marks", "Status push"],
+    ["AI tutor", "Ask question", "Search your notes + teacher material", "Cited answer", "Quiz", "Progress"]
+  ].map((labels, li) => {
+    const y = LY[li], seq = [];
+    let px = 54, prev = null;
+    labels.forEach((l, i) => {
+      const n = node(l, px + (tw(l) + 36) / 2, y, i === 0 ? "start" : "");
+      seq.push(i === 0 ? edge([[TRUNK, y], [n.l, y]]) : hz(prev, n), n);
+      px = n.r + 40; prev = n;
+    });
+    return seq;
+  });
+
+  // System strip
+  svg.insertBefore(mk("line", { class: "fl-div", x1: 0, x2: 1280, y1: 424, y2: 424 }), svg.firstChild);
+  const SY = 464;
+  const phone = node("Phone (PWA)", 54 + (tw("Phone (PWA)") + 36) / 2, SY, "sys");
+  const vercel = node("Vercel (Next.js)", phone.r + 150 + (tw("Vercel (Next.js)") + 36) / 2, SY, "sys");
+  const neon = node("Neon Postgres", vercel.r + 150 + (tw("Neon Postgres") + 36) / 2, SY, "sys");
+  const eA = hz(phone, vercel, { both: true }), eB = hz(vercel, neon, { both: true });
+  const bn = ["Neon Auth", "Push service", "AI models"].map(l => ({ l, w: tw(l) + 36 }));
+  let bx = vercel.cx - (bn.reduce((a, b) => a + b.w, 0) + 60) / 2;
+  const branches = bn.map(b => { const n = node(b.l, bx + b.w / 2, 524, "sys"); bx += b.w + 30; return n; });
+  const bEdges = branches.map(n => edge([[vercel.cx, vercel.b], [vercel.cx, 494], [n.cx, 494], [n.cx, n.t]], { both: true }));
+  const stripSeq = [phone, eA, vercel, eB, neon];
+  branches.forEach((n, i) => stripSeq.push(bEdges[i], n));
+
+  // Dots that travel along the system strip (revealed at the end of the build)
+  const dotsG = mk("g", { opacity: 0 }), dots = [];
+  [[eA, 0], [eA, 1], [eB, 0], [eB, 1], ...bEdges.map(e => [e, 0]), ...bEdges.map(e => [e, 1])].forEach(([e, rev], i) => {
+    dots.push({ el: mk("circle", { class: "fl-dot", r: 4, cx: 0, cy: 0 }, dotsG), path: e.line, rev, i });
+  });
+  Object.assign(flow, { topSeq, extras, trunk, lanes, stripSeq, dotsG, dots });
+}
+
+/* ---------- build timelines (one per slide, played on enter, reverted on leave) ---------- */
+
+// Label + two-tone title, revealed word by word
+function head(s) {
+  const tl = gsap.timeline();
+  tl.from($(".label", s), { autoAlpha: 0, y: 12, duration: 0.5 }, 0);
+  $$(".tl", s).forEach(l => {
+    const sp = SplitText.create(l, { type: "words" });
+    tl.from(sp.words, { yPercent: 110, duration: 0.8, stagger: 0.06, ease: "power4.out" }, 0.1);
+  });
+  return tl;
+}
+
+const builds = [
+  // 0 — title: threads weave in, wordmark rises, team line last
+  s => {
+    const tl = gsap.timeline();
+    tl.from($(".label", s), { autoAlpha: 0, y: 12, duration: 0.5 }, 0)
+      .from($(".brand", s), { yPercent: 100, autoAlpha: 0, duration: 1, ease: "power4.out" }, 0.3)
+      .from($(".tag", s), { autoAlpha: 0, y: 20, duration: 0.7, ease: "power3.out" }, 0.9)
+      .from($(".meta", s), { autoAlpha: 0, y: 20, duration: 0.7, ease: "power3.out" }, 1.3);
+    return tl;
+  },
+  // 1 — problem: rows appear, each thread draws then frays
+  s => {
+    const tl = gsap.timeline().add(head(s), 0);
+    $$(".prow", s).forEach((row, i) => {
+      const at = 0.9 + i * 0.5;
+      tl.from($$(".num, div", row), { autoAlpha: 0, y: 22, duration: 0.55, stagger: 0.05, ease: "power3.out" }, at)
+        .from($(".th", row), { drawSVG: "0%", duration: 0.7, ease: "power2.inOut" }, at + 0.1)
+        .from($$(".fr", row), { drawSVG: "0%", duration: 0.3, stagger: 0.07, ease: "power2.out" }, at + 0.75);
+    });
+    return tl;
+  },
+  // 2 — solution: threads tie into one line, pillars hang off it, phone cycles screens
+  s => {
+    const tl = gsap.timeline().add(head(s), 0);
+    tl.from(".sub", { autoAlpha: 0, y: 16, duration: 0.6 }, 0.7)
+      .from($$(".rt", s), { drawSVG: "0%", duration: 0.7, stagger: 0.1, ease: "power2.inOut" }, 1)
+      .from("#railLine", { drawSVG: "0%", duration: 1.1, ease: "power2.inOut" }, 1.7)
+      .from($$(".pillar", s), { autoAlpha: 0, y: 18, duration: 0.5, stagger: 0.2, ease: "power3.out" }, 1.8)
+      .from($$(".rn", s), { scale: 0, transformOrigin: "50% 50%", duration: 0.35, stagger: 0.2, ease: "back.out(2)" }, 1.9)
+      .from(".phone", { autoAlpha: 0, x: 60, duration: 0.9, ease: "power3.out" }, 1)
+      .from(".strip", { autoAlpha: 0, duration: 0.6 }, 2.8);
+    if (!RM) {
+      const shots = $$(".shot", s);
+      let i = 0;
+      const tick = () => {
+        const a = shots[i], b = shots[(i = (i + 1) % shots.length)];
+        gsap.timeline().to(a, { autoAlpha: 0, x: -24, duration: 0.5, ease: "power2.inOut" })
+          .fromTo(b, { autoAlpha: 0, x: 24 }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "power2.inOut" }, 0);
+        cycle = gsap.delayedCall(2.2, tick);
+      };
+      cycle = gsap.delayedCall(3.4, tick);
+    }
+    return tl;
+  },
+  // 3 — stack: layers build bottom-up
+  s => {
+    const tl = gsap.timeline().add(head(s), 0);
+    tl.from(".hint", { autoAlpha: 0, duration: 0.5 }, 0.8)
+      .from($$(".layer", s), { autoAlpha: 0, y: 40, duration: 0.7, stagger: 0.22, ease: "power3.out" }, 0.8);
+    return tl;
+  },
+  // 4 — flow: draw step by step, then dots travel the system strip
+  s => {
+    const tl = gsap.timeline().add(head(s), 0);
+    const play = (items, at, step = 0.1) => {
+      let t = at;
+      items.forEach(it => {
+        if (it.line) {
+          tl.fromTo(it.line, { drawSVG: "0%" }, { drawSVG: "100%", duration: step * 0.7, ease: "none" }, t);
+          const rest = [...it.heads, ...(it.lab ? [it.lab] : [])];
+          if (rest.length) tl.from(rest, { autoAlpha: 0, duration: 0.08 }, t + step * 0.6);
+          t += step * 0.7;
+        } else {
+          tl.from(it.g, { autoAlpha: 0, scale: 0.8, rotation: it.dia ? -45 : 0, svgOrigin: `${it.cx} ${(it.t + it.b) / 2}`, duration: 0.22, ease: "back.out(1.7)" }, t);
+          t += step;
+        }
+      });
+      return t;
+    };
+    let t = play(flow.topSeq, 0.6);
+    t = play(flow.extras, t);
+    t = play([flow.trunk], t);
+    flow.lanes.forEach(seq => { t = play(seq, t); });
+    t = play(flow.stripSeq, t);
+    tl.to(flow.dotsG, { autoAlpha: 1, duration: 0.3 }, t);
+    flow.dots.forEach(d => gsap.to(d.el, {
+      motionPath: { path: d.path, start: d.rev ? 1 : 0, end: d.rev ? 0 : 1 },
+      duration: 2 + (d.i % 3) * 0.4, delay: 0.3 * d.i, repeat: -1, ease: "none"
+    }));
+    return tl;
+  },
+  // 5 — table: rows slide in, ticks pop by column, Weave's band sweeps last
+  s => {
+    const tl = gsap.timeline().add(head(s), 0);
+    const rows = $$(".trow:not(.head):not(.me)", s), me = $(".trow.me", s);
+    tl.from($$(".trow.head .c", s), { autoAlpha: 0, y: 10, duration: 0.4, stagger: 0.05 }, 0.8)
+      .from(rows, { autoAlpha: 0, x: -40, duration: 0.55, stagger: 0.09, ease: "power3.out" }, 0.9);
+    for (let c = 0; c < 6; c++) tl.from($$(`.c[data-col="${c}"] i`, s).filter(e => !me.contains(e)), { scale: 0, autoAlpha: 0, duration: 0.35, stagger: 0.03, ease: "back.out(2.5)" }, 1.7 + c * 0.12);
+    tl.from($(".band", me), { scaleX: 0, duration: 0.7, ease: "power3.inOut" }, 2.6)
+      .from($(".nm", me), { autoAlpha: 0, x: -20, duration: 0.4 }, 2.8)
+      .from($$(".c i", me), { scale: 0, autoAlpha: 0, duration: 0.35, stagger: 0.07, ease: "back.out(2.5)" }, 3.0)
+      .from(".final", { autoAlpha: 0, y: 14, duration: 0.6 }, 3.5);
+    return tl;
+  }
+];
+
+function enter(n, delay) {
+  ctxs[n] = gsap.context(() => { tls[n] = builds[n](slides[n]); tls[n].delay(delay); }, slides[n]);
+}
+function leave(n) {
+  if (ctxs[n]) ctxs[n].revert();
+  ctxs[n] = tls[n] = null;
+  if (n === 2) { if (cycle) cycle.kill(); cycle = null; gsap.killTweensOf($$(".shot")); gsap.set($$(".shot"), { clearProps: "all" }); }
+}
+
+/* ---------- navigation ---------- */
+
+function chrome(n) {
+  stage.classList.toggle("dark", slides[n].classList.contains("night"));
+  $("#count").textContent = `0${n + 1} / 0${N}`;
+  gsap.to("#fill", { scaleX: (n + 1) / N, duration: RM ? 0 : 0.9, ease: "power3.inOut", overwrite: true });
+}
+
+function go(n) {
+  if (n < 0 || n >= N || n === cur || busy) return;
+  const prev = cur, dir = n > prev ? 1 : -1, inc = slides[n], out = prev >= 0 ? slides[prev] : null;
+  cur = n; busy = true;
+  history.replaceState(null, "", "#" + (n + 1));
+  chrome(n);
+  inc.classList.add("on");
+  inc.style.zIndex = 2;
+  if (out) out.style.zIndex = 1;
+  const done = () => {
+    if (out) { out.classList.remove("on"); gsap.set(out, { clearProps: "all" }); leave(prev); }
+    gsap.set(inc, { clearProps: "clipPath,zIndex,opacity" });
+    busy = false;
+  };
+  const tr = gsap.timeline({ onComplete: done });
+  if (RM) {
+    tr.fromTo(inc, { opacity: 0 }, { opacity: 1, duration: 0.2 });
+    if (out) tr.to(out, { opacity: 0, duration: 0.2 }, 0);
+  } else if (!out) {
+    tr.fromTo(inc, { opacity: 0 }, { opacity: 1, duration: 0.6 });
+    enter(n, 0.15);
+  } else {
+    // masked wipe for the incoming slide, outgoing drifts up and fades
+    tr.fromTo(inc, { clipPath: dir > 0 ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 0.9, ease: "power3.inOut" }, 0)
+      .to(out, { yPercent: -8 * dir, opacity: 0, duration: 0.9, ease: "power3.inOut" }, 0);
+    enter(n, 0.45);
+  }
+}
+
+// If the current slide is still building, → finishes it first
+function skip() {
+  const t = tls[cur];
+  if (t && t.progress() < 1) { t.progress(1); return true; }
+  return false;
+}
+const next = () => { if (!skip() && !busy) go(cur + 1); };
+const back = () => { if (!busy) go(cur - 1); };
+
+function fullscreen() {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else document.documentElement.requestFullscreen().catch(() => {});
+}
+
+addEventListener("keydown", e => {
+  const k = e.key;
+  if (k === "ArrowRight" || k === " " || k === "PageDown") { e.preventDefault(); next(); }
+  else if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); back(); }
+  else if (k === "f" || k === "F") fullscreen();
+  else if (/^[1-9]$/.test(k) && +k <= N) go(+k - 1);
+});
+addEventListener("click", e => { if (e.clientX < innerWidth / 2) back(); else next(); });
+let tx = null;
+addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+addEventListener("touchend", e => {
+  if (tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx; tx = null;
+  if (Math.abs(dx) > 50) { e.preventDefault(); dx < 0 ? next() : back(); }
+}, { passive: false });
+addEventListener("hashchange", () => { const n = parseInt(location.hash.slice(1), 10) - 1; if (n >= 0 && n < N) go(n); });
+
+function fit() {
+  const s = Math.min(innerWidth / 1440, innerHeight / 810);
+  stage.style.transform = `translate(-50%,-50%) scale(${s})`;
+}
+addEventListener("resize", fit);
+
+/* ---------- start (after fonts, so text measures correctly) ---------- */
+fit();
+document.fonts.ready.then(() => {
+  buildThreads(); buildRail(); buildTable(); buildFlow();
+  const n = parseInt(location.hash.slice(1), 10) - 1;
+  go(n >= 0 && n < N ? n : 0);
+});
+</script>
+</body>
+</html>
