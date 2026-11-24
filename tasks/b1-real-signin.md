@@ -93,7 +93,7 @@ Log the real error on the server with `console.error` (never the code or secrets
    `demo.student@weave.test` and confirm Home opens (the demo path must still work).
    The code flow can't be clicked through yet (no code box on the screen), so it is covered by the
    unit tests. Write that in the PR.
-9. Do STEP 6–8 of the start-here prompt (checks, change file, PR).
+9. Do STEP 7–9 of the start-here prompt (checks, change file, PR).
 
 ## Done when
 - [ ] `requestSignInCode`, `verifySignInCode` exist with the exact signatures and error codes above

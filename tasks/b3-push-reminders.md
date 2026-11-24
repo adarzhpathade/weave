@@ -79,7 +79,7 @@ per student).
 6. Manual test: `npm run dev`, then
    `curl -H "Authorization: Bearer <your CRON_SECRET>" http://localhost:3000/api/cron/push-reminders`
    twice. The second call must report `sent: 0`. Paste both outputs (without the secret) in the PR.
-7. Do STEP 6–8 of the start-here prompt (checks, change file, PR).
+7. Do STEP 7–9 of the start-here prompt (checks, change file, PR).
 
 ## Done when
 - [ ] The three functions and the cron route exist with the exact contract

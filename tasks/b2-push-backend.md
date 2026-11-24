@@ -87,7 +87,7 @@ export async function sendPushToStudent(studentId: string, payload: PushPayload)
    does not stop the others.
 9. Manual test: run `npm run dev`. Generate test VAPID keys with `npx web-push generate-vapid-keys`
    and put them in your own `.env.local` only if Adarsh's file has none. Write in the PR how you tested.
-10. Do STEP 6–8 of the start-here prompt (checks, change file, PR).
+10. Do STEP 7–9 of the start-here prompt (checks, change file, PR).
 
 ## Done when
 - [ ] The three actions and `sendPushToStudent` exist with the exact signatures above
