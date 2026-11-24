@@ -12,13 +12,13 @@ Weave puts your syllabus, your notes and your deadlines in one app, and shows ho
 | Layer | Who | What |
 |---|---|---|
 | **Official** | Department / faculty | Syllabus (Subject → Unit → Topic) per program and semester, assignments with due dates and marks |
-| **Personal** | Student | Private notes written under each topic |
+| **Personal** | Student | Private notes linked to syllabus topics and other notes |
 | **Progress** | System | Topic / unit / subject / semester progress calculated from the student's notes (and later quizzes) |
 
 ### Core loop
 ```
-Open app → see today's deadlines and semester progress → open a subject → write a note on a topic
-→ topic turns covered → progress rises → push reminders keep deadlines in front of you
+Open app → see today's deadlines and teacher notifications → write a note linked to a topic
+→ topic turns covered → subject progress rises → push reminders keep deadlines in front of you
 ```
 
 ## Department structure (first user: CSIT)
@@ -40,21 +40,23 @@ Years: 2nd, 3rd, 4th → semesters 3–8 (1st year is common to all branches and
 | **Admin (department)** | 3 | Import the student list and the syllabus (CSV), move divisions to the next semester |
 
 ## Student app — core (built first, finished completely)
-Bottom tabs on mobile: **Home · Subjects · Assignments · Profile**.
+Navigation: floating **menu pill** (opens a full-screen menu with all sections and semester switcher) + **bell** (opens notifications panel). No bottom tab bar; no sidebar.
 1. **Login + onboarding** — sign in with the college email; only students on the department's list get in; confirm the details from the list.
-2. **Home** — upcoming deadlines with live countdown, semester progress, progress per subject.
-3. **Subjects → Unit → Topic** — the syllabus with progress; notes are written and read **inside each topic**; one search box finds notes.
-4. **Assignments** — list with countdown, details, status marked by faculty (Pending / Submitted / Late / Not submitted) and marks. **Push reminders** (2 days before, on the day, new assignment, status marked). Submission stays on paper.
-5. **Profile** — own details, switch semester (past open, future locked), notification on/off, install app, sign out.
+2. **Home** — Today view: greeting, due next with live countdown, this week, keep writing (jump back to last note), split by hairlines. Bell icon opens notifications panel (teacher announcements, marks, deadline reminders).
+3. **Subjects → Unit → Topic** — the syllabus with progress (topic turns green when a note links to it); subject coverage percentages.
+4. **Notes** — separate Notes section with list, search, filters; editor with auto-save, links to topics and other notes (`[[Note title]]`), and backlinks.
+5. **Assignments** — list and calendar with countdown, details sheet, status marked by faculty (Pending / Submitted / Late / Not submitted) and marks/remarks. **Push reminders** (2 days before, on the day, new assignment, status marked). Submission stays on paper.
+6. **Profile** — own details, semester switcher (past open, future locked), notification switches, install app, sign out.
+7. **Graph** — syllabus tree view (simple SVG tree) with topics and notes as diamonds (tap to highlight connections).
 
 ## Later (only after the core is finished and the faculty side exists)
 - **AI tutor** answering only from faculty material + own notes (needs faculty uploads first).
 - **Practice quizzes** per unit/topic (feed into progress).
-- **Graph view** of the syllabus (demo value; same information as Subjects).
+- **Advanced graph view** (React Flow interactive layout; simple SVG tree is already built).
 - **Editing notes offline** (reading offline is in the core PWA).
 
 ## Cut (not planned)
-Separate notes tab, links/backlinks between notes, notifications list page, streaks, activity heatmap, "weak topics", gap finder,
+Announcements dedicated page (teacher notifications appear in the bell panel instead), streaks, activity heatmap, "weak topics", gap finder,
 "analyze my note", activity history, timetable, attendance, results, fees/ERP, online submission, student uploads, chat between students.
 
 ## What makes it "department-ready"
