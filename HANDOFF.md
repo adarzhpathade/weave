@@ -1,52 +1,44 @@
 # HANDOFF — start here (new Claude Code session)
 
-> Last updated 2026-11-23 after Phase 0.3 + 0.4 (scaffold + Neon) and the scope cut (core app only).
-> Read this, then `AGENTS.md`, `CLAUDE.md`, `NOTES.md`, `docs/roadmap.md`. Update this file at the end of each session.
+> Last updated 2026-11-24, after the core student screens shipped and went live on Vercel.
+> Read this, then `AGENTS.md`, `CLAUDE.md`, `NOTES.md` (decision log), `docs/changes/2026-11-24-core-screens.md`. Update this file at the end of each session.
 
 ## Where we are
-- **App:** **Weave** — student-first PWA that maps the syllabus as a knowledge graph, links private notes, tracks deadlines (push reminders) and has grounded AI. College minor project; goal = department daily use, 100+ students, pixel-perfect, Awwwards-level.
-- **Repo:** https://github.com/adarzhpathade/weave (PUBLIC, squash-merge only, auto-delete branches). Local: `E:\Projects\College Projects\weave`.
-- Phase 0.1–0.4 done: Next.js 16.4 app scaffolded (Tailwind 4, shadcn Base UI, ESLint/Prettier, Vitest, Playwright) and Neon set up. See `docs/changes/2026-11-23-scaffold-and-neon.md`.
-- **Neon:** project `weave` = `proud-sky-40049407` (Singapore, PG 18, branch `main` = `br-raspy-boat-biu51cbq`): pgvector, Managed Neon Auth, private bucket `materials`. Secrets only in git-ignored `.env.local`; names in `.env.example`, validated by `lib/envSchema.ts`.
-- The old project `E:\Projects\College Projects\Not Decided` (NODUS) is **abandoned**. Do not reuse its code, design references or docs.
+- **App:** **Weave**, a student PWA for the CSIT department (programs CSIT + CY): syllabus with progress, private linked notes, assignments with countdowns, teacher notifications.
+- **Live:** https://weave-sigma-sepia.vercel.app (public). Demo sign-in: `demo.student@weave.test` (Aarav Sharma, CSIT-2, sem 5). `weave-adarz.vercel.app` is behind Vercel login; share only the sigma-sepia link.
+- **Repo:** https://github.com/adarzhpathade/weave (public; squash-merge). `main` = what is live; every merge to `main` auto-deploys (Vercel project `weave`, team `adarz`, id `prj_SSBauktKXKIVDSaKLuY2VJ4tapwp`).
+- **Built and working (real data, phone 390 px + laptop 1440 px):**
+  - Login (demo sign-in: email must be on the `students` list → HMAC-signed `weave_session` cookie; `proxy.ts` gates app routes).
+  - Home (due next + live countdown, this week, keep writing), floating **menu pill** + full-screen menu, **bell notifications panel** (mark all read).
+  - Subjects (stacked colour cards with %), Subject → units → topics (topic green when a note links to it).
+  - Assignments (list, calendar, detail sheet with marks/remarks).
+  - Notes (list, search, filters; editor with auto-save, links to topics/notes, backlinks, delete). Markdown textarea + Write/Preview.
+  - Profile (account rows, notification switches, sign out), Graph (SVG syllabus tree + notes as diamonds, tap to highlight).
+  - PWA: manifest, icons, offline page, hand-written `public/sw.js` (installable on HTTPS).
+  - "Coming next" page for menu items not built (`app/(app)/[...soon]`).
+- **Checks at last merge:** `tsc`, `eslint`, `vitest` (24 tests), `next build` all pass; Playwright screenshots of every screen, no console errors.
 
-## Decisions already made (don't re-ask)
-- **Scope = core only** (user decision 2026-11-23): Login + onboarding · Home · Subjects → Unit → Topic (notes inside topics) · Assignments + push · Profile. Tabs: Home · Subjects · Assignments · Profile. Faculty/admin = Phase 3. AI tutor, quizzes, graph view, offline editing = Phase 4 extras. Streaks, heatmap, note links, notifications page, gap finder, timetable, attendance, results = **cut**. See `docs/PROJECT_OVERVIEW.md`.
-- **College structure:** department CSIT → programs CSIT and CY → divisions CSIT-1, CSIT-2, CY per year; years 2–4 (sem 3–8). CY shares most subjects with CSIT, has extra subjects, some in different semesters → subjects defined once + `program_subjects` semester plan. See `docs/database_schema.md`.
-- **Syllabus:** RGPV B.Tech CSIT, **theory subjects only**, semesters 3–8 (1st year left out). Electives: student picks one option per group. Only college ID stored = **enrollment number**.
-- **Sign-in gate = the department's student list** (`students` table), not just the email domain. Minimal personal data only.
-- Mobile-first: bottom tab bar on mobile, top bar on desktop, no sidebar.
-- One Next.js app, no BE/FE split, no mock gateway. Build one screen at a time, fully finished.
-- Stack: see `AGENTS.md` §2 (Next.js, TS strict, Tailwind 4, shadcn/Base UI, Motion/GSAP/Lenis, Neon Postgres+pgvector, Drizzle, Neon Auth, Serwist + Web Push, Vercel).
-- AI (Phase 4): **Groq** primary (chat, quizzes), **Gemini** (embeddings, PDF/vision, chat fallback). See `docs/ai.md`.
-- Neon: create a **new** project in Singapore (aws-ap-southeast-1) in Phase 0.4 — not the old `nodus-singapore` one.
-- Design: **new references are coming from the user** into `design/references/` (naming scheme in `design/README.md`). Phase 1 (design system + `/lab`) cannot start without them, and no screen work happens before the user approves `/lab`.
+## Data
+- **Neon** project `proud-sky-40049407` (Singapore). Schema v1 in `lib/db/schema/` (19 tables incl. `note_links`, `announcements`, `announcement_reads`); migration `lib/db/migrations/0000_*`.
+- Seed (`npm run db:seed`, idempotent): 44 subjects, 1,100 **drafted** RGPV topics (`lib/db/seed/data/units-topics.json`, `"draft": true`), 270 students, demo student with 6 assignments, 4 announcements, 45 notes (CN 72%, OS 52%, TOC 32%, AI 84%).
+- Secrets only in git-ignored `.env.local` (also set on Vercel). `DEMO_STUDENT_EMAIL` and `SESSION_SECRET` were added this session.
 
-## User preferences
-- Claude = **orchestrator**: plan, write task files, delegate heavy work to Gemini via `agy`, review, merge. Cost-efficient model choice (routing table in `CLAUDE.md`). Top Gemini models may use their own subagents; Claude subagents are fine too.
-- Don't ask about implementation details — decide and log in `NOTES.md`. Do ask before public/irreversible actions.
-- The user authorized Claude to **merge PRs when the work is good**, but in the 2026-11-23 session the auto-mode classifier blocked `gh pr merge` — open PRs and ask the user to merge.
-- Don't run build/lint/tests after every step; once per finished task (see `AGENTS.md` §11).
-- Reply in simple English.
+## How we work (user rules — don't re-ask)
+- **Claude (Opus) = orchestrator/reviewer** with minimal tokens. **Sonnet workers build everything visible** (`spawn.sh claude`, task `model: sonnet`). **agy (Gemini) builds backend + data wiring**; cheapest model that fits (Neon-medium for normal backend, Hydrogen for seed/simple, Argon only for genuinely hard work).
+- Parallel UI/data pairs work well: the task file fixes a **contract** (types in `components/<feature>/types.ts`, owned by the UI worker; the data worker imports them). Launch spawns **one at a time ~20 s apart** (parallel `git worktree add` races on `.git/config`).
+- Worktree previews: Turbopack can't follow the `node_modules` junction, so preview by merging into a branch checked out in the main folder.
+- Git Bash rewrites `/paths` for node scripts: prefix with `MSYS_NO_PATHCONV=1`.
+- `globals.css` conflicts are frequent when merging parallel UI branches: keep both sides, then check for duplicate `@utility` names and brace balance.
+- Design source of truth = `design/ui-kit/index.html`. User style rules: no dot-matrix numbers, no italic/coloured second words in titles (use ink + grey word), no playful shapes, no cards on Home (hairlines), notifications via bell panel (no announcements page).
+- Reference images stay **local only** (`design/references/` is git-ignored).
+- Reply in simple English. Decide implementation details yourself and log them in `NOTES.md`. Ask before public/irreversible actions. The user has allowed Claude to merge PRs on their behalf when the work is good.
 
-## Open items waiting on the user
-1. **CY subject list:** which subjects are extra and which shared ones move semester (CY seeded as a copy of CSIT until then). College email domain (optional extra check).
-2. **UI references** for Phase 1.
-3. **Unit-wise syllabus** (official RGPV PDFs) to check the drafted units/topics, and the student list CSV format.
-4. Later: Groq API key (console.groq.com), Gemini API key (aistudio.google.com), real syllabus (CSV), team/guide names for `docs/academic/synopsis.md`.
-
-## Next steps (Phase 0, `docs/roadmap.md`)
-- 0.5 Drizzle schema v1 (`docs/database_schema.md`, 16 tables; CSIT theory subjects in `lib/db/seed/data/csit-subjects.json`) + migrations + seed on a Neon **dev branch** — Gemini worker task. Seed script: use `.mts` or `main()` (no top-level await in CJS).
-- 0.6 Auth + **student-list gate** + guards + onboarding. Managed Neon Auth can't block account creation, so the gate is in our server code: email not in `students` → sign out with a message.
-- 0.7 PWA base — decide Serwist vs hand-written SW, log in NOTES.md.
-- 0.8 Vercel project + first preview deploy (ask the user first).
-
-## Machine gotchas (Windows)
-- `agy` CLI: `~/AppData/Local/agy/bin` (v1.5.15). Models: `gemini-4-argon-*`, `gemini-4-neon-*`, `gemini-4-hydrogen-*`, `gemini-3.8-flash-*` (`agy models`). Tier order Argon > Neon > Hydrogen is an **unverified assumption**.
-- Headless `agy --mode accept-edits -p="..."` works for **file-only** tasks. The auto-mode classifier blocks launching agy with `--dangerously-skip-permissions`; for shell tasks the user runs agy interactively (`spawn.sh` prints the command).
-- Headless workers' "completed" notification = launcher exit; real status via `./watch.sh` / `logs/<name>.status`.
-- Always review worker output for silent fallbacks and invented APIs (past Gemini bugs: wrong library APIs, undefined vars, duplicated formulas).
-- Worktrees: `../weave-wt/<name>`; `node_modules` there is a **junction** — remove only with `cmd /c rmdir`, never `rm -rf` / `Remove-Item -Recurse` / `ln -s` (a wrong delete once wiped the main `node_modules`).
-- `gh` is not on Git Bash PATH: use PowerShell and refresh `$env:Path` from Machine + User.
-- Neon CLI 8.4.4 login expired (`invalid_grant`); user must run `neon login`. Neon MCP works.
-- No `jq`; use `node -e`. Repo enforces LF (`.gitattributes`).
+## Open items / next steps
+1. **Speed:** Vercel functions run in `iad1` (US) while the DB is in Singapore → set Function Region to `sin1` (Vercel → Project → Settings → Functions).
+2. **Real sign-in:** Neon Auth email OTP + the student-list gate (replace the demo cookie sign-in; keep `lib/auth/session.ts` API).
+3. **Push notifications** (Web Push, VAPID keys exist): deadline 2 days / same day, new assignment, status marked; "Remind me" button on the assignment sheet.
+4. **Docs drift:** `AGENTS.md` §4–5, `docs/PROJECT_OVERVIEW.md`, `docs/design_system.md` still describe the bottom tab bar, topic-bound notes and "note links cut". Update them to the decisions in `NOTES.md`.
+5. **Rich-text editor** (Tiptap) needs the user's OK for a new dependency; inline `code` isn't rendered in note preview yet.
+6. Faculty tools (Phase 3): post announcements, add assignments, mark students, upload materials.
+7. Waiting on the user: official RGPV unit-wise syllabus (to replace drafted topics), CY subject differences, real student list format.
+8. Clean up: old worktrees in `../weave-wt/` (remove `node_modules` junctions with `cmd /c rmdir`, never `rm -rf`), and old remote design branches (`docs/ui-kit-v0/v2/v3`) that still contain the reference images.
