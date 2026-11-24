@@ -9,14 +9,14 @@
 ## 1. What we are building
 
 **Weave** is an installable PWA for the students of the CSIT department (programs CSIT and CY, 2nd–4th year).
-It shows their syllabus (Semester → Subject → Unit → Topic) with progress, lets them write private notes under each topic,
+It shows their syllabus (Semester → Subject → Unit → Topic) with progress, lets them write private notes linked to topics and other notes,
 and keeps their assignments and deadlines in front of them with push reminders.
-AI features (tutor, quizzes) and the graph view are **later extras** (Phase 4), not part of the core.
+AI features (tutor, quizzes) are **later extras** (Phase 4); a simple SVG graph view is built (interactive tree with notes as diamonds; React Flow layout later).
 
 > *"Weave connects your syllabus, your notes and your deadlines into one fabric, and shows you what you know and what you're missing."*
 
 - **Build order:** the **core student PWA first** (Phase 2). Faculty/admin tools in Phase 3. Extras only in Phase 4.
-- **Core screens only:** Login + onboarding · Home · Subjects → Unit → Topic (notes inside topics) · Assignments (+ push) · Profile. See `docs/PROJECT_OVERVIEW.md` for what is core, later and cut.
+- **Core screens only:** Login + onboarding · Home · Subjects → Unit → Topic · Notes (linked to topics/notes) · Assignments (+ push) · Profile · Graph (simple SVG tree). See `docs/PROJECT_OVERVIEW.md` for what is core, later and cut.
 - **Goal:** a college minor project that is good enough for the department to **use every day** (100+ students).
 - **Quality bar:** pixel-perfect to the user's references, Awwwards-level motion, native-app feel on phones.
 - **Rule:** few features, each one finished completely (real data, all states, motion, mobile, tested). Never many half-built features.
@@ -56,7 +56,7 @@ Adding a major library needs the user's OK. Small utilities are fine if they cle
 ```
 app/                     routes (Server Components by default)
   (public)/              landing, login
-  (app)/                 student PWA screens (bottom tab bar on mobile, top bar on desktop)
+  (app)/                 student PWA screens (floating menu pill + full-screen menu, notifications bell panel)
   api/                   streaming AI, uploads, push, cron
 components/
   ui/                    restyled primitives (Button, Card, Sheet, ...)
@@ -91,19 +91,19 @@ CY shares most subjects with CSIT, has extra subjects, and some shared subjects 
 **Users.** `student` (a row in the department's student list, linked to a login on first sign-in) and later `faculty` / `admin`.
 Sign-in only for emails on the student list. Store only the personal fields listed in `docs/database_schema.md`.
 
-**Semesters.** Switched from the top bar / profile, never inside the graph. Current + past semesters are open; future ones are visible but locked.
+**Semesters.** Switched from the menu / profile, never inside the graph. Current + past semesters are open; future ones are visible but locked.
 
-**Curriculum.** Subject → Unit → Topic (ordered, faculty/admin-defined). Every note belongs to exactly one topic.
+**Curriculum.** Subject → Unit → Topic (ordered, faculty/admin-defined).
 
 **Notes.** Private to the owner — never visible to other students or to faculty (faculty only ever see aggregated progress).
-Stored as Markdown, written inside a topic. Debounced auto-save. No links/backlinks between notes (cut).
+Stored as Markdown in their own Notes section, with links to topics and other notes (`[[Note title]]`) and backlinks. Debounced auto-save.
 
 **Assignments.** Submission is **offline, on paper**. Never build online submission or student file upload.
 Faculty marks each student: Submitted / Late / Not submitted (+ optional marks, remark). Students see details, live countdown, status.
 
 **Progress formula** (lives only in `lib/progress/`):
 ```
-Topic covered = ≥1 note on the topic AND (no quiz attempted OR best quiz score ≥ 50%)
+Topic covered = ≥1 note linked to the topic AND (no quiz attempted OR best quiz score ≥ 50%)
 Unit %        = 0.7 × (covered topics / total topics) + 0.3 × unit quiz average
                 (no quiz attempted in the unit → Unit % = covered topics / total topics)
 Subject %     = average of its units' %       Semester % = average of its subjects' %
@@ -122,7 +122,7 @@ Status bands: Not started 0% · Low 1–39% · In progress 40–75% · Mastered 
   2. Build at the reference's exact viewport width first, then adapt to the other breakpoints.
   3. The orchestrator compares a Playwright screenshot with the reference side by side before accepting.
 - **Breakpoints:** mobile 360–430 px (primary, PWA), tablet 768 px, desktop 1280/1440 px.
-- **Navigation:** bottom tab bar on mobile, top bar on desktop. No sidebar.
+- **Navigation:** floating menu pill that opens a full-screen menu, plus a bell that opens the notifications panel. No tab bar; no sidebar.
 - Every data view has **loading (skeleton), empty and error states**.
 - Fonts via `next/font/local` (files in `public/fonts/`); images via `next/image`.
 
@@ -228,7 +228,7 @@ Write `docs/changes/YYYY-MM-DD-<slug>.md` before ending (suffix `-2` if it exist
 
 - ❌ Online assignment submission or student uploads.
 - ❌ Radial graph view; semester switcher inside the graph; a sidebar.
-- ❌ Building "later" or "cut" features from `docs/PROJECT_OVERVIEW.md` before the core is finished (streaks, heatmaps, note links, timetable, attendance, ...).
+- ❌ Building "later" or "cut" features from `docs/PROJECT_OVERVIEW.md` before the core is finished (streaks, heatmaps, timetable, attendance, ...).
 - ❌ Collecting personal data beyond `docs/database_schema.md` (address, parents, DOB, Aadhaar, caste).
 - ❌ Showing a student's notes to anyone else.
 - ❌ AI answers from outside the provided material.
