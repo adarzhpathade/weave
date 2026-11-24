@@ -1,6 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { departments, divisions, programs, students, users } from "@/lib/db/schema";
 
@@ -149,10 +149,11 @@ export async function ensureStudentUser(
 }
 
 /**
- * Links a student to a Neon Auth user ID on first sign-in with email code.
- * - if the student already has a userId, returns it (does not change it);
- * - otherwise, in one transaction: inserts the users row with id = authUserId
- *   (on conflict do nothing on email), sets students.userId, and returns the userId.
+ * Links a student to a Neon Auth user ID on first sign-in with an email code.
+ * The neon-http driver has no transactions, so each step is safe to repeat on its own:
+ * - if the student already has a userId, return it (never change it);
+ * - insert the users row with id = authUserId (do nothing if the email already exists);
+ * - set students.user_id only while it is still empty, so two parallel sign-ins cannot overwrite each other.
  */
 export async function linkStudentToAuthUser(
   studentId: string,
@@ -167,53 +168,41 @@ export async function linkStudentToAuthUser(
     .from(students)
     .where(eq(students.id, studentId))
     .limit(1);
-
   if (existingStudent?.userId) {
     return existingStudent.userId;
   }
 
-  return await db.transaction(async (tx) => {
-    const [st] = await tx
-      .select({ userId: students.userId })
-      .from(students)
-      .where(eq(students.id, studentId))
-      .limit(1);
+  await db
+    .insert(users)
+    .values({ id: authUserId, email: normalized, name: name.trim() || normalized, role: "student" })
+    .onConflictDoNothing({ target: users.email });
 
-    if (st?.userId) {
-      return st.userId;
-    }
+  const [userRow] = await db
+    .select({ id: users.id })
+    .from(users)
+    .where(eq(users.email, normalized))
+    .limit(1);
+  if (!userRow) {
+    throw new Error(`Failed to resolve user id for student ${studentId}.`);
+  }
 
-    const now = new Date();
-    const [insertedUser] = await tx
-      .insert(users)
-      .values({
-        id: authUserId,
-        email: normalized,
-        name: name.trim() || normalized,
-        role: "student",
-      })
-      .onConflictDoNothing({ target: users.email })
-      .returning({ id: users.id });
+  const [linked] = await db
+    .update(students)
+    .set({ userId: userRow.id, updatedAt: new Date() })
+    .where(and(eq(students.id, studentId), isNull(students.userId)))
+    .returning({ userId: students.userId });
+  if (linked?.userId) {
+    return linked.userId;
+  }
 
-    let finalUserId = insertedUser?.id;
-    if (!finalUserId) {
-      const [existingUser] = await tx
-        .select({ id: users.id })
-        .from(users)
-        .where(eq(users.email, normalized))
-        .limit(1);
-
-      if (!existingUser) {
-        throw new Error(`Failed to resolve user id for student ${studentId}.`);
-      }
-      finalUserId = existingUser.id;
-    }
-
-    await tx
-      .update(students)
-      .set({ userId: finalUserId, updatedAt: now })
-      .where(eq(students.id, studentId));
-
-    return finalUserId;
-  });
+  // Another request linked the student first; use what it stored.
+  const [current] = await db
+    .select({ userId: students.userId })
+    .from(students)
+    .where(eq(students.id, studentId))
+    .limit(1);
+  if (!current?.userId) {
+    throw new Error(`Failed to link student ${studentId} to a user.`);
+  }
+  return current.userId;
 }
