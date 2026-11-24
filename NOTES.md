@@ -59,3 +59,4 @@ Newest at the bottom. Format: `- YYYY-MM-DD — decision/assumption — why`.
 - 2026-11-24 — Workers: frontend (anything the user sees) = Sonnet via spawn.sh claude; backend + data wiring = agy. Use the cheapest agy model that fits; Argon/top tier only for genuinely hard tasks. — user (cost).
 - 2026-11-24 — Two-tone titles = ink + grey word, never italic/colored (user rule applied to Profile and Graph). — user.
 - 2026-11-24 — Profile screen has no kit phone; built from kit hairline/kv language. — orchestrator.
+- 2026-11-24 — Real sign-in with email code (Neon Auth OTP): requestSignInCode gates OTP dispatch to active students on the list; DEMO_STUDENT_EMAIL bypasses OTP so demo keeps working; weave_session cookie remains untouched. — b1-real-signin task.
