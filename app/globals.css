@@ -2,129 +2,724 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: ui-sans-serif, system-ui, sans-serif; /* placeholder until Phase 1 fonts */
-  --font-mono: ui-monospace, monospace;
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
+/* Weave design tokens — copied from design/ui-kit/index.html (:root). Light + dark via prefers-color-scheme. */
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* color */
+  --c-bg: #ECECE8;
+  --c-app: #F4F4F1;
+  --c-surface: #FFFFFF;
+  --c-ink: #0B0B0C;
+  --c-muted: #6E6E73;
+  --c-line: #D8D8D3;
+  --c-night: #0B0B0C; /* forced-dark screens (login) */
+  --c-on-night: #F4F4F1;
+  --c-night-line: #2C2C30;
+  --c-lime: #62E04E;
+  --c-on-lime: #0B0B0C;
+  --c-accent: #6D6AF4; /* periwinkle */
+  --c-on-accent: #FFFFFF;
+  --c-late: #FFB21E;
+  --c-missing: #FF4F3A;
+  --c-on-status: #0B0B0C;
+  --c-scrim: rgba(11, 11, 12, 0.38);
+  --c-sub-1: #D7C6F7;
+  --c-sub-2: #E9F49A;
+  --c-sub-3: #A58CF2;
+  --c-sub-4: #C8CDF7;
+  --c-sub-5: #BDE9D3;
+  --c-sub-6: #F8CBAA;
+  --c-on-sub: #0B0B0C;
+
+  /* shape */
+  --r-xs: 8px;
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 30px;
+  --r-pill: 999px;
+  --shadow-lift: 0 24px 48px -24px rgba(11, 11, 12, 0.35);
+  --shadow-sheet: 0 -12px 40px -12px rgba(11, 11, 12, 0.28);
+
+  /* motion */
+  --d-fast: 140ms;
+  --d-base: 260ms;
+  --d-slow: 520ms;
+  --d-rise: 760ms;
+  --d-stagger: 90ms;
+  --e-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --e-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  --e-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* layout */
+  --w-auth-column: 420px;
+  --stroke-field: 1.5px;
+  --h-field: 52px;
+  --h-button: 48px;
+
+  /* app shell (kit: .navpill, .mpanel, .npanel, .scroll) */
+  --d-menu: 640ms;
+  --d-menu-lead: 120ms; /* first menu row starts after the circle has opened a bit */
+  --d-menu-step: 50ms;
+  --d-notif-lead: 140ms;
+  --d-notif-step: 45ms;
+  --d-sub-step: 40ms;
+  --w-column: 720px; /* laptop content column */
+  --w-pill: 366px; /* 390 phone − 2 × 12px gutter */
+  --s-top-min: 1.5rem; /* top gap when the browser reports no safe area */
+  --s-screen-top: 0.625rem; /* .hm2 padding-top */
+  --s-screen-bottom: 6.5rem; /* .scroll padding-bottom, clears the pill */
+  --s-panel-top: 0.5rem; /* .mpanel 54px − 46px status bar */
+  --s-panel-bottom: 5.375rem; /* .mpanel padding-bottom 86px */
+  --s-dock: 0.75rem; /* pill offset from the screen edges */
+  --col-menu-idx: 1.625rem; /* .mhead 26px index column */
+  --col-notif-time: 2.625rem; /* .np-item 42px time column */
+
+  /* subjects (kit .stack / .scard / .sub-hero / .bar) */
+  --r-scard: 26px;
+  --r-hero: 34px; /* .sub-hero bottom corners */
+  --h-scard: 168px;
+  --s-stack-overlap: 78px; /* .scard margin-top: -78px */
+  --s-stack-open: 132px; /* kit OPEN_SHIFT: cards below the open one slide down */
+  --sh-stack: 0 -10px 24px -14px rgba(11, 11, 12, 0.35);
+  --d-list-step: 60ms; /* kit .stagger nth-child steps */
+  --d-list-max: 340ms;
+  --d-grow: 900ms; /* kit .bar .fill grow */
+  /* assignments (kit .acard, .cal, .sheet) */
+  --r-cal: 10px; /* .cal .d */
+  --r-sheet: 38px; /* .sheet */
+  --d-sheet: 620ms; /* .replay-host.play .sheet (sheet-up) */
+  --d-list-step: 60ms; /* .stagger > * nth-child delays */
+  --d-list-max: 340ms; /* .stagger > *:nth-child(n+7) */
+  --s-sheet-gap: 0.5rem; /* .sheet left/right/bottom 8px */
+  --s-sheet-top: 21dvh; /* .sheet top: 21% */
+  --w-sheet: 480px; /* centered dialog width on laptop */
+  /* notes (kit .prow, .ilink, chip pop-in) */
+  --col-picker-kind: 3.375rem; /* .prow 54px "Topic" / "Note" column */
+  --d-pop: 320ms; /* kit script: added link chip scales in */
+  --ilink-mark: 62%; /* .ilink highlighter starts 62% down the line */
+  /* profile (kit .switch) */
+  --sh-knob: 0 1px 3px rgba(11, 11, 12, 0.25);
+  /* graph (kit .graph, .g-node, .gsheet) */
+  --w-graph: 1080px; /* laptop graph page column */
+  --w-graph-min: 760px; /* .graph-wrap.wide svg min-width */
+  --s-gsheet-bottom: 5.25rem; /* .gsheet bottom: 84px, clears the pill */
+  --s-graph-bottom: 11.875rem; /* .scroll padding-bottom: 190px with the sheet open */
+  --o-dim: 0.28; /* .sel .g-node:not(.hl) */
+  --t-gnode: 0.71875rem; /* 11.5px node label */
+  --t-gsubject: 0.84375rem; /* 13.5px subject label */
+  --g-stroke: 1.5px; /* edge + topic ring */
+  --g-stroke-node: 2px;
+  --g-stroke-sel: 3.5px;
+  --g-halo: 4px; /* label knock-out stroke */
+  --d-gnode: 560ms;
+  --d-gedge: 600ms;
+  --d-gcol: 220ms; /* columns appear left to right */
+  --d-gstep: 22ms; /* stagger inside a column */
+  --d-glead: 80ms; /* edges start just before their column */
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #050506;
+    --c-app: #0B0B0C;
+    --c-surface: #17171A;
+    --c-ink: #F4F4F1;
+    --c-muted: #9C9CA3;
+    --c-line: #2C2C30;
+    --c-scrim: rgba(0, 0, 0, 0.55);
+    --shadow-lift: 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-app: var(--c-app);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-night: var(--c-night);
+  --color-on-night: var(--c-on-night);
+  --color-night-line: var(--c-night-line);
+  --color-lime: var(--c-lime);
+  --color-on-lime: var(--c-on-lime);
+  --color-accent: var(--c-accent);
+  --color-on-accent: var(--c-on-accent);
+  --color-late: var(--c-late);
+  --color-missing: var(--c-missing);
+  --color-on-status: var(--c-on-status);
+  --color-scrim: var(--c-scrim);
+  --color-sub-1: var(--c-sub-1);
+  --color-sub-2: var(--c-sub-2);
+  --color-sub-3: var(--c-sub-3);
+  --color-sub-4: var(--c-sub-4);
+  --color-sub-5: var(--c-sub-5);
+  --color-sub-6: var(--c-sub-6);
+  --color-on-sub: var(--c-on-sub);
+
+  --font-sans: var(--font-urbanist), "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-urbanist), "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --text-label: 0.72rem;
+  --text-hint: 0.75rem;
+  --text-field-label: 0.8125rem;
+  --text-small: 0.875rem;
+  --text-copy: 0.90625rem; /* 14.5px */
+  --text-button: 0.95rem;
+  --text-body: 1rem;
+  --text-wordmark: 1.4rem;
+  --text-title: 1.25rem;
+  --text-h2: 1.75rem;
+  --text-headline: 2.25rem;
+  --text-h1: 2.5rem;
+  --text-headline--line-height: 1;
+
+  /* app shell + home (values from the kit) */
+  --text-mono-2xs: 0.625rem; /* 10px: countdown units, week weekday, "later" */
+  --text-mono-xs: 0.65625rem; /* 10.5px: notification group */
+  --text-mono: 0.6875rem; /* 11px: status chip, menu index, time column */
+  --text-meta: 0.78125rem; /* 12.5px: notification meta line */
+  --text-row: 0.9375rem; /* 15px: list row title */
+  --text-row--line-height: 1.2;
+  --text-lead: 1.05rem; /* menu sub links, notification title */
+  --text-lead--line-height: 1.2;
+  --text-section: 1.35rem; /* empty-state lines in section type */
+  --text-section--line-height: 1.15;
+  --text-due: 1.6rem;
+  --text-due--line-height: 1.1;
+  --text-menu: 1.95rem;
+  --text-menu--line-height: 1;
+  --text-count: 2.4rem;
+  --text-count--line-height: 1;
+  --text-greet: clamp(2.5rem, 12cqi, 4.5rem);
+  --text-greet--line-height: 0.98;
+  --text-panel-title: clamp(2.5rem, 12cqi, 4.5rem);
+  --text-panel-title--line-height: 1;
+  --text-week-day: clamp(2.25rem, 13cqi, 4rem);
+  --text-week-day--line-height: 0.85;
+
+  /* subjects (values from the kit) */
+  --text-screen-title: 3rem; /* .scr-title */
+  --text-screen-title--line-height: 0.88;
+  --text-hero-title: 2.4rem; /* subject detail title */
+  --text-hero-title--line-height: 0.88;
+  --text-card-name: 1.45rem; /* .scard .name */
+  --text-card-name--line-height: 1.15;
+  --text-card-pct: 1.3rem; /* .scard .pct */
+  --text-card-pct--line-height: 1.2;
+  --text-stat: 2rem; /* .stats .v */
+  --text-stat--line-height: 1.1;
+  --text-topic: 0.84375rem; /* .topic 13.5px */
+
+  --radius-scard: var(--r-scard);
+  --radius-hero: var(--r-hero);
+  --shadow-stack: var(--sh-stack);
+  --animate-grow: grow var(--d-grow) var(--e-out) both;
+  /* assignments (values from the kit) */
+  --text-scr-title: 3rem; /* .scr-title */
+  --text-scr-title--line-height: 0.88;
+  --text-card: 0.9375rem; /* .acard .t 15px */
+  --text-card--line-height: 1.25;
+  --text-count-sm: 1.15rem; /* .count.sm */
+  --text-count-sm--line-height: 1;
+  --text-sheet-title: 1.2rem; /* sheet title */
+  --text-sheet-title--line-height: 1.2;
+  --text-fine: 0.8125rem; /* 13px: "Submit on paper" line */
+  --text-cal-day: 0.71875rem; /* 11.5px: .cal .d */
+  --text-cal-dow: 0.59375rem; /* 9.5px: .cal .dow */
+  --text-cal-tag: 0.46875rem; /* 7.5px: .cal .d small */
+  --text-cal-tag--line-height: 1.2;
+  --tracking-sub: 0.04em; /* .acard .sub */
+  --radius-cal: var(--r-cal);
+  --radius-sheet: var(--r-sheet);
+  --aspect-cal-day: 0.82;
+  --shadow-sheet-up: var(--shadow-sheet);
+  --container-sheet: var(--w-sheet);
+  --animate-sheet-up: sheet-up var(--d-sheet) var(--e-spring) backwards;
+  --animate-sheet-down: sheet-down var(--d-base) var(--e-in-out) forwards;
+  --animate-dialog-in: dialog-in var(--d-slow) var(--e-spring) backwards;
+  --animate-dialog-out: dialog-out var(--d-base) var(--e-in-out) forwards;
+  --animate-scrim-in: scrim-in var(--d-base) var(--e-out) backwards;
+  --animate-scrim-out: scrim-out var(--d-base) var(--e-in-out) forwards;
+  /* notes (kit .scr-title, .note-title, .ncard, .lchip, .prow, .brow, .note-body) */
+  --text-screen-title: 3rem;
+  --text-screen-title--line-height: 0.88;
+  --text-note-title: 2.2rem;
+  --text-note-title--line-height: 0.95;
+  --text-card-title: 0.96875rem; /* 15.5px */
+  --text-card-title--line-height: 1.25;
+  --text-excerpt: 0.8125rem; /* 13px */
+  --text-excerpt--line-height: 1.45;
+  --text-chip: 0.71875rem; /* 11.5px */
+  --text-chip--line-height: 1;
+  --text-picker: 0.8125rem; /* 13px */
+  --text-picker--line-height: 1.3;
+  --text-backlink: 0.84375rem; /* 13.5px */
+  --text-backlink--line-height: 1.3;
+  --text-toggle: 0.75rem; /* 12px, kit .view-toggle */
+  --text-note-body: 0.90625rem; /* 14.5px */
+  --text-note-body--line-height: 1.6;
+  --text-note-h1: 1.35rem;
+  --text-note-h1--line-height: 1.15;
+  --text-note-h2: 1.05rem;
+  --text-note-h2--line-height: 1.25;
+
+  /* profile + graph */
+  --shadow-knob: var(--sh-knob);
+  --container-graph: var(--w-graph);
+  --container-graph-min: var(--w-graph-min);
+  --radius-tick: 2px; /* .lg i.dia */
+
+  --leading-sep: 0.95;
+
+  --tracking-wordmark: -0.05em;
+  --tracking-headline: -0.035em;
+  --tracking-label: 0.08em;
+  --tracking-display: -0.045em;
+  --tracking-title: -0.03em;
+  --tracking-snug: -0.02em;
+  --tracking-row: -0.01em;
+  --tracking-count: -0.04em;
+  --tracking-week: -0.06em;
+  --tracking-status: 0.06em;
+
+  --shadow-float: var(--shadow-lift);
+
+  --container-column: var(--w-column);
+  --container-pill: var(--w-pill);
+
+  --radius-xs: var(--r-xs);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-pill: var(--r-pill);
+
+  --ease-out: var(--e-out);
+  --ease-spring: var(--e-spring);
+  --ease-in-out: var(--e-in-out);
+
+  --animate-rise: rise var(--d-rise) var(--e-out) backwards;
+  --animate-fade-up: fade-up var(--d-rise) var(--e-out) backwards;
+  --animate-lift: lift var(--d-slow) var(--e-out) both; /* kit @keyframes rise (menu + notification rows) */
+  --animate-lift-quick: lift var(--d-base) var(--e-out) both; /* kit: menu sub-links */
+  --animate-pop: pop var(--d-pop) var(--e-spring) both; /* kit: a new link chip */
+}
+
+/* spacing helpers that need env() — safe-area aware */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility px-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+@utility min-h-screen-safe {
+  min-height: 100dvh;
+}
+@utility stroke-field {
+  border-width: var(--stroke-field);
+}
+@utility h-field {
+  height: var(--h-field);
+}
+@utility h-button {
+  height: var(--h-button);
+}
+@utility max-w-auth {
+  max-width: var(--w-auth-column);
+}
+@utility duration-fast {
+  transition-duration: var(--d-fast);
+}
+@utility duration-base {
+  transition-duration: var(--d-base);
+}
+@utility stagger {
+  animation-delay: calc(var(--n, 0) * var(--d-stagger));
+}
+
+/* ---------- app shell: floating pill, full-screen menu + notifications (kit .navpill / .mpanel / .npanel) ---------- */
+@utility pt-screen {
+  padding-top: calc(max(env(safe-area-inset-top, 0px), var(--s-top-min)) + var(--s-screen-top));
+}
+@utility pb-screen {
+  padding-bottom: calc(var(--s-screen-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility pt-panel {
+  padding-top: calc(max(env(safe-area-inset-top, 0px), var(--s-top-min)) + var(--s-panel-top));
+}
+@utility pb-panel {
+  padding-bottom: calc(var(--s-panel-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility bottom-dock {
+  bottom: calc(var(--s-dock) + env(safe-area-inset-bottom, 0px));
+}
+@utility grid-cols-menu-head {
+  grid-template-columns: var(--col-menu-idx) 1fr auto;
+}
+@utility grid-cols-notif {
+  grid-template-columns: var(--col-notif-time) 1fr;
+}
+@utility pl-menu-sub {
+  padding-left: calc(var(--col-menu-idx) + 0.5rem); /* index column + gap, kit 34px */
+}
+/* circle reveal from the pill's menu button; --mx / --my are set from the button's position */
+@utility reveal-panel {
+  clip-path: circle(0px at var(--mx, 85%) var(--my, 95%));
+  visibility: hidden;
+  transition:
+    clip-path var(--d-menu) var(--e-in-out),
+    visibility 0s linear var(--d-menu);
+}
+@utility reveal-panel-open {
+  clip-path: circle(150% at var(--mx, 85%) var(--my, 95%));
+  visibility: visible;
+  transition:
+    clip-path var(--d-menu) var(--e-in-out),
+    visibility 0s;
+}
+/* accordion: sub-options grow from 0 to their height */
+@utility rows-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--d-slow) var(--e-out);
+}
+@utility rows-expand {
+  grid-template-rows: 1fr;
+}
+@utility delay-menu {
+  animation-delay: calc(var(--d-menu-lead) + var(--n, 0) * var(--d-menu-step));
+}
+@utility delay-notif {
+  animation-delay: calc(var(--d-notif-lead) + var(--n, 0) * var(--d-notif-step));
+}
+@utility delay-sub {
+  animation-delay: calc(var(--n, 0) * var(--d-sub-step));
+}
+@utility dot-after {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    background: var(--c-lime);
+    vertical-align: 0.5em;
+  }
+}
+@utility dot-before {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--c-lime);
+    vertical-align: 0.12em;
+  }
+}
+
+/* ---------- subjects: wallet stack (kit .stack / .scard) ---------- */
+@utility min-h-scard {
+  min-height: var(--h-scard);
+}
+@utility stack-overlap {
+  &:not(:first-child) {
+    margin-top: calc(-1 * var(--s-stack-overlap));
+  }
+}
+/* uses transform, so it never fights the entrance animation (which animates translate) */
+@utility stack-card-motion {
+  transition: transform var(--d-slow) var(--e-spring);
+}
+@utility shift-stack-open {
+  transform: translateY(var(--s-stack-open));
+}
+@utility pb-stack-open {
+  padding-bottom: calc(var(--s-stack-open) + 0.5rem);
+}
+@utility delay-list {
+  animation-delay: min(calc(var(--n, 0) * var(--d-list-step)), var(--d-list-max));
+}
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- assignments: list stagger, bottom sheet / laptop dialog (kit .stagger, .sheet) ---------- */
+@utility sheet-frame {
+  left: var(--s-sheet-gap);
+  right: var(--s-sheet-gap);
+  bottom: calc(var(--s-sheet-gap) + env(safe-area-inset-bottom, 0px));
+  max-height: calc(100dvh - var(--s-sheet-top) - var(--s-sheet-gap) - env(safe-area-inset-bottom, 0px));
+}
+@utility dialog-frame {
+  inset: 0;
+  margin: auto;
+  width: calc(100% - 2rem);
+  max-width: var(--w-sheet);
+  height: fit-content;
+  max-height: calc(100dvh - 4rem);
+}
+@utility transition-translate {
+  transition-property: translate;
+  transition-duration: var(--d-base);
+  transition-timing-function: var(--e-spring);
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes sheet-down {
+  to {
+    transform: translateY(105%);
+  }
+}
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+@keyframes dialog-out {
+  to {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes scrim-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ---------- graph: tree of subject → units → topics + notes (kit .graph, .g-node, .g-edge) ---------- */
+@utility pb-graph {
+  padding-bottom: calc(var(--s-graph-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility bottom-gsheet {
+  bottom: calc(var(--s-gsheet-bottom) + env(safe-area-inset-bottom, 0px));
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility g-on-surface {
+  --g-bg: var(--c-surface); /* label halo matches the laptop card */
+}
+@layer components {
+  .g-edge {
+    fill: none;
+    stroke: var(--c-line);
+    stroke-width: var(--g-stroke);
+    transition: opacity var(--d-base);
+  }
+  .g-edge-note {
+    stroke: var(--c-accent);
+    stroke-dasharray: 4 4;
+  }
+  .g-node {
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity var(--d-base);
+  }
+  .g-node:focus {
+    outline: none;
+  }
+  .g-node:focus-visible text {
+    text-decoration: underline;
+  }
+  .g-node:focus-visible .g-dot {
+    stroke: var(--c-accent);
+    stroke-width: var(--g-stroke-sel);
+  }
+  .g-hit {
+    fill: transparent;
+    stroke: none;
+  }
+  .g-dot {
+    stroke-width: var(--g-stroke-node);
+    transition: stroke-width var(--d-fast);
+  }
+  .g-node text {
+    font-size: var(--t-gnode);
+    font-weight: 600;
+    fill: var(--c-ink);
+    paint-order: stroke;
+    stroke: var(--g-bg, var(--c-app));
+    stroke-width: var(--g-halo);
+    stroke-linejoin: round;
+  }
+  .g-subject text {
+    font-size: var(--t-gsubject);
+    font-weight: 800;
+  }
+  .g-unit text,
+  .g-note text {
+    font-weight: 700;
+  }
+  .g-subject .g-dot {
+    fill: var(--c-ink);
+    stroke: var(--c-ink);
+  }
+  .g-unit .g-dot {
+    fill: var(--g-bg, var(--c-app));
+    stroke: var(--c-ink);
+  }
+  .g-topic .g-dot {
+    fill: var(--g-bg, var(--c-app));
+    stroke: var(--c-muted);
+    stroke-width: var(--g-stroke);
+  }
+  .g-topic.is-covered .g-dot {
+    fill: var(--c-lime);
+    stroke: var(--c-ink);
+  }
+  .g-note .g-dot {
+    fill: var(--c-accent);
+    stroke: var(--c-accent);
+  }
+  .g-node.is-sel .g-dot {
+    stroke: var(--c-ink);
+    stroke-width: var(--g-stroke-sel);
+  }
+  .g-node.is-dim,
+  .g-edge.is-dim {
+    opacity: var(--o-dim);
+  }
+}
+/* columns build left to right (subject, units, topics, notes); nothing is hidden without the animation */
+@media (prefers-reduced-motion: no-preference) {
+  .g-node {
+    animation: gnode var(--d-gnode) var(--e-spring) backwards;
+    animation-delay: calc(var(--col, 0) * var(--d-gcol) + var(--j, 0) * var(--d-gstep));
+  }
+  .g-edge {
+    animation: gedge var(--d-gedge) var(--e-out) backwards;
+    animation-delay: calc(var(--col, 0) * var(--d-gcol) - var(--d-glead));
+  }
+}
+@keyframes gnode {
+  from {
+    opacity: 0;
+    scale: 0.2;
+  }
+}
+@keyframes gedge {
+  from {
+    opacity: 0;
+  }
+}
+
+/* entrance motion: only when the user has not asked for reduced motion.
+   Elements are fully visible without these animations (no JS needed, no hidden initial state). */
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+/* kit .skel: shimmering placeholder block */
+@utility skel {
+  background: linear-gradient(90deg, var(--c-line) 0%, var(--c-app) 50%, var(--c-line) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+/* notes: kit .prow two-column row and .ilink highlighter underline */
+@utility grid-cols-picker {
+  grid-template-columns: var(--col-picker-kind) 1fr;
+}
+@utility ilink {
+  font-weight: 700;
+  border-radius: 2px;
+  background: linear-gradient(transparent var(--ilink-mark), var(--c-lime) var(--ilink-mark));
+}
+@keyframes lift {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+  }
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  html {
+    font-family: var(--font-sans);
+    background: var(--c-app);
+    color: var(--c-ink);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    overscroll-behavior: none;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--c-app);
+    color: var(--c-ink);
+    font-size: var(--text-body);
+    font-weight: 500;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
   }
-  html {
-    @apply font-sans;
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
   }
 }

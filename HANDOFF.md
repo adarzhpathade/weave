@@ -13,6 +13,7 @@
 ## Decisions already made (don't re-ask)
 - **Scope = core only** (user decision 2026-11-23): Login + onboarding · Home · Subjects → Unit → Topic (notes inside topics) · Assignments + push · Profile. Tabs: Home · Subjects · Assignments · Profile. Faculty/admin = Phase 3. AI tutor, quizzes, graph view, offline editing = Phase 4 extras. Streaks, heatmap, note links, notifications page, gap finder, timetable, attendance, results = **cut**. See `docs/PROJECT_OVERVIEW.md`.
 - **College structure:** department CSIT → programs CSIT and CY → divisions CSIT-1, CSIT-2, CY per year; years 2–4 (sem 3–8). CY shares most subjects with CSIT, has extra subjects, some in different semesters → subjects defined once + `program_subjects` semester plan. See `docs/database_schema.md`.
+- **Syllabus:** RGPV B.Tech CSIT, **theory subjects only**, semesters 3–8 (1st year left out). Electives: student picks one option per group. Only college ID stored = **enrollment number**.
 - **Sign-in gate = the department's student list** (`students` table), not just the email domain. Minimal personal data only.
 - Mobile-first: bottom tab bar on mobile, top bar on desktop, no sidebar.
 - One Next.js app, no BE/FE split, no mock gateway. Build one screen at a time, fully finished.
@@ -29,14 +30,13 @@
 - Reply in simple English.
 
 ## Open items waiting on the user
-0. **Merge PRs #4 → #5 → #6** (stacked: scaffold → Neon → scope docs).
-1. **Student IDs:** PRN / enrollment no. / roll no. — which ones? Lab batches? (Assumed enrollment_no + roll_no + optional lab_batch.) College email domain (optional extra check).
+1. **CY subject list:** which subjects are extra and which shared ones move semester (CY seeded as a copy of CSIT until then). College email domain (optional extra check).
 2. **UI references** for Phase 1.
-3. **Real syllabus** (CSIT + CY semester plans) and the student list format — placeholder seed until then.
+3. **Unit-wise syllabus** (official RGPV PDFs) to check the drafted units/topics, and the student list CSV format.
 4. Later: Groq API key (console.groq.com), Gemini API key (aistudio.google.com), real syllabus (CSV), team/guide names for `docs/academic/synopsis.md`.
 
 ## Next steps (Phase 0, `docs/roadmap.md`)
-- 0.5 Drizzle schema v1 (`docs/database_schema.md`, ~15 tables) + migrations + seed on a Neon **dev branch** — Gemini worker task. Seed script: use `.mts` or `main()` (no top-level await in CJS).
+- 0.5 Drizzle schema v1 (`docs/database_schema.md`, 16 tables; CSIT theory subjects in `lib/db/seed/data/csit-subjects.json`) + migrations + seed on a Neon **dev branch** — Gemini worker task. Seed script: use `.mts` or `main()` (no top-level await in CJS).
 - 0.6 Auth + **student-list gate** + guards + onboarding. Managed Neon Auth can't block account creation, so the gate is in our server code: email not in `students` → sign out with a message.
 - 0.7 PWA base — decide Serwist vs hand-written SW, log in NOTES.md.
 - 0.8 Vercel project + first preview deploy (ask the user first).
