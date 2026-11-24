@@ -74,3 +74,61 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(networkFirstPage(request));
   }
 });
+
+/* Push notifications */
+self.addEventListener("push", (event) => {
+  let payload = { title: "Weave", body: "", url: "/", tag: undefined };
+
+  if (event.data) {
+    try {
+      const json = event.data.json();
+      payload = {
+        title: json.title || "Weave",
+        body: json.body || "",
+        url: json.url || "/",
+        tag: json.tag,
+      };
+    } catch {
+      payload = {
+        title: "Weave",
+        body: event.data.text() || "",
+        url: "/",
+        tag: undefined,
+      };
+    }
+  }
+
+  const options = {
+    body: payload.body,
+    tag: payload.tag,
+    icon: "/icon/192",
+    badge: "/icon/192",
+    data: { url: payload.url },
+  };
+
+  event.waitUntil(self.registration.showNotification(payload.title, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const rawUrl = event.notification.data?.url;
+  const targetUrl = typeof rawUrl === "string" && rawUrl.startsWith("/") && !rawUrl.startsWith("//") ? rawUrl : "/";
+
+  event.waitUntil(
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if ("focus" in client) {
+            if ("navigate" in client) {
+              client.navigate(targetUrl);
+            }
+            return client.focus();
+          }
+        }
+        if (self.clients.openWindow) {
+          return self.clients.openWindow(targetUrl);
+        }
+      }),
+  );
+});
