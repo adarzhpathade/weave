@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 // A tiny, safe Markdown renderer for note previews. It builds React elements only (never raw HTML), so any
 // "<script>" a student types is shown as text. Supported, on purpose nothing more:
 //   # Heading  ·  ## Heading  ·  "- " bullets  ·  paragraphs (single newlines become line breaks)
-//   **bold**  ·  *italic*  ·  [[Note title]] (highlighted; a link when the title matches one of the student's notes)
+//   **bold**  ·  *italic*  ·  `code`  ·  [[Note title]] (highlighted; a link when the title matches one of the student's notes)
 
 export type ResolveNote = (title: string) => string | null; // note title → href, or null when unknown
 
@@ -47,7 +47,8 @@ function toBlocks(md: string): Block[] {
   return blocks;
 }
 
-const INLINE = /\[\[([^[\]\n]+)\]\]|\*\*([^*\n]+)\*\*|\*([^*\s][^*\n]*?)\*/g;
+// `code` comes first so its contents are shown as typed (no bold/italic/links inside code).
+const INLINE = /`([^`\n]+)`|\[\[([^[\]\n]+)\]\]|\*\*([^*\n]+)\*\*|\*([^*\s][^*\n]*?)\*/g;
 
 function renderInline(text: string, resolve: ResolveNote | undefined, keyPrefix: string): ReactNode[] {
   const out: ReactNode[] = [];
@@ -57,8 +58,14 @@ function renderInline(text: string, resolve: ResolveNote | undefined, keyPrefix:
     const start = match.index ?? 0;
     if (start > last) out.push(text.slice(last, start));
     const key = `${keyPrefix}-${i++}`;
-    const [, linkTitle, bold, italic] = match;
-    if (linkTitle !== undefined) {
+    const [, code, linkTitle, bold, italic] = match;
+    if (code !== undefined) {
+      out.push(
+        <code key={key} className="rounded-xs bg-app px-1 font-mono">
+          {code}
+        </code>,
+      );
+    } else if (linkTitle !== undefined) {
       const title = linkTitle.trim();
       const href = resolve?.(title) ?? null;
       out.push(
