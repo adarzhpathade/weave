@@ -21,9 +21,6 @@ test-results/
 .k6/
 
 # pwa build output
-public/sw.js
-public/sw.js.map
-public/swe-worker-*.js
 
 # orchestration runtime
 logs/
